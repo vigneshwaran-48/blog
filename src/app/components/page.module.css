@@ -1,0 +1,8 @@
+.welcomeHeader > nav {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcomePage {
+    height: calc(100% - 45px);
+}
