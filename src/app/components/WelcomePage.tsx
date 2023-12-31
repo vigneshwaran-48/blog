@@ -7,7 +7,7 @@ const WelcomePage = () => {
             <div className={`${styles.welcomeMessageContainer} full-width x-axis-flex`}>
                 <div>
                     <h1>The Blog App that you&apos;ll need</h1>
-                    <button className="button">Get Stared</button>
+                    <button className={`${styles.getStartedButton} button`}>Get Stared</button>
                 </div>
                 <img src="/welcome-image.png" alt="App Welcome Image" />
             </div>

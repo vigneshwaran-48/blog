@@ -3,10 +3,15 @@
     align-items: center;
 }
 
+.getStartedButton {
+    background-color: hsl(186, 91%, 40%);
+    color: white;
+}
+
 .welcomePage {
     height: calc(100% - 45px);
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     max-width: 1200px;
 }
 
@@ -26,6 +31,10 @@
 .welcomeMessageContainer > img {
     height: 400px;
     min-width: 601px;
+}
+.welcomeMessageContainer .getStartedButton {
+    font-size: 22px;
+    margin-top: 5px;
 }
 
 .welcomePageInfoContainer {
