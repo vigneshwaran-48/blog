@@ -59,3 +59,7 @@ body, html {
 .button:active {
   transform: scale(0.9);
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
