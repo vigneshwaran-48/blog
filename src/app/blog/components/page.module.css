@@ -1,0 +1,84 @@
+
+.appHeader {
+    justify-content: space-between;
+    align-items: center;
+    padding: 4.5px 5px;
+    border-bottom: 1px solid var(--app-light-background-color);
+    height: var(--app-header-height);
+}
+.appHeader > img {
+    width: 40px;
+}
+.appOrHamburgerMenu > svg {
+    width: 20px;
+    display: none;
+}
+
+.appNavbar {
+    height: 100%;
+    width: 200px;
+    border-right: 1px solid var(--app-light-background-color);
+    background-color: var(--app-background-color);
+    transition: 0.5s;
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--app-text-color);
+    margin: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+.navLinkChild {
+    align-items: center;
+}
+.navLinkChild > svg {
+    width: 15px;
+    margin-right: 5px;
+}
+
+.activeNavLink {
+    background-color: var(--app-light-background-color);
+}
+
+@media screen and (max-width: 1000px) {
+    .appOrHamburgerMenu > svg {
+        display: block;
+    }
+    .appOrHamburgerMenu > h1 {
+        display: none;
+    }
+    .appNavbar {
+        transform: translateX(var(--app-navbar-status-translate));
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    
+    .appNavbar {
+        flex-direction: row;
+        max-width: none;
+        width: 100%;
+        justify-content: space-around;
+        transform: translateX(0);
+        position: static;
+        height: fit-content;
+    }
+    .navLinkChild > svg {
+        margin: 0px;
+        width: 20px;
+    }
+    .navLinkChild > p {
+        display: none;
+    }
+    .appOrHamburgerMenu > svg {
+        display: none;
+    }
+    .appOrHamburgerMenu > h1 {
+        display: block;
+    }
+}

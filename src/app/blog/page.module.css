@@ -1,0 +1,36 @@
+
+.middleBody {
+    justify-content: space-between;
+    height: calc(100% - var(--app-header-height));
+}
+
+.main {
+    height: 100%;
+    width: calc(100% - 200px);
+}
+
+.home {
+    justify-content: center;
+}
+.blogListing {
+    max-width: 700px;
+}
+
+@media screen and (max-width: 1000px) {
+    .main {
+        width: 100%;
+    }
+    .middleBody {
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    
+    .middleBody {
+        flex-direction: column-reverse;
+    }
+    .blogListing {
+        width: 100%;
+    }
+}
