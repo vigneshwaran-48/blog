@@ -5,4 +5,92 @@
 
 .welcomePage {
     height: calc(100% - 45px);
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+}
+
+.welcomeMessageContainer {
+    font-size: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+
+.welcomeMessageContainer > div {
+    width: 40%;
+    min-width: 450px;
+    font-weight: 100;
+    margin: 10px;
+}
+.welcomeMessageContainer > img {
+    height: 400px;
+    min-width: 601px;
+}
+
+.welcomePageInfoContainer {
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+
+.welcomePageInfoContainer > div {
+    width: 400px;
+    margin: 10px 0px;
+}
+
+@media screen and (max-width: 700px) {
+    
+    .welcomeMessageContainer > img {
+        min-width: 400px;
+        height: 300px;
+    }
+
+}
+
+@media screen and (max-width: 455px) {
+    
+    .welcomeMessageContainer > div {
+        min-width: 320px;
+    }
+    .welcomeMessageContainer > img {
+        min-width: 300px;
+        height: 200px;
+    }
+    .welcomePage {
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .welcomeMessageContainer > div {
+        min-width: 250px;
+        font-size: 25px;
+        margin-left: 5px;
+    }
+    .welcomeMessageContainer > img {
+        min-width: 250px;
+        height: 170px;
+    }
+    .welcomePageInfoContainer {
+        margin-left: 5px;
+    }
+}
+
+@media screen and (max-height: 610px) {
+    .welcomeMessageContainer > div {
+        min-width: 320px;
+    }
+    .welcomeMessageContainer > img {
+        min-width: 300px;
+        height: 200px;
+    }
+    .welcomePage {
+        justify-content: space-around;
+    }
+}
+@media screen and (max-height: 670px) and (max-width: 380px) {
+    .welcomePage {
+        justify-content: flex-start;
+    }
 }

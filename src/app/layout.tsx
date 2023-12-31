@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="full-body">
-      <body className={`${inter.className} full-body`}>{children}</body>
+      <body className={`full-body`}>{children}</body>
     </html>
   )
 }
