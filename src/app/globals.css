@@ -1,10 +1,15 @@
 
 :root {
 
-  --app-background-color: hsl(230, 82%, 4%);
-  --app-light-background-color: hsl(228, 7%, 87%);
-  --app-text-color: hsl(0, 0%, 99%);
+  --app-background-color: white;
+  --app-light-background-color: hsl(0, 4%, 86%);
+  --app-text-color: black;
   --app-button-padding: 7px;
+
+  --app-header-height: 50px;
+
+  --app-navbar-status-translate: -100%;
+
 }
 
 * {
@@ -13,10 +18,11 @@
   box-sizing: border-box;
 }
 
-body {
+body, html {
   background-color: var(--app-background-color);
   color: var(--app-text-color);
-  padding: 10px;
+  width: 100%;
+  height: 100%;
 }
 
 .x-axis-flex {

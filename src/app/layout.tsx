@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="full-body">
-      <body className={`full-body`}>{children}</body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   )
 }
