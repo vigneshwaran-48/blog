@@ -5,6 +5,7 @@ import styles from './page.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { AppFields } from '@/util/AppFields';
+import { useSession } from 'next-auth/react';
 
 export const AppHeader = () => {
 
@@ -15,8 +16,6 @@ export const AppHeader = () => {
             document.documentElement.style.setProperty(AppFields.APP_NAVBAR_STATUS, currentValue === "-100%" ? "0%" : "-100%");
         }
     }
-
-    console.log("From header");
 
     return (
         <header className={`${styles.appHeader} full-width x-axis-flex`}>

@@ -1,15 +1,24 @@
 import { Metadata } from 'next'
-import React from 'react'
+import React, { useRef } from 'react'
 import { Blog } from './components/blog/Blog'
 import { BlogMeta } from '@/util/AppTypes'
 import styles from "./page.module.css";
+import { AppStore, makeStore } from '@/lib/store';
+import { Provider } from 'react-redux';
+import { useAppSelector, useAppStore } from '@/lib/hooks';
+import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 
 export const metadata : Metadata = {
     title: "Home",
     description: "Blog app's home page"
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+
+    const session = await getServerSession();
+
+    console.log(JSON.stringify(session));
 
     const content: BlogMeta = {
         title: "Testing",

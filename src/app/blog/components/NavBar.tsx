@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faMagnifyingGlass, faSitemap, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 export const NavBar = () => {
-
-    console.log("From Navbar");
     
     return (
         <nav className={`${styles.appNavbar} y-axis-flex`}>
