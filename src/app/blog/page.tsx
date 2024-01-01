@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { useAppSelector, useAppStore } from '@/lib/hooks';
 import { getSession } from 'next-auth/react';
 import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
 export const metadata : Metadata = {
     title: "Home",
@@ -16,9 +18,11 @@ export const metadata : Metadata = {
 
 export default async function HomePage() {
 
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
 
-    console.log(JSON.stringify(session));
+    if(!session) {
+        redirect("/api/auth/signin");
+    }
 
     const content: BlogMeta = {
         title: "Testing",
