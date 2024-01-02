@@ -23,7 +23,6 @@ export const authOptions: NextAuthOptions = {
             });
             if(userResponse.ok) {
                 console.log("User already exists");
-                user = Object.assign({}, user, {access_token: account?.access_token})
                 return true;
             }
             console.log("User not exists going to create");
@@ -57,5 +56,9 @@ export const authOptions: NextAuthOptions = {
             }
             return token;
         },
+        async session({ session, token, user }) {
+            session = Object.assign({}, session, {access_token: token?.access_token})
+            return session;
+        }
     }
 }
