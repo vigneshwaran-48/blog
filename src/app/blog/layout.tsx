@@ -20,17 +20,17 @@ export default function RootLayout({ children }: { children : React.ReactNode })
     return (
         <Provider store={storeRef.current}>
             <SessionProvider>
-                    <html lang="en">
-                        <body className={`full-body`}>
-                            <AppHeader />
-                            <div className={`${styles.middleBody} full-width x-axis-flex`}>
-                                <NavBar />
-                                <main className={styles.main}>
-                                    { children }
-                                </main>
-                            </div>
-                        </body>
-                    </html>
+                <html lang="en">
+                    <body className={`full-body`}>
+                        <AppHeader />
+                        <div className={`${styles.middleBody} full-width x-axis-flex`}>
+                            <NavBar />
+                            <main className={styles.main}>
+                                { children }
+                            </main>
+                        </div>
+                    </body>
+                </html>
             </SessionProvider>
         </Provider>
     )

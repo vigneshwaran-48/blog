@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import React from 'react'
 import { getServerSession } from "next-auth";
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
+import { authOptions } from '@/util/authOptions';
 
 export const metadata: Metadata = {
     title: "Search",

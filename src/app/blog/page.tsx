@@ -3,13 +3,9 @@ import React, { useRef } from 'react'
 import { Blog } from './components/blog/Blog'
 import { BlogMeta } from '@/util/AppTypes'
 import styles from "./page.module.css";
-import { AppStore, makeStore } from '@/lib/store';
-import { Provider } from 'react-redux';
-import { useAppSelector, useAppStore } from '@/lib/hooks';
-import { getSession } from 'next-auth/react';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import { authOptions } from '@/util/authOptions';
 
 export const metadata : Metadata = {
     title: "Home",
