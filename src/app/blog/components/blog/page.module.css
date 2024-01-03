@@ -59,6 +59,15 @@
     cursor: pointer;
 }
 
+.searchBarLabel > input {
+    outline: none;
+    border: none;
+    border: 1px solid var(--app-light-background-color);
+    font-size: 20px;
+    padding: 7px;
+    border-radius: 10px;
+}
+
 @media screen and (max-width: 500px) {
     
     .blogMeta {

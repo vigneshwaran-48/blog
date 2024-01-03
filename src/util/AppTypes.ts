@@ -15,3 +15,10 @@ export type UserMeta = {
 
 export type BlogCategory = string;
 
+export type Organization = {
+    name: string,
+    id: number,
+    description?: string,
+    owner?: UserMeta,
+    createdTime?: number
+}

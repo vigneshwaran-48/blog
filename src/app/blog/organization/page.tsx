@@ -3,6 +3,9 @@ import { Metadata } from 'next'
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react'
+import styles from "./page.module.css";
+import { SearchBar } from '../components/blog/SearchBar';
+import { OrganizationComp } from './components/OrganizationComp';
 
 export const metadata: Metadata = {
     title: "Organization",
@@ -27,8 +30,13 @@ export default async function OrganizationPage() {
                                 }
                             });
 
-    console.log(await response.json());
+    const data = await response.json();
+
     return (
-        <div>Organization Page</div>
+        <section className={`${styles.organizationSection} full-body y-axis-flex`}>
+            <h1>Orgnization</h1>
+
+            <OrganizationComp organizations={data.organization} />
+        </section>
     )
 }

@@ -1,0 +1,15 @@
+.searchBarAndCreateButton {
+    justify-content: space-between;
+    max-width: 400px;
+    align-items: center;
+}
+
+.searchBarAndCreateButton > button {
+    background-color: #4183D7;
+    color: white;
+    font-size: 18px;
+}
+
+.organizationsListContainer {
+    
+}
