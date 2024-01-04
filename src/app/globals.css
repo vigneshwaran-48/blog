@@ -4,6 +4,7 @@
   --app-background-color: white;
   --app-light-background-color: hsl(0, 4%, 86%);
   --app-text-color: black;
+  --app-light-text-color: hsl(15, 2%, 51%);
   --app-button-padding: 7px;
 
   --app-header-height: 50px;

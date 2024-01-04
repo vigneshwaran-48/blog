@@ -24,7 +24,7 @@
 
 .navLink {
     text-decoration: none;
-    color: var(--app-text-color);
+    color: var(--app-light-text-color);
     margin: 5px;
     border-radius: 5px;
     padding: 5px;
@@ -40,8 +40,9 @@
     margin-right: 5px;
 }
 
-.activeNavLink {
+.activeNavLink, .navLink:hover {
     background-color: var(--app-light-background-color);
+    color: var(--app-text-color);
 }
 
 @media screen and (max-width: 1000px) {

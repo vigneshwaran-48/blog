@@ -5,4 +5,17 @@
     padding: 10px;
 }
 
+.organizationSection > h2 {
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.organizationBody {
+    max-width: 400px;
+}
+
+.organizationBody > div {
+    height: calc(100% - 62px);
+}
+
 

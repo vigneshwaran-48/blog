@@ -66,6 +66,8 @@
     font-size: 20px;
     padding: 7px;
     border-radius: 10px;
+    max-width: 285px;
+    width: 80%;
 }
 
 @media screen and (max-width: 500px) {

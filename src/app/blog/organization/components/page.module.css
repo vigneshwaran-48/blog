@@ -10,6 +10,32 @@
     font-size: 18px;
 }
 
-.organizationsListContainer {
-    
+.organizationNavbar {
+    padding: 10px;
+}
+
+.organizationNavbar > ul {
+    justify-content: space-around;
+    max-width: 400px;
+}
+
+.organizationNavbar > ul > li {
+    list-style-type: none;
+    width: 100%;
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--app-light-text-color);
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+}
+
+.navLink:hover, .activeNavLink {
+    color: var(--app-text-color);
+    border-color: var(--app-text-color);
 }
