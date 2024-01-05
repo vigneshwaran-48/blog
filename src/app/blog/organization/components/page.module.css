@@ -35,7 +35,15 @@
     transition: 0.5s;
 }
 
-.navLink:hover, .activeNavLink {
+.navLink:hover {
+    color: rgba(0, 0, 0, 0.4);
+    border-color: rgba(0, 0, 0, 0.4);
+}
+.activeNavLink {
+    color: var(--app-text-color);
+    border-color: var(--app-text-color);
+}
+.activeNavLink:hover {
     color: var(--app-text-color);
     border-color: var(--app-text-color);
 }

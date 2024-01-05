@@ -1,13 +1,9 @@
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-export const OrganizationPage = () => {
+const OrganizationPage = () => {
     
-    // redirect("/blog/organization/list");
-
-    console.log("HI")
-
-    return (
-        <></>
-    )
+    redirect("/blog/organization/list");
 }
+
+export default OrganizationPage;
