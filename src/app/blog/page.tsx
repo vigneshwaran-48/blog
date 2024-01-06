@@ -1,11 +1,5 @@
 import { Metadata } from 'next'
-import React, { useRef } from 'react'
-import { Blog } from './components/blog/Blog'
-import { BlogMeta } from '@/util/AppTypes'
-import styles from "./page.module.css";
-import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { authOptions } from '@/util/authOptions';
 
 export const metadata : Metadata = {
     title: "Home",
@@ -14,29 +8,5 @@ export const metadata : Metadata = {
 
 export default async function HomePage() {
 
-    const session = await getServerSession(authOptions);
-
-    if(!session) {
-        redirect("/api/auth/signin");
-    }
-
-    const content: BlogMeta = {
-        title: "Testing",
-        postedUser: {
-            name: "Vicky",
-            image: "/person.jpg"
-        },
-        content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, culpa!",
-        date: "2nd Jan",
-        image: "/welcome-image.png",
-        categories: ["learning", "teaching", "tech"]
-    }
-
-    return (
-        <div className={`${styles.home} x-axis-flex full-body`}>
-            <section className={`${styles.blogListing} y-axis-flex`}>
-                <Blog blog={content} />
-            </section>
-        </div>
-    )
+    redirect("/blog/home");
 }

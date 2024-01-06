@@ -3,8 +3,6 @@ import styles from "./page.module.css";
 import { NavLink } from '@/util/NavLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faMagnifyingGlass, faSitemap, faUserGroup } from '@fortawesome/free-solid-svg-icons';
-import { redirect } from 'next/navigation';
-import Link from 'next/link';
 
 export const NavBar = () => {
     

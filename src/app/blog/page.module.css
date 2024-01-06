@@ -9,13 +9,6 @@
     width: calc(100% - 200px);
 }
 
-.home {
-    justify-content: center;
-}
-.blogListing {
-    max-width: 700px;
-}
-
 @media screen and (max-width: 1000px) {
     .main {
         width: 100%;
