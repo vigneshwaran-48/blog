@@ -21,7 +21,7 @@ export const Blog = ({ blog }: { blog: BlogMeta }) => {
         <article className={`${styles.blogMeta} y-axis-flex`}>
             <div className={`${styles.blogMetaHeader} x-axis-flex`}>
                 <Image 
-                    src={blog.postedUser.image} 
+                    src={blog.postedUser.image as string} 
                     alt="blogged user"
                     width={24}
                     height={24}

@@ -7,15 +7,27 @@ import TextArea from '@/app/blog/components/form/TextArea';
 import { Organization } from '@/util/AppTypes';
 import RadioGroup from '@/app/blog/components/form/RadioGroup';
 import { Props } from '@/app/blog/components/form/Props';
+import { SearchBar } from '@/app/blog/components/blog/SearchBar';
+import UserAddingSection from './UserAddingSection';
+import { useSession } from 'next-auth/react';
+import { authOptions } from '@/util/authOptions';
+import { redirect } from 'next/navigation';
 
 const OrganizationCreationForm = () => {
 
+    const session = useSession();
+
+    if(!session || !session.data?.expires) {
+        redirect("/api/auth/signin");
+    }
     const [ formData, setFormData ] = useState<Organization>({
         name: "",
         description: "",
         joinType: "ANYONE",
         visibility: "PUBLIC"
     });
+
+    const [ showUserAddingSection, setShowUserAddingSection ] = useState<boolean>(true);
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -43,7 +55,12 @@ const OrganizationCreationForm = () => {
             console.error("Error while creating organization");
         }
         const respData = await response.json();
-        console.log(respData);
+        
+        setShowUserAddingSection(true);
+    }
+
+    const handleUserAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
     }
 
     const visibilityRadioButtons: Props[] = [
@@ -87,40 +104,44 @@ const OrganizationCreationForm = () => {
         }
     ];
 
+    const content = !showUserAddingSection ? (
+        <div className={`${styles.organizationCreationForm} y-axis-flex`}>
+            <Input 
+                name="name" 
+                value={formData.name} 
+                onChange={handleFormChange}
+                displayName="Name" 
+            />
+                
+            <TextArea 
+                name="description"
+                value={formData.description as string}
+                onChange={handleFormChange}
+                displayName="Description"
+            />
+
+            <RadioGroup 
+                displayName="Visibility"
+                radios={visibilityRadioButtons}
+            />
+
+            <RadioGroup 
+                displayName="Join Type"
+                radios={joinTypeRadioButtons}
+            />
+
+        </div>
+    ) : <UserAddingSection />
+
     return (
         <div className={`${styles.organizationCreationContainer} full-body y-axis-flex`}>
-            <div className={`${styles.organizationCreationForm} y-axis-flex`}>
-                <Input 
-                    name="name" 
-                    value={formData.name} 
-                    onChange={handleFormChange}
-                    displayName="Name" 
-                />
-                
-                <TextArea 
-                    name="description"
-                    value={formData.description as string}
-                    onChange={handleFormChange}
-                    displayName="Description"
-                />
-
-                <RadioGroup 
-                    displayName="Visibility"
-                    radios={visibilityRadioButtons}
-                />
-
-                <RadioGroup 
-                    displayName="Join Type"
-                    radios={joinTypeRadioButtons}
-                />
-
-            </div>
+            { content }
             <nav className={`${styles.organizationCreationNavbar} full-width x-axis-flex`}>
                 <button 
                     className={`button`}
                     type="button"
-                    onClick={handleOrganizationCreateButton}
-                >Create</button>
+                    onClick={!showUserAddingSection ? handleOrganizationCreateButton : handleUserAdd}
+                >{!showUserAddingSection ? "Create" : "Finish"}</button>
             </nav>
         </div>
     )

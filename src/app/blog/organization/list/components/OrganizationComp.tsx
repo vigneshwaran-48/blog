@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react'
-import { SearchBar } from '../../components/blog/SearchBar';
+import { SearchBar } from '../../../components/blog/SearchBar';
 import styles from "./page.module.css";
 import { Organization } from '@/util/AppTypes';
 

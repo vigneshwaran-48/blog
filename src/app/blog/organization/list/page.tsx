@@ -2,7 +2,7 @@ import { authOptions } from '@/util/authOptions';
 import { Session, getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react'
-import { OrganizationComp } from '../components/OrganizationComp';
+import { OrganizationComp } from './components/OrganizationComp';
 
 const OrganizationList = async () => {
 
