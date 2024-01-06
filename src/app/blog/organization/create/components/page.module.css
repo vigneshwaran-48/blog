@@ -1,0 +1,24 @@
+
+.organizationCreationContainer {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.organizationCreationForm {
+    max-width: 500px;
+    width: 100%;
+    align-items: center;
+}
+
+.organizationCreationForm > label, .organizationCreationForm input, .organizationCreationForm textarea {
+    width: 100%;
+}
+
+.organizationCreationNavbar {
+    justify-content: space-between;
+}
+
+.organizationCreationNavbar > .button {
+    color: var(--app-selected-text-color);
+    background-color: var(--app-selected-background-color);
+}

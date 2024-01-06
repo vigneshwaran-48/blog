@@ -17,6 +17,7 @@ const BlogHome = async () => {
     const content: BlogMeta = {
         title: "Testing",
         postedUser: {
+            id: "9990",
             name: "Vicky",
             image: "/person.jpg"
         },

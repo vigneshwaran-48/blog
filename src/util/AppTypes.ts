@@ -8,8 +8,9 @@ export type BlogMeta = {
 }
 
 export type UserMeta = {
-    name: string,
-    image: string,
+    id: string,
+    name?: string,
+    image?: string,
     description?: string
 }
 
@@ -17,7 +18,7 @@ export type BlogCategory = string;
 
 export type Organization = {
     name: string,
-    id: number,
+    id?: number,
     description?: string,
     owner?: UserMeta,
     createdTime?: number
