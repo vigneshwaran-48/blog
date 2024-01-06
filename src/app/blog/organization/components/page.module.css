@@ -1,49 +1,72 @@
-.searchBarAndCreateButton {
+.searchBar {
     justify-content: space-between;
     max-width: 400px;
     align-items: center;
 }
 
-.searchBarAndCreateButton > button {
+.searchBar > button {
     background-color: #4183D7;
     color: white;
     font-size: 18px;
 }
 
 .organizationNavbar {
-    padding: 10px;
+    max-width: 150px;
+    height: 100%;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px 10px 10px 0px;
 }
 
 .organizationNavbar > ul {
-    justify-content: space-around;
     max-width: 400px;
+    height: 100%;
 }
 
 .organizationNavbar > ul > li {
     list-style-type: none;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .navLink {
     text-decoration: none;
     color: var(--app-light-text-color);
-    display: block;
-    text-align: center;
     font-size: 18px;
-    padding: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 5px 7px;
+    width: 100%;
+    display: block;
+    border-radius: 5px;
     transition: 0.5s;
 }
 
 .navLink:hover {
     color: rgba(0, 0, 0, 0.4);
-    border-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--app-light-background-color);
 }
-.activeNavLink {
-    color: var(--app-text-color);
-    border-color: var(--app-text-color);
+.activeNavLink, .activeNavLink:hover {
+    color: var(--app-selected-text-color);
+    background-color: var(--app-selected-background-color);
 }
-.activeNavLink:hover {
-    color: var(--app-text-color);
-    border-color: var(--app-text-color);
+
+@media screen and (max-width: 500px) {
+
+    .organizationNavbar {
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        height: fit-content;
+        max-width: none;
+        padding: 0px;
+        padding: 5px 0px;
+    }
+    .organizationNavbar > ul {
+        flex-direction: row;
+        justify-content: flex-start;
+        overflow-x: scroll;
+        align-items: center;
+    }
+    .organizationNavbar > ul > li {
+        width: fit-content;
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
 }

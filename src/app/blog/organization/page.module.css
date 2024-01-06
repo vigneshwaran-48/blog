@@ -1,21 +1,22 @@
 
 .organizationSection {
-    align-items: center;
+    /* align-items: center; */
     max-width: 1000px;
     padding: 10px;
 }
 
-.organizationSection > h2 {
-    font-size: 35px;
-    font-weight: 500;
-}
-
 .organizationBody {
-    max-width: 400px;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 10px;
 }
 
-.organizationBody > div {
-    height: calc(100% - 62px);
+@media screen and (max-width: 500px) {
+    .organizationSection {
+        flex-direction: column;
+    }
+    .organizationBody {
+        padding: 10px 0px;
+    }
 }
-
 

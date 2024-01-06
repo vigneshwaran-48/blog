@@ -11,14 +11,10 @@ export const metadata: Metadata = {
 const OrganizationPageLayout = ({ children }: { children : React.ReactNode }) => {
 
     return (
-        <section className={`${styles.organizationSection} full-body y-axis-flex`}>
-            <h2>Orgnization</h2>
-            {/* <OrganizationComp organizations={data.organization} /> */}
-            <div className={`${styles.organizationBody} full-body`}>
-                <OrganizationNavbar />
-                <div className="full-width">
-                    { children }
-                </div>
+        <section className={`${styles.organizationSection} full-body x-axis-flex`}>
+            <OrganizationNavbar />
+            <div className={`${styles.organizationBody} full-body hide-scrollbar y-axis-flex`}>
+                { children }
             </div>
         </section>
     )

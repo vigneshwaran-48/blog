@@ -21,9 +21,8 @@ export const OrganizationComp = (props: Props) => {
 
     return (
         <div>
-            <div className={`${styles.searchBarAndCreateButton} full-width x-axis-flex`}>
+            <div className={`${styles.searchBar} full-width x-axis-flex`}>
                 <SearchBar callback={handleOrgChange} />
-                <button className={`button`} type="button">Create</button>
             </div>
 
             <div className={`${styles.organizationsListContainer}`}>

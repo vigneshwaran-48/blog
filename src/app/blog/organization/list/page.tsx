@@ -2,6 +2,7 @@ import { authOptions } from '@/util/authOptions';
 import { Session, getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react'
+import { OrganizationComp } from '../components/OrganizationComp';
 
 const OrganizationList = async () => {
 
@@ -23,7 +24,7 @@ const OrganizationList = async () => {
     console.log(data);
     
     return (
-        <div>List</div>
+        <OrganizationComp organizations={data.organization} />
     )
 }
 

@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 export const OrganizationNavbar = () => {
     return (
         <nav className={`${styles.organizationNavbar} full-width`}>
-            <ul className={`x-axis-flex full-width`}>
+            <ul className={`y-axis-flex full-width hide-scrollbar`}>
                 <li>
                     <NavLink 
                         href="/blog/organization/create"
