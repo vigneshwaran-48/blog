@@ -1,6 +1,5 @@
 
 .organizationSection {
-    /* align-items: center; */
     padding: 10px;
 }
 
@@ -16,6 +15,8 @@
     }
     .organizationBody {
         padding: 10px 0px;
+        height: calc(100% - 45px);
+        overflow-y: scroll;
     }
 }
 

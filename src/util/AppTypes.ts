@@ -21,5 +21,7 @@ export type Organization = {
     id?: number,
     description?: string,
     owner?: UserMeta,
-    createdTime?: number
+    createdTime?: number,
+    visibility: "PRIVATE" | "PUBLIC",
+    joinType: "MEMBERS_INVITE" | "INVITE" | "ANYONE"
 }

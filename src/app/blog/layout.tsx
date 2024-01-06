@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children : React.ReactNode })
                         }
                     `}
                     </style>
-                    <body className={`full-body ${roboto}`}>
+                    <body className={`full-body ${styles.body} y-axis-flex`}>
                         <AppHeader />
                         <div className={`${styles.middleBody} full-width x-axis-flex`}>
                             <NavBar />

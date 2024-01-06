@@ -1,9 +1,10 @@
-.label, .radio {
+.label, .radio, .radioGroup {
     position: relative;
     margin: 10px 0px;
+    border-radius: 7px;
 }
 
-.label > p {
+.label > p, .radioGroup > p {
     position: absolute;
     font-size: 13px;
     color: var(--app-light-text-color);
@@ -87,4 +88,19 @@
 
 .radio input[type="radio"]:checked + span > i {
     background-color: var(--app-selected-background-color);
+}
+
+
+.radioGroup {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.radioGroup > div {
+    overflow-x: scroll;
+}
+
+.radioGroup .radio {
+    flex-shrink: 0;
+    margin-right: 10px;
 }

@@ -8,7 +8,7 @@ import { faCircleDot } from '@fortawesome/free-solid-svg-icons';
 
 const RadioButton = (props: Props) => {
 
-    const { name, checked, onChange, displayName = name } = props;
+    const { name, checked, onChange, value, displayName = name } = props;
 
     return (
         <label className={`${styles.radio} x-axis-flex`}>
@@ -16,6 +16,7 @@ const RadioButton = (props: Props) => {
                 type="radio"
                 name={name}
                 checked={checked}
+                value={value}
                 onChange={onChange}
             />
             <span className={`x-axis-flex`}>
