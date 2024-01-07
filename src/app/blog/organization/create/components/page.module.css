@@ -19,6 +19,7 @@
 
 .organizationCreationNavbar {
     justify-content: flex-end;
+    margin-top: 5px;
 }
 
 .organizationCreationNavbar > button {
@@ -32,30 +33,47 @@
     max-width: 700px;
     width: 100%;
     align-items: center;
-    max-height: 450px;
+    max-height: 700px;
     height: 100%;
+    border: 1px solid var(--app-light-background-color);
 }
 
 .userAddingForm {
     width: 80%;
     height: 100%;
+    border-right: 1px solid var(--app-light-background-color);
+}
+
+.userAddingForm > div {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.userAddingForm > label {
+    margin: 5px 5px 0px 5px;
 }
 
 .addedUserPreview {
     width: 20%;
     height: 100%;
     min-width: 250px;
-    border: 1px solid;
-
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 710px) {
     .userAddingSection {
         flex-direction: column;
+        justify-content: space-around;
+        height: 100%;
+    }
+    .userAddingForm {
+        border-right: none;
+        border-bottom: 1px solid var(--app-light-background-color);
+        height: 49%;
     }
     .addedUserPreview {
         width: 100%;
-        height: 40px;
+        height: 49%;
     }
     .userAddingForm {
         width: 100%;
@@ -69,5 +87,10 @@
     }
     .organizationCreationContainer {
         justify-content: space-between;
+    }
+    .userAddingForm > label > input {
+        display: block;
+        width: 100%;
+        max-width: 450px;
     }
 }

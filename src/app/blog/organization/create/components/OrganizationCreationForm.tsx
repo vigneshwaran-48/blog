@@ -1,25 +1,23 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useImperativeHandle, useOptimistic, useRef, useState } from 'react';
 import styles from "./page.module.css";
 import Input from '@/app/blog/components/form/Input';
 import TextArea from '@/app/blog/components/form/TextArea';
-import { Organization } from '@/util/AppTypes';
+import { Organization, UserMeta } from '@/util/AppTypes';
 import RadioGroup from '@/app/blog/components/form/RadioGroup';
 import { Props } from '@/app/blog/components/form/Props';
-import { SearchBar } from '@/app/blog/components/blog/SearchBar';
 import UserAddingSection from './UserAddingSection';
-import { useSession } from 'next-auth/react';
-import { authOptions } from '@/util/authOptions';
-import { redirect } from 'next/navigation';
+import { addUsersToOrganization, createOrganization } from '@/app/actions/organization';
+import { useFormStatus } from 'react-dom';
+import { getAllUsers } from '@/app/actions/user';
 
 const OrganizationCreationForm = () => {
 
-    const session = useSession();
+    const organizationRef = useRef<Organization>(null);
 
-    if(!session || !session.data?.expires) {
-        redirect("/api/auth/signin");
-    }
+    const formStatus = useFormStatus();
+    
     const [ formData, setFormData ] = useState<Organization>({
         name: "",
         description: "",
@@ -27,7 +25,22 @@ const OrganizationCreationForm = () => {
         visibility: "PUBLIC"
     });
 
-    const [ showUserAddingSection, setShowUserAddingSection ] = useState<boolean>(true);
+    const [ showUserAddingSection, setShowUserAddingSection ] = useState<boolean>(false);
+
+    const [ users, setUsers ] = useState<UserMeta[]>([]);
+
+    const [ addedUsers, setAddedUsers ] = useState<UserMeta[]>([]);
+
+    const [ currentOrganization, setCurrentOrganization ] = useState<Organization>();
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    const fetchUsers = async () => {
+        const users = await getAllUsers();
+        setUsers(users);
+    }
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -40,27 +53,17 @@ const OrganizationCreationForm = () => {
         });
     }
 
-    const handleOrganizationCreateButton = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        console.log("Creating organization ");
-        console.log(formData);
-
-        const response = await fetch("/api/organization", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    },
-                                    body: JSON.stringify(formData)
-                                });
-        if(!response.ok) {
-            console.error("Error while creating organization");
+    const handleFormAction = async (form: FormData) => {
+        if(!showUserAddingSection) {
+            const organization: Organization = await createOrganization(formData);
+            setCurrentOrganization(organization);
+            setShowUserAddingSection(true);
+            return;
         }
-        const respData = await response.json();
-        
-        setShowUserAddingSection(true);
-    }
-
-    const handleUserAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-
+        console.log("Form data");
+        console.log(formData);
+        console.log(addedUsers);
+        await addUsersToOrganization(currentOrganization?.id as number, addedUsers.map(user => user.id));
     }
 
     const visibilityRadioButtons: Props[] = [
@@ -105,7 +108,9 @@ const OrganizationCreationForm = () => {
     ];
 
     const content = !showUserAddingSection ? (
-        <div className={`${styles.organizationCreationForm} y-axis-flex`}>
+        <div 
+            className={`${styles.organizationCreationForm} y-axis-flex`}
+        >
             <Input 
                 name="name" 
                 value={formData.name} 
@@ -131,19 +136,26 @@ const OrganizationCreationForm = () => {
             />
 
         </div>
-    ) : <UserAddingSection />
+    ) : <UserAddingSection 
+            addedUsers={addedUsers} 
+            users={users} 
+            setAddedUsers={setAddedUsers}
+            setUsers={setUsers}
+        />
 
     return (
-        <div className={`${styles.organizationCreationContainer} full-body y-axis-flex`}>
+        <form 
+            className={`${styles.organizationCreationContainer} full-body y-axis-flex`}
+            action={handleFormAction}
+        >
             { content }
             <nav className={`${styles.organizationCreationNavbar} full-width x-axis-flex`}>
                 <button 
                     className={`button`}
-                    type="button"
-                    onClick={!showUserAddingSection ? handleOrganizationCreateButton : handleUserAdd}
-                >{!showUserAddingSection ? "Create" : "Finish"}</button>
+                    type="submit"
+                >{ formStatus.pending ? "Creating ..." : !showUserAddingSection ? "Create" : "Finish"}</button>
             </nav>
-        </div>
+        </form>
     )
 }
 

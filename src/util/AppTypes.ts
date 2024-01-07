@@ -25,3 +25,11 @@ export type Organization = {
     visibility: "PRIVATE" | "PUBLIC",
     joinType: "MEMBERS_INVITE" | "INVITE" | "ANYONE"
 }
+
+export interface APIRoutes {
+    get: string,
+    create: string,
+    getOne: (id: string | number) => string,
+    delete: (id: string | number) => string,
+    put: string
+}
