@@ -21,17 +21,17 @@ export const Blog = ({ blog }: { blog: BlogMeta }) => {
         <article className={`${styles.blogMeta} y-axis-flex`}>
             <div className={`${styles.blogMetaHeader} x-axis-flex`}>
                 <Image 
-                    src={blog.postedUser.image} 
+                    src={blog.postedUser.image as string} 
                     alt="blogged user"
                     width={24}
                     height={24}
                 />
-                <b title="title"><p>{ blog.postedUser.name }</p></b>
+                <b><p>{ blog.postedUser.name }</p></b>
                 <p>{ blog.date }</p>
             </div>
             <div className={`${styles.blogContent} x-axis-flex`}>
                 <div>
-                    <h2>{ blog.title }</h2>
+                    <h2 title="title">{ blog.title }</h2>
                     <p>{ blog.content }</p>
                 </div>
                 <Image 

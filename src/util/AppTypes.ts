@@ -8,10 +8,28 @@ export type BlogMeta = {
 }
 
 export type UserMeta = {
-    name: string,
-    image: string,
+    id: string,
+    name?: string,
+    image?: string,
     description?: string
 }
 
 export type BlogCategory = string;
 
+export type Organization = {
+    name: string,
+    id?: number,
+    description?: string,
+    owner?: UserMeta,
+    createdTime?: number,
+    visibility: "PRIVATE" | "PUBLIC",
+    joinType: "MEMBERS_INVITE" | "INVITE" | "ANYONE"
+}
+
+export interface APIRoutes {
+    get: string,
+    create: string,
+    getOne: (id: string | number) => string,
+    delete: (id: string | number) => string,
+    put: string
+}

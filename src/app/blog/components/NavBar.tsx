@@ -5,15 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faMagnifyingGlass, faSitemap, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 export const NavBar = () => {
-
-    console.log("From Navbar");
     
     return (
         <nav className={`${styles.appNavbar} y-axis-flex`}>
             <NavLink 
                 activeClassName={`${styles.activeNavLink}`}
                 className={`${styles.navLink}`}
-                href="/blog"
+                href="/blog/home"
             >
                 <div className={`${styles.navLinkChild} x-axis-flex`}>
                     <FontAwesomeIcon icon={faHouse} />

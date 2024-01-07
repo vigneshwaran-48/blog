@@ -59,6 +59,51 @@
     cursor: pointer;
 }
 
+.searchBarLabel > input {
+    outline: none;
+    border: none;
+    border: 1px solid var(--app-light-background-color);
+    font-size: 20px;
+    padding: 7px;
+    border-radius: 10px;
+    max-width: 285px;
+    width: 80%;
+}
+
+
+.userListContainer {
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    border-radius: 7px;
+    transition: 0.5s;
+}
+
+.userListContainer:hover {
+    background-color: var(--app-light-background-color);
+}
+
+.userListContainer > img {
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.userListContainer > p {
+    flex-grow: 1;
+}
+
+.userListContainer > svg {
+    background-color: hsl(123, 91%, 35%);
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.userListContainer > svg:active {
+    transform: scale(0.9);
+}
+
 @media screen and (max-width: 500px) {
     
     .blogMeta {

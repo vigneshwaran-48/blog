@@ -1,0 +1,16 @@
+.organizationCreatePage {
+    align-items: center;
+}
+
+.organizationCreatePage > h2 {
+    margin: 5px 0px;
+}
+
+@media screen and (max-width: 400px) {
+    .organizationCreatePage > h2 {
+        font-size: 20px;
+    }   
+    .organizationCreatePage {
+        align-items: start;
+    }
+}

@@ -1,13 +1,9 @@
-import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
-export const metadata: Metadata = {
-    title: "Organization",
-    description: "Organization page of blog app"
+const OrganizationPage = () => {
+    
+    redirect("/blog/organization/list");
 }
 
-export default function OrganizationPage() {
-    return (
-        <div>Organization Page</div>
-    )
-}
+export default OrganizationPage;

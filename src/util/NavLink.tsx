@@ -16,7 +16,7 @@ export const NavLink = ( { children, href, activeClassName, className }: Props )
     const pathName = usePathname();
 
     return (
-        <Link href={href} className={`${className} ${pathName === href ? activeClassName : ""}`}>
+        <Link href={href} className={`${className} ${pathName.startsWith(href) ? activeClassName : ""}`}>
             { children }
         </Link>
     )

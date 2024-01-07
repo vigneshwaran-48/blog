@@ -1,4 +1,6 @@
-
+.body {
+    justify-content: space-between;
+}
 .middleBody {
     justify-content: space-between;
     height: calc(100% - var(--app-header-height));
@@ -7,13 +9,7 @@
 .main {
     height: 100%;
     width: calc(100% - 200px);
-}
-
-.home {
-    justify-content: center;
-}
-.blogListing {
-    max-width: 700px;
+    --app-main-body-background-color: var(--app-background-color);
 }
 
 @media screen and (max-width: 1000px) {
@@ -26,9 +22,14 @@
 }
 
 @media screen and (max-width: 500px) {
+
+    .main {
+        height: calc(100% - 40px);
+    }
     
     .middleBody {
         flex-direction: column-reverse;
+        height: calc(100% - var(--app-header-height));
     }
     .blogListing {
         width: 100%;

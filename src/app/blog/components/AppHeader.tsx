@@ -16,8 +16,6 @@ export const AppHeader = () => {
         }
     }
 
-    console.log("From header");
-
     return (
         <header className={`${styles.appHeader} full-width x-axis-flex`}>
             <div className={`${styles.appOrHamburgerMenu}`}>
