@@ -98,7 +98,6 @@ export const addUsersToOrganization = async (id: number, users: string[]) => {
         if(data.status !== 200) {
             throw new Error(data.error);
         }
-        console.log(data);
         return data.organizationUsers;
     }
     throw new Error("Error while adding users to organization");
