@@ -2,7 +2,7 @@
 
 import { SearchBar } from '@/app/blog/components/blog/SearchBar';
 import { UserMeta } from '@/util/AppTypes';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./page.module.css";
 import User from '@/app/blog/components/blog/User';
 
@@ -16,6 +16,8 @@ interface Props {
 const UserAddingSection = (props: Props) => {
 
     const { users, addedUsers, setAddedUsers, setUsers } = props;
+
+    const [ userSearchQuery, setUserSearchQuery ] = useState<string>("");
 
     const onUserAdd = (id: string) => {
         const userToAdd = users.find(user => user.id === id);
@@ -38,14 +40,19 @@ const UserAddingSection = (props: Props) => {
     }
 
     const userElems = users && users.length > 0 
-                            ? users.map(user => <User 
+                            ? users
+                                .filter(user => 
+                                    userSearchQuery.length < 1 || 
+                                    user.name?.toLowerCase().includes(userSearchQuery.toLowerCase())
+                                )
+                                .map(user => <User 
                                                     key={user.id} 
                                                     data={user} 
                                                     input={true} 
                                                     add={true} 
                                                     onAction={onUserAdd}
                                                     />
-                                        ) 
+                                        )
                             : <p>No users found</p>
 
     const addedUsersElems = addedUsers.length > 0
@@ -62,7 +69,7 @@ const UserAddingSection = (props: Props) => {
     return (
         <div className={`${styles.userAddingSection} x-axis-flex`}>
             <div className={`${styles.userAddingForm} y-axis-flex`}>
-                <SearchBar />
+                <SearchBar onSearch={setUserSearchQuery} />
                 <div className={`hide-scrollbar y-axis-flex`}>
                     { userElems }
                 </div>
