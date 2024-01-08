@@ -5,6 +5,7 @@ import { UserMeta } from '@/util/AppTypes';
 import React, { useState } from 'react';
 import styles from "./page.module.css";
 import User from '@/app/blog/components/blog/User';
+import Image from 'next/image';
 
 interface Props {
     users: UserMeta[],
@@ -64,7 +65,7 @@ const UserAddingSection = (props: Props) => {
                                                                     onAction={onUserRemove}
                                                                     />
                                                 )
-                                : <p>No Users</p>
+                                : <NoUsersFound />
 
     return (
         <div className={`${styles.userAddingSection} x-axis-flex`}>
@@ -75,8 +76,20 @@ const UserAddingSection = (props: Props) => {
                 </div>
             </div>
             <div className={`${styles.addedUserPreview} hide-scrollbar y-axis-flex`}>
-                { addedUsersElems }
+                <h2>Users ({ addedUsers.length })</h2>
+                <div className={`hide-scrollbar y-axis-flex`}>
+                    { addedUsersElems }
+                </div>
             </div>
+        </div>
+    )
+}
+
+const NoUsersFound = () => {
+
+    return (
+        <div>
+            <img className={styles.noUsersImage} src="/no-users.png" alt="No users" />
         </div>
     )
 }
