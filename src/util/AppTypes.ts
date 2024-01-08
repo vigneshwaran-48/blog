@@ -23,7 +23,8 @@ export type Organization = {
     owner?: UserMeta,
     createdTime?: number,
     visibility: "PRIVATE" | "PUBLIC",
-    joinType: "MEMBERS_INVITE" | "INVITE" | "ANYONE"
+    joinType: "MEMBERS_INVITE" | "INVITE" | "ANYONE",
+    image?: string
 }
 
 export interface APIRoutes {

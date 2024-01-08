@@ -9,3 +9,26 @@
     color: white;
     font-size: 18px;
 }
+
+.organizationComp {
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    transition: 0.5s;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.organizationComp:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.organizationComp > img {
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.organizationCompNameDesc {
+    flex-grow: 1;
+}

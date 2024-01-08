@@ -1,32 +1,37 @@
-import { authOptions } from '@/util/authOptions';
-import { Session, getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
-import React from 'react'
+"use client";
+
+import React, { useEffect, useState } from 'react'
 import { OrganizationComp } from './components/OrganizationComp';
+import { SearchBar } from '../../components/blog/SearchBar';
+import styles from "./page.module.css";
+import { Organization } from '@/util/AppTypes';
 import { getAllOrganizations } from '@/app/actions/organization';
 
-const OrganizationList = async () => {
+const OrganizationList = () => {
 
-    // Making it as any so I can take the access_token from it without typescript compling it.
-    // const session: any = await getServerSession(authOptions);
+    const [ organizations, setOrganizations ] = useState<Organization[]>([]);
 
-    // if(!session) {
-    //     redirect("/api/auth/signin");
-    // }
+    useEffect(() => {
+        fetchOrganizations();
+    }, []);
 
-    // const response = await fetch("http://localhost:8082/api/v1/app/organization", {
-    //                             headers: {
-    //                                 "Authorization": `Bearer ${session?.access_token}`
-    //                             }
-    //                         });
-        
-    // const data = await response.json();
-    const data = await getAllOrganizations();
+    const fetchOrganizations = async () => {
+        const orgs = await getAllOrganizations();
+        setOrganizations(orgs);
+    }
 
-    console.log(data);
+    const organizationElems = organizations.length > 0 
+                                        ? organizations
+                                            .map((organization, k) => <OrganizationComp key={k}  organization={organization} />)
+                                        : <h2>You are not part of any organization</h2>
     
     return (
-        <OrganizationComp organizations={data} />
+        <div>
+            <div className={`${styles.searchBar} full-width x-axis-flex`}>
+                <SearchBar onSearch={() => {}} />
+            </div>
+            { organizationElems }
+        </div>
     )
 }
 

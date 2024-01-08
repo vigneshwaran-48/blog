@@ -5,7 +5,6 @@ import { UserMeta } from '@/util/AppTypes';
 import React, { useState } from 'react';
 import styles from "./page.module.css";
 import User from '@/app/blog/components/blog/User';
-import Image from 'next/image';
 
 interface Props {
     users: UserMeta[],

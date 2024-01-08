@@ -1,6 +1,6 @@
 "use server";
 
-import { APIRoutes, UserMeta } from "@/util/AppTypes";
+import { APIRoutes } from "@/util/AppTypes";
 import { getOrganizationResourceRoutes } from "@/util/ResourceServer";
 import { authOptions } from "@/util/authOptions";
 import { getTokenFromSession } from "@/util/getTokenFromSession";

@@ -60,9 +60,6 @@ const OrganizationCreationForm = () => {
             setShowUserAddingSection(true);
             return;
         }
-        console.log("Form data");
-        console.log(formData);
-        console.log(addedUsers);
         await addUsersToOrganization(currentOrganization?.id as number, addedUsers.map(user => user.id));
     }
 

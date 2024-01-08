@@ -4,35 +4,29 @@ import React from 'react'
 import { SearchBar } from '../../../components/blog/SearchBar';
 import styles from "./page.module.css";
 import { Organization } from '@/util/AppTypes';
+import Image from 'next/image';
 
 interface Props {
-    organizations?: Organization[]
+    organization?: Organization
 }
 
 export const OrganizationComp = (props: Props) => {
 
-    const { organizations = [] } = props;
-
-    const handleOrgChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-
-        console.log(`Searching for Org ${value}`);
-    }
+    const { organization } = props;
 
     return (
-        <div>
-            <div className={`${styles.searchBar} full-width x-axis-flex`}>
-                <SearchBar callback={handleOrgChange} />
+        <div className={`${styles.organizationComp} x-axis-flex`}>
+            <Image 
+                src={organization?.image || "/person.jpg"}
+                width={50}
+                height={50}
+                alt="organization"
+            />
+            <div className={`${styles.organizationCompNameDesc}`}>
+                <h3>{ organization?.name }</h3>
+                <p>{ organization?.description }</p>
             </div>
-
-            <div className={`${styles.organizationsListContainer}`}>
-                {
-                    organizations.length > 0 ? (
-                        <div>{ organizations[0].name }</div>
-                    )
-                    : <h2>You are not a part of any organization</h2>
-                }
-            </div>
+            <button className={`button`}>View</button>
         </div>
     )
 }
