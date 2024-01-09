@@ -102,3 +102,31 @@ export const addUsersToOrganization = async (id: number, users: string[]) => {
     }
     throw new Error("Error while adding users to organization");
 }
+
+export const getOrganization = async (id: number) => {
+
+    const routes: APIRoutes = getOrganizationResourceRoutes();
+
+    const session = await getServerSession(authOptions);
+
+    if(!isAuthenticated(session as Session, false)) {
+        redirect("/api/auth/signin");
+    }
+
+    const accessToken = getTokenFromSession(session as Session);
+
+    const response = await fetch(routes.getOne(id), {
+                                headers: {
+                                    "Authorization": `Bearer ${accessToken}`
+                                }
+                            });
+    if(response.ok) {
+        const data = await response.json();
+
+        if(data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.organization;
+    }
+    throw new Error("Error while fetching organization details");
+}

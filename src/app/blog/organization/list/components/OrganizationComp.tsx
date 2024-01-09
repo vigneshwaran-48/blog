@@ -5,6 +5,7 @@ import { SearchBar } from '../../../components/blog/SearchBar';
 import styles from "./page.module.css";
 import { Organization } from '@/util/AppTypes';
 import Image from 'next/image';
+import { NavLink } from '@/util/NavLink';
 
 interface Props {
     organization?: Organization
@@ -15,7 +16,7 @@ export const OrganizationComp = (props: Props) => {
     const { organization } = props;
 
     return (
-        <div className={`${styles.organizationComp} x-axis-flex`}>
+        <NavLink href={`/blog/organization/list/${organization?.id}`} className={`${styles.organizationComp} x-axis-flex`}>
             <Image 
                 src={organization?.image || "/person.jpg"}
                 width={50}
@@ -27,6 +28,6 @@ export const OrganizationComp = (props: Props) => {
                 <p>{ organization?.description }</p>
             </div>
             <button className={`button`}>View</button>
-        </div>
+        </NavLink>
     )
 }
