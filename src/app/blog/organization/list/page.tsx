@@ -1,37 +1,14 @@
-"use client";
-
-import React, { useEffect, useState } from 'react'
-import { OrganizationComp } from './components/OrganizationComp';
-import { SearchBar } from '../../components/blog/SearchBar';
-import styles from "./page.module.css";
+import React from 'react'
 import { Organization } from '@/util/AppTypes';
 import { getAllOrganizations } from '@/app/actions/organization';
+import OrganizationContainer from './components/OrganizationContainer';
 
-const OrganizationList = () => {
+const OrganizationList = async () => {
 
-    const [ organizations, setOrganizations ] = useState<Organization[]>([]);
-
-    useEffect(() => {
-        fetchOrganizations();
-    }, []);
-
-    const fetchOrganizations = async () => {
-        const orgs = await getAllOrganizations();
-        setOrganizations(orgs);
-    }
-
-    const organizationElems = organizations.length > 0 
-                                        ? organizations
-                                            .map((organization, k) => <OrganizationComp key={k}  organization={organization} />)
-                                        : <h2>You are not part of any organization</h2>
+    const organizations: Organization[] = await getAllOrganizations();
     
     return (
-        <div>
-            <div className={`${styles.searchBar} full-width x-axis-flex`}>
-                <SearchBar onSearch={() => {}} />
-            </div>
-            { organizationElems }
-        </div>
+        <OrganizationContainer organizations={organizations} />
     )
 }
 

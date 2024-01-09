@@ -20,10 +20,6 @@
     margin-bottom: 10px;
 }
 
-.organizationComp:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
 .organizationComp > img {
     margin-right: 5px;
     border-radius: 50%;
@@ -31,4 +27,13 @@
 
 .organizationCompNameDesc {
     flex-grow: 1;
+}
+
+.organizationContainer {
+    overflow-y: scroll;
+    height: calc(100% - 40px);
+}
+
+.organizaitonListingPage {
+    height: 100%;
 }
