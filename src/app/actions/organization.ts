@@ -21,6 +21,8 @@ export async function getAllOrganizations() {
 
     const accessToken = getTokenFromSession(session as Session);
 
+    console.log(accessToken);
+
 
     const response = await fetch(routes.get, {
                                 headers: {
