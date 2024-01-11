@@ -3,6 +3,20 @@ import { BlogMeta, Organization } from '@/util/AppTypes';
 import React from 'react';
 import styles from "./page.module.css";
 import { Blog } from '@/app/blog/components/blog/Blog';
+import { Metadata } from 'next';
+
+interface Props {
+    params: {id: number}
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const organization: Organization = await getOrganization(params.id);
+
+    return {
+        title: organization.name,
+        description: `${organization.name} view page`
+    }
+}
 
 const OrganizationView = async ({params}: {params: {id: number}}) => {
 

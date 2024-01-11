@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { redirect } from "next/navigation";
 import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
