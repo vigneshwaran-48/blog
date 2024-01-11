@@ -1,7 +1,7 @@
 import React from 'react'
 import { Organization } from '@/util/AppTypes';
 import { getAllOrganizations } from '@/app/actions/organization';
-import OrganizationContainer from './components/OrganizationContainer';
+import OrganizationContainer from '../components/OrganizationContainer';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ const OrganizationList = async () => {
     const organizations: Organization[] = await getAllOrganizations();
     
     return (
-        <OrganizationContainer organizations={organizations} />
+        <OrganizationContainer hrefBase="/blog/organization/list" organizations={organizations} />
     )
 }
 

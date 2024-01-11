@@ -7,10 +7,13 @@ import styles from "./page.module.css";
 import { SearchBar } from '@/app/blog/components/blog/SearchBar';
 
 interface Props {
-    organizations: Organization[]
+    organizations: Organization[],
+    hrefBase?: string
 }
 
 const OrganizationContainer = (props: Props) => {
+
+    const { hrefBase = "/blog/organization" } = props;
 
 
     // Need to remove this state if I don't have plan to have delete button in this organization listing page.
@@ -24,7 +27,11 @@ const OrganizationContainer = (props: Props) => {
                                                 organizationSearchQuery.length <= 0 
                                                 || 
                                                 organization.name.toLowerCase().includes(organizationSearchQuery.toLowerCase()))
-                                            .map((organization, k) => <OrganizationComp key={k}  organization={organization} />)
+                                            .map((organization, k) => <OrganizationComp 
+                                                                            key={k}  
+                                                                            organization={organization} 
+                                                                            href={`${hrefBase}/${organization.id}`}
+                                                                        />)
                                         : <h2>You are not part of any organization</h2>
 
     return (

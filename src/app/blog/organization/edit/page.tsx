@@ -1,6 +1,7 @@
 import { getOrganizationsUserHasEditPermission } from '@/app/actions/organization';
 import { Metadata } from 'next';
 import React from 'react';
+import OrganizationContainer from '../components/OrganizationContainer';
 
 export const metadata: Metadata = {
     title: "Edit Organization",
@@ -11,10 +12,8 @@ const OrganizationEditPage = async () => {
 
     const organizations = await getOrganizationsUserHasEditPermission();
 
-    console.log(organizations);
-
     return (
-        <div>OrganizationEditPage</div>
+        <OrganizationContainer hrefBase="/blog/organization/edit" organizations={organizations} />
     )
 }
 

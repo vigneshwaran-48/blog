@@ -36,6 +36,49 @@
     background-color: var(--app-selected-background-color);
 }
 
+
+.searchBar {
+    justify-content: space-between;
+    max-width: 400px;
+    align-items: center;
+}
+
+.searchBar > button {
+    background-color: #4183D7;
+    color: white;
+    font-size: 18px;
+}
+
+.organizationComp {
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    transition: 0.5s;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: var(--app-text-color);
+}
+
+.organizationComp > img {
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.organizationCompNameDesc {
+    flex-grow: 1;
+}
+
+.organizationContainer {
+    overflow-y: scroll;
+    height: calc(100% - 40px);
+}
+
+.organizaitonListingPage {
+    height: 100%;
+}
+
 @media screen and (max-width: 500px) {
 
     .organizationNavbar {

@@ -1,22 +1,23 @@
 "use client";
 
 import React from 'react'
-import { SearchBar } from '../../../components/blog/SearchBar';
+import { SearchBar } from '../../components/blog/SearchBar';
 import styles from "./page.module.css";
 import { Organization } from '@/util/AppTypes';
 import Image from 'next/image';
 import { NavLink } from '@/util/NavLink';
 
 interface Props {
-    organization?: Organization
+    organization?: Organization,
+    href?: string
 }
 
 export const OrganizationComp = (props: Props) => {
 
-    const { organization } = props;
+    const { organization, href = "/blog/organization" } = props;
 
     return (
-        <NavLink href={`/blog/organization/list/${organization?.id}`} className={`${styles.organizationComp} x-axis-flex`}>
+        <NavLink href={href} className={`${styles.organizationComp} x-axis-flex`}>
             <Image 
                 src={organization?.image || "/person.jpg"}
                 width={50}
