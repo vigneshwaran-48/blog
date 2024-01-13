@@ -8,5 +8,6 @@ export interface Props {
     checked?: boolean,
     onChange: (e: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => void,
     width?: number,
-    height?: number
+    height?: number,
+    id?: string
 }

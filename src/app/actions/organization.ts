@@ -178,3 +178,33 @@ export const getOrganizationsUserHasEditPermission = async () => {
     }
     throw new Error("Error while fetching organization details");
 }
+
+export const updateOrganizationImage = async (id: number, image: string) => {
+
+    const routes: APIRoutes = getOrganizationResourceRoutes();
+
+    const session = await getServerSession(authOptions);
+
+    if(!isAuthenticated(session as Session, false)) {
+        redirect("/api/auth/signin");
+    }
+
+    const accessToken = getTokenFromSession(session as Session);
+
+    const organization: Organization = {
+        id,
+        image
+    };
+
+    const response = await fetch(routes.put, {
+                                method: "PUT",
+                                headers: {
+                                    "Authorization": `Bearer ${accessToken}`,
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(organization)
+                            });
+    if(response.ok) {
+        
+    }
+}

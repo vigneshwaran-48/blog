@@ -33,6 +33,13 @@ const GeneralEditForm = ({ organization }: FormProps) => {
         });
     }
 
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        if(e.target.files) {
+            console.log(e.target.files[0]);
+        }
+    }
+
     const visibilityRadioButtons: Props[] = [
         {
             name: "visibility",
@@ -81,7 +88,8 @@ const GeneralEditForm = ({ organization }: FormProps) => {
             <ImageInput
                 name="image"
                 value={"/person.jpg"}
-                onChange={handleFormChange}
+                onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
+                id={`org-image-${organization.id}`}
             />
             <Input 
                 name="name" 
