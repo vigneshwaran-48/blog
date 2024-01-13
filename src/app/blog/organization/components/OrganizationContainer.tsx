@@ -26,7 +26,7 @@ const OrganizationContainer = (props: Props) => {
                                             .filter(organization => 
                                                 organizationSearchQuery.length <= 0 
                                                 || 
-                                                organization.name.toLowerCase().includes(organizationSearchQuery.toLowerCase()))
+                                                organization.name?.toLowerCase().includes(organizationSearchQuery.toLowerCase()))
                                             .map((organization, k) => <OrganizationComp 
                                                                             key={k}  
                                                                             organization={organization} 
