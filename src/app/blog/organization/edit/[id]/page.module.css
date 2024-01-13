@@ -1,0 +1,9 @@
+
+.layout {
+    justify-content: space-between;
+}
+
+.main {
+    height: calc(100% - 53px);
+    overflow-y: scroll;
+}

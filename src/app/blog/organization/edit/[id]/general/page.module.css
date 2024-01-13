@@ -1,0 +1,11 @@
+
+
+.generalEditForm {
+    max-width: 700px;
+    width: 100%;
+    align-items: center;
+}
+
+.generalEditForm > label, .generalEditForm input, .generalEditForm textarea {
+    width: 100%;
+}

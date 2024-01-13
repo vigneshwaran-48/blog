@@ -1,13 +1,11 @@
-"use client";
-import { useRouter } from 'next/navigation';
+import { redirect } from "next/navigation";
 
-const OrganizationEditPage = () => {
-
-    const router = useRouter();
-
-    console.log("Path => " + location.pathname)
-
-    router.push(location.pathname + "/general");
+interface Props {
+    params: { id: number }
 }
 
-export default OrganizationEditPage;
+const OrganizationGeneralPage = ({ params }: Props) => {
+    redirect(`/blog/organization/edit/${params.id}/general`);
+}
+
+export default OrganizationGeneralPage;

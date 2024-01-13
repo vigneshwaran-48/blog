@@ -1,17 +1,22 @@
 import { getOrganization } from '@/app/actions/organization';
 import React from 'react';
+import GeneralEditForm from './GeneralEditPage';
 
 interface Props {
     params: { id: number }
 }
 
-const OrganizationEditGeneralPage = async ({ params }: Props) => {
+const OrganizationGeneralPage = async ({ params }: Props) => {
 
-    const organization = await getOrganization(params.id);
+    const { id } = params;
+
+    const organization = await getOrganization(id);
 
     return (
-        <div>OrganizationEditGeneralPage</div>
+        <div className={`full-body`}>
+            <GeneralEditForm organization={organization} />
+        </div>
     )
 }
 
-export default OrganizationEditGeneralPage;
+export default OrganizationGeneralPage;
