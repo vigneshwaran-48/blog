@@ -17,13 +17,14 @@ export type UserMeta = {
 export type BlogCategory = string;
 
 export type Organization = {
-    name: string,
+    name?: string,
     id?: number,
     description?: string,
     owner?: UserMeta,
     createdTime?: number,
-    visibility: "PRIVATE" | "PUBLIC",
-    joinType: "MEMBERS_INVITE" | "INVITE" | "ANYONE"
+    visibility?: "PRIVATE" | "PUBLIC",
+    joinType?: "MEMBERS_INVITE" | "INVITE" | "ANYONE",
+    image?: string
 }
 
 export interface APIRoutes {

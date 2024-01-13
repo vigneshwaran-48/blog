@@ -6,12 +6,12 @@ import styles from "./page.module.css";
 interface Props {
     shouldExpandOnActive?: boolean,
     placeHolder?: string,
-    callback?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onSearch?: (query: string) => void
 }
 
 export const SearchBar = (props: Props) => {
 
-    const { shouldExpandOnActive = false, placeHolder = "Search", callback = () => "" } = props;
+    const { shouldExpandOnActive = false, placeHolder = "Search", onSearch = () => {} } = props;
 
     return (
         <label htmlFor="search-bar-id" className={`${styles.searchBarLabel}`}>
@@ -19,7 +19,7 @@ export const SearchBar = (props: Props) => {
                 id="search-bar-id" 
                 name="search-bar"
                 placeholder={ placeHolder }
-                onChange={callback}
+                onChange={e => onSearch(e.target.value)}
             />
         </label>
     )

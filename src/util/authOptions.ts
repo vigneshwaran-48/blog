@@ -27,11 +27,16 @@ export const authOptions: NextAuthOptions = {
             }
             console.log("User not exists going to create");
 
+            let image = profile?.image;
+            if(account?.provider === "google") {
+                image = Object.create(profile as object).picture;
+            }
+
             const userData = {
                 id: profile?.sub,
                 name: profile?.name,
                 email: profile?.email,
-                image: profile?.image
+                image
             }
 
             const response = await fetch("http://localhost:8082/api/v1/app/user", {

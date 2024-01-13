@@ -6,5 +6,8 @@ export interface Props {
     placeHolder?: string,
     value?: string,
     checked?: boolean,
-    onChange: (e: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => void
+    onChange: (e: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => void,
+    width?: number,
+    height?: number,
+    id?: string
 }

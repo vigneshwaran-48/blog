@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from "./page.module.css";
 import OrganizationCreationForm from './components/OrganizationCreationForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Create Organization",
+    description: "Organization creating page"
+}
 
 const OrganizationCreatePage = () => {
     return (

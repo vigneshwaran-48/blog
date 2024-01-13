@@ -8,6 +8,7 @@
 }
 .appHeader > img {
     width: 40px;
+    border-radius: 50%;
 }
 .appOrHamburgerMenu > svg {
     width: 20px;

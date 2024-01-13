@@ -1,0 +1,20 @@
+
+.editLayout {
+    
+}
+
+.navBar {
+ padding: 10px 0px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--app-text-color);
+    padding: 7px;
+    border-radius: 7px;
+}
+
+.activeNavLink {
+    color: var(--app-selected-text-color);
+    background-color: var(--app-selected-background-color);
+}

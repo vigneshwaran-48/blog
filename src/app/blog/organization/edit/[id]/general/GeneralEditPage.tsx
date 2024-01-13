@@ -1,47 +1,26 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import { Organization } from '@/util/AppTypes';
+import React, { useState } from 'react';
 import styles from "./page.module.css";
-import Input from '@/app/blog/components/form/Input';
+import Input from "@/app/blog/components/form/Input";
 import TextArea from '@/app/blog/components/form/TextArea';
-import { Organization, UserMeta } from '@/util/AppTypes';
 import RadioGroup from '@/app/blog/components/form/RadioGroup';
 import { Props } from '@/app/blog/components/form/Props';
-import UserAddingSection from './UserAddingSection';
-import { addUsersToOrganization, createOrganization } from '@/app/actions/organization';
-import { useFormStatus } from 'react-dom';
-import { getAllUsers } from '@/app/actions/user';
-import { useRouter } from 'next/navigation';
+import ImageInput from '@/app/blog/components/form/ImageInput';
 
-const OrganizationCreationForm = () => {
+interface FormProps {
+    organization: Organization
+}
 
-    const formStatus = useFormStatus();
-    
+const GeneralEditForm = ({ organization }: FormProps) => {
+
     const [ formData, setFormData ] = useState<Organization>({
-        name: "",
-        description: "",
-        joinType: "ANYONE",
-        visibility: "PUBLIC"
+        name: organization.name,
+        description: organization.description,
+        joinType: organization.joinType,
+        visibility: organization.visibility
     });
-
-    const [ showUserAddingSection, setShowUserAddingSection ] = useState<boolean>(false);
-
-    const [ users, setUsers ] = useState<UserMeta[]>([]);
-
-    const [ addedUsers, setAddedUsers ] = useState<UserMeta[]>([]);
-
-    const [ currentOrganization, setCurrentOrganization ] = useState<Organization>();
-
-    const router = useRouter();
-
-    useEffect(() => {
-        fetchUsers();
-    }, []);
-
-    const fetchUsers = async () => {
-        const users = await getAllUsers();
-        setUsers(users);
-    }
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -54,15 +33,11 @@ const OrganizationCreationForm = () => {
         });
     }
 
-    const handleFormAction = async (form: FormData) => {
-        if(!showUserAddingSection) {
-            const organization: Organization = await createOrganization(formData);
-            setCurrentOrganization(organization);
-            setShowUserAddingSection(true);
-            return;
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        if(e.target.files) {
+            console.log(e.target.files[0]);
         }
-        await addUsersToOrganization(currentOrganization?.id as number, addedUsers.map(user => user.id));
-        router.push(`/blog/organization/list/${currentOrganization?.id}`);
     }
 
     const visibilityRadioButtons: Props[] = [
@@ -106,10 +81,16 @@ const OrganizationCreationForm = () => {
         }
     ];
 
-    const content = !showUserAddingSection ? (
+    const content = (
         <div 
-            className={`${styles.organizationCreationForm} y-axis-flex`}
+            className={`${styles.generalEditForm} y-axis-flex`}
         >
+            <ImageInput
+                name="image"
+                value={"/person.jpg"}
+                onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
+                id={`org-image-${organization.id}`}
+            />
             <Input 
                 name="name" 
                 value={formData.name} 
@@ -135,27 +116,13 @@ const OrganizationCreationForm = () => {
             />
 
         </div>
-    ) : <UserAddingSection 
-            addedUsers={addedUsers} 
-            users={users} 
-            setAddedUsers={setAddedUsers}
-            setUsers={setUsers}
-        />
+    )
 
     return (
-        <form 
-            className={`${styles.organizationCreationContainer} full-body y-axis-flex`}
-            action={handleFormAction}
-        >
+        <form className={`full-body hide-scrollbar y-axis-flex`}>
             { content }
-            <nav className={`${styles.organizationCreationNavbar} full-width x-axis-flex`}>
-                <button 
-                    className={`button`}
-                    type="submit"
-                >{ formStatus.pending ? "Creating ..." : !showUserAddingSection ? "Create" : "Finish"}</button>
-            </nav>
         </form>
     )
 }
 
-export default OrganizationCreationForm;
+export default GeneralEditForm;
