@@ -7,6 +7,7 @@ import Input from "@/app/blog/components/form/Input";
 import TextArea from '@/app/blog/components/form/TextArea';
 import RadioGroup from '@/app/blog/components/form/RadioGroup';
 import { Props } from '@/app/blog/components/form/Props';
+import ImageInput from '@/app/blog/components/form/ImageInput';
 
 interface FormProps {
     organization: Organization
@@ -77,6 +78,11 @@ const GeneralEditForm = ({ organization }: FormProps) => {
         <div 
             className={`${styles.generalEditForm} y-axis-flex`}
         >
+            <ImageInput
+                name="image"
+                value={"/person.jpg"}
+                onChange={handleFormChange}
+            />
             <Input 
                 name="name" 
                 value={formData.name} 
@@ -105,7 +111,7 @@ const GeneralEditForm = ({ organization }: FormProps) => {
     )
 
     return (
-        <form className={`full-body`}>
+        <form className={`full-body hide-scrollbar y-axis-flex`}>
             { content }
         </form>
     )
