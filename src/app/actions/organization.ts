@@ -179,7 +179,7 @@ export const getOrganizationsUserHasEditPermission = async () => {
     throw new Error("Error while fetching organization details");
 }
 
-export const updateOrganizationImage = async (id: number, image: string) => {
+export const updateOrganization = async (organization: Organization) => {
 
     const routes: APIRoutes = getOrganizationResourceRoutes();
 
@@ -191,11 +191,6 @@ export const updateOrganizationImage = async (id: number, image: string) => {
 
     const accessToken = getTokenFromSession(session as Session);
 
-    const organization: Organization = {
-        id,
-        image
-    };
-
     const response = await fetch(routes.put, {
                                 method: "PUT",
                                 headers: {
@@ -204,7 +199,10 @@ export const updateOrganizationImage = async (id: number, image: string) => {
                                 },
                                 body: JSON.stringify(organization)
                             });
-    if(response.ok) {
-        
+    const data = await response.json();
+
+    if(data.status === 200) {
+        return data.organization;
     }
+    throw new Error(data.error);
 }

@@ -28,3 +28,11 @@
     height: calc(100% - 40px);
     overflow-y: scroll;
 }
+
+.page > form > button {
+    width: fit-content;
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+    padding: 5px 10px;
+    font-size: 18px;
+}
