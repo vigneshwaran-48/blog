@@ -35,7 +35,6 @@ export async function getAllOrganizations() {
         if(data.status !== 200) {
             throw new Error(data.error);
         }
-        console.log(data.organizations)
         return data.organizations;
     }
     else if(response.status === 401) {
@@ -209,4 +208,27 @@ export const updateOrganization = async (organization: Organization) => {
         return data.organization;
     }
     throw new Error(data.error);
+}
+
+export const getUsersOfOrganization = async (id: number) => {
+
+    const routes: APIRoutes = getOrganizationResourceRoutes();
+
+    const session = await getServerSession(authOptions);
+
+    if(!isAuthenticated(session as Session, false)) {
+        redirect("/api/auth/signin");
+    }
+
+    const accessToken = getTokenFromSession(session as Session);
+
+    const response = await fetch(`${routes.getOne(id)}/user`, {
+                                headers: {
+                                    "Authorization": `Bearer ${accessToken}`
+                                }
+                            });
+    if(response.ok) {
+        const data = await response.json();
+        return data.organizationUsers;
+    }
 }
