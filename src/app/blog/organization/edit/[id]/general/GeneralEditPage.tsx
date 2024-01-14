@@ -11,6 +11,10 @@ import ImageInput from '@/app/blog/components/form/ImageInput';
 import { uploadImage } from '@/app/actions/staticResource';
 import { getStaticResourceRoutes } from '@/util/ResourceServer';
 import { updateOrganization } from '@/app/actions/organization';
+import { useAppDispatch } from '@/lib/hooks';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { getUniqueId } from '@/util/getUniqueId';
+import { PopupType } from '@/app/blog/components/popup/PopUp';
 
 interface FormProps {
     organization: Organization
@@ -19,6 +23,9 @@ interface FormProps {
 const GeneralEditForm = ({ organization }: FormProps) => {
 
     const [ formData, setFormData ] = useState<Organization>(organization);
+
+
+    const dispatch = useAppDispatch();
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -50,6 +57,12 @@ const GeneralEditForm = ({ organization }: FormProps) => {
 
         const response = await updateOrganization(formData);
         setFormData(response);
+
+        dispatch(addPopup({
+            id: getUniqueId(),
+            message: "Saved the organization",
+            type: PopupType.SUCCESS
+        }));
     }
 
     const visibilityRadioButtons: Props[] = [

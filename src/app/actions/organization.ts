@@ -8,6 +8,7 @@ import { isAuthenticated } from "@/util/isAuthenticated";
 import { Session, getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { Organization } from "@/util/AppTypes";
+import { revalidatePath } from "next/cache";
 
 export async function getAllOrganizations() {
 
@@ -68,6 +69,8 @@ export async function createOrganization(organization: Organization) {
         if(data.status !== 201) {
             throw new Error(data.error);
         }
+        revalidatePath("/blog/organization/list");
+        revalidatePath("/blog/organization/edit");
         return data.organization;
     }
     else if(response.status === 401) {
@@ -202,6 +205,7 @@ export const updateOrganization = async (organization: Organization) => {
     const data = await response.json();
 
     if(data.status === 200) {
+        revalidatePath(`/blog/organization/edit`);
         return data.organization;
     }
     throw new Error(data.error);

@@ -1,0 +1,80 @@
+
+.popup {
+    --indicator-color: hsl(131, 59%, 52%);
+}
+
+.popupContainer {
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    max-width: 300px;
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.popup {
+    justify-content: space-between;
+    width: 95%;
+    background-color: var(--app-background-color);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+
+.popupBody {
+    padding: 10px;
+    align-items: center;
+    position: relative;
+}
+
+.popupBody > p {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.popupBody > .successIcon, .failedIcon {
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--indicator-color);
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: var(--app-text-color);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.close:hover {
+    color: var(--app-light-text-color);
+    background-color: var(--app-light-background-color);
+}
+
+
+.loaderContainer {
+    height: 5px;
+    background-color: var(--indicator-color);
+}
+
+@media screen and (max-width: 500px) {
+    
+    .popupContainer {
+        max-width: none;
+    }
+    .popup {
+        max-width: 300px;
+    }
+}

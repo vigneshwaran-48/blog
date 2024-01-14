@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
 import userSlice from "./features/user/userSlice";
+import popupSlice from "./features/popup/popupSlice";
 
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
-            userSlice: userSlice
+            userSlice,
+            popupSlice
         }
     })
 }
