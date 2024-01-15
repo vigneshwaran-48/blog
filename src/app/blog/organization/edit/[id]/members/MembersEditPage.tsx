@@ -8,20 +8,21 @@ import OrganizationUserContainer from './OrganizationUserContainer';
 
 interface Props {
     users: UserMeta[],
-    orgUsers: OrganizationUser[]
+    orgUsers: OrganizationUser[],
+    organizationId: number
 }
 
-const MembersEditPage = (props: Props) => {
+const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
 
-    const [ allUsers, setAllUsers ] = useState<UserMeta[]>(props.users);
-    const [ organizationUsers, setOrganizationUsers ] = useState<OrganizationUser[]>(props.orgUsers);
+    const [ allUsers, setAllUsers ] = useState<UserMeta[]>(users);
+    const [ organizationUsers, setOrganizationUsers ] = useState<OrganizationUser[]>(orgUsers);
     
     const handleUsersSearch = (query: String) => {
 
     }
 
     const orgUsersElem = organizationUsers.length > 0 ? organizationUsers.map((user, key) => {
-        return <OrganizationUserContainer key={key} user={user} />
+        return <OrganizationUserContainer key={key} organizationId={organizationId} user={user} />
     }) : <h1>No users</h1>
 
     return (

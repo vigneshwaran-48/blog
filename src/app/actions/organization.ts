@@ -232,3 +232,28 @@ export const getUsersOfOrganization = async (id: number) => {
         return data.organizationUsers;
     }
 }
+
+export const updateUserRole = async (id: number, userId: string, role: string) => {
+
+    const routes: APIRoutes = getOrganizationResourceRoutes();
+
+    const session = await getServerSession(authOptions);
+
+    if(!isAuthenticated(session as Session, false)) {
+        redirect("/api/auth/signin");
+    }
+
+    const accessToken = getTokenFromSession(session as Session);
+
+    const response = await fetch(`${routes.getOne(id)}/user/${userId}?role=${role}`, {
+                                method: "PUT",
+                                headers: {
+                                    "Authorization": `Bearer ${accessToken}`
+                                }
+                            });
+    const data = await response.json();
+    if(data.status === 200) {
+        revalidatePath(`/blog/organization/edit/${id}/members`);
+    }
+    return data;
+}

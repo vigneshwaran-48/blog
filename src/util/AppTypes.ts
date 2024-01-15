@@ -41,9 +41,11 @@ export enum UserOrganizationRole {
     MEMBER
 }
 
+export type UserRole = "ADMIN" | "MODERATOR" | "MEMBER";
+
 export interface OrganizationUser {
     details: UserMeta,
-    role: "ADMIN" | "MODERATOR" | "MEMBER"
+    role: UserRole
 }
 
 export interface OrganizationUserDTO {
