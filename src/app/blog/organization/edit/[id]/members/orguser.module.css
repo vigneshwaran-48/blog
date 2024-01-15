@@ -1,0 +1,40 @@
+
+.userContainer {
+    padding: 10px;
+    border-radius: 7px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.userContainer > img {
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.userContainer > p {
+    flex-grow: 1;
+}
+
+.removeUserButton {
+    color: red;
+}
+
+.userRole {
+    align-items: center;
+    padding: 0px 10px;
+    position: relative;
+}
+
+.userRole > ul {
+    background-color: var(--app-background-color);
+    color: var(--app-light-color);
+    position: absolute;
+    right: 100%;
+    transform: scaleY(0);
+    transition: 0.5s;
+}
+
+.userRole > ul > li {
+    list-style-type: none;
+}
+

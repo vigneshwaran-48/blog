@@ -67,3 +67,7 @@ body, html {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.pointer {
+  cursor: pointer;
+}

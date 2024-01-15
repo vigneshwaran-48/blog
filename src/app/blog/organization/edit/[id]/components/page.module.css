@@ -18,3 +18,17 @@
     color: var(--app-selected-text-color);
     background-color: var(--app-selected-background-color);
 }
+
+.header {
+    align-items: center;
+    padding: 5px 0px;
+}
+.header > a {
+    display: inline-block;
+    font-size: 25px;
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+    padding: 0px 5px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: var(--app-text-color);
+}
