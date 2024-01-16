@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { SessionProvider } from "next-auth/react";
 import { Roboto } from "next/font/google";
 import PopUpMessageContainer from "./components/popup/PopUpMessageContainer";
+import PopupDialogComp from "./components/popup/PopupDialogComp";
 
 const roboto = Roboto({
     weight: "400",
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children : React.ReactNode })
                             </main>
                         </div>
                         <PopUpMessageContainer />
+                        <PopupDialogComp />
                     </body>
                 </html>
             </SessionProvider>

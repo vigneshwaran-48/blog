@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit"
 import userSlice from "./features/user/userSlice";
 import popupSlice from "./features/popup/popupSlice";
+import popupDialogSlice from "./features/popup/popupDialogSlice";
 
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             userSlice,
-            popupSlice
+            popupSlice,
+            popupDialogSlice
         }
     })
 }

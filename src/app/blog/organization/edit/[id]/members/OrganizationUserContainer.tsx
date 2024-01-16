@@ -7,10 +7,12 @@ import Image from 'next/image';
 import { faCheck, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { updateUserRole } from '@/app/actions/organization';
-import { useAppDispatch } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '@/app/blog/components/popup/PopUp';
+import { PopupDialogType, addPopupDialog } from '@/lib/features/popup/popupDialogSlice';
+import { AppFields } from '@/util/AppFields';
 
 interface Props {
     user: OrganizationUser,
@@ -21,11 +23,28 @@ const OrganizationUserContainer = ({ user, organizationId }: Props) => {
 
     const { name, image } = user.details;
 
+    const currentUser = useAppSelector(state => state.userSlice);
+
     const dispatch = useAppDispatch();
 
     const [ role, setRole ] = useState<UserRole>(user.role);
 
     const onUserRoleChange = async (role: UserRole) => {
+
+        if(role == "ADMIN") {
+            dispatch(addPopupDialog({
+                type: PopupDialogType.WARNING,
+                message: "Doing this will degrade your role to moderator!",
+                title: "Role Assigning!",
+                openDialog: true
+            }));
+
+            document.addEventListener(AppFields.Events.Popup.onProceed, () => changeRole(role));
+            
+        }
+    }
+
+    const changeRole = async (role: UserRole) => {
         const response = await updateUserRole(organizationId, user.details.id, role);
         dispatch(addPopup({
             id: getUniqueId(),
