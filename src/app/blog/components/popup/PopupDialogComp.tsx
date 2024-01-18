@@ -1,37 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from "./popupDialog.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfo, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { PopupDialog, PopupDialogType, closeDialog } from '@/lib/features/popup/popupDialogSlice';
-import { AppFields } from '@/util/AppFields';
+import { PopupDialogState, PopupDialogType, PopupModelContextProvider } from './PopupModelProvider';
 
-const PopupDialogComp = () => {
+const PopupDialogComp = (props: PopupDialogState) => {
 
-    const [ showDialog, setShowDialog ] = useState<boolean>(false);
+    const { message, title, open, type, onClose, onProceed = () => {} } = props;
 
-    const popupDialog: PopupDialog = useAppSelector(state => state.popupDialogSlice.value);
+    const popupContext = useContext(PopupModelContextProvider);
 
-    const { message, title, openDialog } = popupDialog;
-
-    const dispatch = useAppDispatch();
-
-    const isWarning: boolean = popupDialog.type === PopupDialogType.WARNING;
+    const isWarning = type === PopupDialogType.WARNING;
 
     const handleProceed = () => {
-        const event = new Event(AppFields.Events.Popup.onProceed);
-        dispatch(closeDialog());
-        document.dispatchEvent(event);
+        onProceed();
+        popupContext.closePopup();
     }
 
     const handleClose = () => {
-        const event = new Event(AppFields.Events.Popup.onCancel);
-        dispatch(closeDialog());
-        document.dispatchEvent(event);
+        onClose();
+        popupContext.closePopup();
     }
 
     return (
-        <div className={`${styles.dialogContainerPage} ${openDialog ? styles.showDialog : ""} full-body x-axis-flex`}>
+        <div className={`${styles.dialogContainerPage} ${open ? styles.showDialog : ""} full-body x-axis-flex`}>
             <div className={`${styles.background} full-body`}></div>
             <div 
                 className={`${styles.dialogContainer} y-axis-flex`}

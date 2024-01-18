@@ -1,7 +1,7 @@
 "use client";
 
 import { OrganizationUser, UserRole } from '@/util/AppTypes';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styles from "./orguser.module.css";
 import Image from 'next/image';
 import { faCheck, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
@@ -11,8 +11,8 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '@/app/blog/components/popup/PopUp';
-import { PopupDialogType, addPopupDialog } from '@/lib/features/popup/popupDialogSlice';
 import { AppFields } from '@/util/AppFields';
+import { PopupDialogType, PopupModelContextProvider } from '@/app/blog/components/popup/PopupModelProvider';
 
 interface Props {
     user: OrganizationUser,
@@ -20,6 +20,8 @@ interface Props {
 }
 
 const OrganizationUserContainer = ({ user, organizationId }: Props) => {
+
+    const popupModel = useContext(PopupModelContextProvider);
 
     const { name, image } = user.details;
 
@@ -32,15 +34,17 @@ const OrganizationUserContainer = ({ user, organizationId }: Props) => {
     const onUserRoleChange = async (role: UserRole) => {
 
         if(role == "ADMIN") {
-            dispatch(addPopupDialog({
-                type: PopupDialogType.WARNING,
-                message: "Doing this will degrade your role to moderator!",
-                title: "Role Assigning!",
-                openDialog: true
-            }));
+            
 
             document.addEventListener(AppFields.Events.Popup.onProceed, () => changeRole(role));
-            
+            popupModel.setPopupModelState({
+                message: "You will be degraded",
+                title: "Role change",
+                onClose: () => {},
+                onProceed: () => changeRole(role),
+                type: PopupDialogType.WARNING,
+                open: true
+            })
         }
     }
 
