@@ -1,7 +1,7 @@
 import { APIRoutes } from "./AppTypes";
 
 export const getServerBase = () => {
-    return "http://192.168.172.188:7000";
+    return "http://localhost:7000";
 }
 
 export const getOrganizationResourceRoutes = () => {

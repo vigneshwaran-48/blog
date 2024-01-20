@@ -22,7 +22,6 @@ export async function getAllOrganizations() {
 
     const accessToken = getTokenFromSession(session as Session);
 
-
     const response = await fetch(routes.get, {
                                 headers: {
                                     "Authorization": `Bearer ${accessToken}`

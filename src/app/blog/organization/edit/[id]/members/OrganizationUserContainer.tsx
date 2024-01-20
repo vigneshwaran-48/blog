@@ -33,9 +33,9 @@ const OrganizationUserContainer = ({ user, organizationId }: Props) => {
 
     const onUserRoleChange = async (role: UserRole) => {
 
-        if(role == "ADMIN") {
-            
+        console.log(currentUser);
 
+        if(role == "ADMIN") {
             document.addEventListener(AppFields.Events.Popup.onProceed, () => changeRole(role));
             popupModel.setPopupModelState({
                 message: "You will be degraded",
