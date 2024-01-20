@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '@/app/blog/components/popup/PopUp';
-import { AppFields } from '@/util/AppFields';
 import { PopupDialogType, PopupModelContextProvider } from '@/app/blog/components/popup/PopupModelProvider';
 
 interface Props {
@@ -33,18 +32,28 @@ const OrganizationUserContainer = ({ user, organizationId }: Props) => {
 
     const onUserRoleChange = async (role: UserRole) => {
 
-        console.log(currentUser);
-
         if(role == "ADMIN") {
-            document.addEventListener(AppFields.Events.Popup.onProceed, () => changeRole(role));
             popupModel.setPopupModelState({
-                message: "You will be degraded",
+                message: "Performing this action will degrade your role",
                 title: "Role change",
                 onClose: () => {},
                 onProceed: () => changeRole(role),
                 type: PopupDialogType.WARNING,
                 open: true
-            })
+            });
+        }
+        else if(currentUser.id === user.details.id && user.role === "ADMIN") {
+            popupModel.setPopupModelState({
+                message: "This operation will degrade your current role in this organization",
+                title: "Role change",
+                onClose: () => {},
+                onProceed: () => changeRole(role),
+                type: PopupDialogType.WARNING,
+                open: true
+            });
+        }
+        else {
+            changeRole(role);
         }
     }
 

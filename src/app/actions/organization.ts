@@ -61,20 +61,16 @@ export async function createOrganization(organization: Organization) {
                                 },
                                 body: JSON.stringify(organization)
                             });
-    if(response.ok) {
-        const data = await response.json();
-                        
-        if(data.status !== 201) {
-            throw new Error(data.error);
-        }
+
+    const data = await response.json();
+    if(response.status === 200 || response.status === 201) {
         revalidatePath("/blog/organization/list");
         revalidatePath("/blog/organization/edit");
-        return data.organization;
     }
     else if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    throw new Error("Error while creating organization");
+    return data;
 }
 
 export const addUsersToOrganization = async (id: number, users: string[]) => {

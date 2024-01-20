@@ -14,15 +14,11 @@ const UserStoreProvider = ({ children }: Props) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        console.log("User store provider fetch")
         setUserInStore();
     }, []);
 
     const setUserInStore = async () => {
-        
-        console.log("Fecthing current user details");
         const user = await getProfile();
-        console.log(user);
         dispatch(setUser(user));
     }
 

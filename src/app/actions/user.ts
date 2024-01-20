@@ -55,8 +55,6 @@ export const getProfile = async () => {
                                 }
                             });
 
-    console.log(response.status);
-    console.log(response.ok);
     if(response.ok) {
         const data = await response.json();
                                                 

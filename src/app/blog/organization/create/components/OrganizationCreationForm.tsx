@@ -12,6 +12,9 @@ import { addUsersToOrganization, createOrganization } from '@/app/actions/organi
 import { useFormStatus } from 'react-dom';
 import { getAllUsers } from '@/app/actions/user';
 import { useRouter } from 'next/navigation';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { PopupType } from '@/app/blog/components/popup/PopUp';
+import { getUniqueId } from '@/util/getUniqueId';
 
 const OrganizationCreationForm = () => {
 
@@ -56,7 +59,21 @@ const OrganizationCreationForm = () => {
 
     const handleFormAction = async (form: FormData) => {
         if(!showUserAddingSection) {
-            const organization: Organization = await createOrganization(formData);
+            const response = await createOrganization(formData);
+            if(response.status != 200 || response.status !== 201) {
+                addPopup({
+                    id: getUniqueId(),
+                    type: PopupType.FAILED,
+                    message: response.error
+                });
+                return;
+            }
+            addPopup({
+                id: getUniqueId(),
+                type: PopupType.SUCCESS,
+                message: response.message
+            });
+            const organization: Organization = response.data;
             setCurrentOrganization(organization);
             setShowUserAddingSection(true);
             return;
