@@ -16,6 +16,7 @@ const popupSlice = createSlice({
     initialState: { value: initialState },
     reducers: {
         addPopup: (state, action: PayloadAction<Popup>) => {
+            console.log("Adding popup slice");
             state.value = [...state.value, action.payload];
         },
         deletePopup: (state, action: PayloadAction<string>) => {

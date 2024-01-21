@@ -27,7 +27,8 @@ export const sendRequest = async (props: Props) => {
 
     const options: RequestInit = {};
     const headers: any = {
-        "Authorization": `Bearer ${accessToken}`
+        "Authorization": `Bearer ${accessToken}`,
+        "Accept-Language": "en-US"
     }
 
     if(includeBody) {
