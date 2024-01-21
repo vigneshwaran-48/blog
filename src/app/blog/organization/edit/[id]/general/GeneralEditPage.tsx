@@ -49,6 +49,11 @@ const GeneralEditForm = ({ organization }: FormProps) => {
             formData.image = resourePath;
 
             const response = await updateOrganization(formData);
+            if(response.status !== 200) {
+                addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error });
+                return;
+            }
+            addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
             setFormData(response);
         }
     }
@@ -56,13 +61,12 @@ const GeneralEditForm = ({ organization }: FormProps) => {
     const handleFormAction = async (form: FormData) => {
 
         const response = await updateOrganization(formData);
+        if(response.status !== 200) {
+            addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error });
+            return;
+        }
+        addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
         setFormData(response);
-
-        dispatch(addPopup({
-            id: getUniqueId(),
-            message: "Saved the organization",
-            type: PopupType.SUCCESS
-        }));
     }
 
     const visibilityRadioButtons: Props[] = [

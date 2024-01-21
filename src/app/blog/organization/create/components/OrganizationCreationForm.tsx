@@ -60,25 +60,23 @@ const OrganizationCreationForm = () => {
     const handleFormAction = async (form: FormData) => {
         if(!showUserAddingSection) {
             const response = await createOrganization(formData);
-            if(response.status != 200 || response.status !== 201) {
-                addPopup({
-                    id: getUniqueId(),
-                    type: PopupType.FAILED,
-                    message: response.error
-                });
+            console.log(response);
+            if(response.status !== 200 && response.status !== 201) {
+                addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error });
                 return;
             }
-            addPopup({
-                id: getUniqueId(),
-                type: PopupType.SUCCESS,
-                message: response.message
-            });
+            addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
             const organization: Organization = response.data;
             setCurrentOrganization(organization);
             setShowUserAddingSection(true);
             return;
         }
-        await addUsersToOrganization(currentOrganization?.id as number, addedUsers.map(user => user.id));
+        const response = await addUsersToOrganization(currentOrganization?.id as number, addedUsers.map(user => user.id));
+        if(response.status !== 200) {
+            addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error });
+            return;
+        }
+        addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
         router.push(`/blog/organization/list/${currentOrganization?.id}`);
     }
 
