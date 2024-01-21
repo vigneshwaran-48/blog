@@ -1,0 +1,69 @@
+
+.dialogContainerPage {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    transform: scale(0);
+    justify-content: center;
+    align-items: center;
+}
+
+.dialogContainer {
+    justify-content: space-between;
+    max-width: 300px;
+    width: 95%;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    transition: 0.5s;
+    position: absolute;
+    background-color: var(--app-background-color);
+}
+
+.background {
+    position: absolute;
+}
+
+.popupDialogBody {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popupDialogBody > span {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoIcon {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+}
+
+.popupDialogBody > h2 {
+    flex-grow: 1;
+    margin-left: 5px;
+}
+
+.dialogContainer > p {
+    padding: 10px 0px;
+}
+
+.buttonContainer {
+    justify-content: flex-end;
+}
+
+.processButton {
+    background-color: hsl(121, 72%, 49%);
+    color: white;
+    margin-left: 5px;
+}
+
+.showDialog {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0.4);
+}

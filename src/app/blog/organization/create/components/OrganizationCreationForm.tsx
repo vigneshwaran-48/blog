@@ -12,6 +12,10 @@ import { addUsersToOrganization, createOrganization } from '@/app/actions/organi
 import { useFormStatus } from 'react-dom';
 import { getAllUsers } from '@/app/actions/user';
 import { useRouter } from 'next/navigation';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { PopupType } from '@/app/blog/components/popup/PopUp';
+import { getUniqueId } from '@/util/getUniqueId';
+import { useAppDispatch } from '@/lib/hooks';
 
 const OrganizationCreationForm = () => {
 
@@ -23,6 +27,8 @@ const OrganizationCreationForm = () => {
         joinType: "ANYONE",
         visibility: "PUBLIC"
     });
+
+    const dispatch = useAppDispatch();
 
     const [ showUserAddingSection, setShowUserAddingSection ] = useState<boolean>(false);
 
@@ -56,12 +62,24 @@ const OrganizationCreationForm = () => {
 
     const handleFormAction = async (form: FormData) => {
         if(!showUserAddingSection) {
-            const organization: Organization = await createOrganization(formData);
+            const response = await createOrganization(formData);
+            if(response.status !== 200 && response.status !== 201) {
+                dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+                console.log("Added popup");
+                return;
+            }
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
+            const organization: Organization = response.organization;
             setCurrentOrganization(organization);
             setShowUserAddingSection(true);
             return;
         }
-        await addUsersToOrganization(currentOrganization?.id as number, addedUsers.map(user => user.id));
+        const response = await addUsersToOrganization(currentOrganization?.id as number, addedUsers.map(user => user.id));
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
         router.push(`/blog/organization/list/${currentOrganization?.id}`);
     }
 

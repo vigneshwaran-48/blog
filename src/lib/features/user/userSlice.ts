@@ -1,36 +1,33 @@
+import { UserMeta } from "@/util/AppTypes";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
-
-export interface User {
-    name: string,
-    image: string,
-    loggedIn: boolean
-}
-
-export const initialState: User = {
+export const initialState: UserMeta = {
     name: "Guest",
     image: "/person.jpg",
-    loggedIn: false
+    id: "test-001"
 }
 
 const userSlice = createSlice({
     name: "userSlice",
     reducers: {
-        setLoggenInStatus: (state, action: PayloadAction<User>) => {
-            const { loggedIn } = action.payload;
-            state.loggedIn = loggedIn;
-        },
-        setName: (state, action: PayloadAction<User>) => {
-            const { name } = action.payload;
+        setName: (state, action: PayloadAction<string>) => {
+            const name = action.payload;
             state.name = name;
         },
-        setImage: (state, action: PayloadAction<User>) => {
-            const { image } = action.payload;
+        setImage: (state, action: PayloadAction<string>) => {
+            const image = action.payload;
             state.image = image;
+        },
+        setUser: (state, action: PayloadAction<UserMeta>) => {
+            // Setting all values separately then only it is getting relected in the store.
+            state.name = action.payload.name;
+            state.image = action.payload.image;
+            state.description = action.payload.description;
+            state.id = action.payload.id;
         }
     },
     initialState
 });
 
-export const { setLoggenInStatus, setName, setImage } = userSlice.actions;
+export const { setName, setImage, setUser } = userSlice.actions;
 export default userSlice.reducer;

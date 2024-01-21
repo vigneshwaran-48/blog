@@ -34,3 +34,21 @@ export interface APIRoutes {
     delete: (id: string | number) => string,
     put: string
 }
+
+export enum UserOrganizationRole {
+    ADMIN,
+    MODERATOR,
+    MEMBER
+}
+
+export type UserRole = "ADMIN" | "MODERATOR" | "MEMBER";
+
+export interface OrganizationUser {
+    details: UserMeta,
+    role: UserRole
+}
+
+export interface OrganizationUserDTO {
+    organization: Organization,
+    users: OrganizationUser[]
+}

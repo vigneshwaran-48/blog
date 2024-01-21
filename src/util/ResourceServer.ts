@@ -1,7 +1,7 @@
 import { APIRoutes } from "./AppTypes";
 
 export const getServerBase = () => {
-    return "http://localhost:8082";
+    return "http://localhost:7000";
 }
 
 export const getOrganizationResourceRoutes = () => {
@@ -27,6 +27,19 @@ export const getUserResourceRoutes = () => {
         create: `${serverBase}/api/v1/app/user`,
         put: `${serverBase}/api/v1/app/user`,
         delete: (id: string | number) => `${serverBase}/api/v1/app/user/${id}`
+    }
+    return routes;
+}
+
+export const getStaticResourceRoutes = () => {
+    const serverBase = getServerBase();
+
+    const routes : APIRoutes = {
+        get: "",
+        getOne: (id: string | number) => `${serverBase}/static/${id}`,
+        create: `${serverBase}/static`,
+        put: "",
+        delete: (id: string | number) => `${serverBase}/static/${id}`
     }
     return routes;
 }

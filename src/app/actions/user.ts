@@ -1,29 +1,14 @@
 "use server";
 
+import { Prefernces } from "@/lib/features/settings/preferencesSlice";
 import { getUserResourceRoutes } from "@/util/ResourceServer";
-import { authOptions } from "@/util/authOptions";
-import { getTokenFromSession } from "@/util/getTokenFromSession";
-import { isAuthenticated } from "@/util/isAuthenticated";
-import { Session, getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import { sendRequest } from "@/util/RequestUtil";
 
 export const getAllUsers = async () => {
 
     const routes = getUserResourceRoutes();
 
-    const session = await getServerSession(authOptions);
-
-    if(!isAuthenticated(session as Session, false)) {
-        redirect("/api/auth/signin");
-    }
-
-    const accessToken = getTokenFromSession(session as Session);
-
-    const response = await fetch(routes.get, {
-                                headers: {
-                                    "Authorization": `Bearer ${accessToken}`
-                                }
-                            });
+    const response = await sendRequest({ url: routes.get, method: "GET", includeBody: false });
 
     if(response.ok) {
         const data = await response.json();
@@ -35,4 +20,29 @@ export const getAllUsers = async () => {
     }
     throw new Error("Error while fetching users details");
 
+}
+
+export const getProfile = async () => {
+
+    const routes = getUserResourceRoutes();
+
+    const response = await sendRequest({ url: `${routes.get}/profile`, method: "GET", includeBody: false });
+
+    if(response.ok) {
+        const data = await response.json();
+                                                
+        if(data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.user;
+    }
+    throw new Error("Error while fetching users details");
+}
+
+export const getUserPreferences = async () => {
+
+    return {
+        theme: "LIGHT",
+        lang: "en"
+    } as Prefernces
 }

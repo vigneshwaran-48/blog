@@ -8,6 +8,9 @@ import { AppStore, makeStore } from "@/lib/store";
 import { Provider } from "react-redux";
 import { SessionProvider } from "next-auth/react";
 import { Roboto } from "next/font/google";
+import PopUpMessageContainer from "./components/popup/PopUpMessageContainer";
+import PopupModelProvider from "./components/popup/PopupModelProvider";
+import UserStoreProvider from "./components/providers/UserStoreProvider";
 
 const roboto = Roboto({
     weight: "400",
@@ -35,13 +38,18 @@ export default function RootLayout({ children }: { children : React.ReactNode })
                     `}
                     </style>
                     <body className={`full-body ${styles.body} y-axis-flex`}>
-                        <AppHeader />
-                        <div className={`${styles.middleBody} full-width x-axis-flex`}>
-                            <NavBar />
-                            <main className={styles.main}>
-                                { children }
-                            </main>
-                        </div>
+                        <PopupModelProvider>
+                            <UserStoreProvider>
+                                <AppHeader />
+                                <div className={`${styles.middleBody} full-width x-axis-flex`}>
+                                    <NavBar />
+                                    <main className={styles.main}>
+                                        { children }
+                                    </main>
+                                </div>
+                            </UserStoreProvider>
+                        <PopUpMessageContainer />
+                        </PopupModelProvider>
                     </body>
                 </html>
             </SessionProvider>

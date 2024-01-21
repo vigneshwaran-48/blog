@@ -8,6 +8,13 @@ import TextArea from '@/app/blog/components/form/TextArea';
 import RadioGroup from '@/app/blog/components/form/RadioGroup';
 import { Props } from '@/app/blog/components/form/Props';
 import ImageInput from '@/app/blog/components/form/ImageInput';
+import { uploadImage } from '@/app/actions/staticResource';
+import { getStaticResourceRoutes } from '@/util/ResourceServer';
+import { updateOrganization } from '@/app/actions/organization';
+import { useAppDispatch } from '@/lib/hooks';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { getUniqueId } from '@/util/getUniqueId';
+import { PopupType } from '@/app/blog/components/popup/PopUp';
 
 interface FormProps {
     organization: Organization
@@ -15,12 +22,10 @@ interface FormProps {
 
 const GeneralEditForm = ({ organization }: FormProps) => {
 
-    const [ formData, setFormData ] = useState<Organization>({
-        name: organization.name,
-        description: organization.description,
-        joinType: organization.joinType,
-        visibility: organization.visibility
-    });
+    const [ formData, setFormData ] = useState<Organization>(organization);
+
+
+    const dispatch = useAppDispatch();
 
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -33,11 +38,35 @@ const GeneralEditForm = ({ organization }: FormProps) => {
         });
     }
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
         if(e.target.files) {
-            console.log(e.target.files[0]);
+            const file = e.target.files[0];
+            const form = new FormData();
+            form.append("resource", file);
+            const resourceId = await uploadImage(form);
+            const resourePath = getStaticResourceRoutes().getOne(resourceId);
+            formData.image = resourePath;
+
+            const response = await updateOrganization(formData);
+            if(response.status !== 200) {
+                addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error });
+                return;
+            }
+            addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
+            setFormData(response);
         }
+    }
+
+    const handleFormAction = async (form: FormData) => {
+
+        const response = await updateOrganization(formData);
+        if(response.status !== 200) {
+            addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error });
+            return;
+        }
+        addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
+        setFormData(response);
     }
 
     const visibilityRadioButtons: Props[] = [
@@ -87,9 +116,9 @@ const GeneralEditForm = ({ organization }: FormProps) => {
         >
             <ImageInput
                 name="image"
-                value={"/person.jpg"}
+                value={formData.image}
                 onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
-                id={`org-image-${organization.id}`}
+                id={`org-image-${formData.id}`}
             />
             <Input 
                 name="name" 
@@ -119,8 +148,12 @@ const GeneralEditForm = ({ organization }: FormProps) => {
     )
 
     return (
-        <form className={`full-body hide-scrollbar y-axis-flex`}>
+        <form 
+            className={`full-body hide-scrollbar y-axis-flex`}
+            action={handleFormAction}
+        >
             { content }
+            <button className={`button`}>Save</button>
         </form>
     )
 }

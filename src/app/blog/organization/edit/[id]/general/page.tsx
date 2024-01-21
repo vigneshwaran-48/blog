@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import styles from "./page.module.css";
 import Link from 'next/link';
+import { Organization } from '@/util/AppTypes';
+import Goback from '../components/Goback';
 
 interface Props {
     params: { id: number }
@@ -14,16 +16,14 @@ const OrganizationGeneralPage = async ({ params }: Props) => {
 
     const { id } = params;
 
-    const organization = await getOrganization(id);
+    const organization: Organization = await getOrganization(id);
 
     return (
         <div className={`${styles.page} full-body`}>
-            <div className={`${styles.header} x-axis-flex`}>
-                <Link href="/blog/organization/edit">
-                    <FontAwesomeIcon icon={faArrowLeftLong} />
-                </Link>
-                <h2>General</h2>
-            </div>
+            <Goback 
+                goBackLink="/blog/organization/edit" 
+                text="General"
+            />
             <GeneralEditForm organization={organization} />
         </div>
     )

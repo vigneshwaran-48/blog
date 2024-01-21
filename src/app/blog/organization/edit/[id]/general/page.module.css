@@ -10,21 +10,15 @@
     width: 100%;
 }
 
-.header {
-    align-items: center;
-    padding: 5px 0px;
-}
-.header > a {
-    display: inline-block;
-    font-size: 25px;
-    border-right: 2px solid rgba(0, 0, 0, 0.2);
-    padding: 0px 5px;
-    margin-right: 5px;
-    text-decoration: none;
-    color: var(--app-text-color);
-}
-
 .page > form {
     height: calc(100% - 40px);
     overflow-y: scroll;
+}
+
+.page > form > button {
+    width: fit-content;
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+    padding: 5px 10px;
+    font-size: 18px;
 }
