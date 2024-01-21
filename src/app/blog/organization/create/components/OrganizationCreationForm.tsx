@@ -66,7 +66,7 @@ const OrganizationCreationForm = () => {
                 return;
             }
             addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
-            const organization: Organization = response.data;
+            const organization: Organization = response.organization;
             setCurrentOrganization(organization);
             setShowUserAddingSection(true);
             return;

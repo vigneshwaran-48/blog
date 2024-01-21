@@ -32,7 +32,7 @@ export const sendRequest = async (props: Props) => {
 
     if(includeBody) {
         options.body = body;
-        headers.contentType = contentType;
+        headers["Content-Type"] = contentType;
     }
 
     options.headers = headers;
