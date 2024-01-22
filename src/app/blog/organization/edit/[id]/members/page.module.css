@@ -1,0 +1,20 @@
+
+.searchWrapper {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.searchWrapper > button {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+    margin-left: 5px;
+}
+
+.layout {
+    position: relative;
+}
+
+.body {
+    height: calc(100% - 40px);
+    justify-content: center;
+}

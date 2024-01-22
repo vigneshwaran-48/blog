@@ -59,6 +59,12 @@
     cursor: pointer;
 }
 
+.searchBarLabel {
+    max-width: 400px;
+    width: 90%;
+    display: block;
+}
+
 .searchBarLabel > input {
     outline: none;
     border: none;
@@ -66,8 +72,7 @@
     font-size: 20px;
     padding: 7px;
     border-radius: 10px;
-    max-width: 285px;
-    width: 80%;
+    width: 100%;
 }
 
 

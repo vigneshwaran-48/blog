@@ -5,6 +5,7 @@ import { OrganizationUser, UserMeta } from '@/util/AppTypes';
 import React, { useState } from 'react';
 import styles from "./page.module.css";
 import OrganizationUserContainer from './OrganizationUserContainer';
+import Link from 'next/link';
 
 interface Props {
     users: UserMeta[],
@@ -26,8 +27,11 @@ const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
     }) : <h1>No users</h1>
 
     return (
-        <div className={`${styles.orgUsersListingContainer} y-axis-flex`}>
-            <SearchBar onSearch={handleUsersSearch} />
+        <div className={`full-body y-axis-flex`}>
+            <div className={`${styles.searchWrapper} x-axis-flex full-width`}>
+                <SearchBar onSearch={handleUsersSearch} />
+                <button className={`button`}>Add</button>
+            </div>
             <div className={`y-axis-flex`}>
                 { orgUsersElem }
             </div>

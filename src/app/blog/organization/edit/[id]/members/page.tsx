@@ -5,6 +5,7 @@ import MembersEditPage from './MembersEditPage';
 import { OrganizationUserDTO, UserMeta } from '@/util/AppTypes';
 import Goback from '../components/Goback';
 import { Metadata } from 'next';
+import styles from "./page.module.css";
 
 interface Props {
     params: {id: number}
@@ -30,7 +31,7 @@ const OrganizationMemersPage = async ({ params }: Props) => {
     const filteredUsers = users.filter(user => orgUsers.findIndex(orgUser => orgUser.details.id === user.id) < 0);
 
     return (
-        <div>
+        <div className={`${styles.layout} full-body`}>
             <Goback 
                 goBackLink="/blog/organization/edit" 
                 text="Members"
