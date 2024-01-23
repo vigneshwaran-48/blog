@@ -18,3 +18,13 @@
     height: calc(100% - 40px);
     justify-content: center;
 }
+
+.membersEditPage {
+    position: relative;
+    height: calc(100% - 40px);
+}
+
+.orgMembersListContainer {
+    position: absolute;
+    height: calc(100% - 40px);
+}

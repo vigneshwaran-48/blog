@@ -1,0 +1,77 @@
+
+.userAddingWindow {
+    max-width: 400px;
+    max-height: 600px;
+    width: 95%;
+    height: 100%;
+    background-color: var(--app-background-color);
+    position: absolute;
+    justify-content: space-between;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 1px 2px 8px 0px; */
+    border: 1px solid #0000001a;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.background {
+    position: fixed;
+    background-color: rgb(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+}
+
+.userAddingWindow > label {
+    margin-bottom: 10px;
+}
+
+.userListContainer {
+    height: calc(100% - 50px);
+}
+
+.addedUsersPreview {
+    position: absolute;
+    bottom: 0%;
+    right: 2px;
+    left: 2px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+}
+
+.selectedUserContainer {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.selectedUserContainer > img {
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.selectedUserContainer > span {
+    position: absolute;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    justify-content: center;
+    align-items: center;
+    left: 60%;
+    top: -15%;
+}
+
+.closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.5);
+}
