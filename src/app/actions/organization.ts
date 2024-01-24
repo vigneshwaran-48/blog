@@ -64,6 +64,9 @@ export const addUsersToOrganization = async (id: number, users: string[]) => {
                         });
 
     const data = await response.json();
+    if(response.ok) {
+        revalidatePath(`/blog/organization/edit/${id}/members`);
+    }
     return data;
 }
 

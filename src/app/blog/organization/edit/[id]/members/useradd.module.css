@@ -7,8 +7,6 @@
     background-color: var(--app-background-color);
     position: absolute;
     justify-content: space-between;
-    /* box-shadow: rgba(99, 99, 99, 0.2) 1px 2px 8px 0px; */
-    border: 1px solid #0000001a;
     border-radius: 7px;
     padding: 10px;
 }
@@ -39,6 +37,9 @@
     left: 2px;
     background-color: rgba(255, 255, 255, 0.7);
     padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
 }
 
 .selectedUserContainer {
@@ -74,4 +75,12 @@
     right: 5px;
     font-size: 20px;
     color: rgba(0, 0, 0, 0.5);
+}
+
+.addedUsersContainer {
+    width: 90%;
+}
+.addedUsersPreview > button {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
 }

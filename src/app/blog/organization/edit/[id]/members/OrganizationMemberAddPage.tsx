@@ -58,8 +58,8 @@ const OrganizationMemberAddPage = ({ members, onAdd, onClose }: Props) => {
     : null;
 
     return (
-        <div className={`${styles.background} full-body x-axis-flex`}>
-            <div className={`${styles.userAddingWindow} y-axis-flex`}>
+        <div className={`${styles.background} full-body x-axis-flex`} onClick={e => onClose()}>
+            <div className={`${styles.userAddingWindow} y-axis-flex`} onClick={e => e.stopPropagation()}>
                 <span className={`${styles.closeButton} pointer`} onClick={e => onClose()}>
                     <FontAwesomeIcon icon={faXmark} />
                 </span>
@@ -68,7 +68,14 @@ const OrganizationMemberAddPage = ({ members, onAdd, onClose }: Props) => {
                     { userElems }
                 </div>
                 <div className={`${styles.addedUsersPreview} x-axis-flex`}>
-                    { selectedUsersElem }
+                    <div className={`${styles.addedUsersContainer} x-axis-flex`}>
+                        { selectedUsersElem }
+                    </div>
+                    {
+                        selectedUsers.length > 0 
+                            ? <button onClick={e => onAdd(selectedUsers)} className={`button`}>Add</button> 
+                            : ""
+                    }
                 </div>
             </div>
         </div>

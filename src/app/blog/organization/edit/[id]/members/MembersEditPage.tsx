@@ -7,6 +7,11 @@ import styles from "./page.module.css";
 import OrganizationUserContainer from './OrganizationUserContainer';
 import Link from 'next/link';
 import OrganizationMemberAddPage from './OrganizationMemberAddPage';
+import { addUsersToOrganization } from '@/app/actions/organization';
+import { useAppDispatch } from '@/lib/hooks';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { PopupType } from '@/app/blog/components/popup/PopUp';
+import { getUniqueId } from '@/util/getUniqueId';
 
 interface Props {
     users: UserMeta[],
@@ -20,13 +25,24 @@ const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
     const [ organizationUsers, setOrganizationUsers ] = useState<OrganizationUser[]>(orgUsers);
 
     const [ openUserAddComp, setOpenUserAddComp ] = useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
     
     const handleUsersSearch = (query: String) => {
 
     }
 
-    const handleUsersAdd = (users: UserMeta[]) => {
+    const handleUsersAdd = async (users: UserMeta[]) => {
+        console.log("Users added => " + users);
+        const response = await addUsersToOrganization(organizationId, users.map(user => user.id));
 
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
+
+        setOpenUserAddComp(false);
     }
 
     const handleOpenAddSection = () => {
