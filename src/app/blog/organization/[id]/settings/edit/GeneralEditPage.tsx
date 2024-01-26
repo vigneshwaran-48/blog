@@ -123,7 +123,7 @@ const GeneralEditForm = ({ organization }: FormProps) => {
         >
             <ImageInput
                 name="image"
-                value={formData.image}
+                value={formData.image || "/person.jpg"}
                 onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
                 id={`org-image-${formData.id}`}
             />

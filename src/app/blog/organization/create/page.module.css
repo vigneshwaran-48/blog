@@ -1,9 +1,19 @@
 .organizationCreatePage {
     align-items: center;
+    padding-top: var(--app-main-page-padding-top);
+    max-width: var(--app-main-page-max-width);
+    width: 95%;
+    overflow-y: scroll;
 }
 
 .organizationCreatePage > h2 {
     margin: 5px 0px;
+}
+
+@media screen and (max-width: 500px) {
+    .organizationCreatePage {
+        padding-top: 10px;
+    }
 }
 
 @media screen and (max-width: 400px) {

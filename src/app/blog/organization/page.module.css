@@ -9,6 +9,11 @@
     color: var(--app-selected-text-color);
 }
 
+.header > button > a {
+    color: var(--app-selected-text-color);
+    text-decoration: none;
+}
+
 .main {
     max-width: var(--app-main-page-max-width);
     padding: 10px;

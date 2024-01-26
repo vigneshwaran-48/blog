@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import styles from "./page.module.css";
 import { SearchBar } from '../components/blog/SearchBar';
 import { OrganizationComp } from './components/OrganizationComp';
+import Link from 'next/link';
 
 interface Props {
     organizations: Organization[]
@@ -29,7 +30,9 @@ const OrganizationListing = ({ organizations }: Props) => {
         <div className={`${styles.main} y-axis-flex full-body`}>
             <div className={`${styles.header} x-axis-flex`}>
                 <SearchBar onSearch={handleOrganizationSearch} />
-                <button className={`button`}>Create</button>
+                <button className={`button`}>
+                    <Link href="/blog/organization/create">Create</Link>
+                </button>
             </div>
             <div className={`${styles.organizationListingContainer} hide-scrollbar full-width y-axis-flex`}>
                 { organizationElems }
