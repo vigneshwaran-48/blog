@@ -72,7 +72,7 @@ const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
                     <SearchBar onSearch={handleUsersSearch} />
                     <button className={`button`} onClick={e => setOpenUserAddComp(true)}>Add</button>
                 </div>
-                <div className={`full-width y-axis-flex`}>
+                <div className={`${styles.usersList} full-width y-axis-flex`}>
                     { orgUsersElem }
                 </div>
             </div>

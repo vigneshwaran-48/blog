@@ -3,9 +3,7 @@ import { getAllUsers } from '@/app/actions/user';
 import React from 'react';
 import MembersEditPage from './MembersEditPage';
 import { OrganizationUserDTO, UserMeta } from '@/util/AppTypes';
-import Goback from '../components/Goback';
 import { Metadata } from 'next';
-import styles from "./page.module.css";
 
 interface Props {
     params: {id: number}
@@ -31,13 +29,7 @@ const OrganizationMemersPage = async ({ params }: Props) => {
     const filteredUsers = users.filter(user => orgUsers.findIndex(orgUser => orgUser.details.id === user.id) < 0);
 
     return (
-        <div className={`${styles.layout} full-body`}>
-            <Goback 
-                goBackLink="/blog/organization/edit" 
-                text="Members"
-            />
-            <MembersEditPage users={filteredUsers} orgUsers={organizationUsers.users} organizationId={params.id} />
-        </div>
+        <MembersEditPage users={filteredUsers} orgUsers={organizationUsers.users} organizationId={params.id} />
     )
 }
 
