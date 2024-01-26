@@ -64,6 +64,11 @@ export const addUsersToOrganization = async (id: number, users: string[]) => {
                         });
 
     const data = await response.json();
+    if(response.ok) {
+        revalidatePath(`/blog/organization/edit/${id}/members`, "page");
+        revalidatePath(`/blog/organization/edit`);
+        revalidatePath(`/blog/organization/list`, "page");
+    }
     return data;
 }
 
@@ -152,6 +157,29 @@ export const updateUserRole = async (id: number, userId: string, role: string) =
     const data = await response.json();
     if(data.status === 200) {
         revalidatePath(`/blog/organization/edit/${id}/members`);
+    }
+    return data;
+}
+
+export const removeUsersFromOrganization = async (id: number, users: string[]) => {
+    const routes: APIRoutes = getOrganizationResourceRoutes();
+
+    const params = new URLSearchParams();
+    const usersCSV = users.join(",");
+    
+    params.set("usersToRemove", usersCSV);
+
+    const response = await sendRequest({ 
+                            url: `${routes.getOne(id)}/user?${params.toString()}`,
+                            method: "DELETE", 
+                            includeBody: false 
+                        });
+
+    const data = await response.json();
+    if(response.ok) {
+        revalidatePath(`/blog/organization/edit/${id}/members`, "page");
+        revalidatePath(`/blog/organization/edit`);
+        revalidatePath(`/blog/organization/list`);
     }
     return data;
 }
