@@ -33,6 +33,20 @@
     line-height: 1.7;
 }
 
+.attributes {
+    max-width: 200px;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.attributes > p:nth-child(1) {
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-right: 5px;
+}
+
 @media screen and (max-width: 500px) {
     
     .organizationSection {
