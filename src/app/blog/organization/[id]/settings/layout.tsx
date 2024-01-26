@@ -18,7 +18,7 @@ const OrganizationPageLayout = ({ children, params: { id } }: Props) => {
     return (
         <section className={`${styles.organizationSection} full-body y-axis-flex`}>
             <SettingsNavbar organizationId={id} />
-            <div className={`${styles.organizationBody} full-body hide-scrollbar y-axis-flex`}>
+            <div className={`${styles.organizationBody} full-body hide-scrollbar x-axis-flex`}>
                 { children }
             </div>
         </section>

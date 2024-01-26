@@ -2,7 +2,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    margin: 20px 0px;
 }
 
 .header > button {
@@ -14,6 +13,7 @@
     max-width: var(--app-main-page-max-width);
     padding: 10px;
     justify-content: space-between;
+    padding-top: var(--app-main-page-padding-top);
 }
 
 .organizationListingContainer {
@@ -24,6 +24,9 @@
 @media screen and (max-width: 500px) {
     .header > label {
         max-width: 200px;
+    }
+    .main {
+        padding-top: 10px;
     }
 }
 
