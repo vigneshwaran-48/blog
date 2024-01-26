@@ -1,13 +1,12 @@
 "use client";
 
 import { SearchBar } from '@/app/blog/components/blog/SearchBar';
-import { OrganizationUser, UserMeta } from '@/util/AppTypes';
+import { OrganizationUser, OrganizationUserDTO, UserMeta } from '@/util/AppTypes';
 import React, { useState } from 'react';
 import styles from "./page.module.css";
 import OrganizationUserContainer from './OrganizationUserContainer';
-import Link from 'next/link';
 import OrganizationMemberAddPage from './OrganizationMemberAddPage';
-import { addUsersToOrganization } from '@/app/actions/organization';
+import { addUsersToOrganization, getUsersOfOrganization, removeUsersFromOrganization } from '@/app/actions/organization';
 import { useAppDispatch } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { PopupType } from '@/app/blog/components/popup/PopUp';
@@ -33,7 +32,6 @@ const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
     }
 
     const handleUsersAdd = async (users: UserMeta[]) => {
-        console.log("Users added => " + users);
         const response = await addUsersToOrganization(organizationId, users.map(user => user.id));
 
         if(response.status !== 200) {
@@ -42,15 +40,29 @@ const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
         }
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
 
+        const orgUsers: OrganizationUserDTO = await getUsersOfOrganization(organizationId);
+        setOrganizationUsers(orgUsers.users);
+        
         setOpenUserAddComp(false);
     }
 
-    const handleOpenAddSection = () => {
-        setOpenUserAddComp(true);
+    const handleRemoveUser = async (id: string) => {
+        const response = await removeUsersFromOrganization(organizationId, [id]);
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        setOrganizationUsers(prevOrganizationUsers => prevOrganizationUsers.filter(user => user.details.id !== id));
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
     }
 
     const orgUsersElem = organizationUsers.length > 0 ? organizationUsers.map((user, key) => {
-        return <OrganizationUserContainer key={key} organizationId={organizationId} user={user} />
+        return <OrganizationUserContainer 
+                    key={key} 
+                    organizationId={organizationId} 
+                    user={user}
+                    onRemove={handleRemoveUser}
+                />
     }) : <h1>No users</h1>
 
     return (

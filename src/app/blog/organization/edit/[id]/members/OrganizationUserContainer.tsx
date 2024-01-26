@@ -15,10 +15,11 @@ import { PopupDialogType, PopupModelContextProvider } from '@/app/blog/component
 
 interface Props {
     user: OrganizationUser,
-    organizationId: number
+    organizationId: number,
+    onRemove: (id: string) => void
 }
 
-const OrganizationUserContainer = ({ user, organizationId }: Props) => {
+const OrganizationUserContainer = ({ user, organizationId, onRemove }: Props) => {
 
     const popupModel = useContext(PopupModelContextProvider);
 
@@ -84,7 +85,10 @@ const OrganizationUserContainer = ({ user, organizationId }: Props) => {
                     role={role}
                     onRoleChange={onUserRoleChange}
                 />
-                <span className={`${styles.removeUserButton} pointer`}>
+                <span 
+                    className={`${styles.removeUserButton} pointer`}
+                    onClick={e => onRemove(user.details.id)}
+                >
                     <FontAwesomeIcon icon={faCircleMinus} />
                 </span>
             </div>
