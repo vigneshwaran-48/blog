@@ -1,22 +1,35 @@
-
-.organizationSection {
+.header {
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
+    margin: 20px 0px;
 }
 
-.organizationBody {
-    height: 100%;
-    overflow-y: scroll;
+.header > button {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+}
+
+.main {
+    max-width: var(--app-main-page-max-width);
     padding: 10px;
+    justify-content: space-between;
+}
+
+.organizationListingContainer {
+    height: calc(100% - 80px);
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 500px) {
-    .organizationSection {
-        flex-direction: column;
-    }
-    .organizationBody {
-        padding: 10px 0px;
-        height: calc(100% - 45px);
-        overflow-y: scroll;
+    .header > label {
+        max-width: 200px;
     }
 }
 
+@media screen and (max-width: 300px) { 
+
+    .header > label {
+        max-width: 160px;
+    }
+}

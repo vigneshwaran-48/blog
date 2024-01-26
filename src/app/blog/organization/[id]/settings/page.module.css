@@ -1,0 +1,11 @@
+.organizationSection {
+    padding: 10px;
+    flex-direction: column;
+    max-width: var(--app-main-page-max-width);
+    align-items: center;
+}
+.organizationBody {
+    padding: 10px 0px;
+    height: calc(100% - 45px);
+    overflow-y: scroll;
+}

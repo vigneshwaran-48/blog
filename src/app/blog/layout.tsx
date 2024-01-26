@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children : React.ReactNode })
                                 <AppHeader />
                                 <div className={`${styles.middleBody} full-width x-axis-flex`}>
                                     <NavBar />
-                                    <main className={styles.main}>
+                                    <main className={`${styles.main} x-axis-flex`}>
                                         { children }
                                     </main>
                                 </div>
