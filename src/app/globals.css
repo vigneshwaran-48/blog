@@ -14,6 +14,9 @@
 
   --app-navbar-status-translate: -100%;
 
+  --app-main-page-max-width: 830px;
+  --app-main-page-padding-top: 60px;
+
 }
 
 * {

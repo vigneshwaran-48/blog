@@ -65,7 +65,6 @@ const OrganizationCreationForm = () => {
             const response = await createOrganization(formData);
             if(response.status !== 200 && response.status !== 201) {
                 dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
-                console.log("Added popup");
                 return;
             }
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
@@ -80,7 +79,7 @@ const OrganizationCreationForm = () => {
             return;
         }
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
-        router.push(`/blog/organization/list/${currentOrganization?.id}`);
+        router.push(`/blog/organization/${currentOrganization?.id}`);
     }
 
     const visibilityRadioButtons: Props[] = [

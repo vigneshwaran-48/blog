@@ -6,6 +6,9 @@ import styles from "./page.module.css";
 import { Organization } from '@/util/AppTypes';
 import Image from 'next/image';
 import { NavLink } from '@/util/NavLink';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 interface Props {
     organization?: Organization,
@@ -28,7 +31,9 @@ export const OrganizationComp = (props: Props) => {
                 <h3>{ organization?.name }</h3>
                 <p>{ organization?.description }</p>
             </div>
-            <button className={`button`}>View</button>
+            <Link href={`${href}/settings`}>
+                <FontAwesomeIcon icon={faGear} />
+            </Link>
         </NavLink>
     )
 }

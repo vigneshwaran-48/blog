@@ -8,15 +8,21 @@ interface Props {
     children?: React.ReactNode,
     href: string,
     activeClassName?: string,
-    className?: string | null
+    className?: string | null,
+    useStartsWith?: boolean
 }
 
-export const NavLink = ( { children, href, activeClassName, className }: Props ) => {
+export const NavLink = ( { children, href, activeClassName, className, useStartsWith = true }: Props ) => {
 
     const pathName = usePathname();
 
     return (
-        <Link href={href} className={`${className} ${pathName.startsWith(href) ? activeClassName : ""}`}>
+        <Link href={href} className={`${className} ${useStartsWith 
+            ? pathName.startsWith(href) 
+                ? activeClassName : ""
+            : pathName === href 
+                ? activeClassName : ""}`}
+        >
             { children }
         </Link>
     )

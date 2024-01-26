@@ -1,0 +1,55 @@
+.organizationSection {
+    padding: 10px;
+    flex-direction: column;
+    max-width: var(--app-main-page-max-width);
+    align-items: center;
+    padding-top: var(--app-main-page-padding-top);
+}
+.organizationBody {
+    padding: 10px 0px;
+    height: calc(100% - 45px);
+    overflow-y: scroll;
+    justify-content: center;
+}
+
+.infoContainer {
+    max-width: 450px;
+    width: 95%;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.infoContainer > img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.infoContainer > h2, .infoContainer > p {
+    margin: 15px 0px;
+}
+
+.infoContainer > p {
+    line-height: 1.7;
+}
+
+.attributes {
+    max-width: 200px;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.attributes > p:nth-child(1) {
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 500px) {
+    
+    .organizationSection {
+        padding-top: 10px;
+    }
+}

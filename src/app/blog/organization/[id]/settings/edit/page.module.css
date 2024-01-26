@@ -10,15 +10,22 @@
     width: 100%;
 }
 
-.page > form {
+.page {
     height: calc(100% - 40px);
     overflow-y: scroll;
+    align-items: center;
 }
 
-.page > form > button {
+.page > button {
     width: fit-content;
     background-color: var(--app-selected-background-color);
     color: var(--app-selected-text-color);
     padding: 5px 10px;
-    font-size: 18px;
+    font-size: 20px;
+    width: 200px;
+}
+
+.generalEditForm > div:first-child {
+    display: flex;
+    justify-content: center;
 }

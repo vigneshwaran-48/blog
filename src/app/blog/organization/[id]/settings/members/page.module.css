@@ -22,9 +22,15 @@
 .membersEditPage {
     position: relative;
     height: calc(100% - 40px);
+    position: relative;
+    margin-top: 20px;
 }
 
 .orgMembersListContainer {
     position: absolute;
     height: calc(100% - 40px);
+}
+
+.usersList {
+    margin-top: 10px;
 }

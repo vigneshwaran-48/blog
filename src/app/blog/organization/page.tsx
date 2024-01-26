@@ -1,8 +1,13 @@
-import { redirect } from 'next/navigation'
+import { getAllOrganizations } from '@/app/actions/organization';
+import OrganizationListing from './OrganizationListing';
 
-const OrganizationPage = () => {
+const OrganizationPage = async () => {
     
-    redirect("/blog/organization/list");
+    const organizations = await getAllOrganizations();
+
+    return (
+        <OrganizationListing organizations={organizations} />
+    )
 }
 
 export default OrganizationPage;
