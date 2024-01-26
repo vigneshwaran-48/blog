@@ -4,12 +4,12 @@
     padding: 10px;
 }
 
-.header > button {
+.header > a > button {
     background-color: var(--app-selected-background-color);
     color: var(--app-selected-text-color);
 }
 
-.header > button > a {
+.header > a {
     color: var(--app-selected-text-color);
     text-decoration: none;
 }

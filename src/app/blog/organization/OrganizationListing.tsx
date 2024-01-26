@@ -30,9 +30,9 @@ const OrganizationListing = ({ organizations }: Props) => {
         <div className={`${styles.main} y-axis-flex full-body`}>
             <div className={`${styles.header} x-axis-flex`}>
                 <SearchBar onSearch={handleOrganizationSearch} />
-                <button className={`button`}>
-                    <Link href="/blog/organization/create">Create</Link>
-                </button>
+                <Link href="/blog/organization/create">
+                    <button className={`button`}>Create</button>
+                </Link>
             </div>
             <div className={`${styles.organizationListingContainer} hide-scrollbar full-width y-axis-flex`}>
                 { organizationElems }
