@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const OrganizationCreatePage = () => {
     return (
-        <div className={`${styles.organizationCreatePage} full-body y-axis-flex`}>
+        <div className={`${styles.organizationCreatePage} hide-scrollbar y-axis-flex`}>
             <h2>Set up your Organization</h2>
             <OrganizationCreationForm />
         </div>

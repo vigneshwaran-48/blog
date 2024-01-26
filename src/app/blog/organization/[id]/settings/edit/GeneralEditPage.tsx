@@ -44,17 +44,24 @@ const GeneralEditForm = ({ organization }: FormProps) => {
             const file = e.target.files[0];
             const form = new FormData();
             form.append("resource", file);
-            const resourceId = await uploadImage(form);
+            const imageResponse = await uploadImage(form);
+
+            if(imageResponse.status !== 201 && imageResponse.status !== 200) {
+                dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: imageResponse.error }));
+                return;
+            }
+
+            const resourceId = imageResponse.id;
             const resourePath = getStaticResourceRoutes().getOne(resourceId);
             formData.image = resourePath;
 
             const response = await updateOrganization(formData);
             if(response.status !== 200) {
-                addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error });
+                dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
                 return;
             }
-            addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
-            setFormData(response);
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: "Updated Image" }));
+            setFormData(response.organization);
         }
     }
 
@@ -62,11 +69,11 @@ const GeneralEditForm = ({ organization }: FormProps) => {
 
         const response = await updateOrganization(formData);
         if(response.status !== 200) {
-            addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error });
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
             return;
         }
-        addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message });
-        setFormData(response);
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
+        setFormData(response.organization);
     }
 
     const visibilityRadioButtons: Props[] = [
@@ -116,7 +123,7 @@ const GeneralEditForm = ({ organization }: FormProps) => {
         >
             <ImageInput
                 name="image"
-                value={formData.image}
+                value={formData.image || "/person.jpg"}
                 onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
                 id={`org-image-${formData.id}`}
             />
@@ -149,7 +156,7 @@ const GeneralEditForm = ({ organization }: FormProps) => {
 
     return (
         <form 
-            className={`full-body hide-scrollbar y-axis-flex`}
+            className={`${styles.page} full-body hide-scrollbar y-axis-flex`}
             action={handleFormAction}
         >
             { content }

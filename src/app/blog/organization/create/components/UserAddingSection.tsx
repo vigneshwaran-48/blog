@@ -5,6 +5,7 @@ import { UserMeta } from '@/util/AppTypes';
 import React, { useState } from 'react';
 import styles from "./page.module.css";
 import User from '@/app/blog/components/blog/User';
+import { useAppSelector } from '@/lib/hooks';
 
 interface Props {
     users: UserMeta[],
@@ -18,6 +19,8 @@ const UserAddingSection = (props: Props) => {
     const { users, addedUsers, setAddedUsers, setUsers } = props;
 
     const [ userSearchQuery, setUserSearchQuery ] = useState<string>("");
+
+    const currentUserId = useAppSelector(state => state.userSlice.id);
 
     const onUserAdd = (id: string) => {
         const userToAdd = users.find(user => user.id === id);
@@ -42,8 +45,10 @@ const UserAddingSection = (props: Props) => {
     const userElems = users && users.length > 0 
                             ? users
                                 .filter(user => 
-                                    userSearchQuery.length < 1 || 
-                                    user.name?.toLowerCase().includes(userSearchQuery.toLowerCase())
+                                    (userSearchQuery.length < 1 || 
+                                    user.name?.toLowerCase().includes(userSearchQuery.toLowerCase()))
+                                    &&
+                                    user.id !== currentUserId
                                 )
                                 .map(user => <User 
                                                     key={user.id} 

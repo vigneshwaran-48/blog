@@ -1,40 +1,4 @@
-.organizationNavbar {
-    max-width: 150px;
-    height: 100%;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 10px 10px 10px 0px;
-}
 
-.organizationNavbar > ul {
-    max-width: 400px;
-    height: 100%;
-}
-
-.organizationNavbar > ul > li {
-    list-style-type: none;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.navLink {
-    text-decoration: none;
-    color: var(--app-light-text-color);
-    font-size: 18px;
-    padding: 5px 7px;
-    width: 100%;
-    display: block;
-    border-radius: 5px;
-    transition: 0.5s;
-}
-
-.navLink:hover {
-    color: rgba(0, 0, 0, 0.4);
-    background-color: var(--app-light-background-color);
-}
-.activeNavLink, .activeNavLink:hover {
-    color: var(--app-selected-text-color);
-    background-color: var(--app-selected-background-color);
-}
 
 
 .searchBar {
@@ -66,6 +30,10 @@
     border-radius: 50%;
 }
 
+.organizationComp > a {
+    color: var(--app-text-color);
+}
+
 .organizationCompNameDesc {
     flex-grow: 1;
 }
@@ -77,27 +45,4 @@
 
 .organizaitonListingPage {
     height: 100%;
-}
-
-@media screen and (max-width: 500px) {
-
-    .organizationNavbar {
-        border: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        height: fit-content;
-        max-width: none;
-        padding: 0px;
-        padding: 5px 0px;
-    }
-    .organizationNavbar > ul {
-        flex-direction: row;
-        justify-content: flex-start;
-        overflow-x: scroll;
-        align-items: center;
-    }
-    .organizationNavbar > ul > li {
-        width: fit-content;
-        margin-bottom: 0px;
-        margin-right: 10px;
-    }
 }
