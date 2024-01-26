@@ -12,14 +12,8 @@ export const uploadImage = async(formData: FormData) => {
         method: "POST", 
         includeBody: true, 
         body: formData,
-        contentType: "application/json"
+        includeContentType: false
     });
-    if(response.ok) {
-        const data = await response.json();
-        if(data.status !== 201) {
-            throw new Error(data.error);
-        }
-        return data.id;
-    }
-    throw new Error("Error while uploading image");
+
+    return await response.json();
 }

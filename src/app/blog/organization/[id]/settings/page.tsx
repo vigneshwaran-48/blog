@@ -21,10 +21,7 @@ const page = async ({ params: { id }}: Props) => {
                 height={150}
             />
             <h2>{ organization.name }</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, dicta sunt. Laudantium perspiciatis aperiam iure. Reiciendis iste quos cum quo nostrum, obcaecati soluta nemo fugit exercitationem repudiandae? Laudantium, itaque suscipit!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatem adipisci sequi quas mollitia molestiae facere, laudantium eos. Ipsam quod delectus architecto dolore rem cumque aliquid. Itaque velit quas nihil!
-            </p>
+            <p>{ organization.description }</p>
             <div className={`${styles.attributes} x-axis-flex`}>
                 <p>Visibility:</p>
                 <p>{ organization.visibility }</p>

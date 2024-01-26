@@ -10,12 +10,13 @@ interface Props {
     body?: any,
     includeBody?: boolean,
     url: string,
-    contentType?: string
+    contentType?: string,
+    includeContentType?: boolean
 }
 
 export const sendRequest = async (props: Props) => {
 
-    const { url, method = "GET", body, includeBody, contentType = "text/html" } = props;
+    const { url, method = "GET", body, includeBody, contentType = "text/html", includeContentType = true } = props;
 
     const session = await getServerSession(authOptions);
 
@@ -33,7 +34,9 @@ export const sendRequest = async (props: Props) => {
 
     if(includeBody) {
         options.body = body;
-        headers["Content-Type"] = contentType;
+        if(includeContentType) {
+            headers["Content-Type"] = contentType;
+        }
     }
 
     options.headers = headers;
