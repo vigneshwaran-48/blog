@@ -9,12 +9,11 @@ interface LineProps {
     index: number,
     text: string,
     onEnterCallback: (index: number) => void,
-    focus?: boolean
+    focus?: boolean,
+    onTextChange: (index: number, text: string) => void
 }
 
-const ParaLine = ({ index, text, onEnterCallback, focus = false }: LineProps) => {
-
-    const [ stateText, setStateText ] = useState<string>(text);
+const ParaLine = ({ index, text, onEnterCallback, focus = false, onTextChange }: LineProps) => {
 
     const pRef = useRef<HTMLParagraphElement>(null);
 
@@ -22,7 +21,7 @@ const ParaLine = ({ index, text, onEnterCallback, focus = false }: LineProps) =>
         if(focus && pRef.current) {
             pRef.current.focus();
         }
-    })
+    }, []);
 
     return (
         <p
@@ -34,17 +33,15 @@ const ParaLine = ({ index, text, onEnterCallback, focus = false }: LineProps) =>
                     onEnterCallback(index);
                 }
             }}
-            onBlur={e => setStateText(e.currentTarget.textContent || "")}
+            onBlur={e => onTextChange(index, e.currentTarget.textContent || "")}
             suppressContentEditableWarning
         >
-            { stateText }
+            { text }
         </p>
     );
 };  
 
-const H4Line = ({ index, text, onEnterCallback }: LineProps) => {
-
-    const [ stateText, setStateText ] = useState<string>(text);
+const H4Line = ({ index, text, onEnterCallback, onTextChange }: LineProps) => {
 
     return (
         <h4
@@ -55,10 +52,10 @@ const H4Line = ({ index, text, onEnterCallback }: LineProps) => {
                     onEnterCallback(index);
                 }
             }}
-            onBlur={e => setStateText(e.currentTarget.textContent || "")}
+            onBlur={e => onTextChange(index, e.currentTarget.textContent || "")}
             suppressContentEditableWarning
         >
-            { stateText }
+            { text }
         </h4>
     );
 };
@@ -81,8 +78,9 @@ const BlogComposeComp = () => {
                 }
                 line.focus = false;
             });
+            prevStructure.push(newLine);
 
-            return [...prevStructure, newLine];
+            return [...prevStructure];
         });
     };
 
@@ -93,6 +91,17 @@ const BlogComposeComp = () => {
 
     const [ contentStructure, setContentStructure ] = useState<BlogContent[]>(blogContent);
 
+    const handleTextChange = (index: number, text: string) => {
+        setContentStructure(prevContentStructure => {
+            return prevContentStructure.map(content => {
+                if(content.index === index) {
+                    content.text = text;
+                }
+                return content;
+            });
+        });
+    }
+
     const content = contentStructure && contentStructure.sort((a, b) => a.index - b.index).map((line) => {
                         if (line.type === "p") {
                             return (
@@ -102,6 +111,7 @@ const BlogComposeComp = () => {
                                     text={line.text}
                                     onEnterCallback={handleLineEnter}
                                     focus={line.focus || false}
+                                    onTextChange={handleTextChange}
                                 />
                             );
                         } else if (line.type === "h4") {
@@ -112,6 +122,7 @@ const BlogComposeComp = () => {
                                     text={line.text}
                                     onEnterCallback={handleLineEnter}
                                     focus={line.focus || false}
+                                    onTextChange={handleTextChange}
                                 />
                             );
                         }
