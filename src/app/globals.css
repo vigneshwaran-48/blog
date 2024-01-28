@@ -32,6 +32,10 @@ body, html {
   height: 100%;
 }
 
+[contenteditable] {
+  outline: 0px solid transparent;
+}
+
 .x-axis-flex {
   display: flex;
 }

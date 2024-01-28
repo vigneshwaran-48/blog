@@ -1,20 +1,14 @@
 
-.composeContainer {
+.composeArea {
     max-width: 1200px;
-    width: 100%;
-    height: 100%;
+    width: 95%;
+    height: 90%;
     padding-top: var(--app-main-page-padding-top);
 }
 
-.composeBar {
-    height: 100%;
-    width: 100px;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    align-items: end;
-    padding: 10px;
-}
-
-.composeArea {
-    width: calc(100% - 100px);
-
+@media screen and (max-width: 500px) {
+    .composeArea {
+        padding-top: 10px;
+        height: 85%;
+    }
 }
