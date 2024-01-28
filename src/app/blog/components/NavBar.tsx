@@ -38,16 +38,6 @@ export const NavBar = () => {
                     <p>Organization</p>
                 </div>
             </NavLink>
-            <NavLink 
-                activeClassName={`${styles.activeNavLink}`}
-                className={`${styles.navLink}`}
-                href="/blog/groups"
-            >
-                <div className={`${styles.navLinkChild} x-axis-flex`}>
-                    <FontAwesomeIcon icon={faUserGroup} />
-                    <p>Groups</p>
-                </div>
-            </NavLink>
         </nav>
     )
 }
