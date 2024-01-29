@@ -1,28 +1,30 @@
 "use client";
 
-import React from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from "./compose.module.css";
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { setContent } from '@/lib/features/compose/composeSlice';
+import { Editor } from "react-draft-wysiwyg";
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { EditorState } from 'draft-js';
+import { stateToHTML } from 'draft-js-export-html';
 
 const BlogComposeComp = () => {
 
-    const content = useAppSelector(state => state.composeSlice.content);
-
     const dispatch = useAppDispatch();
+
+    const [ editorState, setEditorState ] = useState(() => EditorState.createEmpty());
+
+    useEffect(() => {
+        dispatch(setContent(stateToHTML(editorState.getCurrentContent())))
+    }, [editorState]);
 
     return (
         <div className={`${styles.composeArea}`}>
-            <ReactQuill 
-                theme="snow" 
-                value={content} 
-                onChange={(value: string) => dispatch(setContent(value))}
-                style={{
-                    width: "100%",
-                    height: "100%"
-                }}
+            <Editor 
+                editorState={editorState}
+                onEditorStateChange={setEditorState}
+                wrapperClassName={styles.editorWrapper}
             />
         </div>
     )

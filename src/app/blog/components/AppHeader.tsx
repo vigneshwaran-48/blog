@@ -14,6 +14,8 @@ export const AppHeader = () => {
 
     const user: UserMeta = useAppSelector(state => state.userSlice);
 
+    const blogContent = useAppSelector(state => state.composeSlice.content);
+
     const pathname = usePathname();
 
     const handleNavbarToggle = () => {
@@ -22,6 +24,10 @@ export const AppHeader = () => {
             const currentValue = getComputedStyle(rootElement).getPropertyValue(AppFields.APP_NAVBAR_STATUS);
             document.documentElement.style.setProperty(AppFields.APP_NAVBAR_STATUS, currentValue === "-100%" ? "0%" : "-100%");
         }
+    }
+
+    const onPublishBlog = () => {
+        console.log(blogContent);
     }
 
     return (
@@ -43,7 +49,10 @@ export const AppHeader = () => {
                         </Link>
                     )
                     : (
-                        <button className={`${styles.publishButton} button`}>Publish</button>
+                        <button 
+                            className={`${styles.publishButton} button`}
+                            onClick={onPublishBlog}
+                        >Publish</button>
                     )
                 }
                 

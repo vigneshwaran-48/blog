@@ -6,6 +6,11 @@
     padding-top: var(--app-main-page-padding-top);
 }
 
+.editorWrapper {
+    border: 1px solid;
+    height: 100%;
+}
+
 @media screen and (max-width: 500px) {
     .composeArea {
         padding-top: 10px;
