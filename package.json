@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.0.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
+    "@draft-js-plugins/editor": "^4.1.4",
+    "@draft-js-plugins/image": "^4.1.4",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
