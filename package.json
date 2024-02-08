@@ -25,6 +25,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-draft-wysiwyg": "^1.15.0",
+    "react-quill": "^2.0.0",
     "react-redux": "^9.0.4",
     "sharp": "^0.33.2"
   },
