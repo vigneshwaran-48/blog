@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { setContent, setTitle } from '@/lib/features/compose/composeSlice';
+import { setBlogImage, setContent, setTitle } from '@/lib/features/compose/composeSlice';
 import styles from "./compose.module.css";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -26,11 +26,23 @@ const BlogImage = () => {
 
     const image = useAppSelector(state => state.composeSlice.image);
 
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fileReader = new FileReader();
+
+        fileReader.onload = () => {
+            dispatch(setBlogImage(fileReader.result as string));
+        }
+
+        if(e.target.files) {
+            fileReader.readAsDataURL(e.target.files[0]);
+        }
+    }
+
     return (
         <ImageInput
             value={ image }
             name="blog-compose-image"
-            onChange={e => "/person.jpg"}
+            onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
         />
     )
 }

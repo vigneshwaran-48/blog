@@ -22,5 +22,5 @@ const composeSlice = createSlice({
     }
 })
 
-export const { setContent, setTitle } = composeSlice.actions;
+export const { setContent, setTitle, setBlogImage } = composeSlice.actions;
 export default composeSlice.reducer;
