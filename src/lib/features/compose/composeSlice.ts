@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    content: ""
+    content: "",
+    title: "",
+    image: "/person.jpg"
 }
 
 const composeSlice = createSlice({
@@ -10,9 +12,15 @@ const composeSlice = createSlice({
     reducers: {
         setContent: (state, action: PayloadAction<string>) => {
             state.content = action.payload;
+        },
+        setTitle: (state, action: PayloadAction<string>) => {
+            state.title = action.payload;
+        },
+        setBlogImage: (state, action: PayloadAction<string>) => {
+            state.image = action.payload;
         }
     }
 })
 
-export const { setContent } = composeSlice.actions;
+export const { setContent, setTitle } = composeSlice.actions;
 export default composeSlice.reducer;

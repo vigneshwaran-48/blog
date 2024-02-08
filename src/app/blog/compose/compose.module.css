@@ -4,6 +4,7 @@
     width: 95%;
     height: 90%;
     padding-top: var(--app-main-page-padding-top);
+    overflow-y: scroll;
 }
 
 .editorWrapper {
