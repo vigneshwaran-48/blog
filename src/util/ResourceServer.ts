@@ -43,3 +43,16 @@ export const getStaticResourceRoutes = () => {
     }
     return routes;
 }
+
+export const getBlogResourceRoutes = () => {
+    const serverBase = getServerBase();
+
+    const routes : APIRoutes = {
+        get: `${serverBase}/api/v1/app/blog`,
+        getOne: (id: string | number) => `${serverBase}/api/v1/app/blog/${id}`,
+        create: `${serverBase}/api/v1/app/blog`,
+        put: `${serverBase}/api/v1/app/blog`,
+        delete: (id: string | number) => `${serverBase}/api/v1/app/blog/${id}`
+    }
+    return routes;
+}

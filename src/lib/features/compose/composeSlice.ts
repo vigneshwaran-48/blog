@@ -1,9 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+interface Compose {
+    content: string,
+    title: string,
+    image: string,
+}
+
+const initialState: Compose = {
     content: "",
     title: "",
-    image: "/person.jpg"
+    image: "/person.jpg",
 }
 
 const composeSlice = createSlice({

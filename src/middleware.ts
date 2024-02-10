@@ -8,9 +8,9 @@ export async function middleware(request: NextRequest) {
         const token = await getToken({req: request});
 
         if(!token) {
-            NextResponse.redirect(new URL("/api/auth/signin?callbackUrl=" + request.url, request.url));
-            
+            NextResponse.redirect(new URL("/api/auth/signin?callbackUrl=" + request.url, request.url));   
         }
+        console.log(token);
         const expireDate = new Date(Object.create(token).exp);
         const currentDate = new Date();
 
