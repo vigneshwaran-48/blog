@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import BlogComposeComp from './BlogComposeComp';
 
 const page = () => {

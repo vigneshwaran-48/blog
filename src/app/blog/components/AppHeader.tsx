@@ -8,14 +8,12 @@ import { AppFields } from '@/util/AppFields';
 import { Blog, UserMeta } from '@/util/AppTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { addBlog } from '@/app/actions/blog';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from './popup/PopUp';
-import { uploadImage } from '@/app/actions/staticResource';
-import { getStaticResourceRoutes } from '@/util/ResourceServer';
-import { getFileFromImageUrl } from '@/util/getFileFromImageUrl';
+import { clearBlog } from '@/lib/features/compose/composeSlice';
 
 interface PublishProps {
     user: UserMeta
@@ -57,8 +55,6 @@ export const AppHeader = () => {
                         <PublishBlog user={user} />
                     )
                 }
-                
-                
                 <img src={user?.image || "/person.jpg"} alt="user" />
             </div>
         </header>
@@ -75,6 +71,8 @@ const PublishBlog = ({ user }: PublishProps) => {
 
     const dispatch = useAppDispatch();
 
+    const router = useRouter();
+
     const onPublishBlog = async () => {
 
         const blog: Blog = {
@@ -83,22 +81,6 @@ const PublishBlog = ({ user }: PublishProps) => {
             image,
             owner: user
         }
-
-        const imageFile = await getFileFromImageUrl(image);
-        
-        const form = new FormData();
-        form.append("resource", imageFile);
-
-        const resourceResponse = await uploadImage(form);
-
-        console.log(resourceResponse);
-
-        if(resourceResponse.status !== 200 && resourceResponse.status !== 201) {
-            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: resourceResponse.error }));
-            return;
-        }
-        
-        blog.image = getStaticResourceRoutes().getOne(resourceResponse.id);
         const response = await addBlog(blog);
 
         if(response.status !== 200) {
@@ -106,6 +88,9 @@ const PublishBlog = ({ user }: PublishProps) => {
             return;
         }
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
+        dispatch(clearBlog());
+
+        router.push("/blog/home");
     }
 
     return (

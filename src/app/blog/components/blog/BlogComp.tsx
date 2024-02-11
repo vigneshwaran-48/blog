@@ -1,13 +1,13 @@
 import React from 'react';
-import { BlogMeta } from '@/util/AppTypes';
+import { Blog } from '@/util/AppTypes';
 import styles from "./page.module.css";
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faMinus } from '@fortawesome/free-solid-svg-icons';
 
-export const Blog = ({ blog }: { blog: BlogMeta }) => {
+export const BlogComp = ({ blog }: { blog: Blog }) => {
 
-    const categories = blog.categories.map(category => {
+    const categories = blog.categories?.map(category => {
         return (
             <div 
                 key={category} 
@@ -21,13 +21,13 @@ export const Blog = ({ blog }: { blog: BlogMeta }) => {
         <article className={`${styles.blogMeta} y-axis-flex`}>
             <div className={`${styles.blogMetaHeader} x-axis-flex`}>
                 <Image 
-                    src={blog.postedUser.image as string} 
+                    src={blog.owner.image as string} 
                     alt="blogged user"
                     width={24}
                     height={24}
                 />
-                <b><p>{ blog.postedUser.name }</p></b>
-                <p>{ blog.date }</p>
+                <b><p>{ blog.owner.name }</p></b>
+                <p>{ blog.postedTime }</p>
             </div>
             <div className={`${styles.blogContent} x-axis-flex`}>
                 <div>

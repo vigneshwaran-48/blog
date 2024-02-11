@@ -24,9 +24,14 @@ const composeSlice = createSlice({
         },
         setBlogImage: (state, action: PayloadAction<string>) => {
             state.image = action.payload;
+        },
+        clearBlog: (state) => {
+            state.content = "";
+            state.title = "";
+            state.image = "/person.jpg";
         }
     }
 })
 
-export const { setContent, setTitle, setBlogImage } = composeSlice.actions;
+export const { setContent, setTitle, setBlogImage, clearBlog } = composeSlice.actions;
 export default composeSlice.reducer;
