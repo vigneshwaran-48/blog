@@ -5,14 +5,16 @@ import { addPopup } from '@/lib/features/popup/popupSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { getStaticResourceRoutes } from '@/util/ResourceServer';
 import { getUniqueId } from '@/util/getUniqueId';
-import React from 'react'
+import React, { useRef } from 'react'
 import { PopupType } from '../../components/popup/PopUp';
 import { setBlogImage } from '@/lib/features/compose/composeSlice';
-import ImageInput from '../../components/form/ImageInput';
+import styles from "./blogImage.module.css";
 
 const BlogImage = () => {
     const dispatch = useAppDispatch();
     const image = useAppSelector(state => state.composeSlice.image);
+
+    const inputFileRef = useRef<HTMLInputElement>(null);
 
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -31,12 +33,26 @@ const BlogImage = () => {
         dispatch(setBlogImage(imageUrl));
     }
 
+    const handleImageButtonClick = () => {
+        if(inputFileRef.current) {
+            inputFileRef.current.click();
+        }
+    }
+
     return (
-        <ImageInput
-            value={ image }
-            name="blog-compose-image"
-            onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
-        />
+        <div className={`${styles.blogImage} x-axis-flex`}>
+            <button 
+                className={`button`}
+                onClick={handleImageButtonClick}
+            >Add Image</button>
+            <input 
+                type="file" 
+                accept="image/*"
+                ref={inputFileRef}
+                onChange={handleImageChange}
+            />
+            <img src={image} width={100} height={100} alt="Blog header image" />
+        </div>
     )
 }
 

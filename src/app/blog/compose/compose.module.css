@@ -2,7 +2,7 @@
 .composeArea {
     max-width: 1200px;
     width: 95%;
-    height: 90%;
+    height: 98%;
     padding-top: var(--app-main-page-padding-top);
     overflow-y: scroll;
 }
@@ -15,6 +15,5 @@
 @media screen and (max-width: 500px) {
     .composeArea {
         padding-top: 10px;
-        height: 85%;
     }
 }

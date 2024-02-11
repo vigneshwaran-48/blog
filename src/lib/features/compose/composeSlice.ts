@@ -9,7 +9,7 @@ interface Compose {
 const initialState: Compose = {
     content: "",
     title: "",
-    image: "/person.jpg",
+    image: "/blog-banner.jpg",
 }
 
 const composeSlice = createSlice({
@@ -28,7 +28,7 @@ const composeSlice = createSlice({
         clearBlog: (state) => {
             state.content = "";
             state.title = "";
-            state.image = "/person.jpg";
+            state.image = "/blog-banner.jpg";
         }
     }
 })

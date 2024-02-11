@@ -78,3 +78,23 @@ body, html {
 .pointer {
   cursor: pointer;
 }
+
+.quill {
+  height: calc(100% - 250px);
+  overflow-y: scroll;
+}
+.ql-container.ql-snow {
+  border: none;
+  height: calc(100% - 50px);
+  overflow-y: scroll;
+}
+
+.ql-container.ql-snow::-webkit-scrollbar, .quill::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .ql-container.ql-snow {
+    height: calc(100% - 70px);
+  }
+}

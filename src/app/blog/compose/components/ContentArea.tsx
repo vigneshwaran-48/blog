@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import dynamic from 'next/dynamic';
 import React, { useMemo } from 'react'
 import 'react-quill/dist/quill.snow.css';
+import styles from "./content.module.css";
 
 const ContentArea = () => {
 
@@ -31,6 +32,7 @@ const ContentArea = () => {
                 ]
             }}
             placeholder="Today is a wonderful day"
+            // scrollingContainer={styles.contentScrollContainer}
         />
     )
 }
