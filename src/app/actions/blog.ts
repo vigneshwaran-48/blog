@@ -43,3 +43,16 @@ export const getBlogsOfUser = async () => {
     }
     throw new Error("Error while fetching organization details");
 }
+
+export const deleteBlog = async (id: number) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({ url: routes.getOne(id), method: "DELETE", includeBody: false });
+
+    const data = await response.json();
+    if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    return data;
+}

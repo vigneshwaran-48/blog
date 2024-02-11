@@ -1,11 +1,9 @@
 import { Blog } from '@/util/AppTypes';
-import { faBookmark, faEllipsis, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import React from 'react';
 import styles from "./page.module.css";
-import postedBlogStyles from "./postedBlog.module.css";
 import BlogContentComp from './BlogContentComp';
+import PostedBlogMoreOptions from './PostedBlogMoreOptions';
 
 const PostedBlog = ({ blog }: { blog: Blog }) => {
 
@@ -17,7 +15,7 @@ const PostedBlog = ({ blog }: { blog: Blog }) => {
                 title="category"
             >{ category }</div>
         )
-    })
+    });
 
     return (
         <article className={`${styles.blogMeta} y-axis-flex`}>
@@ -39,13 +37,7 @@ const PostedBlog = ({ blog }: { blog: Blog }) => {
                     { categories }
                 </div>
                 <div className={`${styles.otherActionsContainer} x-axis-flex`}>
-                    <span tabIndex={0} title="More options" className={`${postedBlogStyles.moreOptionsButton}`}>
-                        <FontAwesomeIcon icon={faEllipsis} />
-                        <ul className={`${postedBlogStyles.moreOptions}`}>
-                            <li>Edit</li>
-                            <li className={`${postedBlogStyles.hoverRed}`}>Delete</li>
-                        </ul>
-                    </span>
+                    <PostedBlogMoreOptions id={blog.id as number} />
                 </div>
             </div>
         </article>

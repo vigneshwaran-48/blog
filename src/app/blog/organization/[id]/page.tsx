@@ -31,6 +31,7 @@ const OrganizationView = async ({params}: {params: {id: number}}) => {
     }
 
     const content: Blog = {
+        id: 1,
         title: "Testing",
         owner: {
             id: "9990",
