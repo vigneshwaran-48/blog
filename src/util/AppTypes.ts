@@ -5,7 +5,8 @@ export type Blog = {
     image: string,
     postedTime?: string,
     categories?: BlogCategory[],
-    description?: string
+    description?: string,
+    displayPostedDate?: string
 }
 
 export type UserMeta = {

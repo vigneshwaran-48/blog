@@ -1,12 +1,13 @@
-import React from 'react';
 import { Blog } from '@/util/AppTypes';
-import styles from "./page.module.css";
-import Image from 'next/image';
+import { faBookmark, faEllipsis, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark, faMinus } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
+import React from 'react';
+import styles from "./page.module.css";
+import postedBlogStyles from "./postedBlog.module.css";
 import BlogContentComp from './BlogContentComp';
 
-export const BlogComp = ({ blog }: { blog: Blog }) => {
+const PostedBlog = ({ blog }: { blog: Blog }) => {
 
     const categories = blog.categories?.map(category => {
         return (
@@ -16,7 +17,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
                 title="category"
             >{ category }</div>
         )
-    });
+    })
 
     return (
         <article className={`${styles.blogMeta} y-axis-flex`}>
@@ -28,24 +29,27 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
                     height={24}
                 />
                 <b><p>{ blog.owner.name }</p></b>
-                <p>{ blog.postedTime }</p>
             </div>
 
             <BlogContentComp title={blog.title} description={blog.description || ""} image={blog.image} />
             
             <div className={`${styles.blogFooter} x-axis-flex`}>
+                <p>posted { blog.displayPostedDate }</p>
                 <div className={`${styles.categoryContainer} hide-scrollbar x-axis-flex`}>
                     { categories }
                 </div>
                 <div className={`${styles.otherActionsContainer} x-axis-flex`}>
-                    <span title="bookmark this blog">
-                        <FontAwesomeIcon icon={faBookmark} />
-                    </span>
-                    <span title="Don't Like this type blog">
-                        <FontAwesomeIcon icon={faMinus} />
+                    <span tabIndex={0} title="More options" className={`${postedBlogStyles.moreOptionsButton}`}>
+                        <FontAwesomeIcon icon={faEllipsis} />
+                        <ul className={`${postedBlogStyles.moreOptions}`}>
+                            <li>Edit</li>
+                            <li className={`${postedBlogStyles.hoverRed}`}>Delete</li>
+                        </ul>
                     </span>
                 </div>
             </div>
         </article>
     )
 }
+
+export default PostedBlog;
