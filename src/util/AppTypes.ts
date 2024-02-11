@@ -1,10 +1,13 @@
-export type BlogMeta = {
-    postedUser: UserMeta,
+export type Blog = {
+    owner: UserMeta,
     title: string,
     content: string,
-    date: string,
     image: string,
-    categories: BlogCategory[]
+    postedTime?: string,
+    categories?: BlogCategory[],
+    description?: string,
+    displayPostedDate?: string,
+    id?: number
 }
 
 export type UserMeta = {

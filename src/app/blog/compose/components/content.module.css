@@ -1,0 +1,14 @@
+
+.contentScrollContainer {
+    height: calc(100% - 300px);
+    overflow-y: scroll;
+}
+
+.ql-toolbar {
+    position: sticky;
+  }
+  
+  .ql-container {
+    overflow-x:auto;
+    height: 300px; /* whatever you what */
+  }

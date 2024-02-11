@@ -17,8 +17,8 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-redux": "^9.0.4",
-    "sharp": "^0.33.2"
+    "react-quill": "^2.0.0",
+    "react-redux": "^9.0.4"
   },
   "devDependencies": {
     "@types/node": "^20",

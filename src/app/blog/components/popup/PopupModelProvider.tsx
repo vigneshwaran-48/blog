@@ -55,7 +55,14 @@ const PopupModelProvider = ({ children }: Props) => {
         }}>
             { children }
 
-            <PopupDialogComp {...popupModelState} />
+            <PopupDialogComp 
+                type={popupModelState.type} 
+                message={popupModelState.message}
+                onClose={popupModelState.onClose}
+                onProceed={popupModelState.onProceed}
+                title={popupModelState.title}
+                open={popupModelState.open}
+            />
         </PopupModelContextProvider.Provider>
     )
 }

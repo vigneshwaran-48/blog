@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./page.module.css";
 import { NavLink } from '@/util/NavLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faMagnifyingGlass, faSitemap, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHouse, faMagnifyingGlass, faSitemap, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 export const NavBar = () => {
     
@@ -41,11 +41,11 @@ export const NavBar = () => {
             <NavLink 
                 activeClassName={`${styles.activeNavLink}`}
                 className={`${styles.navLink}`}
-                href="/blog/groups"
+                href="/blog/stories"
             >
                 <div className={`${styles.navLinkChild} x-axis-flex`}>
-                    <FontAwesomeIcon icon={faUserGroup} />
-                    <p>Groups</p>
+                    <FontAwesomeIcon icon={faComment} />
+                    <p>My Stories</p>
                 </div>
             </NavLink>
         </nav>

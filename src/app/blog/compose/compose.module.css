@@ -1,0 +1,19 @@
+
+.composeArea {
+    max-width: 1200px;
+    width: 95%;
+    height: 98%;
+    padding-top: var(--app-main-page-padding-top);
+    overflow-y: scroll;
+}
+
+.editorWrapper {
+    border: 1px solid;
+    height: 100%;
+}
+
+@media screen and (max-width: 500px) {
+    .composeArea {
+        padding-top: 10px;
+    }
+}

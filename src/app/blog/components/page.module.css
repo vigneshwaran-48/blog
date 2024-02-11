@@ -6,7 +6,27 @@
     border-bottom: 1px solid var(--app-light-background-color);
     height: var(--app-header-height);
 }
-.appHeader > img {
+
+.rightBar {
+    align-items: center;
+    justify-content: space-between;
+    max-width: 130px;
+    width: 60%;
+}
+
+.composeIcon {
+    align-items: center;
+    color: var(--app-light-text-color);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.composeIcon > svg {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.rightBar > img {
     width: 40px;
     border-radius: 50%;
 }
@@ -47,6 +67,11 @@
 .activeNavLink, .activeNavLink:hover {
     background-color: var(--app-selected-background-color);
     color: var(--app-selected-text-color);
+}
+
+.publishButton {
+    background-color: #128B10;
+    color: white;
 }
 
 @media screen and (max-width: 1000px) {

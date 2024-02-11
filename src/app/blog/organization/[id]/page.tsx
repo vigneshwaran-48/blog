@@ -1,8 +1,8 @@
 import { getOrganization } from '@/app/actions/organization';
-import { BlogMeta, Organization } from '@/util/AppTypes';
+import { Blog, Organization } from '@/util/AppTypes';
 import React from 'react';
 import styles from "./page.module.css";
-import { Blog } from '@/app/blog/components/blog/Blog';
+import { BlogComp } from '@/app/blog/components/blog/BlogComp';
 import { Metadata } from 'next';
 
 interface Props {
@@ -30,15 +30,16 @@ const OrganizationView = async ({params}: {params: {id: number}}) => {
         bannerTextColor: "white"
     }
 
-    const content: BlogMeta = {
+    const content: Blog = {
+        id: 1,
         title: "Testing",
-        postedUser: {
+        owner: {
             id: "9990",
             name: "Vicky",
             image: "/person.jpg"
         },
         content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, culpa!",
-        date: "2nd Jan",
+        postedTime: "2nd Jan",
         image: "/welcome-image.png",
         categories: ["learning", "teaching", "tech"]
     }
@@ -51,7 +52,7 @@ const OrganizationView = async ({params}: {params: {id: number}}) => {
             </div>
 
             <div className={`y-axis-flex`}>
-                <Blog blog={content} />
+                <BlogComp blog={content} />
             </div>
         </div>
     )

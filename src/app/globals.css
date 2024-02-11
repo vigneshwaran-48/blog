@@ -4,6 +4,7 @@
   --app-background-color: white;
   --app-light-background-color: hsl(0, 4%, 86%);
   --app-selected-background-color: hsl(206, 93%, 52%);
+  --app-warning-background-color: red;
 
   --app-text-color: black;
   --app-light-text-color: hsl(15, 2%, 51%);
@@ -30,6 +31,10 @@ body, html {
   color: var(--app-text-color);
   width: 100%;
   height: 100%;
+}
+
+[contenteditable] {
+  outline: 0px solid transparent;
 }
 
 .x-axis-flex {
@@ -73,4 +78,24 @@ body, html {
 
 .pointer {
   cursor: pointer;
+}
+
+.quill {
+  height: calc(100% - 250px);
+  overflow-y: scroll;
+}
+.ql-container.ql-snow {
+  border: none;
+  height: calc(100% - 50px);
+  overflow-y: scroll;
+}
+
+.ql-container.ql-snow::-webkit-scrollbar, .quill::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .ql-container.ql-snow {
+    height: calc(100% - 70px);
+  }
 }

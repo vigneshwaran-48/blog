@@ -1,0 +1,15 @@
+
+.storiesContainer {
+    max-width: var(--app-main-page-max-width);
+    padding-top: var(--app-main-page-padding-top);
+    width: 100%;
+    overflow-y: scroll;
+    align-items: center;
+}
+
+@media screen and (max-width: 500px) {
+    
+    .storiesContainer {
+        padding-top: 10px;
+    }
+}
