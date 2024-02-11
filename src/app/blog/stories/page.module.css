@@ -1,0 +1,7 @@
+
+.storiesContainer {
+    max-width: var(--app-main-page-max-width);
+    width: 100%;
+    overflow-y: scroll;
+    align-items: center;
+}

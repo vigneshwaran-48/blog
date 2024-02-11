@@ -4,7 +4,8 @@ export type Blog = {
     content: string,
     image: string,
     postedTime?: string,
-    categories?: BlogCategory[]
+    categories?: BlogCategory[],
+    description?: string
 }
 
 export type UserMeta = {

@@ -32,7 +32,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
             <div className={`${styles.blogContent} x-axis-flex`}>
                 <div>
                     <h2 title="title">{ blog.title }</h2>
-                    <p>{ blog.content }</p>
+                    <p>{ blog.description }</p>
                 </div>
                 <Image 
                     src={blog.image}
