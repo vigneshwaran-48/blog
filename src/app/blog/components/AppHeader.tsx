@@ -9,7 +9,7 @@ import { Blog, UserMeta } from '@/util/AppTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { addBlog } from '@/app/actions/blog';
+import { updateBlog } from '@/app/actions/blog';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from './popup/PopUp';
@@ -41,7 +41,7 @@ export const AppHeader = () => {
             </div>
             <div className={`${styles.rightBar} x-axis-flex`}>
                 {
-                    pathname !== "/blog/compose" 
+                    !pathname.startsWith("/blog/compose")
                     ? (
                         <Link 
                             href="/blog/compose" 
@@ -61,27 +61,28 @@ export const AppHeader = () => {
     )
 }
 
+// This component will render for every single state field change but not a big problem its a small button.
+// If a big problem came then need to think about refactoring this.
 const PublishBlog = ({ user }: PublishProps) => {
 
     const blogContent = useAppSelector(state => state.composeSlice.content);
 
-    const title = useAppSelector(state => state.composeSlice.title);
-
-    const image = useAppSelector(state => state.composeSlice.image);
+    const { title, image, isEdit, id } = useAppSelector(state => state.composeSlice);
 
     const dispatch = useAppDispatch();
 
     const router = useRouter();
 
-    const onPublishBlog = async () => {
+    const onPublishBlog = async (isEditMode: boolean) => {
 
         const blog: Blog = {
             content: blogContent,
             title,
             image,
-            owner: user
+            owner: user,
+            id
         }
-        const response = await addBlog(blog);
+        const response = isEditMode ? await updateBlog(blog) : await updateBlog(blog);
 
         if(response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
@@ -90,13 +91,20 @@ const PublishBlog = ({ user }: PublishProps) => {
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
         dispatch(clearBlog());
 
-        router.push("/blog/home");
+        router.push("/blog/stories");
     }
 
     return (
-        <button 
-            className={`${styles.publishButton} button`}
-            onClick={onPublishBlog}
-        >Publish</button>
+        isEdit ? (
+            <button 
+                className={`${styles.publishButton} button`}
+                onClick={e => onPublishBlog(isEdit)}
+            >Save</button>
+        ) : (
+            <button 
+                className={`${styles.publishButton} button`}
+                onClick={e=> onPublishBlog(isEdit)}
+            >Publish</button>
+        )
     )
 }

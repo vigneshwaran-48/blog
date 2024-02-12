@@ -41,7 +41,7 @@ export const getBlogsOfUser = async () => {
     else if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    throw new Error("Error while fetching organization details");
+    throw new Error("Error while fetching blog details");
 }
 
 export const deleteBlog = async (id: number) => {
@@ -49,6 +49,45 @@ export const deleteBlog = async (id: number) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
     const response = await sendRequest({ url: routes.getOne(id), method: "DELETE", includeBody: false });
+
+    const data = await response.json();
+    if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    return data;
+}
+
+export const getBlog = async (id: number) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({ url: routes.getOne(id), method: "GET", includeBody: false });
+
+    if(response.ok) {
+        const data = await response.json();
+
+        if(data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.blog;
+    }
+    else if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    throw new Error("Error while fetching blog");
+}
+
+export const updateBlog = async (blog: Blog) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({
+        url: routes.put,
+        method: "PATCH",
+        includeBody: true, 
+        body: JSON.stringify(blog),
+        contentType: "application/json"
+    });
 
     const data = await response.json();
     if(response.status === 401) {
