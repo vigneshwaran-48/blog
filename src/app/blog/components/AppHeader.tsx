@@ -9,7 +9,7 @@ import { Blog, UserMeta } from '@/util/AppTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { updateBlog } from '@/app/actions/blog';
+import { addBlog, updateBlog } from '@/app/actions/blog';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from './popup/PopUp';
@@ -82,7 +82,7 @@ const PublishBlog = ({ user }: PublishProps) => {
             owner: user,
             id
         }
-        const response = isEditMode ? await updateBlog(blog) : await updateBlog(blog);
+        const response = isEditMode ? await updateBlog(blog) : await addBlog(blog);
 
         if(response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));

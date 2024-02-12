@@ -3,6 +3,7 @@
 import { APIRoutes, Blog } from "@/util/AppTypes";
 import { sendRequest } from "@/util/RequestUtil";
 import { getBlogResourceRoutes } from "@/util/ResourceServer";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const addBlog = async (blog: Blog) => {
@@ -21,6 +22,7 @@ export const addBlog = async (blog: Blog) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
+    revalidatePath("/blog/stories");
     return data;
 }
 
@@ -54,6 +56,7 @@ export const deleteBlog = async (id: number) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
+    revalidatePath("/blog/stories");
     return data;
 }
 
@@ -93,5 +96,7 @@ export const updateBlog = async (blog: Blog) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
+    revalidatePath(`/blog/compose/${blog.id}`);
+    revalidatePath("/blog/stories");
     return data;
 }
