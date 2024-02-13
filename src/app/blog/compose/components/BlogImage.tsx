@@ -7,10 +7,10 @@ import { getStaticResourceRoutes } from '@/util/ResourceServer';
 import { getUniqueId } from '@/util/getUniqueId';
 import React, { useRef } from 'react'
 import { PopupType } from '../../components/popup/PopUp';
-import { setBlogImage } from '@/lib/features/compose/composeSlice';
+import { Compose, setBlogImage } from '@/lib/features/compose/composeSlice';
 import styles from "./blogImage.module.css";
 
-const BlogImage = () => {
+const BlogImage = ({ onChange }: { onChange: (blog: Partial<Compose>) => void }) => {
     const dispatch = useAppDispatch();
     const image = useAppSelector(state => state.composeSlice.image);
 
@@ -31,6 +31,7 @@ const BlogImage = () => {
         }
         const imageUrl = getStaticResourceRoutes().getOne(resourceResponse.id);
         dispatch(setBlogImage(imageUrl));
+        onChange({ image: imageUrl });
     }
 
     const handleImageButtonClick = () => {

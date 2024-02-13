@@ -13,7 +13,7 @@ const BlogContentComp = ({ title, description, image }: Props) => {
     return (
         <div className={`${styles.blogContent} x-axis-flex`}>
             <div>
-                <h2 title="title">{ title }</h2>
+                <h2 title="title">{ title || "Untitled Blog" }</h2>
                 <p>{ description }</p>
             </div>
             <Image 

@@ -27,7 +27,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
                     width={24}
                     height={24}
                 />
-                <b><p>{ blog.owner.name }</p></b>
+                <b><p>{ blog.owner.name || "Untitled Blog" }</p></b>
                 <p>{ blog.postedTime }</p>
             </div>
 

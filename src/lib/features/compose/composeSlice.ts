@@ -2,12 +2,13 @@ import { Blog } from "@/util/AppTypes";
 import { getStaticResourceRoutes } from "@/util/ResourceServer";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
-interface Compose {
+export interface Compose {
     content: string,
     title: string,
     image: string,
     isEdit: boolean,
-    id?: number
+    id?: number,
+    isSaving: boolean
 }
 
 const defaultImage = getStaticResourceRoutes().getOne(552);
@@ -16,7 +17,8 @@ const initialState: Compose = {
     content: "",
     title: "",
     image: defaultImage,
-    isEdit: false
+    isEdit: false,
+    isSaving: false
 }
 
 const composeSlice = createSlice({
@@ -37,6 +39,7 @@ const composeSlice = createSlice({
             state.title = "";
             state.image = defaultImage;
             state.isEdit = false;
+            state.isSaving = false;
         },
         setBlog: (state, action: PayloadAction<Blog>) => {
             state.content = action.payload.content;
@@ -46,9 +49,12 @@ const composeSlice = createSlice({
         },
         setEditMode: (state, action: PayloadAction<boolean>) => {
             state.isEdit = action.payload;
+        },
+        setIsSaving: (state, action: PayloadAction<boolean>) => {
+            state.isSaving = action.payload;
         }
     }
 })
 
-export const { setContent, setTitle, setBlogImage, clearBlog, setBlog, setEditMode} = composeSlice.actions;
+export const { setContent, setTitle, setBlogImage, clearBlog, setBlog, setEditMode, setIsSaving } = composeSlice.actions;
 export default composeSlice.reducer;
