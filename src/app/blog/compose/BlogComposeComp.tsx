@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styles from "./compose.module.css";
 import ContentArea from './components/ContentArea';
 import BlogImage from './components/BlogImage';
@@ -26,6 +26,7 @@ const BlogComposeComp = ({ blog }: Props) => {
     const router = useRouter();
 
     useEffect(() => {
+        console.log("use effect")
         if(blog) {
             dispatch(setBlog(blog));
             // If the blog details have given then it will be definitely in editing mode.
@@ -36,6 +37,30 @@ const BlogComposeComp = ({ blog }: Props) => {
         }
     }, [blog]);
 
+    const debounce = useCallback((callback: (blog: Blog) => void, timeout = 3000) => {
+        console.log("Creating debounce");
+        let timer : ReturnType<typeof setTimeout>;
+        return (blog: Blog) => {
+            console.log("Clearing previous timer");
+            clearTimeout(timer);
+            timer = setTimeout(() => callback(blog), timeout);
+        }
+    }, [blog]);
+
+    const processChange = useCallback(debounce((blog: Blog) => {
+        console.log("Saving ...");
+        // const response = 
+        addBlog(blog).then(response => {
+            if(response.status !== 200 && response.status !== 201) {
+                dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error}));
+            }
+            else {
+                router.replace(`/blog/compose/${response.blog.id}`);
+            }
+            console.log("Saved");
+        }) 
+    }), [blog]);
+
     const handleChange = async ({ 
         title = blogState.title, 
         content = blogState.content, 
@@ -43,19 +68,8 @@ const BlogComposeComp = ({ blog }: Props) => {
     }: Partial<Compose>) => {
 
         if(!blogState.isEdit) {
-            dispatch(setEditMode(true));
-            const response = await addBlog({ 
-                                title, 
-                                owner: user, 
-                                content, 
-                                image
-                            });
-            if(response.status !== 200 && response.status !== 201) {
-                dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error}));
-            }
-            else {
-                router.replace(`/blog/compose/${response.blog.id}`);
-            }
+            // dispatch(setEditMode(true));
+            processChange({ title, image, content, owner: user });
         }
         else {
             if(!blogState.id) return;
