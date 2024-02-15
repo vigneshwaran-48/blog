@@ -67,7 +67,7 @@ const PublishBlog = ({ user }: PublishProps) => {
 
     const blogContent = useAppSelector(state => state.composeSlice.content);
 
-    const { title, image, isEdit, id } = useAppSelector(state => state.composeSlice);
+    const { title, image, isEdit, id, isSaving } = useAppSelector(state => state.composeSlice);
 
     const dispatch = useAppDispatch();
 
@@ -95,6 +95,9 @@ const PublishBlog = ({ user }: PublishProps) => {
     }
 
     return (
+        isSaving ? (
+            <p>Saving ....</p>
+        ) :
         isEdit ? (
             <button 
                 className={`${styles.publishButton} button`}
