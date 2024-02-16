@@ -1,0 +1,38 @@
+
+.navBar {
+    padding: 10px 0px;
+    max-width: 150px;
+    width: 100%;
+}
+
+.navBar > li {
+    width: 100%;
+    list-style-type: none;
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--app-light-text-color);
+    display: block;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.activeNavLink {
+    color: var(--app-selected-text-color);
+    background-color: var(--app-selected-background-color);
+}
+
+@media screen and (max-width: 500px) {
+    
+    .navBar {
+        flex-direction: row;
+        max-width: none;
+    }
+    .navLink {
+        display: inline-block;
+    }
+    .navBar > li {
+        width: auto;
+    }
+}

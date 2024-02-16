@@ -1,0 +1,23 @@
+
+.layout {
+    max-width: var(--app-main-page-max-width);
+    width: 100%;
+    padding: 10px;
+    padding-top: var(--app-main-page-padding-top);
+}
+
+.layoutBody {
+    width: calc(100% - 200px);
+}
+
+@media screen and (max-width: 500px) {
+    
+    .layout {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+    .layoutBody {
+        width: 100%;
+        height: calc(100% - 60px);
+    }
+}
