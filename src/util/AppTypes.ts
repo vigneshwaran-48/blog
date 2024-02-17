@@ -1,3 +1,12 @@
+
+export type Profile = {
+    profileId: string,
+    name: string,
+    description: string,
+    type: "USER" | "ORGANIZATION",
+    entityId: string
+}
+
 export type Blog = {
     owner: UserMeta,
     title: string,
@@ -17,7 +26,7 @@ export type UserMeta = {
     image?: string,
     description?: string
     email?: string,
-    uniqueName?: string
+    profileId?: string
 }
 
 export type BlogCategory = string;
@@ -30,7 +39,8 @@ export type Organization = {
     createdTime?: number,
     visibility?: "PRIVATE" | "PUBLIC",
     joinType?: "MEMBERS_INVITE" | "INVITE" | "ANYONE",
-    image?: string
+    image?: string,
+    profileId?: string
 }
 
 export interface APIRoutes {

@@ -1,14 +1,14 @@
 import React from 'react';
 
 interface Props {
-    params: { name: string }
+    params: { id: number, profileId: string }
 }
 
-const page = ({ params: { name } }: Props) => {
+const page = ({ params: { id, profileId } }: Props) => {
 
     return (
         <div>
-            
+
         </div>
     )
 }

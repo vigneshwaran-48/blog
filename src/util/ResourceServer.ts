@@ -56,3 +56,16 @@ export const getBlogResourceRoutes = () => {
     }
     return routes;
 }
+
+export const getProfileResourceRoutes = () => {
+    const serverBase = getServerBase();
+
+    const routes : APIRoutes = {
+        get: ``,
+        getOne: (id: string | number) => `${serverBase}/api/v1/app/profile/${id}`,
+        create: ``,
+        put: ``,
+        delete: (id: string | number) => ``
+    }
+    return routes;
+}

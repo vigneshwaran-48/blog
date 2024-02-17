@@ -6,7 +6,7 @@ export const initialState: UserMeta = {
     image: "/person.jpg",
     id: "test-001",
     email: "guest@guest.com",
-    uniqueName: "test-001"
+    profileId: "test-001"
 }
 
 const userSlice = createSlice({
@@ -28,7 +28,7 @@ const userSlice = createSlice({
             state.description = action.payload.description;
             state.id = action.payload.id;
             state.email = action.payload.email;
-            state.uniqueName = action.payload.uniqueName || action.payload.id;
+            state.profileId = action.payload.profileId || action.payload.id;
         }
     },
     initialState

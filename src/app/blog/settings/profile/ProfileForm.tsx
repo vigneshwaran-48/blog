@@ -40,10 +40,12 @@ const ProfileForm = () => {
         const imageUrl = getStaticResourceRoutes().getOne(resourceResponse.id);
         setUserFormState(prevUserFormState => ({ ...prevUserFormState, image: imageUrl}));
     }
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setUserFormState(prevUserFormState => ({ ...prevUserFormState, [name]: value }))
     }
+
     const saveProfile = async () => {
         const response = await updateUser(userFormState);
         if(response.status !== 200) {
@@ -59,7 +61,7 @@ const ProfileForm = () => {
             <ImageInput 
                 name="user-profile-image" 
                 value={userFormState.image}
-                onChange={handleImageChange}
+                onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
             />
             <Input 
                 value={userFormState.name} 
@@ -68,9 +70,9 @@ const ProfileForm = () => {
                 displayName="Display Name"
             />
             <Input 
-                value={userFormState.uniqueName} 
+                value={userFormState.profileId} 
                 onChange={handleChange}
-                name="uniqueName"
+                name="profileId"
                 displayName="Profile Id"
             />
             <TextArea
