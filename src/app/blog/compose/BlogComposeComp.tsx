@@ -26,7 +26,6 @@ const BlogComposeComp = ({ blog }: Props) => {
     const router = useRouter();
 
     useEffect(() => {
-        console.log("use effect")
         if(blog) {
             dispatch(setBlog(blog));
             // If the blog details have given then it will be definitely in editing mode.
@@ -38,10 +37,8 @@ const BlogComposeComp = ({ blog }: Props) => {
     }, [blog]);
 
     const debounce = (callback: (blog: Blog) => void, timeout = 3000) => {
-        console.log("Creating debounce");
         let timer : ReturnType<typeof setTimeout>;
         return (blog: Blog) => {
-            console.log("Clearing previous timer");
             clearTimeout(timer);
             timer = setTimeout(() => callback(blog), timeout);
         }

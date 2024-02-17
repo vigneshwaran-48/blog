@@ -4,7 +4,7 @@ import styles from "./navbar.module.css";
 
 const Navbar = () => {
     return (
-        <ul className={`${styles.navBar} y-axis-flex`}>
+        <ul className={`${styles.navBar} hide-scrollbar y-axis-flex`}>
             <li>
                 <NavLink href="/blog/settings/profile" className={styles.navLink} activeClassName={styles.activeNavLink}>
                     <p>Profile</p>

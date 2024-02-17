@@ -3,7 +3,7 @@ import ProfileForm from './ProfileForm';
 
 const ProfilePage = () => {
     return (
-        <div>
+        <div className={`full-body`}>
             <ProfileForm />
         </div>
     )

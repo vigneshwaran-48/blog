@@ -1,0 +1,10 @@
+
+.profileForm {
+    padding: 10px;
+    align-items: center;
+}
+
+.profileForm > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+}

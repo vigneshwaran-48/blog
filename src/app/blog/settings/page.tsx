@@ -1,10 +1,7 @@
-"use client";
-
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 const SettingsPage = () => {
-    const router = useRouter();
-    router.push("/blog/settings/profile");
+    redirect("/blog/settings/profile");
 }
 
 export default SettingsPage;
