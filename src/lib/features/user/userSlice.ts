@@ -4,7 +4,9 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 export const initialState: UserMeta = {
     name: "Guest",
     image: "/person.jpg",
-    id: "test-001"
+    id: "test-001",
+    email: "guest@guest.com",
+    uniqueName: "test-001"
 }
 
 const userSlice = createSlice({
@@ -19,11 +21,14 @@ const userSlice = createSlice({
             state.image = image;
         },
         setUser: (state, action: PayloadAction<UserMeta>) => {
-            // Setting all values separately then only it is getting relected in the store.
+            console.log(action.payload);
+            // Setting all values separately then only it is getting reflected in the store.
             state.name = action.payload.name;
             state.image = action.payload.image;
             state.description = action.payload.description;
             state.id = action.payload.id;
+            state.email = action.payload.email;
+            state.uniqueName = action.payload.uniqueName || action.payload.id;
         }
     },
     initialState

@@ -7,7 +7,8 @@ export type Blog = {
     categories?: BlogCategory[],
     description?: string,
     displayPostedDate?: string,
-    id?: number
+    id?: number,
+    email?: string
 }
 
 export type UserMeta = {
@@ -15,6 +16,8 @@ export type UserMeta = {
     name?: string,
     image?: string,
     description?: string
+    email?: string,
+    uniqueName?: string
 }
 
 export type BlogCategory = string;
