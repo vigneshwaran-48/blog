@@ -23,7 +23,8 @@ const OrganizationListing = ({ organizations }: Props) => {
         return <OrganizationComp 
                     key={key} 
                     organization={organization} 
-                    href={`/blog/organization/${organization.id}`} />
+                    href={`/blog/${organization.profileId}`}
+                    settingsHref={`/blog/organization/${organization.id}`} />
     });
 
     return (

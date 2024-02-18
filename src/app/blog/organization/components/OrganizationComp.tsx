@@ -12,12 +12,13 @@ import Link from 'next/link';
 
 interface Props {
     organization?: Organization,
-    href?: string
+    href?: string,
+    settingsHref: string
 }
 
 export const OrganizationComp = (props: Props) => {
 
-    const { organization, href = "/blog/organization" } = props;
+    const { organization, href = "/blog/organization", settingsHref = "/blog/organization" } = props;
 
     return (
         <NavLink href={href} className={`${styles.organizationComp} x-axis-flex`}>
@@ -31,7 +32,7 @@ export const OrganizationComp = (props: Props) => {
                 <h3>{ organization?.name }</h3>
                 <p>{ organization?.description }</p>
             </div>
-            <Link href={`${href}/settings`}>
+            <Link href={`${settingsHref}/settings`}>
                 <FontAwesomeIcon icon={faGear} />
             </Link>
         </NavLink>

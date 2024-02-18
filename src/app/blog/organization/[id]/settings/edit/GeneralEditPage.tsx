@@ -133,7 +133,12 @@ const GeneralEditForm = ({ organization }: FormProps) => {
                 onChange={handleFormChange}
                 displayName="Name" 
             />
-                
+            <Input 
+                name="profileId" 
+                value={formData.profileId} 
+                onChange={handleFormChange}
+                displayName="Profile Id" 
+            />  
             <TextArea 
                 name="description"
                 value={formData.description as string}
