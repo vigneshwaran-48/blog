@@ -5,16 +5,22 @@ import Image from 'next/image';
 import React from 'react';
 import styles from "./page.module.css";
 import BlogContentComp from './BlogContentComp';
-import PostedBlogMoreOptions from './PostedBlogMoreOptions';
+import MoreOptions, { List } from './MoreOptions';
 import { useRouter } from 'next/navigation';
-import { useAppSelector } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { deleteBlog } from '@/app/actions/blog';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { getUniqueId } from '@/util/getUniqueId';
+import { PopupType } from '../popup/PopUp';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
 const PostedBlog = ({ blog }: { blog: Blog }) => {
 
     // For now getting the user profile Id. But once the posting blogs from organization enabled.
     // Need to chnage this logic for using profileId of both organization and user.
     const profileId = useAppSelector(state => state.userSlice.profileId);
-
+    const dispatch = useAppDispatch();
     const router = useRouter();
 
     const categories = blog.categories?.map(category => {
@@ -30,6 +36,27 @@ const PostedBlog = ({ blog }: { blog: Blog }) => {
     const handleBlogClick = () => {
         router.push(`/blog/${profileId}/${blog.id}`);
     }
+
+    const handleDeleteBlog = async (id: number) => {
+        const response = await deleteBlog(id);
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error}));
+            return;
+        }
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message}));
+    }
+
+    const lists: List[] = [
+        {
+            content: "Edit",
+            onClick: (e) => router.push(`/blog/compose/${blog.id}`)
+        },
+        {
+            content: "Delete",
+            hoverRed: true,
+            onClick: (e) => handleDeleteBlog(blog.id as number)
+        }
+    ]
 
     return (
         <article className={`${styles.blogMeta} y-axis-flex`} onClick={handleBlogClick} >
@@ -51,7 +78,7 @@ const PostedBlog = ({ blog }: { blog: Blog }) => {
                     { categories }
                 </div>
                 <div className={`${styles.otherActionsContainer} x-axis-flex`} onClick={e => e.stopPropagation()}>
-                    <PostedBlogMoreOptions id={blog.id as number} />
+                    <MoreOptions lists={lists} icon={<FontAwesomeIcon icon={faEllipsis} />} />
                 </div>
             </div>
         </article>

@@ -5,15 +5,13 @@ import styles from './page.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { AppFields } from '@/util/AppFields';
-import { Blog, UserMeta } from '@/util/AppTypes';
+import { UserMeta } from '@/util/AppTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { addBlog, updateBlog } from '@/app/actions/blog';
-import { addPopup } from '@/lib/features/popup/popupSlice';
-import { getUniqueId } from '@/util/getUniqueId';
-import { PopupType } from './popup/PopUp';
-import { clearBlog } from '@/lib/features/compose/composeSlice';
+import headerStyles from "./page.module.css";
+import MoreOptions, { List } from './blog/MoreOptions';
+import Image from 'next/image';
 
 interface PublishProps {
     user: UserMeta
@@ -24,6 +22,7 @@ export const AppHeader = () => {
     const user: UserMeta = useAppSelector(state => state.userSlice);
 
     const pathname = usePathname();
+    const router = useRouter();
 
     const handleNavbarToggle = () => {
         const rootElement = document.querySelector(":root");
@@ -32,6 +31,17 @@ export const AppHeader = () => {
             document.documentElement.style.setProperty(AppFields.APP_NAVBAR_STATUS, currentValue === "-100%" ? "0%" : "-100%");
         }
     }
+
+    const lists: List[] = [
+        {
+            content: "Profile",
+            onClick: () => router.push(`/blog/${user.profileId}`)
+        },
+        {
+            content: "Settings",
+            onClick: () => router.push(`/blog/settings/profile`)
+        }
+    ]
 
     return (
         <header className={`${styles.appHeader} full-width x-axis-flex`}>
@@ -55,7 +65,20 @@ export const AppHeader = () => {
                         <PublishBlog user={user} />
                     )
                 }
-                <img src={user?.image || "/person.jpg"} alt="user" />
+                <MoreOptions 
+                    lists={lists} 
+                    icon={
+                        <Image 
+                            className={`${styles.headerImage}`}
+                            src={user?.image || "/person.jpg"} 
+                            alt="user" 
+                            width={40}
+                            height={40}
+                        />
+                    }
+                    top="50px"
+                    translateX="-80%"
+                />
             </div>
         </header>
     )
@@ -73,23 +96,6 @@ const PublishBlog = ({ user }: PublishProps) => {
 
     const onPublishBlog = async (isEditMode: boolean) => {
 
-        // const blog: Blog = {
-        //     content,
-        //     title,
-        //     image,
-        //     owner: user,
-        //     id
-        // }
-        // const response = isEditMode ? await updateBlog(blog) : await addBlog(blog);
-
-        // if(response.status !== 200) {
-        //     dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
-        //     return;
-        // }
-        // dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
-        // dispatch(clearBlog());
-
-        // router.push("/blog/stories");
     }
 
     return (
