@@ -3,6 +3,14 @@ import { Blog } from '@/util/AppTypes';
 import React from 'react';
 import styles from "./page.module.css";
 import PostedBlog from '../components/blog/PostedBlog';
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Stories",
+        description: `Stories of the user`
+    }
+}
 
 const StoriesPage = async () => {
 

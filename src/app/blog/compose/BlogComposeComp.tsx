@@ -40,12 +40,13 @@ const BlogComposeComp = ({ blog }: Props) => {
         let timer : ReturnType<typeof setTimeout>;
         return (blog: Blog) => {
             clearTimeout(timer);
+            dispatch(setIsSaving(true));
             timer = setTimeout(() => callback(blog), timeout);
         }
     }
 
     const processChange = useMemo(() => debounce(async (blog: Blog) => {
-        dispatch(setIsSaving(true));
+        
         const response = await addBlog(blog)
         if(response.status !== 200 && response.status !== 201) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error}));
@@ -57,7 +58,7 @@ const BlogComposeComp = ({ blog }: Props) => {
     }), []);
 
     const processEditChange = useMemo(() => debounce(async (blog: Blog) => {
-        dispatch(setIsSaving(true));
+        // dispatch(setIsSaving(true));
         const response = await updateBlog(blog)
         if(response.status !== 200 && response.status !== 201) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error}));
@@ -72,7 +73,6 @@ const BlogComposeComp = ({ blog }: Props) => {
     }: Partial<Compose>) => {
 
         if(!blogState.isEdit) {
-            // dispatch(setEditMode(true));
             processChange({ title, image, content, owner: user });
         }
         else {

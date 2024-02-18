@@ -65,9 +65,7 @@ export const AppHeader = () => {
 // If a big problem came then need to think about refactoring this.
 const PublishBlog = ({ user }: PublishProps) => {
 
-    const blogContent = useAppSelector(state => state.composeSlice.content);
-
-    const { title, image, isEdit, id, isSaving } = useAppSelector(state => state.composeSlice);
+    const { title, image, isEdit, id, isSaving, content } = useAppSelector(state => state.composeSlice);
 
     const dispatch = useAppDispatch();
 
@@ -75,35 +73,30 @@ const PublishBlog = ({ user }: PublishProps) => {
 
     const onPublishBlog = async (isEditMode: boolean) => {
 
-        const blog: Blog = {
-            content: blogContent,
-            title,
-            image,
-            owner: user,
-            id
-        }
-        const response = isEditMode ? await updateBlog(blog) : await addBlog(blog);
+        // const blog: Blog = {
+        //     content,
+        //     title,
+        //     image,
+        //     owner: user,
+        //     id
+        // }
+        // const response = isEditMode ? await updateBlog(blog) : await addBlog(blog);
 
-        if(response.status !== 200) {
-            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
-            return;
-        }
-        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
-        dispatch(clearBlog());
+        // if(response.status !== 200) {
+        //     dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+        //     return;
+        // }
+        // dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
+        // dispatch(clearBlog());
 
-        router.push("/blog/stories");
+        // router.push("/blog/stories");
     }
 
     return (
         isSaving ? (
             <p>Saving ....</p>
         ) :
-        isEdit ? (
-            <button 
-                className={`${styles.publishButton} button`}
-                onClick={e => onPublishBlog(isEdit)}
-            >Save</button>
-        ) : (
+        (
             <button 
                 className={`${styles.publishButton} button`}
                 onClick={e=> onPublishBlog(isEdit)}

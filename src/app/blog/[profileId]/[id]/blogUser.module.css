@@ -1,0 +1,24 @@
+
+.blogUserDetails {
+    padding: 10px 0px;
+    margin: 10px 0px;
+}
+
+.blogUserDetails > img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.nameAndPostedTime {
+    padding: 0px 10px;
+}
+
+.nameAndPostedTime > h4 {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+.nameAndPostedTime > p {
+    color: var(--app-light-text-color);
+    font-size: 14px;
+}
