@@ -4,7 +4,8 @@ export type Profile = {
     name: string,
     description: string,
     type: "USER" | "ORGANIZATION",
-    entityId: string
+    entityId: string,
+    bannerImage: string
 }
 
 export type Blog = {

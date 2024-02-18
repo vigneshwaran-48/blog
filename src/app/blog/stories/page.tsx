@@ -1,9 +1,10 @@
 import { getBlogsOfUser } from '@/app/actions/blog';
-import { Blog } from '@/util/AppTypes';
+import { Blog, UserMeta } from '@/util/AppTypes';
 import React from 'react';
 import styles from "./page.module.css";
 import PostedBlog from '../components/blog/PostedBlog';
 import { Metadata } from 'next';
+import { getUserProfile } from '@/app/actions/user';
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -14,7 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const StoriesPage = async () => {
 
-    const blogs: Blog[] = await getBlogsOfUser();
+    const user: UserMeta = await getUserProfile();
+
+    console.log(user);
+
+    const blogs: Blog[] = await getBlogsOfUser(user.id);
+
+    console.log(blogs);
 
     const blogElems = blogs && blogs.map((blog, key) => <PostedBlog key={key} blog={blog} />);
     

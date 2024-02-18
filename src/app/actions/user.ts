@@ -5,6 +5,7 @@ import { getUserResourceRoutes } from "@/util/ResourceServer";
 import { sendRequest } from "@/util/RequestUtil";
 import { UserMeta } from "@/util/AppTypes";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const getAllUsers = async () => {
 
@@ -24,7 +25,7 @@ export const getAllUsers = async () => {
 
 }
 
-export const getProfile = async () => {
+export const getUserProfile = async () => {
 
     const routes = getUserResourceRoutes();
 
@@ -65,5 +66,24 @@ export const updateUser = async (user: UserMeta) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
+    const userResponse = data.user;
+    revalidatePath(`/blog/${userResponse.profileId}`)
     return data; 
+}
+
+export const getUser = async (id: string) => {
+
+    const routes = getUserResourceRoutes();
+
+    const response = await sendRequest({ url: routes.getOne(id), method: "GET", includeBody: false });
+
+    if(response.ok) {
+        const data = await response.json();
+                                                
+        if(data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.user;
+    }
+    throw new Error("Error while fetching user details");
 }

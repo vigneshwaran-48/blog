@@ -27,7 +27,7 @@ const MoreOptions = ({ lists, icon, top = "20px", translateX = "" }: Props) => {
                 className={`${hoverRed ? styles.hoverRed : ""}`}
             >{ content }</li>
         )
-    })    
+    });
 
     return (
         <span tabIndex={0} title="More options" className={`${styles.moreOptionsButton}`}>

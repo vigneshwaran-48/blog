@@ -26,11 +26,11 @@ export const addBlog = async (blog: Blog) => {
     return data;
 }
 
-export const getBlogsOfUser = async () => {
+export const getBlogsOfUser = async (userId: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ url: routes.get, method: "GET", includeBody: false });
+    const response = await sendRequest({ url: `${routes.get}/user/${userId}`, method: "GET", includeBody: false });
 
     if(response.ok) {
         const data = await response.json();
