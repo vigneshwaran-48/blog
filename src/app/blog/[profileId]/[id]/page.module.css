@@ -1,0 +1,22 @@
+
+.page {
+    max-width: var(--app-main-page-max-width);
+    width: 100%;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.page > img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+.page > h1 {
+    font-size: 36px;
+}
+
+.page > p {
+    padding: 10px 15px;
+}

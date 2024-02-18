@@ -1,0 +1,44 @@
+
+.navBar {
+    padding: 10px 5px;
+    max-width: 150px;
+    width: 100%;
+    border-right: 1px solid var(--app-light-background-color);
+}
+
+.navBar > li {
+    width: 100%;
+    list-style-type: none;
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--app-light-text-color);
+    display: block;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.activeNavLink {
+    color: var(--app-selected-text-color);
+    background-color: var(--app-selected-background-color);
+}
+
+@media screen and (max-width: 500px) {
+    
+    .navBar {
+        padding: 10px 0px;
+        flex-direction: row;
+        max-width: none;
+        border-right: none;
+        border-bottom: 1px solid var(--app-light-background-color);
+        overflow-x: scroll;
+    }
+    .navLink {
+        display: inline-block;
+    }
+    .navBar > li {
+        width: auto;
+        margin-right: 5px;
+    }
+}

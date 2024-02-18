@@ -1,0 +1,12 @@
+
+.blog {
+    max-width: 300px;
+    width: 100%;
+    flex-shrink: 0;
+    margin: 10px;
+    align-items: center;
+}
+
+.blog > img {
+    width: 100%;
+}

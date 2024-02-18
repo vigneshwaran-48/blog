@@ -3,6 +3,7 @@
 import { APIRoutes, Blog } from "@/util/AppTypes";
 import { sendRequest } from "@/util/RequestUtil";
 import { getBlogResourceRoutes } from "@/util/ResourceServer";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const addBlog = async (blog: Blog) => {
@@ -21,14 +22,15 @@ export const addBlog = async (blog: Blog) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
+    revalidatePath("/blog/stories");
     return data;
 }
 
-export const getBlogsOfUser = async () => {
+export const getBlogsOfUser = async (userId: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ url: routes.get, method: "GET", includeBody: false });
+    const response = await sendRequest({ url: `${routes.get}/user/${userId}`, method: "GET", includeBody: false });
 
     if(response.ok) {
         const data = await response.json();
@@ -41,7 +43,7 @@ export const getBlogsOfUser = async () => {
     else if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    throw new Error("Error while fetching organization details");
+    throw new Error("Error while fetching blog details");
 }
 
 export const deleteBlog = async (id: number) => {
@@ -54,5 +56,47 @@ export const deleteBlog = async (id: number) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
+    revalidatePath("/blog/stories");
+    return data;
+}
+
+export const getBlog = async (id: number) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({ url: routes.getOne(id), method: "GET", includeBody: false });
+
+    if(response.ok) {
+        const data = await response.json();
+
+        if(data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.blog;
+    }
+    else if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    throw new Error("Error while fetching blog");
+}
+
+export const updateBlog = async (blog: Blog) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({
+        url: routes.put,
+        method: "PATCH",
+        includeBody: true, 
+        body: JSON.stringify(blog),
+        contentType: "application/json"
+    });
+
+    const data = await response.json();
+    if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    revalidatePath(`/blog/compose/${blog.id}`);
+    revalidatePath("/blog/stories");
     return data;
 }

@@ -1,0 +1,37 @@
+
+.banner {
+    max-width: 900px;
+    border-radius: 7px;
+    border: 1px solid var(--app-light-background-color);
+    align-items: center;
+    margin-top: -30px;
+    background-color: var(--app-background-color);
+    justify-content: flex-start;
+    position: relative;
+}
+
+.banner > img {
+    margin-top: -72px;
+    border-radius: 50%;
+    border: 2px solid var(--app-background-color);
+}
+
+.banner > h1 {
+    margin: 10px 0px;
+}
+
+.banner > p {
+    margin: 10px 0px;
+    text-align: center;
+    width: 70%;
+}
+
+.banner > button {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    font-size: 20px;
+    font-weight: 800;
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { getProfile } from '@/app/actions/user';
+import { getUserProfile } from '@/app/actions/user';
 import { setUser } from '@/lib/features/user/userSlice';
 import { useAppDispatch } from '@/lib/hooks';
 import React, { useEffect } from 'react';
@@ -18,7 +18,7 @@ const UserStoreProvider = ({ children }: Props) => {
     }, []);
 
     const setUserInStore = async () => {
-        const user = await getProfile();
+        const user = await getUserProfile();
         dispatch(setUser(user));
     }
 

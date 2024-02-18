@@ -1,0 +1,18 @@
+
+.profileForm {
+    padding: 10px;
+    align-items: center;
+}
+
+.profileForm > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+}
+.profileForm > button {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+}
+
+.profileForm > label, .profileForm > label > input, .profileForm > label > textarea {
+    width: 100%;
+}

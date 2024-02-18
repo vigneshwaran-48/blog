@@ -26,8 +26,9 @@
     margin-right: 5px;
 }
 
-.rightBar > img {
+.headerImage {
     width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 .appOrHamburgerMenu > svg {

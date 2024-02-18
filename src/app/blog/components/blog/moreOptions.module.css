@@ -4,7 +4,8 @@
 }
 
 .moreOptionsButton:focus-within > .moreOptions {
-    transform: scale(1) translateX(-50%);
+    scale: 1;
+    transform: translateX(-50%);
 }
 
 .moreOptions {
@@ -15,8 +16,10 @@
     background-color: var(--app-background-color);
     padding: 10px 15px;
     transition: 0.5s;
-    transform: scale(0) translateX(-50%);
+    scale: 0;
+    transform: translateX(-50%);
     transform-origin: top left;
+    z-index: 20;
 }
 
 .moreOptions::before {
@@ -49,10 +52,12 @@
 @media screen and (max-width: 500px) {
     
     .moreOptionsButton:focus-within > .moreOptions {
-        transform: scale(1) translateX(-75%);
+        scale: 1;
+        transform: translateX(-75%);
     }
 
     .moreOptions {
-        transform: scale(0) translateX(-75%);
+        scale: 0;
+        transform: translateX(-75%);
     }
 }
