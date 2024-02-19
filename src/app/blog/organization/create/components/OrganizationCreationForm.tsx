@@ -25,7 +25,8 @@ const OrganizationCreationForm = () => {
         name: "",
         description: "",
         joinType: "ANYONE",
-        visibility: "PUBLIC"
+        visibility: "PUBLIC",
+        profileId: ""
     });
 
     const dispatch = useAppDispatch();
@@ -79,7 +80,7 @@ const OrganizationCreationForm = () => {
             return;
         }
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
-        router.push(`/blog/organization/${currentOrganization?.id}`);
+        router.push(`/blog/${currentOrganization?.profileId}`);
     }
 
     const visibilityRadioButtons: Props[] = [
@@ -132,6 +133,13 @@ const OrganizationCreationForm = () => {
                 value={formData.name} 
                 onChange={handleFormChange}
                 displayName="Name" 
+            />
+
+            <Input 
+                name="profileId" 
+                value={formData.profileId} 
+                onChange={handleFormChange}
+                displayName="Profile Id" 
             />
                 
             <TextArea 
