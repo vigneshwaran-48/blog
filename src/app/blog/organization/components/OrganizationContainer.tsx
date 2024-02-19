@@ -31,6 +31,9 @@ const OrganizationContainer = (props: Props) => {
                                                                             key={k}  
                                                                             organization={organization} 
                                                                             href={`${hrefBase}/${organization.id}`}
+                                                                            settingsHref={
+                                                                                `/blog/organization/${organization.id}/edit`
+                                                                            }
                                                                         />)
                                         : <h2>You are not part of any organization</h2>
 

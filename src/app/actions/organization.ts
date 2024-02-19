@@ -183,3 +183,20 @@ export const removeUsersFromOrganization = async (id: number, users: string[]) =
     }
     return data;
 }
+
+export const deleteOrganization = async (id: number) => {
+
+    const routes: APIRoutes = getOrganizationResourceRoutes();
+
+    const response = await sendRequest({ 
+        url: `${routes.getOne(id)}`,
+        method: "DELETE", 
+        includeBody: false 
+    });
+    const data = await response.json();
+    if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    revalidatePath(`/blog/organization`);
+    return data;
+}

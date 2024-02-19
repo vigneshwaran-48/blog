@@ -19,7 +19,7 @@ const OrganizationListing = ({ organizations }: Props) => {
         setOrgsToShow(organizations.filter(org => org.name?.toLowerCase().includes(query.toLowerCase())));
     }
 
-    const organizationElems = orgsToShow && orgsToShow.map((organization, key) => {
+    const organizationElems = organizations && organizations.map((organization, key) => {
         return <OrganizationComp 
                     key={key} 
                     organization={organization} 

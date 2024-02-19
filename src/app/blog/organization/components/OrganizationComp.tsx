@@ -1,14 +1,18 @@
 "use client";
 
 import React from 'react'
-import { SearchBar } from '../../components/blog/SearchBar';
 import styles from "./page.module.css";
 import { Organization } from '@/util/AppTypes';
 import Image from 'next/image';
-import { NavLink } from '@/util/NavLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { deleteOrganization } from '@/app/actions/organization';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { getUniqueId } from '@/util/getUniqueId';
+import { PopupType } from '../../components/popup/PopUp';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     organization?: Organization,
@@ -18,10 +22,26 @@ interface Props {
 
 export const OrganizationComp = (props: Props) => {
 
+    const userId = useAppSelector(state => state.userSlice.id);
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+
     const { organization, href = "/blog/organization", settingsHref = "/blog/organization" } = props;
 
+    const handleOrganizationDelete = async(id: number) => {
+        const response = await deleteOrganization(id);
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), message: response.error, type: PopupType.FAILED }));
+            return;
+        }
+        dispatch(addPopup({ id: getUniqueId(), message: response.message, type: PopupType.SUCCESS }));
+    }
+
     return (
-        <NavLink href={href} className={`${styles.organizationComp} x-axis-flex`}>
+        <div
+            className={`${styles.organizationComp} x-axis-flex`}
+            onClick={e => router.push(href)}
+        >
             <Image 
                 src={organization?.image || "/person.jpg"}
                 width={50}
@@ -32,9 +52,19 @@ export const OrganizationComp = (props: Props) => {
                 <h3>{ organization?.name }</h3>
                 <p>{ organization?.description }</p>
             </div>
+            {
+                userId === organization?.owner?.id && (
+                    <span onClick={e => {
+                        e.stopPropagation();
+                        handleOrganizationDelete(organization.id as number);
+                    }}>
+                        <FontAwesomeIcon icon={faTrashCan} />
+                    </span>
+                )
+            }
             <Link href={`${settingsHref}/settings`}>
                 <FontAwesomeIcon icon={faGear} />
             </Link>
-        </NavLink>
+        </div>
     )
 }

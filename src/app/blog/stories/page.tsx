@@ -16,12 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const StoriesPage = async () => {
 
     const user: UserMeta = await getUserProfile();
-
-    console.log(user);
-
     const blogs: Blog[] = await getBlogsOfUser(user.id);
-
-    console.log(blogs);
 
     const blogElems = blogs && blogs.map((blog, key) => <PostedBlog key={key} blog={blog} />);
     
