@@ -1,4 +1,10 @@
 
+export type BlogLike = {
+    id: number,
+    blog: Blog,
+    user: UserMeta
+}
+
 export type Profile = {
     profileId: string,
     name: string,
