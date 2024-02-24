@@ -6,8 +6,9 @@ import styles from "./page.module.css";
 import UserProfileBanner from './comp/UserProfileBanner';
 import { getUser } from '@/app/actions/user';
 import OrganizationProfileBanner from './comp/OrganizationProfileBanner';
-import { getBlogsOfUser } from '@/app/actions/blog';
+import { getAllBlogsOfProfile } from '@/app/actions/blog';
 import ProfileBlog from './comp/ProfileBlog';
+import { getOrganization } from '@/app/actions/organization';
 
 interface Props {
     params: { profileId: string }
@@ -35,7 +36,7 @@ const page = async ({ params: { profileId } }: Props) => {
     let blogs: Blog[] = [];
 
     if(profile.type === ProfileType.USER) {
-        blogs = await getBlogsOfUser(profile.entityId);
+        blogs = await getAllBlogsOfProfile(profileId);
     }
 
     const blogElems = blogs && blogs.map((blog, key) => <ProfileBlog key={key} profileId={profileId} blog={blog} />);
@@ -49,7 +50,9 @@ const page = async ({ params: { profileId } }: Props) => {
                 {
                     profile.type === ProfileType.USER 
                         ?   <UserProfileBanner user={await getUser(profile.entityId)} />
-                        :   <OrganizationProfileBanner />
+                        :   <OrganizationProfileBanner 
+                                organization={await getOrganization(Number.parseInt(profile.entityId))}
+                            />
                 }
             </div>
             <div className={`${styles.blogContainer} x-axis-flex`}>

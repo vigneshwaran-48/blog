@@ -7,7 +7,6 @@
 .organizationNavbar > ul {
     overflow-x: scroll;
     align-items: center;
-    justify-content: space-between;
 }
 
 .organizationNavbar > ul > li {

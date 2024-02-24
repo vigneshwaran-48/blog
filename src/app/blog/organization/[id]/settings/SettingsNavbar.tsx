@@ -21,13 +21,6 @@ const SettingsNavbar = ({ organizationId }: Props) => {
             <ul className={`x-axis-flex full-width hide-scrollbar`}>
                 <li>
                     <NavLink 
-                        href={`/blog/organization/${organizationId}/settings`}
-                        className={`${styles.navLink}`}
-                        activeClassName={`${styles.activeNavLink}`}
-                        useStartsWith={false}
-                    >Info</NavLink></li>
-                <li>
-                    <NavLink 
                         href={`/blog/organization/${organizationId}/settings/edit`}
                         className={`${styles.navLink}`}
                         activeClassName={`${styles.activeNavLink}`}

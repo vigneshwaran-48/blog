@@ -1,0 +1,15 @@
+
+.blogOptions {
+    border-top: 1px solid var(--app-light-background-color);
+    border-bottom: 1px solid var(--app-light-background-color);
+    padding: 10px;
+    align-items: center;
+}
+
+.likesContainer {
+    align-items: center;
+}
+
+.likesContainer > p {
+    margin-left: 5px;
+}
