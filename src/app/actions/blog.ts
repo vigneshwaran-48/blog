@@ -60,7 +60,7 @@ export const deleteBlog = async (id: number) => {
     return data;
 }
 
-export const getBlog = async (userId: string, id: number) => {
+export const getBlog = async (id: number) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 

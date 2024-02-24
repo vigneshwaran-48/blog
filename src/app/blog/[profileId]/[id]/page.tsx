@@ -1,11 +1,10 @@
-import { getBlog, getBlogOfProfile, getLikesCountOfBlog, getLikesOfBlog } from '@/app/actions/blog';
-import { Blog, BlogLike, UserMeta } from '@/util/AppTypes';
+import { getBlogOfProfile, getLikesOfBlog } from '@/app/actions/blog';
+import { Blog } from '@/util/AppTypes';
 import React from 'react';
 import styles from "./page.module.css";
 import BlogUserDetails from './BlogUserDetails';
 import { Metadata } from 'next';
 import BlogOptions from './BlogOptions';
-import { getUserProfile } from '@/app/actions/user';
 
 interface Props {
     params: { id: number, profileId: string }
