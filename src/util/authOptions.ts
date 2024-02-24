@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { getServerBase } from "./ResourceServer";
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -16,7 +17,7 @@ export const authOptions: NextAuthOptions = {
 
             const id = profile?.sub;
 
-            const userResponse = await fetch(`http://localhost:8082/api/v1/app/user/${id}`,{
+            const userResponse = await fetch(`${getServerBase()}/api/v1/app/user/${id}`,{
                 headers: {
                     "Authorization": `Bearer ${account?.id_token}`
                 }
@@ -39,7 +40,7 @@ export const authOptions: NextAuthOptions = {
                 image
             }
 
-            const response = await fetch("http://localhost:8082/api/v1/app/user", {
+            const response = await fetch(`${getServerBase()}/api/v1/app/user`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
