@@ -12,25 +12,26 @@ import { PopupType } from '../../components/popup/PopUp';
 
 interface Props {
     likes: BlogLike[],
-    blogId: number
+    blogId: number,
+    profileId: string
 }
 
 const notLikedIcon = "/heart.png";
 const likedIcon = "/heart_full.png";
 
-const BlogOptions = ({ likes, blogId }: Props) => {
+const BlogOptions = ({ likes, blogId, profileId }: Props) => {
 
     const userId = useAppSelector(state => state.userSlice.id);
     const dispatch = useAppDispatch();
     const isUserLiked: boolean = likes.findIndex(like => like.user.id === userId) >= 0;
 
     const onRemoveLike = async () => {
-        const response = await removeLikeFromBlog(blogId);
+        const response = await removeLikeFromBlog(blogId, profileId);
         handleResponse(response);
     }
 
     const onLiked = async () => {
-        const response = await likeBlog(blogId);
+        const response = await likeBlog(blogId, profileId);
         handleResponse(response);
     }
 

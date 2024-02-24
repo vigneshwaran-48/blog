@@ -26,11 +26,11 @@ export const addBlog = async (blog: Blog) => {
     return data;
 }
 
-export const getBlogsOfUser = async (userId: string) => {
+export const getBlogsOfUser = async () => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ url: `${routes.get}/user/${userId}`, method: "GET", includeBody: false });
+    const response = await sendRequest({ url: `${routes.get}/user`, method: "GET", includeBody: false });
 
     if(response.ok) {
         const data = await response.json();
@@ -60,7 +60,7 @@ export const deleteBlog = async (id: number) => {
     return data;
 }
 
-export const getBlog = async (id: number) => {
+export const getBlog = async (userId: string, id: number) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
@@ -70,6 +70,7 @@ export const getBlog = async (id: number) => {
         const data = await response.json();
 
         if(data.status !== 200) {
+            console.log(data);
             throw new Error(data.error);
         }
         return data.blog;
@@ -101,11 +102,15 @@ export const updateBlog = async (blog: Blog) => {
     return data;
 }
 
-export const getLikesCountOfBlog = async (id: number) => {
+export const getLikesCountOfBlog = async (id: number, profileId: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ url: `${routes.getOne(id)}/like/count`, method: "GET", includeBody: false });
+    const response = await sendRequest({ 
+        url: `${routes.getOne(id)}/like/count?profileId=${profileId}`, 
+        method: "GET", 
+        includeBody: false 
+    });
 
     if(response.ok) {
         const data = await response.json();
@@ -121,11 +126,15 @@ export const getLikesCountOfBlog = async (id: number) => {
     throw new Error("Error while fetching blog");
 }
 
-export const getLikesOfBlog = async (id: number) => {
+export const getLikesOfBlog = async (id: number, profileId: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ url: `${routes.getOne(id)}/like`, method: "GET", includeBody: false });
+    const response = await sendRequest({ 
+        url: `${routes.getOne(id)}/like?profileId=${profileId}`, 
+        method: "GET", 
+        includeBody: false 
+    });
 
     if(response.ok) {
         const data = await response.json();
@@ -138,13 +147,17 @@ export const getLikesOfBlog = async (id: number) => {
     else if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    throw new Error("Error while fetching blog");
+    throw new Error("Error while fetching likes of blog");
 }
 
-export const likeBlog = async (id: number) => {
+export const likeBlog = async (id: number, profileId: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ url: `${routes.getOne(id)}/like`, method: "POST", includeBody: false });
+    const response = await sendRequest({ 
+        url: `${routes.getOne(id)}/like?profileId=${profileId}`, 
+        method: "POST", 
+        includeBody: false 
+    });
 
     const data = await response.json();
     if(response.status === 401) {
@@ -154,10 +167,14 @@ export const likeBlog = async (id: number) => {
     return data;
 }
 
-export const removeLikeFromBlog = async (id: number) => {
+export const removeLikeFromBlog = async (id: number, profileId: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ url: `${routes.getOne(id)}/like`, method: "DELETE", includeBody: false });
+    const response = await sendRequest({ 
+        url: `${routes.getOne(id)}/like?profileId=${profileId}`, 
+        method: "DELETE", 
+        includeBody: false 
+    });
 
     const data = await response.json();
     if(response.status === 401) {
@@ -165,4 +182,52 @@ export const removeLikeFromBlog = async (id: number) => {
     }
     revalidatePath(`/blog/[profileId]/${id}`);
     return data;
+}
+
+export const getBlogOfProfile = async (blogId: number, profileId: string) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({ 
+        url: `${routes.getOne(blogId)}/profile/${profileId}`, 
+        method: "GET", 
+        includeBody: false 
+    });
+
+    if(response.ok) {
+        const data = await response.json();
+
+        if(data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.blog;
+    }
+    else if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    throw new Error("Error while fetching blog of profile");
+}
+
+export const getAllBlogsOfProfile = async (profileId: string) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({ 
+        url: `${routes.get}/profile/${profileId}`, 
+        method: "GET", 
+        includeBody: false 
+    });
+
+    if(response.ok) {
+        const data = await response.json();
+
+        if(data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.blogs;
+    }
+    else if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    throw new Error("Error while fetching blogs of profile");
 }
