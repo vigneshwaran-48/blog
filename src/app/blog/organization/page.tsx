@@ -1,6 +1,7 @@
 import { getAllOrganizations } from '@/app/actions/organization';
 import OrganizationListing from './OrganizationListing';
 import { Metadata } from 'next';
+import NoOrganizations from './NoOrganizations';
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -14,7 +15,10 @@ const OrganizationPage = async () => {
     const organizations = await getAllOrganizations();
 
     return (
-        <OrganizationListing organizations={organizations} />
+        organizations && organizations.length > 0 ? (
+            <OrganizationListing organizations={organizations} />
+        )
+        : <NoOrganizations />
     )
 }
 

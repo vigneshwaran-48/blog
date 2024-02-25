@@ -4,6 +4,7 @@ import React from 'react';
 import styles from "./page.module.css";
 import PostedBlog from '../components/blog/PostedBlog';
 import { Metadata } from 'next';
+import NoStories from './NoStories';
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -16,7 +17,9 @@ const StoriesPage = async () => {
 
     const blogs: Blog[] = await getBlogsOfUser();
 
-    const blogElems = blogs && blogs.map((blog, key) => <PostedBlog key={key} blog={blog} />);
+    const blogElems = blogs && blogs.length > 0 
+                        ? blogs.map((blog, key) => <PostedBlog key={key} blog={blog} />)
+                        : <NoStories />;
     
     return (
         <div className={`${styles.storiesContainer} hide-scrollbar y-axis-flex`}>
