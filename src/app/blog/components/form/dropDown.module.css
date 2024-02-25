@@ -1,0 +1,37 @@
+
+.dropDownContainer {
+    position: relative;
+}
+
+.dropDownContainer > button {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+}
+
+.dropDown {
+    min-width: 200px;
+    scale: 0;
+    transition: 0.5s;
+    transform-origin: top left;
+    border: 1px solid var(--app-light-background-color);
+    position: absolute;
+    top: 100%;
+    background-color: var(--app-background-color);
+}
+
+.showDropDown {
+    scale: 1;
+}
+
+.dropDown > li {
+    list-style-type: none;
+    padding: 10px;
+    border-bottom: 1px solid var(--app-light-background-color);
+    cursor: pointer;
+}
+
+.dropDown > li:hover {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+    transition: 0.5s;
+}

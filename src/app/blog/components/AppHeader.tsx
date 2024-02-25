@@ -12,6 +12,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import headerStyles from "./page.module.css";
 import MoreOptions, { List } from './blog/MoreOptions';
 import Image from 'next/image';
+import PublishBlog from './PublishBlog';
 
 interface PublishProps {
     user: UserMeta
@@ -62,7 +63,7 @@ export const AppHeader = () => {
                         </Link>
                     )
                     : (
-                        <PublishBlog user={user} />
+                        <PublishBlog />
                     )
                 }
                 <MoreOptions 
@@ -81,32 +82,5 @@ export const AppHeader = () => {
                 />
             </div>
         </header>
-    )
-}
-
-// This component will render for every single state field change but not a big problem its a small button.
-// If a big problem came then need to think about refactoring this.
-const PublishBlog = ({ user }: PublishProps) => {
-
-    const { title, image, isEdit, id, isSaving, content } = useAppSelector(state => state.composeSlice);
-
-    const dispatch = useAppDispatch();
-
-    const router = useRouter();
-
-    const onPublishBlog = async (isEditMode: boolean) => {
-
-    }
-
-    return (
-        isSaving ? (
-            <p>Saving ....</p>
-        ) :
-        (
-            <button 
-                className={`${styles.publishButton} button`}
-                onClick={e=> onPublishBlog(isEdit)}
-            >Publish</button>
-        )
     )
 }
