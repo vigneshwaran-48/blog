@@ -14,6 +14,13 @@ export type Profile = {
     bannerImage: string
 }
 
+export type ProfileId = {
+    id: number,
+    profileId: string,
+    entityId: string,
+    type: "USER" | "ORGANIZATION"
+}
+
 export type Blog = {
     owner: UserMeta,
     title: string,

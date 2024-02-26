@@ -30,6 +30,7 @@
     max-width: 400px;
     width: 95%;
     justify-content: center;
+    align-items: center;
     padding: 10px;
     border-radius: 7px;
 }
@@ -38,4 +39,10 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 0px;
+}
+
+.modal > button {
+    width: fit-content;
+    background-color: #128B10;
+    color: white;
 }

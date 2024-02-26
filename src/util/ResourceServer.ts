@@ -61,7 +61,7 @@ export const getProfileResourceRoutes = () => {
     const serverBase = getServerBase();
 
     const routes : APIRoutes = {
-        get: ``,
+        get: `${serverBase}/api/v1/app/profile`,
         getOne: (id: string | number) => `${serverBase}/api/v1/app/profile/${id}`,
         create: ``,
         put: ``,

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "./publishBlog.module.css";
-import Dropdown, { Item } from './form/Dropdown';
+import Dropdown from './form/Dropdown';
+import { useAppSelector } from '@/lib/hooks';
 
 interface Props {
     isOpen: boolean
@@ -8,28 +9,28 @@ interface Props {
 
 const PublishModal = ({ isOpen }: Props) => {
 
-    const items: Item[] = [
-        {
-            id: "test-123",
-            displayName: "Test 1"
-        },
-        {
-            id: "test-124",
-            displayName: "Test 2"
-        }
-    ]
+    const profiles = useAppSelector(state => state.profileSlice.value);
+
+    console.log(profiles);
+
+    const items = profiles.map(profile => ({ id: profile.id + "", displayName: profile.profileId }));
+
+    const onDropDownSelect = (id: string) => {
+        console.log(id);
+    }
     return (
         <div className={`${styles.publishModal} ${isOpen ? styles.showModal : ""} full-body x-axis-flex`}>
             <div className={`${styles.background} full-body`}></div>
             <div className={`${styles.modal} y-axis-flex`}>
                 <div className={`${styles.modalRow} x-axis-flex full-width`}>
                     <p>Publish At</p>
-                    <Dropdown displayName="Select" items={items} />
+                    <Dropdown items={items} onSelect={onDropDownSelect} />
                 </div>
                 <div className={`${styles.modalRow} x-axis-flex full-width`}>
                     <p>Tags</p>
                     <p>Javascript</p>
                 </div>
+                <button className={`button`}>Publish</button>
             </div>
         </div>
     )
