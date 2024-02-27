@@ -231,3 +231,20 @@ export const getAllBlogsOfProfile = async (profileId: string) => {
     }
     throw new Error("Error while fetching blogs of profile");
 }
+
+export const publishBlog = async (id: number, publishAtProfileId: string) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({
+        url: `${routes.getOne(id)}/publish?publishAt=${publishAtProfileId}`,
+        method: "POST",
+        includeBody: false
+    });
+
+    const data = await response.json();
+    if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    return data;
+}

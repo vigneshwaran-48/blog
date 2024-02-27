@@ -1,7 +1,6 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/lib/hooks';
 import React, { useState } from 'react';
 import styles from "./publishBlog.module.css";
 import PublishModal from './PublishModal';
@@ -28,7 +27,7 @@ const PublishBlog = () => {
                     >Publish</button>
                 )
             }
-            <PublishModal isOpen={isPublishModalOpen} />
+            <PublishModal isOpen={isPublishModalOpen} onClose={() => setIsPublishModalOpen(false)} />
         </div>
     )
 }

@@ -11,7 +11,6 @@ import { Roboto } from "next/font/google";
 import PopUpMessageContainer from "./components/popup/PopUpMessageContainer";
 import PopupModelProvider from "./components/popup/PopupModelProvider";
 import UserStoreProvider from "./components/providers/UserStoreProvider";
-import ProfilesProvider from "./components/providers/ProfilesProvider";
 
 const roboto = Roboto({
     weight: "400",
@@ -41,7 +40,6 @@ export default function RootLayout({ children }: { children : React.ReactNode })
                     <body className={`full-body ${styles.body} y-axis-flex`}>
                         <PopupModelProvider>
                             <UserStoreProvider>
-                                <ProfilesProvider>
                                     <AppHeader />
                                     <div className={`${styles.middleBody} full-width x-axis-flex`}>
                                         <NavBar />
@@ -49,7 +47,6 @@ export default function RootLayout({ children }: { children : React.ReactNode })
                                             { children }
                                         </main>
                                     </div>
-                                </ProfilesProvider>
                             </UserStoreProvider>
                         <PopUpMessageContainer />
                         </PopupModelProvider>

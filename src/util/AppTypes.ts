@@ -31,7 +31,8 @@ export type Blog = {
     description?: string,
     displayPostedDate?: string,
     id?: number,
-    email?: string
+    email?: string,
+    publishedAt?: ProfileId
 }
 
 export type UserMeta = {

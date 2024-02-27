@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 import BlogContentComp from './BlogContentComp';
 import MoreOptions, { List } from './MoreOptions';
 import { useRouter } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { useAppDispatch } from '@/lib/hooks';
 import { deleteBlog } from '@/app/actions/blog';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
@@ -17,9 +17,7 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
 const PostedBlog = ({ blog }: { blog: Blog }) => {
 
-    // For now getting the user profile Id. But once the posting blogs from organization enabled.
-    // Need to chnage this logic for using profileId of both organization and user.
-    const profileId = useAppSelector(state => state.userSlice.profileId);
+    const profileId = blog.publishedAt?.profileId;
     const dispatch = useAppDispatch();
     const router = useRouter();
 

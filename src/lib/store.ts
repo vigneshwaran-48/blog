@@ -3,7 +3,6 @@ import userSlice from "./features/user/userSlice";
 import popupSlice from "./features/popup/popupSlice";
 import preferencesSlice from "./features/settings/preferencesSlice";
 import composeSlice from "./features/compose/composeSlice";
-import profileSlice from "./features/profile/profileSlice";
 
 export const makeStore = () => {
     return configureStore({
@@ -12,7 +11,6 @@ export const makeStore = () => {
             popupSlice,
             preferencesSlice,
             composeSlice,
-            profileSlice
         }
     });
 }

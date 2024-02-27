@@ -33,12 +33,8 @@ const page = async ({ params: { profileId } }: Props) => {
 
     const profile: Profile = await getProfile(profileId);
 
-    let blogs: Blog[] = [];
-
-    if(profile.type === ProfileType.USER) {
-        blogs = await getAllBlogsOfProfile(profileId);
-    }
-
+    let blogs: Blog[] = await getAllBlogsOfProfile(profileId);
+    
     const blogElems = blogs && blogs.map((blog, key) => <ProfileBlog key={key} profileId={profileId} blog={blog} />);
 
     return (
