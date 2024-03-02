@@ -32,7 +32,8 @@ export type Blog = {
     displayPostedDate?: string,
     id?: number,
     email?: string,
-    publishedAt?: ProfileId
+    publishedAt?: ProfileId,
+    isPublished: boolean
 }
 
 export type UserMeta = {
