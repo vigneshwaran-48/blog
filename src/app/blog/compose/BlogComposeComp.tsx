@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styles from "./compose.module.css";
 import ContentArea from './components/ContentArea';
 import BlogImage from './components/BlogImage';
 import Title from './components/Title';
-import { Blog } from '@/util/AppTypes';
+import { Blog, ProfileId } from '@/util/AppTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { Compose, clearBlog, setBlog, setEditMode, setIsSaving } from '@/lib/features/compose/composeSlice';
 import { addBlog, updateBlog } from '@/app/actions/blog';
@@ -36,7 +36,7 @@ const BlogComposeComp = ({ blog }: Props) => {
         }
     }, [blog]);
 
-    const debounce = (callback: (blog: Blog) => void, timeout = 3000) => {
+    const debounce = (callback: (blog: Blog) => void, timeout = 1000) => {
         let timer : ReturnType<typeof setTimeout>;
         return (blog: Blog) => {
             clearTimeout(timer);
@@ -47,12 +47,13 @@ const BlogComposeComp = ({ blog }: Props) => {
 
     const processChange = useMemo(() => debounce(async (blog: Blog) => {
         
-        const response = await addBlog(blog)
+        const response = await addBlog(blog);
         if(response.status !== 200 && response.status !== 201) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error}));
         }
         else {
-            router.replace(`/blog/compose/${response.blog.id}`);
+            router.push(`/blog/compose/${response.blog.id}`);
+            dispatch(response.blog);
         }
         dispatch(setIsSaving(false));
     }), []);
@@ -69,7 +70,9 @@ const BlogComposeComp = ({ blog }: Props) => {
     const handleChange = async ({ 
         title = blogState.title, 
         content = blogState.content, 
-        image = blogState.image 
+        image = blogState.image,
+        publised = blogState.publised,
+        publishedAt = blogState.publishedAt
     }: Partial<Compose>) => {
 
         if(!blogState.isEdit) {
@@ -82,7 +85,9 @@ const BlogComposeComp = ({ blog }: Props) => {
                 title, 
                 owner: user, 
                 content, 
-                image
+                image,
+                publised,
+                publishedAt: publishedAt as ProfileId
             });
         }
     }

@@ -248,3 +248,20 @@ export const publishBlog = async (id: number, publishAtProfileId: string) => {
     }
     return data;
 }
+
+export const unPublishBlog = async (id: number) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({
+        url: `${routes.getOne(id)}/unpublish`,
+        method: "POST",
+        includeBody: false
+    });
+
+    const data = await response.json();
+    if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    return data;
+}

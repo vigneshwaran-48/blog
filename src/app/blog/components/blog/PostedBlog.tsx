@@ -10,9 +10,7 @@ import BlogMetaFooter from './BlogMetaFooter';
 
 const PostedBlog = ({ blog }: { blog: Blog }) => {
 
-    console.log(blog.owner);
-
-    const profileId = blog.isPublished ? blog.publishedAt?.profileId : blog.owner.profileId;
+    const profileId = blog.publised ? blog.publishedAt?.profileId : blog.owner.profileId;
     const router = useRouter();
 
     const handleBlogClick = () => {

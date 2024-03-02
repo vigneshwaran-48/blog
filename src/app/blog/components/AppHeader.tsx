@@ -6,17 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { AppFields } from '@/util/AppFields';
 import { UserMeta } from '@/util/AppTypes';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import headerStyles from "./page.module.css";
 import MoreOptions, { List } from './blog/MoreOptions';
 import Image from 'next/image';
 import PublishBlog from './PublishBlog';
-
-interface PublishProps {
-    user: UserMeta
-}
 
 export const AppHeader = () => {
 

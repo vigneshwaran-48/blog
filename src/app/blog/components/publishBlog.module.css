@@ -3,6 +3,11 @@
     color: white;
 }
 
+.unPublishButton {
+    background-color: red;
+    color: white;
+}
+
 .publishModal {
     position: fixed;
     display: none;
