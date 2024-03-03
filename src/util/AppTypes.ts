@@ -1,4 +1,13 @@
 
+export type Comment = {
+    id: number,
+    blogId: number,
+    commentBy: UserMeta,
+    parentComment: Comment,
+    threads: Comment[],
+    content: string
+}
+
 export type BlogLike = {
     id: number,
     blog: Blog,

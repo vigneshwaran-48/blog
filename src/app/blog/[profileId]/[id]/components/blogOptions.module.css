@@ -13,3 +13,7 @@
 .likesContainer > p {
     margin-left: 5px;
 }
+
+.likesContainer img {
+    cursor: pointer;
+}

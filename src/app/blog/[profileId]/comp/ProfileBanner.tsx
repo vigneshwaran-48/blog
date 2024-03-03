@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React from 'react'
 import bannerStyles from "./banner.module.css";
-import { useAppDispatch } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { followProfile, unFollowProfile } from '@/app/actions/follow';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
@@ -21,6 +21,7 @@ interface Props {
 const ProfileBanner = ({ profileId, image, name, description, isFollowing }: Props) => {
 
     const dispatch = useAppDispatch();
+    const currentUserProfileId = useAppSelector(state => state.userSlice.profileId);
 
     const onFollow = async () => {
         const response = await followProfile(profileId as string);
@@ -48,12 +49,16 @@ const ProfileBanner = ({ profileId, image, name, description, isFollowing }: Pro
                 width={120} 
                 height={120} 
             />
-            <button 
-                onClick={e => isFollowing ? unFollow() : onFollow()} 
-                className={`button ${styles.followButton} ${isFollowing ? styles.unFollow : ""}`}
-            >
-                { isFollowing ? "UnFollow" : "Follow" }
-            </button>
+            {
+                currentUserProfileId !== profileId && (
+                    <button 
+                        onClick={e => isFollowing ? unFollow() : onFollow()} 
+                        className={`button ${styles.followButton} ${isFollowing ? styles.unFollow : ""}`}
+                    >
+                        { isFollowing ? "UnFollow" : "Follow" }
+                    </button>
+                )
+            }
             <h1>{ name }</h1>
             <p>{ description }</p>
         </div>

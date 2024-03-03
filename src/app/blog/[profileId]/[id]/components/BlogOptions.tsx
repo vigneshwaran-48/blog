@@ -8,16 +8,14 @@ import Image from 'next/image';
 import { likeBlog, removeLikeFromBlog } from '@/app/actions/blog';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
-import { PopupType } from '../../components/popup/PopUp';
+import { PopupType } from '../../../components/popup/PopUp';
+import LikeButton from './LikeButton';
 
 interface Props {
     likes: BlogLike[],
     blogId: number,
     profileId: string
 }
-
-const notLikedIcon = "/heart.png";
-const likedIcon = "/heart_full.png";
 
 const BlogOptions = ({ likes, blogId, profileId }: Props) => {
 
@@ -45,14 +43,12 @@ const BlogOptions = ({ likes, blogId, profileId }: Props) => {
 
     return (
         <div className={`${styles.blogOptions} full-width x-axis-flex`}>
-            <span className={`${styles.likesContainer} x-axis-flex`}>
-                {
-                    isUserLiked 
-                        ? <Image src={likedIcon} alt="liked icon" width={20} height={20} onClick={e => onRemoveLike()} /> 
-                        : <Image src={notLikedIcon} alt="Not liked icon" width={20} height={20} onClick={e => onLiked()} />
-                }
-                <p>{ likes.length }</p>
-            </span>
+            <LikeButton 
+                isLiked={isUserLiked} 
+                likesCount={likes.length} 
+                onRemoveLike={onRemoveLike}
+                onLiked={onLiked}
+            />
         </div>
     )
 }
