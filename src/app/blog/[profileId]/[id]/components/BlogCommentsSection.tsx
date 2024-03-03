@@ -9,12 +9,14 @@ interface Props {
 
 const BlogCommentsSection = ({ comments }: Props) => {
 
-    const commentsElem = comments.map((comment, key) => <BlogComment key={key} comment={comment} />);
+    const commentsElem = comments.map((comment, key) => <BlogComment key={key} comment={comment} threadLevel={0} />);
 
     return (
         <div className={`${styles.commentSection} full-width y-axis-flex`}>
             <h2>Comments ({ comments.length })</h2>
-            { commentsElem }
+            <div className={`${styles.commentsContainer} full-width y-axis-flex`}>
+                { commentsElem }
+            </div>
         </div>
     )
 }
