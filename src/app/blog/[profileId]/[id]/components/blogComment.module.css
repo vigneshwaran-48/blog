@@ -43,3 +43,42 @@
     right: 0px;
     left: 0px;
 }
+
+.replyButtonContainer {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.replyButton {
+    font-size: 18px;
+    color: var(--app-light-text-color);
+    cursor: pointer;
+}
+
+.replyButton:hover {
+    color: var(--app-selected-background-color);
+}
+
+.commentArea > textarea {
+    resize: none;
+    height: 200px;
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.commentAreaButtonsContainer {
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.commentAreaButtonsContainer > button {
+    margin: 0px 5px;
+}
+
+.commentButton {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+}

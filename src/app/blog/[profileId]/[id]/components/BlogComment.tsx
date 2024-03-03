@@ -7,6 +7,11 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import LikeButton from './LikeButton';
+import { postComment } from '@/app/actions/comment';
+import { useAppDispatch } from '@/lib/hooks';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { getUniqueId } from '@/util/getUniqueId';
+import { PopupType } from '@/app/blog/components/popup/PopUp';
 
 const MAX_THREAD_LEVEL = 2;
 const PADDING_MULTIPLIER = 20;
@@ -14,13 +19,28 @@ const PADDING_MULTIPLIER = 20;
 interface Props {
     comment: Comment, 
     threadLevel: number,
-    isLastComment?: boolean
+    isLastComment?: boolean,
+    profileId: string
 }
 
-const BlogComment = ({ comment, threadLevel, isLastComment = false }: Props) => {
+const BlogComment = ({ profileId, comment, threadLevel, isLastComment = false }: Props) => {
 
     const [ showReplies, setShowReplies ] = useState<boolean>(false);
+    const [ showCommentInput, setShowCommentInput ] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+
     const isMaximumDepthLevel: boolean = threadLevel >= MAX_THREAD_LEVEL;
+
+    const handleOnComment = async (content: string) => {
+        const response = await postComment(profileId, comment.blogId, content, comment.id);
+        console.log(response);
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
+        setShowCommentInput(false);
+    }
 
     return (
         <div
@@ -58,9 +78,26 @@ const BlogComment = ({ comment, threadLevel, isLastComment = false }: Props) => 
                             </span>
                         )
                     }
+                    {
+                        !isMaximumDepthLevel && (
+                            <span className={`${styles.replyButtonContainer} x-axis-flex`}>
+                                <p 
+                                    className={`${styles.replyButton}`}
+                                    onClick={e => setShowCommentInput(true)}
+                                >Reply</p>
+                            </span>
+                        )
+                    }
                 </div>
+                {
+                    showCommentInput && <CommentArea
+                                            onClose={() => setShowCommentInput(false)}
+                                            onComment={handleOnComment}
+                                        />
+                }
             </div>
             {showReplies && comment.threads && <BlogReplies 
+                                                    profileId={profileId}
                                                     comments={comment.threads} 
                                                     currentThreadLevel={threadLevel} />}
         </div>
@@ -88,7 +125,10 @@ const BlogCommentHeader = ({ userImage, userName }: { userImage: string, userNam
     )
 }
 
-const BlogReplies = ({ comments, currentThreadLevel }: { comments: Comment[], currentThreadLevel: number }) => {
+const BlogReplies = (
+    { profileId, comments, currentThreadLevel }: 
+    { profileId: string, comments: Comment[], currentThreadLevel: number }
+) => {
 
     const commentsElem = [];
 
@@ -99,6 +139,7 @@ const BlogReplies = ({ comments, currentThreadLevel }: { comments: Comment[], cu
                 comment={comments[i]} 
                 threadLevel={currentThreadLevel + 1} 
                 isLastComment={isLastCommentInThisLevel}
+                profileId={profileId}
             />)
     }
 
@@ -106,6 +147,33 @@ const BlogReplies = ({ comments, currentThreadLevel }: { comments: Comment[], cu
         <>
             { commentsElem }
         </>
+    )
+}
+
+const CommentArea = ({ onClose, onComment }: { onClose: () => void, onComment: (comment: string) => void }) => {
+
+    const [ comment, setComment ] = useState<string>("");
+    const handleOnComment = () => {
+        onComment(comment);
+    }
+
+    return (
+        <div className={`${styles.commentArea} y-axis-flex`}>
+            <textarea
+                value={comment}
+                onChange={e => setComment(e.target.value)}
+            ></textarea>
+            <div className={`${styles.commentAreaButtonsContainer} x-axis-flex`}>
+                <button 
+                    className={`button`}
+                    onClick={e => onClose()}
+                >Cancel</button>
+                <button 
+                    className={`${styles.commentButton} button`}
+                    onClick={handleOnComment}
+                >Comment</button>
+            </div>
+        </div>
     )
 }
 
