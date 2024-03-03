@@ -6,16 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { AppFields } from '@/util/AppFields';
 import { UserMeta } from '@/util/AppTypes';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import headerStyles from "./page.module.css";
 import MoreOptions, { List } from './blog/MoreOptions';
 import Image from 'next/image';
-
-interface PublishProps {
-    user: UserMeta
-}
+import PublishBlog from './PublishBlog';
 
 export const AppHeader = () => {
 
@@ -62,7 +58,7 @@ export const AppHeader = () => {
                         </Link>
                     )
                     : (
-                        <PublishBlog user={user} />
+                        <PublishBlog />
                     )
                 }
                 <MoreOptions 
@@ -81,32 +77,5 @@ export const AppHeader = () => {
                 />
             </div>
         </header>
-    )
-}
-
-// This component will render for every single state field change but not a big problem its a small button.
-// If a big problem came then need to think about refactoring this.
-const PublishBlog = ({ user }: PublishProps) => {
-
-    const { title, image, isEdit, id, isSaving, content } = useAppSelector(state => state.composeSlice);
-
-    const dispatch = useAppDispatch();
-
-    const router = useRouter();
-
-    const onPublishBlog = async (isEditMode: boolean) => {
-
-    }
-
-    return (
-        isSaving ? (
-            <p>Saving ....</p>
-        ) :
-        (
-            <button 
-                className={`${styles.publishButton} button`}
-                onClick={e=> onPublishBlog(isEdit)}
-            >Publish</button>
-        )
     )
 }

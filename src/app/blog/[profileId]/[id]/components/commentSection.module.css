@@ -1,0 +1,9 @@
+
+.commentSection {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.commentsContainer {
+    justify-content: flex-end;
+}

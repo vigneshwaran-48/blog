@@ -70,11 +70,6 @@
     color: var(--app-selected-text-color);
 }
 
-.publishButton {
-    background-color: #128B10;
-    color: white;
-}
-
 @media screen and (max-width: 1000px) {
     .appOrHamburgerMenu > svg {
         display: block;

@@ -20,3 +20,8 @@
 .page > p {
     padding: 10px 15px;
 }
+
+.blogContent {
+    padding: 15px 10px;
+    border-bottom: 1px solid var(--app-light-background-color);
+}

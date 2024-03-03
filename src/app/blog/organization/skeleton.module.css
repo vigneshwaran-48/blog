@@ -1,0 +1,12 @@
+
+.skeletonContainer {
+    max-width: var(--app-main-page-max-width);
+    padding-top: var(--app-main-page-padding-top);
+    overflow-y: scroll;
+}
+@media screen and (max-width: 500px) {
+ 
+    .skeletonContainer {
+        padding-top: 10px;
+    }
+}

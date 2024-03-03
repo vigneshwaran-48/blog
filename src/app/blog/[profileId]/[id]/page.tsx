@@ -2,9 +2,11 @@ import { getBlogOfProfile, getLikesOfBlog } from '@/app/actions/blog';
 import { Blog } from '@/util/AppTypes';
 import React from 'react';
 import styles from "./page.module.css";
-import BlogUserDetails from './BlogUserDetails';
+import BlogUserDetails from './components/BlogUserDetails';
 import { Metadata } from 'next';
-import BlogOptions from './BlogOptions';
+import BlogOptions from './components/BlogOptions';
+import BlogCommentsSection from './components/BlogCommentsSection';
+import { getCommentsOfBlog } from '@/app/actions/comment';
 
 interface Props {
     params: { id: number, profileId: string }
@@ -22,8 +24,11 @@ export async function generateMetadata({ params: { id, profileId } }: Props): Pr
 
 const page = async ({ params: { id, profileId } }: Props) => {
 
-    const [ blog, likesOfBlog ] = await Promise.all([ getBlogOfProfile(id, profileId), getLikesOfBlog(id, profileId) ]);
-    
+    const [ blog, likesOfBlog, comments ] = await Promise.all([ 
+                                                    getBlogOfProfile(id, profileId), 
+                                                    getLikesOfBlog(id, profileId), 
+                                                    getCommentsOfBlog(id) 
+                                                ]);
     return (
         <div className={`${styles.page} hide-scrollbar y-axis-flex`}>
             <img 
@@ -31,8 +36,11 @@ const page = async ({ params: { id, profileId } }: Props) => {
                 alt="Blog Header Image" />
             <BlogUserDetails user={blog.owner} postedOn={blog.displayPostedDate as string}  />
             <BlogOptions likes={likesOfBlog} blogId={id} profileId={profileId} />
-            <h1>{ blog.title }</h1>
-            <p dangerouslySetInnerHTML={ { __html: blog.content } } />
+            <div className={`${styles.blogContent}`}>
+                <h1>{ blog.title }</h1>
+                <p dangerouslySetInnerHTML={ { __html: blog.content } } />
+            </div>
+            <BlogCommentsSection profileId={profileId} comments={comments} />
         </div>
     )
 }

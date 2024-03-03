@@ -1,7 +1,7 @@
 import { APIRoutes } from "./AppTypes";
 
 export const getServerBase = () => {
-    return process.env.RESOURCE_SERVER_URL;
+    return process.env.NEXT_PUBLIC_RESOURCE_SERVER_URL;
 }
 
 export const getOrganizationResourceRoutes = () => {
@@ -61,7 +61,7 @@ export const getProfileResourceRoutes = () => {
     const serverBase = getServerBase();
 
     const routes : APIRoutes = {
-        get: ``,
+        get: `${serverBase}/api/v1/app/profile`,
         getOne: (id: string | number) => `${serverBase}/api/v1/app/profile/${id}`,
         create: ``,
         put: ``,

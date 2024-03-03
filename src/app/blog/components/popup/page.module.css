@@ -12,6 +12,7 @@
     align-items: center;
     padding: 10px;
     overflow-y: scroll;
+    z-index: 30;
 }
 
 .popup {

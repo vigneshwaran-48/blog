@@ -1,0 +1,84 @@
+
+.commentContainer {
+    align-items: flex-end;
+    border-color: var(--app-light-background-color);
+    padding: 10px;
+}
+.comment {
+    padding: 5px;
+    justify-content: space-between;
+}
+.commentHeader {
+    align-items: center;
+    padding: 10px 0px;
+}
+.commentHeader > img {
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.commentHeader > span {
+    cursor: pointer;
+}
+.commentUserNameAndTime {
+    flex-grow: 1;
+}
+.commentContent {
+    padding: 10px 0px;
+}
+.commentFooter {
+    padding: 10px 0px;
+}
+.repliesButton {
+    align-items: center;
+    padding: 0px 10px;
+    cursor: pointer;
+}
+.repliesButton > p {
+    margin-left: 5px;
+}
+
+.repliesContainer {
+    position: absolute;
+    top: 100%;
+    right: 0px;
+    left: 0px;
+}
+
+.replyButtonContainer {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.replyButton {
+    font-size: 18px;
+    color: var(--app-light-text-color);
+    cursor: pointer;
+}
+
+.replyButton:hover {
+    color: var(--app-selected-background-color);
+}
+
+.commentArea > textarea {
+    resize: none;
+    height: 200px;
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.commentAreaButtonsContainer {
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.commentAreaButtonsContainer > button {
+    margin: 0px 5px;
+}
+
+.commentButton {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+}

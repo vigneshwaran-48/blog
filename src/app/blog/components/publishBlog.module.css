@@ -1,0 +1,53 @@
+.publishButton {
+    background-color: #128B10;
+    color: white;
+}
+
+.unPublishButton {
+    background-color: red;
+    color: white;
+}
+
+.publishModal {
+    position: fixed;
+    display: none;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    z-index: 20;
+    justify-content: center;
+    align-items: center;
+}
+
+.publishModal > .background {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.showModal {
+    display: flex;
+}
+
+.modal {
+    background-color: var(--app-background-color);
+    z-index: 22;
+    max-width: 400px;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.modalRow {
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.modal > button {
+    width: fit-content;
+    background-color: #128B10;
+    color: white;
+}

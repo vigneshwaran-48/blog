@@ -10,7 +10,7 @@ export const makeStore = () => {
             userSlice,
             popupSlice,
             preferencesSlice,
-            composeSlice
+            composeSlice,
         }
     });
 }

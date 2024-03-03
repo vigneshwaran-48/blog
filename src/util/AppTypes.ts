@@ -1,4 +1,13 @@
 
+export type Comment = {
+    id: number,
+    blogId: number,
+    commentBy: UserMeta,
+    parentComment: Comment,
+    threads: Comment[],
+    content: string
+}
+
 export type BlogLike = {
     id: number,
     blog: Blog,
@@ -14,6 +23,13 @@ export type Profile = {
     bannerImage: string
 }
 
+export type ProfileId = {
+    id: number,
+    profileId: string,
+    entityId: string,
+    type: "USER" | "ORGANIZATION"
+}
+
 export type Blog = {
     owner: UserMeta,
     title: string,
@@ -24,7 +40,9 @@ export type Blog = {
     description?: string,
     displayPostedDate?: string,
     id?: number,
-    email?: string
+    email?: string,
+    publishedAt?: ProfileId,
+    publised?: boolean
 }
 
 export type UserMeta = {

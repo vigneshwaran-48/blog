@@ -20,6 +20,10 @@
 
 }
 
+html {
+  color-scheme: light;
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -98,4 +102,8 @@ body, html {
   .ql-container.ql-snow {
     height: calc(100% - 70px);
   }
+}
+
+@media (prefers-color-scheme: dark) {
+
 }

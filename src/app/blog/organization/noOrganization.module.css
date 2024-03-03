@@ -1,0 +1,20 @@
+
+.noOrganization {
+    max-width: 500px;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-10%);
+}
+
+
+.noOrganization > img {
+    height: 350px;
+    width: 100%;
+}
+
+.noOrganization button {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+    width: fit-content;
+}

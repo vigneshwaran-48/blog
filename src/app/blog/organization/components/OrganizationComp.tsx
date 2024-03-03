@@ -37,6 +37,12 @@ export const OrganizationComp = (props: Props) => {
         dispatch(addPopup({ id: getUniqueId(), message: response.message, type: PopupType.SUCCESS }));
     }
 
+    const handleOrgSettingsClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        router.push(`${settingsHref}/settings`);
+    }
+
     return (
         <div
             className={`${styles.organizationComp} x-axis-flex`}
@@ -62,9 +68,9 @@ export const OrganizationComp = (props: Props) => {
                     </span>
                 )
             }
-            <Link href={`${settingsHref}/settings`}>
+            <div onClick={handleOrgSettingsClick}>
                 <FontAwesomeIcon icon={faGear} />
-            </Link>
+            </div>
         </div>
     )
 }

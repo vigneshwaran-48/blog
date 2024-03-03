@@ -1,4 +1,4 @@
-import { Blog } from "@/util/AppTypes";
+import { Blog, ProfileId } from "@/util/AppTypes";
 import { getStaticResourceRoutes } from "@/util/ResourceServer";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
@@ -8,7 +8,9 @@ export interface Compose {
     image: string,
     isEdit: boolean,
     id?: number,
-    isSaving: boolean
+    isSaving: boolean,
+    publised: boolean,
+    publishedAt: ProfileId | null
 }
 
 const defaultImage = getStaticResourceRoutes().getOne(552);
@@ -18,7 +20,9 @@ const initialState: Compose = {
     title: "",
     image: defaultImage,
     isEdit: false,
-    isSaving: false
+    isSaving: false,
+    publised: false,
+    publishedAt: null
 }
 
 const composeSlice = createSlice({
@@ -46,15 +50,29 @@ const composeSlice = createSlice({
             state.title = action.payload.title;
             state.image = action.payload.image;
             state.id = action.payload.id;
+            state.publised = action.payload.publised || false;
+            state.publishedAt = action.payload.publishedAt || null
         },
         setEditMode: (state, action: PayloadAction<boolean>) => {
             state.isEdit = action.payload;
         },
         setIsSaving: (state, action: PayloadAction<boolean>) => {
             state.isSaving = action.payload;
+        },
+        setPublished: (state, action: PayloadAction<boolean>) => {
+            state.publised = action.payload;
         }
     }
 })
 
-export const { setContent, setTitle, setBlogImage, clearBlog, setBlog, setEditMode, setIsSaving } = composeSlice.actions;
+export const { 
+    setContent, 
+    setTitle, 
+    setBlogImage, 
+    clearBlog, 
+    setBlog, 
+    setEditMode, 
+    setIsSaving,
+    setPublished
+} = composeSlice.actions;
 export default composeSlice.reducer;

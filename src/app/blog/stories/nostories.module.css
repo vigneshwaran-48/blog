@@ -1,0 +1,22 @@
+
+.noStories {
+    max-width: 400px;
+    width: 95%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-10%);
+}
+
+.noStories > img {
+    width: 200px;
+    height: 300px;
+    width: 100%;
+}
+
+.noStories button {
+    background-color: var(--app-selected-background-color);
+    color: var(--app-selected-text-color);
+    width: fit-content;
+}
+

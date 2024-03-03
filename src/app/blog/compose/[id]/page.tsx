@@ -22,6 +22,8 @@ const BlogComposePage = async ({ params: { id } }: Props) => {
 
     const blog: Blog = await getBlog(id);
 
+    console.log(blog);
+    
     return (
         <BlogComposeComp blog={blog} />
     )
