@@ -103,3 +103,7 @@ body, html {
     height: calc(100% - 70px);
   }
 }
+
+@media (prefers-color-scheme: dark) {
+
+}

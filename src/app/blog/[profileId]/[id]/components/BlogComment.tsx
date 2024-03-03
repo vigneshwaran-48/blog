@@ -9,17 +9,19 @@ import { faComments, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import LikeButton from './LikeButton';
 
 const MAX_THREAD_LEVEL = 2;
-const PADDING_MULTIPLIER = 50;
+const PADDING_MULTIPLIER = 20;
 
 const BlogComment = ({ comment, threadLevel }: { comment: Comment, threadLevel: number }) => {
 
     const [ showReplies, setShowReplies ] = useState<boolean>(false);
 
+    const isMaximumDepthLevel: boolean = threadLevel > MAX_THREAD_LEVEL;
+
     return (
         <div
             className={`${styles.commentContainer} y-axis-flex`}
             style={{
-                width: `calc(100% - ${threadLevel <= MAX_THREAD_LEVEL ? threadLevel * PADDING_MULTIPLIER : 0}px`
+                width: `calc(100% - ${!isMaximumDepthLevel ? threadLevel * PADDING_MULTIPLIER : 0}px`
             }}
         >
             <div className={`${styles.comment} full-width y-axis-flex`}>
@@ -37,12 +39,16 @@ const BlogComment = ({ comment, threadLevel }: { comment: Comment, threadLevel: 
                         onRemoveLike={() => {}} 
                         onLiked={() => {}}
                     />
-                    <span 
-                        className={`${styles.repliesButton} x-axis-flex`} 
-                        onClick={e => setShowReplies(prevState => !prevState)}>
-                        <FontAwesomeIcon icon={faComments} />
-                        <p>{ comment.threads?.length || "" }</p>
-                    </span>
+                    {
+                        !isMaximumDepthLevel && (
+                            <span 
+                                className={`${styles.repliesButton} x-axis-flex`} 
+                                onClick={e => setShowReplies(prevState => !prevState)}>
+                                <FontAwesomeIcon icon={faComments} />
+                                <p>{ comment.threads?.length || "" }</p>
+                            </span>
+                        )
+                    }
                 </div>
             </div>
             {showReplies && comment.threads 
