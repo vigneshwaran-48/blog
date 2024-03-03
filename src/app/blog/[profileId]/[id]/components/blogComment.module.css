@@ -1,11 +1,12 @@
 
 .commentContainer {
     align-items: flex-end;
+    border-color: var(--app-light-background-color);
+    padding: 10px;
 }
 .comment {
     padding: 5px;
     justify-content: space-between;
-    border-bottom: 1px solid var(--app-light-background-color);
 }
 .commentHeader {
     align-items: center;

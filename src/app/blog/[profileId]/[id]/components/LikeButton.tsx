@@ -20,7 +20,7 @@ const LikeButton = ({ isLiked, likesCount, onRemoveLike, onLiked }: Props) => {
                     ? <Image src={likedIcon} alt="liked icon" width={20} height={20} onClick={e => onRemoveLike()} /> 
                     : <Image src={notLikedIcon} alt="Not liked icon" width={20} height={20} onClick={e => onLiked()} />
             }
-            <p>{ likesCount }</p>
+            <p>{ likesCount > 0 && likesCount }</p>
         </span>
     )
 }

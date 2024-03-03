@@ -11,17 +11,26 @@ import LikeButton from './LikeButton';
 const MAX_THREAD_LEVEL = 2;
 const PADDING_MULTIPLIER = 20;
 
-const BlogComment = ({ comment, threadLevel }: { comment: Comment, threadLevel: number }) => {
+interface Props {
+    comment: Comment, 
+    threadLevel: number,
+    isLastComment?: boolean
+}
+
+const BlogComment = ({ comment, threadLevel, isLastComment = false }: Props) => {
 
     const [ showReplies, setShowReplies ] = useState<boolean>(false);
-
-    const isMaximumDepthLevel: boolean = threadLevel > MAX_THREAD_LEVEL;
+    const isMaximumDepthLevel: boolean = threadLevel >= MAX_THREAD_LEVEL;
 
     return (
         <div
             className={`${styles.commentContainer} y-axis-flex`}
             style={{
-                width: `calc(100% - ${!isMaximumDepthLevel ? threadLevel * PADDING_MULTIPLIER : 0}px`
+                width: `calc(100% - ${!isMaximumDepthLevel ? threadLevel * PADDING_MULTIPLIER : 0}px`,
+                borderBottomStyle: "solid",
+                borderBottomWidth: `${isLastComment ? "0px" : "1px"}`,
+                borderLeftStyle: "solid",
+                borderLeftWidth: `${isMaximumDepthLevel ? "0px" : "1px"}`
             }}
         >
             <div className={`${styles.comment} full-width y-axis-flex`}>
@@ -51,12 +60,9 @@ const BlogComment = ({ comment, threadLevel }: { comment: Comment, threadLevel: 
                     }
                 </div>
             </div>
-            {showReplies && comment.threads 
-                                && 
-                                comment.threads.map((thread, key) => <BlogComment 
-                                                                        key={key} 
-                                                                        comment={thread} 
-                                                                        threadLevel={threadLevel + 1} />)}
+            {showReplies && comment.threads && <BlogReplies 
+                                                    comments={comment.threads} 
+                                                    currentThreadLevel={threadLevel} />}
         </div>
     )
 }
@@ -79,6 +85,27 @@ const BlogCommentHeader = ({ userImage, userName }: { userImage: string, userNam
                 <FontAwesomeIcon icon={faEllipsis} />
             </span>
         </div>
+    )
+}
+
+const BlogReplies = ({ comments, currentThreadLevel }: { comments: Comment[], currentThreadLevel: number }) => {
+
+    const commentsElem = [];
+
+    for(let i = 0; i < comments.length; i ++) {
+        const isLastCommentInThisLevel = i == comments.length - 1;
+        commentsElem.push(
+            <BlogComment 
+                comment={comments[i]} 
+                threadLevel={currentThreadLevel + 1} 
+                isLastComment={isLastCommentInThisLevel}
+            />)
+    }
+
+    return (
+        <>
+            { commentsElem }
+        </>
     )
 }
 
