@@ -20,7 +20,7 @@ export const getCommentsOfBlog = async (id: number) => {
     return data.comments;
 }
 
-export const postComment = async (profileId: string, blogId: number, content: string, parentCommentId: number) => {
+export const postComment = async (profileId: string, blogId: number, content: string, parentCommentId: number | null) => {
     const routes: APIRoutes = getBlogResourceRoutes();
     const body = { content, parentCommentId };
 

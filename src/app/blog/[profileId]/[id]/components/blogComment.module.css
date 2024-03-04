@@ -66,6 +66,9 @@
     width: 100%;
     font-size: 18px;
     padding: 10px;
+    border-color: var(--app-light-background-color);
+    border-radius: 7px;
+    margin-top: 5px;
 }
 
 .commentAreaButtonsContainer {

@@ -12,6 +12,7 @@ import { useAppDispatch } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '@/app/blog/components/popup/PopUp';
+import CommentArea from './CommentArea';
 
 const MAX_THREAD_LEVEL = 2;
 const PADDING_MULTIPLIER = 20;
@@ -147,33 +148,6 @@ const BlogReplies = (
         <>
             { commentsElem }
         </>
-    )
-}
-
-const CommentArea = ({ onClose, onComment }: { onClose: () => void, onComment: (comment: string) => void }) => {
-
-    const [ comment, setComment ] = useState<string>("");
-    const handleOnComment = () => {
-        onComment(comment);
-    }
-
-    return (
-        <div className={`${styles.commentArea} y-axis-flex`}>
-            <textarea
-                value={comment}
-                onChange={e => setComment(e.target.value)}
-            ></textarea>
-            <div className={`${styles.commentAreaButtonsContainer} x-axis-flex`}>
-                <button 
-                    className={`button`}
-                    onClick={e => onClose()}
-                >Cancel</button>
-                <button 
-                    className={`${styles.commentButton} button`}
-                    onClick={handleOnComment}
-                >Comment</button>
-            </div>
-        </div>
     )
 }
 
