@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import LikeButton from './LikeButton';
-import { postComment } from '@/app/actions/comment';
+import { likeComment, postComment, unLikeComment } from '@/app/actions/comment';
 import { useAppDispatch } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
@@ -26,6 +26,8 @@ interface Props {
 
 const BlogComment = ({ profileId, comment, threadLevel, isLastComment = false }: Props) => {
 
+    console.log(comment);
+
     const [ showReplies, setShowReplies ] = useState<boolean>(false);
     const [ showCommentInput, setShowCommentInput ] = useState<boolean>(false);
     const dispatch = useAppDispatch();
@@ -41,6 +43,24 @@ const BlogComment = ({ profileId, comment, threadLevel, isLastComment = false }:
         }
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
         setShowCommentInput(false);
+    }
+
+    const onLike = async () => {
+        const response = await likeComment(profileId, comment.blogId, comment.id);
+        handleResponse(response);
+    }
+
+    const onRemoveLike = async () => {
+        const response = await unLikeComment(profileId, comment.blogId, comment.id);
+        handleResponse(response);
+    }
+
+    const handleResponse = (response: any) => {
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
     }
 
     return (
@@ -64,10 +84,10 @@ const BlogComment = ({ profileId, comment, threadLevel, isLastComment = false }:
                 </div>
                 <div className={`${styles.commentFooter} x-axis-flex`}>
                     <LikeButton 
-                        isLiked={false} 
-                        likesCount={0} 
-                        onRemoveLike={() => {}} 
-                        onLiked={() => {}}
+                        isLiked={comment.currentUserLikedComment} 
+                        likesCount={comment.commentLikesCount} 
+                        onRemoveLike={onRemoveLike} 
+                        onLiked={onLike}
                     />
                     {
                         !isMaximumDepthLevel && (

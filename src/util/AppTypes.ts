@@ -5,7 +5,9 @@ export type Comment = {
     commentBy: UserMeta,
     parentComment: Comment,
     threads: Comment[],
-    content: string
+    content: string,
+    currentUserLikedComment: boolean,
+    commentLikesCount: number
 }
 
 export type BlogLike = {

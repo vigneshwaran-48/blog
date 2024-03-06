@@ -40,3 +40,39 @@ export const postComment = async (profileId: string, blogId: number, content: st
     revalidatePath(`/blog/${profileId}/${blogId}`);
     return data;
 }
+
+export const likeComment = async (profileId: string, blogId: number, id: number) => {
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({ 
+        url: `${routes.getOne(blogId)}/comment/${id}/like`, 
+        method: "POST", 
+        includeBody: false 
+    });
+    
+    const data = await response.json();
+
+    if(data.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    revalidatePath(`/blog/${profileId}/${blogId}`);
+    return data;
+}
+
+export const unLikeComment = async (profileId: string, blogId: number, id: number) => {
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({ 
+        url: `${routes.getOne(blogId)}/comment/${id}/like`, 
+        method: "DELETE", 
+        includeBody: false 
+    });
+    
+    const data = await response.json();
+
+    if(data.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    revalidatePath(`/blog/${profileId}/${blogId}`);
+    return data;
+}
