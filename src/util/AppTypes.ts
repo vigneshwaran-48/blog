@@ -1,4 +1,17 @@
 
+export type Notification = {
+    id: number,
+    userId: string,
+    message: string,
+    senderId: string,
+    senderName: string,
+    senderImage: string,
+    time: string,
+    isSeen: boolean,
+    senderType: "USER" | "ORGANIZATION",
+    organizationId?: number
+}
+
 export type Comment = {
     id: number,
     blogId: number,
