@@ -59,6 +59,17 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
+    transition: 0.5s;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.notification.hoverable {
+    cursor: pointer;
+}
+
+.notification.hoverable:hover {
+    background-color: var(--app-light-background-color);
 }
 
 .notification > img {
@@ -86,7 +97,16 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
+    background-color: transparent;
+}
+.unSeenColor {
     background-color: var(--app-selected-background-color);
+}
+
+@media screen and (max-width: 500px) {
+    .notificationContainerHeader > h2 {
+        font-size: 22px;
+    }
 }
 
 @media screen and (max-width: 300px) {

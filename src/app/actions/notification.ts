@@ -17,3 +17,16 @@ export const getNotificationsOfUser = async () => {
     }
     return data.notifications;
 }
+
+export const markNotificationAsSeen = async (id: number) => {
+
+    const routes: APIRoutes = getNotificationResourceRoutes();
+
+    const response = await sendRequest({ url: `${routes.getOne(id)}/seen`, method: "POST", includeBody: false });
+    const data = await response.json();
+
+    if(data.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    return data;
+}

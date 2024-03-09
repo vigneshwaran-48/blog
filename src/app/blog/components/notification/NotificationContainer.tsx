@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react';
 
 import styles from "./notification.module.css";
 import { Notification } from '@/util/AppTypes';
-import { getNotificationsOfUser } from '@/app/actions/notification';
+import { getNotificationsOfUser, markNotificationAsSeen } from '@/app/actions/notification';
 import NotificationComp from './NotificationComp';
+import { useAppDispatch } from '@/lib/hooks';
+import { addPopup } from '@/lib/features/popup/popupSlice';
+import { getUniqueId } from '@/util/getUniqueId';
+import { PopupType } from '../popup/PopUp';
 
 const NotificationContainer = () => {
 
     const [ notifications, setNotifications ] = useState<Notification[]>([]);
+
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         console.log("Setting notification")
@@ -20,8 +26,28 @@ const NotificationContainer = () => {
         setNotifications(notifs);
     }
 
+    const handleMarkAsSeen = async (id: number) => {
+        const response = await markNotificationAsSeen(id);
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        setNotifications(prevNotifications => {
+            return prevNotifications.map(notification => {
+                if(notification.id === id) {
+                    notification.seen = true;
+                }
+                return notification;
+            });
+        });
+    }
+
     const notificationElems = notifications.map((notification, key) => 
-                                                    <NotificationComp key={key} notification={notification} />)
+                                                    <NotificationComp 
+                                                        key={key} 
+                                                        notification={notification} 
+                                                        onMarkAsSeen={handleMarkAsSeen}
+                                                    />)
 
     return (
         <div className={`${styles.containerWrapper}`}>

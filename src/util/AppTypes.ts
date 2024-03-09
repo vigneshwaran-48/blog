@@ -7,7 +7,7 @@ export type Notification = {
     senderName: string,
     senderImage: string,
     time: string,
-    isSeen: boolean,
+    seen: boolean,
     senderType: "USER" | "ORGANIZATION",
     organizationId?: number
 }
