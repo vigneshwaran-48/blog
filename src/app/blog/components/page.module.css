@@ -10,7 +10,7 @@
 .rightBar {
     align-items: center;
     justify-content: space-between;
-    max-width: 130px;
+    max-width: 150px;
     width: 60%;
 }
 
@@ -42,6 +42,7 @@
     border-right: 1px solid var(--app-light-background-color);
     background-color: var(--app-background-color);
     transition: 0.5s;
+    z-index: 10;
 }
 
 .navLink {
@@ -106,5 +107,6 @@
     }
     .appOrHamburgerMenu > h1 {
         display: block;
+        font-size: 26px;
     }
 }

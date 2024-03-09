@@ -12,6 +12,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import MoreOptions, { List } from './blog/MoreOptions';
 import Image from 'next/image';
 import PublishBlog from './PublishBlog';
+import NotificationIcon from './notification/NotificationIcon';
 
 export const AppHeader = () => {
 
@@ -61,6 +62,7 @@ export const AppHeader = () => {
                         <PublishBlog />
                     )
                 }
+                <NotificationIcon />
                 <MoreOptions 
                     lists={lists} 
                     icon={

@@ -7,11 +7,12 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import LikeButton from './LikeButton';
-import { postComment } from '@/app/actions/comment';
+import { likeComment, postComment, unLikeComment } from '@/app/actions/comment';
 import { useAppDispatch } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '@/app/blog/components/popup/PopUp';
+import CommentArea from './CommentArea';
 
 const MAX_THREAD_LEVEL = 2;
 const PADDING_MULTIPLIER = 20;
@@ -24,6 +25,8 @@ interface Props {
 }
 
 const BlogComment = ({ profileId, comment, threadLevel, isLastComment = false }: Props) => {
+
+    console.log(comment);
 
     const [ showReplies, setShowReplies ] = useState<boolean>(false);
     const [ showCommentInput, setShowCommentInput ] = useState<boolean>(false);
@@ -40,6 +43,24 @@ const BlogComment = ({ profileId, comment, threadLevel, isLastComment = false }:
         }
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
         setShowCommentInput(false);
+    }
+
+    const onLike = async () => {
+        const response = await likeComment(profileId, comment.blogId, comment.id);
+        handleResponse(response);
+    }
+
+    const onRemoveLike = async () => {
+        const response = await unLikeComment(profileId, comment.blogId, comment.id);
+        handleResponse(response);
+    }
+
+    const handleResponse = (response: any) => {
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
     }
 
     return (
@@ -63,10 +84,10 @@ const BlogComment = ({ profileId, comment, threadLevel, isLastComment = false }:
                 </div>
                 <div className={`${styles.commentFooter} x-axis-flex`}>
                     <LikeButton 
-                        isLiked={false} 
-                        likesCount={0} 
-                        onRemoveLike={() => {}} 
-                        onLiked={() => {}}
+                        isLiked={comment.currentUserLikedComment} 
+                        likesCount={comment.commentLikesCount} 
+                        onRemoveLike={onRemoveLike} 
+                        onLiked={onLike}
                     />
                     {
                         !isMaximumDepthLevel && (
@@ -147,33 +168,6 @@ const BlogReplies = (
         <>
             { commentsElem }
         </>
-    )
-}
-
-const CommentArea = ({ onClose, onComment }: { onClose: () => void, onComment: (comment: string) => void }) => {
-
-    const [ comment, setComment ] = useState<string>("");
-    const handleOnComment = () => {
-        onComment(comment);
-    }
-
-    return (
-        <div className={`${styles.commentArea} y-axis-flex`}>
-            <textarea
-                value={comment}
-                onChange={e => setComment(e.target.value)}
-            ></textarea>
-            <div className={`${styles.commentAreaButtonsContainer} x-axis-flex`}>
-                <button 
-                    className={`button`}
-                    onClick={e => onClose()}
-                >Cancel</button>
-                <button 
-                    className={`${styles.commentButton} button`}
-                    onClick={handleOnComment}
-                >Comment</button>
-            </div>
-        </div>
     )
 }
 

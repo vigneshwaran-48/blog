@@ -1,11 +1,26 @@
 
+export type Notification = {
+    id: number,
+    userId: string,
+    message: string,
+    senderId: string,
+    senderName: string,
+    senderImage: string,
+    time: string,
+    seen: boolean,
+    senderType: "USER" | "ORGANIZATION",
+    organizationId?: number
+}
+
 export type Comment = {
     id: number,
     blogId: number,
     commentBy: UserMeta,
     parentComment: Comment,
     threads: Comment[],
-    content: string
+    content: string,
+    currentUserLikedComment: boolean,
+    commentLikesCount: number
 }
 
 export type BlogLike = {

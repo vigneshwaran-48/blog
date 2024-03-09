@@ -40,7 +40,7 @@ const page = async ({ params: { id, profileId } }: Props) => {
                 <h1>{ blog.title }</h1>
                 <p dangerouslySetInnerHTML={ { __html: blog.content } } />
             </div>
-            <BlogCommentsSection profileId={profileId} comments={comments} />
+            <BlogCommentsSection blogId={id} profileId={profileId} comments={comments} />
         </div>
     )
 }

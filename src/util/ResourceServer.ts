@@ -69,3 +69,16 @@ export const getProfileResourceRoutes = () => {
     }
     return routes;
 }
+
+export const getNotificationResourceRoutes = () => {
+    const serverBase = getServerBase();
+
+    const routes : APIRoutes = {
+        get: `${serverBase}/api/v1/notification`,
+        getOne: (id: string | number) => `${serverBase}/api/v1/notification/${id}`,
+        create: `${serverBase}/api/v1/notification`,
+        put: `${serverBase}/api/v1/notification`,
+        delete: (id: string | number) => `${serverBase}/api/v1/notification/${id}`
+    }
+    return routes;
+}

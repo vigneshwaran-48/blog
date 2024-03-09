@@ -1,0 +1,118 @@
+
+.notificationIconContainer {
+    position: relative;
+    margin: 0px 10px;
+}
+
+.notificationIconContainer > svg {
+    cursor: pointer;
+}
+
+.containerWrapper {
+    position: absolute;
+    top: 200%;
+    right: -50px;
+    width: 300px;
+    height: 0px;
+    transition: 0.5s;
+    overflow: hidden;
+    border-radius: 7px;
+    z-index: 10;
+}
+.notificationContainer {
+    background-color: var(--app-background-color);
+    border-radius: 7px;
+    padding: 10px;
+    border: 1px solid var(--app-light-background-color);
+}
+
+.notificationContainerHeader {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notificationContainerHeader > p, .notificationContainerHeader > h2 {
+    flex-shrink: 0;
+}
+
+.notificationContainerHeader > p {
+    color: var(--app-selected-background-color);
+    cursor: pointer;
+}
+
+.notificationContainerHeader > p:hover {
+    text-decoration: underline;
+}
+
+
+.notificationIconContainer:focus-within .containerWrapper {
+    height: 300px;
+}
+
+.notifications {
+    overflow-y: scroll;
+    padding: 10px 0px;
+    height: calc(100% - 30px);
+}
+
+.notification {
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    transition: 0.5s;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.notification.hoverable {
+    cursor: pointer;
+}
+
+.notification.hoverable:hover {
+    background-color: var(--app-light-background-color);
+}
+
+.notification > img {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    margin-right: 5px;
+}
+
+.notification > .middle > b > p {
+    font-size: 18px;
+}
+
+.notification > .middle > p {
+    font-size: 16px;
+    color: var(--app-light-text-color);
+}
+
+.timeAndSeenStatus {
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+.unseenIndicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+.unSeenColor {
+    background-color: var(--app-selected-background-color);
+}
+
+@media screen and (max-width: 500px) {
+    .notificationContainerHeader > h2 {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    
+    .containerWrapper {
+        width: 250px;
+    }
+
+}
