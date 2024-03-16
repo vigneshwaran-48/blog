@@ -26,8 +26,6 @@ interface Props {
 
 const BlogComment = ({ profileId, comment, threadLevel, isLastComment = false }: Props) => {
 
-    console.log(comment);
-
     const [ showReplies, setShowReplies ] = useState<boolean>(false);
     const [ showCommentInput, setShowCommentInput ] = useState<boolean>(false);
     const dispatch = useAppDispatch();
