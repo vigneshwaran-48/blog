@@ -21,8 +21,6 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
 const BlogComposePage = async ({ params: { id } }: Props) => {
 
     const blog: Blog = await getBlog(id);
-
-    console.log(blog);
     
     return (
         <BlogComposeComp blog={blog} />

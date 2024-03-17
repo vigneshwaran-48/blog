@@ -44,6 +44,8 @@ const composeSlice = createSlice({
             state.image = defaultImage;
             state.isEdit = false;
             state.isSaving = false;
+            state.publised = false;
+            state.publishedAt = null;
         },
         setBlog: (state, action: PayloadAction<Blog>) => {
             state.content = action.payload.content;
