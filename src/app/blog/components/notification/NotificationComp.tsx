@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 interface Props {
     notification: Notification, 
-    onMarkAsSeen: (id: number) => void
+    onMarkAsSeen: (id: string) => void
 }
 
 const NotificationComp = ({ notification, onMarkAsSeen }: Props) => {
@@ -15,8 +15,6 @@ const NotificationComp = ({ notification, onMarkAsSeen }: Props) => {
             onMarkAsSeen(notification.id);
         }
     }
-
-    console.log(notification);
 
     return (
         <div 

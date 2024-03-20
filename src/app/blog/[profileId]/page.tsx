@@ -48,7 +48,7 @@ const page = async ({ params: { profileId } }: Props) => {
         user = await getUser(profile.entityId);
     }
     else {
-        organization = await getOrganization(Number.parseInt(profile.entityId));
+        organization = await getOrganization(profile.entityId);
     }
 
     const isFollowing = followers.findIndex((follower: UserMeta) => follower.profileId === userProfile.profileId) >= 0;

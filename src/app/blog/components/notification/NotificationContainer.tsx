@@ -22,11 +22,10 @@ const NotificationContainer = () => {
 
     const fetchAndSetNotifications = async () => {
         const notifs: Notification[] = await getNotificationsOfUser();
-        console.log(notifs);
         setNotifications(notifs);
     }
 
-    const handleMarkAsSeen = async (id: number) => {
+    const handleMarkAsSeen = async (id: string) => {
         const response = await markNotificationAsSeen(id);
         if(response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
@@ -42,7 +41,7 @@ const NotificationContainer = () => {
         });
     }
 
-    const notificationElems = notifications.map((notification, key) => 
+    const notificationElems = notifications && notifications.map((notification, key) => 
                                                     <NotificationComp 
                                                         key={key} 
                                                         notification={notification} 

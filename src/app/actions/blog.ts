@@ -46,7 +46,7 @@ export const getBlogsOfUser = async () => {
     throw new Error("Error while fetching blog details");
 }
 
-export const deleteBlog = async (id: number) => {
+export const deleteBlog = async (id: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
@@ -60,7 +60,7 @@ export const deleteBlog = async (id: number) => {
     return data;
 }
 
-export const getBlog = async (id: number) => {
+export const getBlog = async (id: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
@@ -102,7 +102,7 @@ export const updateBlog = async (blog: Blog) => {
     return data;
 }
 
-export const getLikesCountOfBlog = async (id: number, profileId: string) => {
+export const getLikesCountOfBlog = async (id: string, profileId: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
@@ -126,7 +126,7 @@ export const getLikesCountOfBlog = async (id: number, profileId: string) => {
     throw new Error("Error while fetching blog");
 }
 
-export const getLikesOfBlog = async (id: number, profileId: string) => {
+export const getLikesOfBlog = async (id: string, profileId: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
@@ -150,7 +150,7 @@ export const getLikesOfBlog = async (id: number, profileId: string) => {
     throw new Error("Error while fetching likes of blog");
 }
 
-export const likeBlog = async (id: number, profileId: string) => {
+export const likeBlog = async (id: string, profileId: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
     const response = await sendRequest({ 
@@ -167,7 +167,7 @@ export const likeBlog = async (id: number, profileId: string) => {
     return data;
 }
 
-export const removeLikeFromBlog = async (id: number, profileId: string) => {
+export const removeLikeFromBlog = async (id: string, profileId: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
     const response = await sendRequest({ 
@@ -184,7 +184,7 @@ export const removeLikeFromBlog = async (id: number, profileId: string) => {
     return data;
 }
 
-export const getBlogOfProfile = async (blogId: number, profileId: string) => {
+export const getBlogOfProfile = async (blogId: string, profileId: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
@@ -232,7 +232,7 @@ export const getAllBlogsOfProfile = async (profileId: string) => {
     throw new Error("Error while fetching blogs of profile");
 }
 
-export const publishBlog = async (id: number, publishAtProfileId: string) => {
+export const publishBlog = async (id: string, publishAtProfileId: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
@@ -249,7 +249,7 @@ export const publishBlog = async (id: number, publishAtProfileId: string) => {
     return data;
 }
 
-export const unPublishBlog = async (id: number) => {
+export const unPublishBlog = async (id: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 

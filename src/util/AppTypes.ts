@@ -1,6 +1,6 @@
 
 export type Notification = {
-    id: number,
+    id: string,
     userId: string,
     message: string,
     senderId: string,
@@ -13,7 +13,7 @@ export type Notification = {
 }
 
 export type Comment = {
-    id: number,
+    id: string,
     blogId: number,
     commentBy: UserMeta,
     parentComment: Comment,
@@ -24,12 +24,13 @@ export type Comment = {
 }
 
 export type BlogLike = {
-    id: number,
+    id: string,
     blog: Blog,
     user: UserMeta
 }
 
 export type Profile = {
+    id: string,
     profileId: string,
     name: string,
     description: string,
@@ -54,7 +55,7 @@ export type Blog = {
     categories?: BlogCategory[],
     description?: string,
     displayPostedDate?: string,
-    id?: number,
+    id?: string,
     email?: string,
     publishedAt?: ProfileId,
     publised?: boolean
@@ -73,7 +74,7 @@ export type BlogCategory = string;
 
 export type Organization = {
     name?: string,
-    id?: number,
+    id?: string,
     description?: string,
     owner?: UserMeta,
     createdTime?: number,

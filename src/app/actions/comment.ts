@@ -6,7 +6,7 @@ import { getBlogResourceRoutes } from "@/util/ResourceServer";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const getCommentsOfBlog = async (id: number) => {
+export const getCommentsOfBlog = async (id: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
@@ -20,7 +20,7 @@ export const getCommentsOfBlog = async (id: number) => {
     return data.comments;
 }
 
-export const postComment = async (profileId: string, blogId: number, content: string, parentCommentId: number | null) => {
+export const postComment = async (profileId: string, blogId: string, content: string, parentCommentId: string | null) => {
     const routes: APIRoutes = getBlogResourceRoutes();
     const body = { content, parentCommentId };
 
@@ -41,7 +41,7 @@ export const postComment = async (profileId: string, blogId: number, content: st
     return data;
 }
 
-export const likeComment = async (profileId: string, blogId: number, id: number) => {
+export const likeComment = async (profileId: string, blogId: string, id: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
     const response = await sendRequest({ 
@@ -59,7 +59,7 @@ export const likeComment = async (profileId: string, blogId: number, id: number)
     return data;
 }
 
-export const unLikeComment = async (profileId: string, blogId: number, id: number) => {
+export const unLikeComment = async (profileId: string, blogId: string, id: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
     const response = await sendRequest({ 
