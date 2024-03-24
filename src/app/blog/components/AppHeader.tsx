@@ -43,7 +43,7 @@ export const AppHeader = () => {
     return (
         <header className={`${styles.appHeader} full-width x-axis-flex`}>
             <div className={`${styles.appOrHamburgerMenu}`}>
-                <h1>Blog App</h1>
+                <h1 className={`text-3xl font-bold`}>Blog App</h1>
                 <FontAwesomeIcon onClick={handleNavbarToggle} icon={faBars} />
             </div>
             <div className={`${styles.rightBar} x-axis-flex`}>
