@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import Checkbox from '../../components/form/Checkbox'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { Filter, Filters, setFilters, toggleFilter } from '@/lib/features/search/searchSlice';
-import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
+import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
 
@@ -12,6 +12,8 @@ const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
     const searchFilters: Filters = useAppSelector(state => state.searchSlice.filters);
 
     const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
         handleUrlParams(searchParams);
@@ -24,22 +26,41 @@ const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
                             id={filter.id} 
                             name={filter.name} 
                             checked={filter.checked}
-                            onChange={e => dispatch(toggleFilter(filter.id))}
+                            onChange={e => handleFilterChange(filter)}
                         />
                     </div>
                 );
     }
 
+    const handleFilterChange = (filter: Filter) => {
+        let value = null;
+        if(!filter.checked) {
+            // If it is false then it will be toggled to true. So, considering it as a applied filter.
+            if (searchParams.has(filter.type)) {
+                value = `${searchParams.get(filter.type)},${filter.id}`;
+            } else {
+                value = filter.id;
+            }
+        } else {
+            if (searchParams.has(filter.type)) {
+                const splitted = searchParams.get(filter.type)?.split(",").filter(splValue => splValue !== filter.id) || [];
+                value = splitted?.join(",");
+            }
+        }
+        const params = new URLSearchParams(searchParams.toString());
+        if (!value) {
+            params.delete(filter.type);
+        } else {
+            params.set(filter.type, value);
+        }
+        router.push(`${pathname}?${params.toString()}`)
+    }
+
     const handleUrlParams = (params: ReadonlyURLSearchParams) => {
         let splitted = [];
         splitted = params.has("type") ? params.get("type")?.split(",") || [] : [];
-
         const searchBy = params.has("searchBy") ? params.get("searchBy")?.split(",") || [] : [];
-
-        console.log(searchBy)
-
         splitted = searchBy && splitted.concat(searchBy);
-        console.log(splitted);
                 
         const filters: Filter[] = [];
         splitted && splitted.forEach(value => {
@@ -53,7 +74,6 @@ const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
             newFilter.checked = true;
             filters.push(newFilter);
         });
-        // console.log(filters);
         dispatch(setFilters(filters));
     }
 

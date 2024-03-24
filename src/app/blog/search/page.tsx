@@ -12,6 +12,8 @@ interface Props {
 }
 
 const SearchPage = ({ searchParams }: Props) => {
+
+    console.log(searchParams);
     
     return (
         <SearchPageComp />

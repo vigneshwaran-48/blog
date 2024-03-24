@@ -12,7 +12,8 @@ export type Filters = {
 export type Filter = {
     id: string,
     name: string,
-    checked: boolean
+    checked: boolean,
+    type: "type" | "searchBy"
 }
 
 const initialState: Search = {
@@ -21,44 +22,52 @@ const initialState: Search = {
             {
                 id: "USER",
                 name: "User",
-                checked: false
+                checked: false,
+                type: "type"
             },
             {
                 id: "ORGANIZATION",
                 name: "Organization",
-                checked: false
+                checked: false,
+                type: "type"
             },
             {
                 id: "BLOG",
                 name: "Blog",
-                checked: false
+                checked: false,
+                type: "type"
             }
         ],
         searchBy: [
             {
                 id: "USER_NAME",
                 name: "User Name",
-                checked: false
+                checked: false,
+                type: "searchBy"
             },
             {
                 id: "ORGANIZATION_NAME",
                 name: "Organization Name",
-                checked: false
+                checked: false,
+                type: "searchBy"
             },
             {
                 id: "BLOG_TITLE",
                 name: "Blog Title",
-                checked: false
+                checked: false,
+                type: "searchBy"
             },
             {
                 id: "BLOG_CONTENT",
                 name: "Blog Content",
-                checked: false
+                checked: false,
+                type: "searchBy"
             },
             {
                 id: "PROFILE_ID",
                 name: "Profile Id",
-                checked: false
+                checked: false,
+                type: "searchBy"
             }
         ]
     }
