@@ -22,10 +22,9 @@ const SearchPageComp = () => {
                     />
                     <SearchBar />
                 </div>
-                <ResultComp />
-                <ResultComp />
-                <ResultComp />
-                <ResultComp />
+                <ResultComp name="Vigneshwaran" image="/person.jpg" type="USER" />
+                <ResultComp name="Java Community" image="/person.jpg" type="ORGANIZATION" />
+                <ResultComp name="Vigneshwaran" image="/person.jpg" type="USER" />
             </div>
         </div>
     )

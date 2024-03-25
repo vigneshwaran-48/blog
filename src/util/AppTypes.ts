@@ -1,4 +1,18 @@
 
+export type SearchResult = {
+    entities: SearchEntity[]
+}
+
+export type SearchEntity = {
+    type: SearchType,
+    id: string,
+    profileId: string
+}
+
+export type SearchType = "USER" | "ORGANIZATION" | "BLOG";
+
+export type SearchBy = "USER_NAME" | "BLOG_TITLE" | "BLOG_CONTENT" | "ORGANIZATION_NAME" | "PROFILE_ID" | "ALL";
+
 export type Notification = {
     id: string,
     userId: string,
