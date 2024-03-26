@@ -6,7 +6,9 @@ export type SearchResult = {
 export type SearchEntity = {
     type: SearchType,
     id: string,
-    profileId: string
+    profileId: string,
+    image: string,
+    name: string
 }
 
 export type SearchType = "USER" | "ORGANIZATION" | "BLOG";

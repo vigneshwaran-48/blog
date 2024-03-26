@@ -5,9 +5,8 @@ import FilterSection from './FilterSection';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { SearchBar } from '../../components/blog/SearchBar';
-import ResultComp from './ResultComp';
 
-const SearchPageComp = () => {
+const SearchPageComp = ({ results }: { results?:  React.JSX.Element[] }) => {
     const [ isFilterOpen, setIsFilterOpen ] = useState<boolean>(false);
 
     return (
@@ -22,9 +21,9 @@ const SearchPageComp = () => {
                     />
                     <SearchBar />
                 </div>
-                <ResultComp name="Vigneshwaran" image="/person.jpg" type="USER" />
-                <ResultComp name="Java Community" image="/person.jpg" type="ORGANIZATION" />
-                <ResultComp name="Vigneshwaran" image="/person.jpg" type="USER" />
+                <div className="flex-1 overflow-scroll">
+                    { results }
+                </div>
             </div>
         </div>
     )
