@@ -1,7 +1,8 @@
-import { PayloadAction, createReducer, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 export interface Search {
-    filters: Filters
+    filters: Filters,
+    query: string
 }
 
 export type Filters = {
@@ -70,7 +71,8 @@ const initialState: Search = {
                 type: "searchBy"
             }
         ]
-    }
+    },
+    query: ""
 }
 
 const searchSlice = createSlice({
@@ -110,9 +112,12 @@ const searchSlice = createSlice({
                 }
                 return filter;
             });
+        },
+        setQuery: (state, action: PayloadAction<string>) => {
+            state.query = action.payload;
         }
     }
 });
 
-export const { toggleFilter, setFilters } = searchSlice.actions;
+export const { toggleFilter, setFilters, setQuery } = searchSlice.actions;
 export default searchSlice.reducer;

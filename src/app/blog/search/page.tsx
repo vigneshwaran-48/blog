@@ -4,6 +4,7 @@ import SearchPageComp from './components/SearchPageComp';
 import { SearchResult } from '@/util/AppTypes';
 import { search } from '@/app/actions/search';
 import ResultComp from './components/ResultComp';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
     title: "Search",
@@ -16,10 +17,15 @@ interface Props {
 
 const SearchPage = async ({ searchParams = {} }: Props) => {
 
-    const type = searchParams["type"] || "";
+    let type = searchParams["type"] || "";
     const searchBy = searchParams["searchBy"] || "";
+    const query = searchParams["query"] as string || "";
 
-    const results: SearchResult = await search("", typeof(type) === "string" ? type : type?.join(","),
+    if (type === "") {
+        type = "ALL";
+    }
+
+    const results: SearchResult = await search(query, typeof(type) === "string" ? type : type?.join(","),
                                                typeof(searchBy) === "string" ? searchBy : searchBy?.join(","));
 
     console.log(results);
@@ -30,6 +36,7 @@ const SearchPage = async ({ searchParams = {} }: Props) => {
                                                                 entityId={result.id} 
                                                                 name={result.name} 
                                                                 image={result.image} 
+                                                                profileId={result.profileId}
                                                                 type={result.type} />);
     
     return (

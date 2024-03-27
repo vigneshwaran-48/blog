@@ -5,23 +5,40 @@ import FilterSection from './FilterSection';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { SearchBar } from '../../components/blog/SearchBar';
+import { useAppDispatch } from '@/lib/hooks';
+import { setQuery } from '@/lib/features/search/searchSlice';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const SearchPageComp = ({ results }: { results?:  React.JSX.Element[] }) => {
+
     const [ isFilterOpen, setIsFilterOpen ] = useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const onSearch = (query: string) => {
+        dispatch(setQuery(query));
+        const params = new URLSearchParams(searchParams);
+        params.set("query", query);
+        router.push(`${pathname}?${params.toString()}`);
+    }
 
     return (
         <div className="flex w-full justify-around p-4 relative">
             <FilterSection isOpen={isFilterOpen} />
             <div className="flex-1 w-full sm:w-3/4">
-                <div className="flex items-center p-2 sm:hidden">
+                <div className="flex h-1/6 items-center p-2 sm:hidden">
                     <FontAwesomeIcon 
                         icon={faFilter} 
                         className="mr-2 text-lg cursor-pointer"
                         onClick={e => setIsFilterOpen(prev => !prev)}
                     />
-                    <SearchBar />
+                    <SearchBar 
+                        onSearch={onSearch} />
                 </div>
-                <div className="flex-1 overflow-scroll">
+                <div className="flex-1 h-5/6 overflow-scroll hide-scrollbar sm:h-full">
                     { results }
                 </div>
             </div>

@@ -6,13 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { AppFields } from '@/util/AppFields';
 import { UserMeta } from '@/util/AppTypes';
-import { useAppSelector } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import MoreOptions, { List } from './blog/MoreOptions';
 import Image from 'next/image';
 import PublishBlog from './PublishBlog';
 import NotificationIcon from './notification/NotificationIcon';
+import { SearchBar } from './blog/SearchBar';
+import { setQuery } from '@/lib/features/search/searchSlice';
 
 export const AppHeader = () => {
 
@@ -20,6 +22,15 @@ export const AppHeader = () => {
 
     const pathname = usePathname();
     const router = useRouter();
+    const dispatch = useAppDispatch();
+    const searchParams = useSearchParams();
+
+    const onSearch = (query: string) => {
+        dispatch(setQuery(query));
+        const params = new URLSearchParams(searchParams);
+        params.set("query", query);
+        router.push(`${pathname}?${params.toString()}`);
+    }
 
     const handleNavbarToggle = () => {
         const rootElement = document.querySelector(":root");
@@ -42,9 +53,12 @@ export const AppHeader = () => {
 
     return (
         <header className={`${styles.appHeader} full-width x-axis-flex`}>
-            <div className={`${styles.appOrHamburgerMenu}`}>
-                <h1 className={`text-3xl font-bold`}>Blog App</h1>
+            <div className={`${styles.appOrHamburgerMenu} flex items-center`}>
+                <h1 className={`text-3xl flex-shrink-0 font-bold`}>Blog App</h1>
                 <FontAwesomeIcon onClick={handleNavbarToggle} icon={faBars} />
+                <span className="ml-2 hidden text-xs m-4 sm:block">
+                    <SearchBar shouldExpandOnActive={true} onSearch={onSearch} />
+                </span>
             </div>
             <div className={`${styles.rightBar} x-axis-flex`}>
                 {

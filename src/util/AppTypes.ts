@@ -11,7 +11,7 @@ export type SearchEntity = {
     name: string
 }
 
-export type SearchType = "USER" | "ORGANIZATION" | "BLOG";
+export type SearchType = "USER" | "ORGANIZATION" | "BLOG" | "ALL";
 
 export type SearchBy = "USER_NAME" | "BLOG_TITLE" | "BLOG_CONTENT" | "ORGANIZATION_NAME" | "PROFILE_ID" | "ALL";
 
