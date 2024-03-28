@@ -27,7 +27,7 @@ const SearchPageComp = ({ results }: { results?:  React.JSX.Element[] }) => {
 
     return (
         <div className="flex w-full justify-around p-4 relative">
-            <FilterSection isOpen={isFilterOpen} />
+            <FilterSection isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />
             <div className="flex-1 w-full sm:w-3/4">
                 <div className="flex h-1/6 items-center p-2 sm:hidden">
                     <FontAwesomeIcon 

@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Checkbox from '../../components/form/Checkbox'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { Filter, Filters, setFilters, toggleFilter } from '@/lib/features/search/searchSlice';
 import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
-const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
+const FilterSection = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
 
     const dispatch = useAppDispatch();
     const searchFilters: Filters = useAppSelector(state => state.searchSlice.filters);
@@ -15,9 +17,18 @@ const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
     const router = useRouter();
     const pathname = usePathname();
 
+    const sectionRef = useRef<HTMLElement>(null);
+
     useEffect(() => {
         handleUrlParams(searchParams);
     }, [searchParams]);
+
+    useEffect(() => {
+        document.body.addEventListener("click", focusOutListener);
+        return (() => {
+            document.removeEventListener("click", focusOutListener);
+        });
+    }, []);
 
     const sectionMapper = (filters: Filter[]) => {
         return filters.map((filter, key) => 
@@ -30,6 +41,12 @@ const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
                         />
                     </div>
                 );
+    }
+
+    const focusOutListener = (e: MouseEvent) => {
+        if(sectionRef.current && !sectionRef.current.contains(e.target as Node)) {
+            onClose();
+        }
     }
 
     const handleFilterChange = (filter: Filter) => {
@@ -82,7 +99,13 @@ const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
 
     return (
         <section 
+            ref={sectionRef}
             className={`flex-1 ${isOpen ? "translate-x-0" : "-translate-x-[250%]"} p-2 bg-white left-0 top-0 bottom-0 w-full max-w-48 border-r absolute transition duration-500 sm:relative sm:border-r-0 sm:w-1/4 sm:translate-x-0`}>
+            <FontAwesomeIcon 
+                icon={faX} 
+                className="absolute p-2 right-2 top-2 sm:hidden" 
+                onClick={e => onClose()}
+            />
             <h2 className={`text-3xl w-full p-2 border-b border-[#c2c1c1] h-fit font-semibold`}>Filters</h2>
             <div className={`flex-1 p-3 border-b border-[#c2c1c1]`}>
                 <h2 className={`text-2xl mb-3 font-bold text-gray-500`}>Type</h2>
@@ -94,13 +117,6 @@ const FilterSection = ({ isOpen }: { isOpen: boolean }) => {
             </div>
         </section>
     )
-}
-
-type SectionCheckbox = {
-    name: string,
-    id: string,
-    checked: boolean,
-    onChange: (id: string) => void
 }
 
 export default FilterSection;

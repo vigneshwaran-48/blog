@@ -15,7 +15,7 @@ import { PopupDialogType, PopupModelContextProvider } from '@/app/blog/component
 
 interface Props {
     user: OrganizationUser,
-    organizationId: number,
+    organizationId: string,
     onRemove: (id: string) => void
 }
 
