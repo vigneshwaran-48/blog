@@ -28,7 +28,7 @@ export const OrganizationComp = (props: Props) => {
 
     const { organization, href = "/blog/organization", settingsHref = "/blog/organization" } = props;
 
-    const handleOrganizationDelete = async(id: number) => {
+    const handleOrganizationDelete = async(id: string) => {
         const response = await deleteOrganization(id);
         if(response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), message: response.error, type: PopupType.FAILED }));
@@ -62,7 +62,7 @@ export const OrganizationComp = (props: Props) => {
                 userId === organization?.owner?.id && (
                     <span onClick={e => {
                         e.stopPropagation();
-                        handleOrganizationDelete(organization.id as number);
+                        handleOrganizationDelete(organization.id as string);
                     }}>
                         <FontAwesomeIcon icon={faTrashCan} />
                     </span>

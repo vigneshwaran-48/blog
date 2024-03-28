@@ -14,7 +14,7 @@ import { PopupType } from '@/app/blog/components/popup/PopUp';
 interface Props {
     comments: Comment[],
     profileId: string,
-    blogId: number
+    blogId: string
 }
 
 const BlogCommentsSection = ({ blogId, comments, profileId }: Props) => {

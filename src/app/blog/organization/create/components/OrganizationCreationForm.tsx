@@ -74,7 +74,7 @@ const OrganizationCreationForm = () => {
             setShowUserAddingSection(true);
             return;
         }
-        const response = await addUsersToOrganization(currentOrganization?.id as number, addedUsers.map(user => user.id));
+        const response = await addUsersToOrganization(currentOrganization?.id as string, addedUsers.map(user => user.id));
         if(response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
             return;

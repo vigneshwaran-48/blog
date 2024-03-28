@@ -81,7 +81,7 @@ const BlogComposeComp = ({ blog }: Props) => {
         else {
             if(!blogState.id) return;
             processEditChange({ 
-                id: blogState.id as number, 
+                id: blogState.id, 
                 title, 
                 owner: user, 
                 content, 

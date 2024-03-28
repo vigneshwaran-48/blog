@@ -14,7 +14,7 @@ import { PopupType } from '../popup/PopUp';
 
 interface Props {
     categories: string[],
-    blogId: number,
+    blogId: string,
     postedDate: string
 }
 
@@ -23,7 +23,7 @@ const BlogMetaFooter = ({ blogId, categories, postedDate }: Props) => {
     const router = useRouter();
     const dispatch = useAppDispatch();
 
-    const handleDeleteBlog = async (id: number) => {
+    const handleDeleteBlog = async (id: string) => {
         const response = await deleteBlog(id);
         if(response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error}));

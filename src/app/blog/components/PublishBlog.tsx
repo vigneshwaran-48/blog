@@ -19,7 +19,7 @@ const PublishBlog = () => {
         setIsPublishModalOpen(true);
     }
     const onUnPublishBlog = async () => {
-        const response = await unPublishBlog(id as number);
+        const response = await unPublishBlog(id as string);
         if(response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
             return;

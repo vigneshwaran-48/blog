@@ -25,12 +25,12 @@ export type Notification = {
     time: string,
     seen: boolean,
     senderType: "USER" | "ORGANIZATION",
-    organizationId?: number
+    organizationId?: string
 }
 
 export type Comment = {
     id: string,
-    blogId: number,
+    blogId: string,
     commentBy: UserMeta,
     parentComment: Comment,
     threads: Comment[],

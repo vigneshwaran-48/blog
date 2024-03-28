@@ -5,7 +5,7 @@ import { Organization } from '@/util/AppTypes';
 import { Metadata } from 'next';
 
 interface Props {
-    params: { id: number }
+    params: { id: string }
 }
 
 export async function generateMetadata({ params: { id }}: Props): Promise<Metadata> {

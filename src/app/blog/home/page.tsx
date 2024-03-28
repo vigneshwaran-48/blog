@@ -15,7 +15,7 @@ const BlogHome = async () => {
     }
 
     const content: Blog = {
-        id: 2,
+        id: "2",
         title: "Testing",
         owner: {
             id: "9990",

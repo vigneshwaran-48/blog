@@ -13,7 +13,7 @@ import LikeButton from './LikeButton';
 
 interface Props {
     likes: BlogLike[],
-    blogId: number,
+    blogId: string,
     profileId: string
 }
 

@@ -31,7 +31,7 @@ const PostedBlog = ({ blog }: { blog: Blog }) => {
             <BlogMetaFooter 
                 postedDate={blog.displayPostedDate as string} 
                 categories={blog.categories || []}
-                blogId={blog.id as number}
+                blogId={blog.id as string}
             />
         </article>
     )

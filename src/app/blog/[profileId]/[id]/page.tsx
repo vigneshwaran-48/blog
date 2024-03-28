@@ -9,7 +9,7 @@ import BlogCommentsSection from './components/BlogCommentsSection';
 import { getCommentsOfBlog } from '@/app/actions/comment';
 
 interface Props {
-    params: { id: number, profileId: string }
+    params: { id: string, profileId: string }
 }
 
 export async function generateMetadata({ params: { id, profileId } }: Props): Promise<Metadata> {

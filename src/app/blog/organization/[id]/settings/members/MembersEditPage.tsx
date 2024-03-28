@@ -15,7 +15,7 @@ import { getUniqueId } from '@/util/getUniqueId';
 interface Props {
     users: UserMeta[],
     orgUsers: OrganizationUser[],
-    organizationId: number
+    organizationId: string
 }
 
 const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
