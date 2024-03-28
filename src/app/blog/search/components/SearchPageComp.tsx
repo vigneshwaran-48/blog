@@ -9,7 +9,7 @@ import { useAppDispatch } from '@/lib/hooks';
 import { setQuery } from '@/lib/features/search/searchSlice';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-const SearchPageComp = ({ results }: { results?:  React.JSX.Element[] }) => {
+const SearchPageComp = ({ results }: { results?:  React.JSX.Element[] | React.JSX.Element }) => {
 
     const [ isFilterOpen, setIsFilterOpen ] = useState<boolean>(false);
 
