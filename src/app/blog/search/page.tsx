@@ -4,7 +4,6 @@ import SearchPageComp from './components/SearchPageComp';
 import { SearchResult } from '@/util/AppTypes';
 import { search } from '@/app/actions/search';
 import ResultComp from './components/ResultComp';
-import { redirect } from 'next/navigation';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
@@ -29,8 +28,6 @@ const SearchPage = async ({ searchParams = {} }: Props) => {
     const results: SearchResult = await search(query, typeof(type) === "string" ? type : type?.join(","),
                                                typeof(searchBy) === "string" ? searchBy : searchBy?.join(","));
 
-    console.log(results);
-
     let resultElems;
     if (results && results.entities && results.entities.length > 0) {
         resultElems = results.entities.map((result, key) => <ResultComp 
@@ -41,7 +38,6 @@ const SearchPage = async ({ searchParams = {} }: Props) => {
                                                                 profileId={result.profileId}
                                                                 type={result.type} />);
     } else {
-        console.log("HI")
         resultElems = (
             <div className="flex flex-col justify-center items-center h-full w-full">
                 <Image 

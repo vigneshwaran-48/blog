@@ -265,3 +265,28 @@ export const unPublishBlog = async (id: string) => {
     }
     return data;
 }
+
+export const getFeeds = async () => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({ 
+        url: `${routes.get}/feed`, 
+        method: "GET", 
+        includeBody: false 
+    });
+
+    if(response.ok) {
+        const data = await response.json();
+
+        if(data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.blogs;
+    }
+    else if(response.status === 401) {
+        redirect("/api/auth/signin");
+    }
+    throw new Error("Error while fetching blog feeds of user");
+
+}

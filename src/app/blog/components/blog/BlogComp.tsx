@@ -19,7 +19,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
     });
 
     return (
-        <article className={`${styles.blogMeta} y-axis-flex`}>
+        <article className={`${styles.blogMeta} mb-10 y-axis-flex`}>
             <div className={`${styles.blogMetaHeader} x-axis-flex`}>
                 <Image 
                     src={blog.owner.image as string} 

@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 import styles from "./page.module.css"
 import { BlogComp } from '../components/blog/BlogComp';
+import { getFeeds } from '@/app/actions/blog';
 
 const BlogHome = async () => {
 
@@ -14,24 +15,14 @@ const BlogHome = async () => {
         redirect("/api/auth/signin");
     }
 
-    const content: Blog = {
-        id: "2",
-        title: "Testing",
-        owner: {
-            id: "9990",
-            name: "Vicky",
-            image: "/person.jpg"
-        },
-        content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, culpa!",
-        postedTime: "2nd Jan",
-        image: "/welcome-image.png",
-        categories: ["learning", "teaching", "tech"]
-    }
+    const blogs: Blog[] = await getFeeds();
+
+    const feeds = blogs && blogs.map((blog, key) => <BlogComp key={key} blog={blog} />);
 
     return (
         <div className={`${styles.home} x-axis-flex full-body`}>
-            <section className={`${styles.blogListing} y-axis-flex`}>
-                <BlogComp blog={content} />
+            <section className={`${styles.blogListing} py-10 overflow-scroll hide-scrollbar y-axis-flex`}>
+                { feeds }
             </section>
         </div>
     )
