@@ -111,9 +111,6 @@
 
 @media screen and (max-width: 500px) {
     
-    .blogMeta {
-        height: 150px;
-    }
     .blogContent > div > p {
         display: none;
     }

@@ -15,7 +15,7 @@ const ProfileBlog = ({ blog, profileId }: { blog: Blog, profileId: string }) => 
             onClick={e => router.push(`/blog/${profileId}/${blog.id}`)}
         >
             <img src={blog.image} alt="User Posted Blog" width={100} height={230}  />
-            <h2>{ blog.title }</h2>
+            <h2 className="m-2 text-3xl font-bold">{ blog.title }</h2>
         </div>
     )
 }

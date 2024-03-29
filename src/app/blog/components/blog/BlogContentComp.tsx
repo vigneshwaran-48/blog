@@ -19,8 +19,9 @@ const BlogContentComp = ({ title, description, image }: Props) => {
             <Image 
                 src={ image }
                 alt="Blog's image"
-                width={115}
-                height={115}
+                width={70}
+                height={70}
+                className="w-[70px] h-[70px]"
             />
         </div>
     )

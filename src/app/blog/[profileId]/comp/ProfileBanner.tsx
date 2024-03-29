@@ -59,7 +59,7 @@ const ProfileBanner = ({ profileId, image, name, description, isFollowing }: Pro
                     </button>
                 )
             }
-            <h1>{ name }</h1>
+            <h1 className="text-2xl font-semibold">{ name }</h1>
             <p>{ description }</p>
         </div>
     )

@@ -19,7 +19,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
     });
 
     return (
-        <article className={`${styles.blogMeta} mb-10 y-axis-flex`}>
+        <article className={`${styles.blogMeta} mb-10 h-[170px] y-axis-flex`}>
             <div className={`${styles.blogMetaHeader} x-axis-flex`}>
                 <Image 
                     src={blog.owner.image as string} 
@@ -28,7 +28,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
                     height={24}
                 />
                 <b><p>{ blog.owner.name || "Untitled Blog" }</p></b>
-                <p>{ blog.postedTime }</p>
+                <p>{ blog.displayPostedDate }</p>
             </div>
 
             <BlogContentComp title={blog.title} description={blog.description || ""} image={blog.image} />
