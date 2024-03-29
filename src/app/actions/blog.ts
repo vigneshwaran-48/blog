@@ -271,7 +271,7 @@ export const getFeeds = async () => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
     const response = await sendRequest({ 
-        url: `${routes.get}/feed`, 
+        url: `${routes.get}/feeds`, 
         method: "GET", 
         includeBody: false 
     });

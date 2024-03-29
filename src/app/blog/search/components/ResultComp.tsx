@@ -29,7 +29,7 @@ const ResultComp = ({ name, image, type, profileId, entityId }: Props ) => {
     
     return (
         <Link href={link} className="w-full h-fit">
-            <div className="w-full h-fit flex align-middle p-7">
+            <div className="w-full h-fit border-b rounded transition duration-500 flex align-middle p-7 hover:bg-[var(--app-light-background-color)] sm:border-none)]">
                 <Image 
                     src={image}
                     alt="search result image"
@@ -38,8 +38,8 @@ const ResultComp = ({ name, image, type, profileId, entityId }: Props ) => {
                     className="w-14 mr-2 h-14 rounded-full"
                 />
                 <div>
-                    <p>{ name }</p>
-                    <b><p>{ type }</p></b>
+                    <p className="text-1xl p-1 font-semibold">{ name }</p>
+                    <b><p className="text-xs p-1">{ type }</p></b>
                 </div>
             </div>
         </Link>
