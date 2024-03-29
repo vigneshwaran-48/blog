@@ -21,7 +21,7 @@ const BlogHome = async () => {
 
     return (
         <div className={`${styles.home} x-axis-flex full-body`}>
-            <section className={`${styles.blogListing} py-10 overflow-scroll hide-scrollbar y-axis-flex`}>
+            <section className={`${styles.blogListing} items-center py-10 overflow-scroll hide-scrollbar y-axis-flex`}>
                 { feeds }
             </section>
         </div>
