@@ -266,12 +266,12 @@ export const unPublishBlog = async (id: string) => {
     return data;
 }
 
-export const getFeeds = async () => {
+export const getFeeds = async (page: number) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
     const response = await sendRequest({ 
-        url: `${routes.get}/feeds`, 
+        url: `${routes.get}/feeds?page=${page}`, 
         method: "GET", 
         includeBody: false 
     });

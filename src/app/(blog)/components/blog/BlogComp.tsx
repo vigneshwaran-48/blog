@@ -8,6 +8,8 @@ import BlogContentComp from './BlogContentComp';
 
 export const BlogComp = ({ blog }: { blog: Blog }) => {
 
+    // console.log(blog);
+
     const categories = blog.categories?.map(category => {
         return (
             <div 
