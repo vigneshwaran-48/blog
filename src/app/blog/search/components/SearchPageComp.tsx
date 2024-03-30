@@ -26,7 +26,7 @@ const SearchPageComp = ({ results }: { results?:  React.JSX.Element[] | React.JS
     }
 
     return (
-        <div className="flex w-full justify-around p-4 relative">
+        <div className="flex w-full max-w-[1000px] justify-around p-4 relative sm:pt-[--app-main-page-padding-top]">
             <FilterSection isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />
             <div className="flex-1 w-full sm:w-3/4">
                 <div className="flex h-1/6 items-center p-2 sm:hidden">
