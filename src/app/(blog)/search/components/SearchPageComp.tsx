@@ -5,7 +5,7 @@ import FilterSection from './FilterSection';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { SearchBar } from '../../components/blog/SearchBar';
-import { useAppDispatch } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { setQuery } from '@/lib/features/search/searchSlice';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -17,6 +17,7 @@ const SearchPageComp = ({ results }: { results?:  React.JSX.Element[] | React.JS
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
+    const query = useAppSelector(state => state.searchSlice.query);
 
     const onSearch = (query: string) => {
         dispatch(setQuery(query));
@@ -36,9 +37,9 @@ const SearchPageComp = ({ results }: { results?:  React.JSX.Element[] | React.JS
                         onClick={e => setIsFilterOpen(prev => !prev)}
                     />
                     <SearchBar 
-                        onSearch={onSearch} />
+                        onSearch={onSearch} value={query} />
                 </div>
-                <div className="flex-1 h-5/6 overflow-scroll hide-scrollbar sm:h-full">
+                <div className="flex-col h-5/6 overflow-scroll hide-scrollbar sm:h-full">
                     { results }
                 </div>
             </div>
