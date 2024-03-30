@@ -82,3 +82,16 @@ export const getNotificationResourceRoutes = () => {
     }
     return routes;
 }
+
+export const getSearchResourceRoutes = () => {
+    const serverBase = getServerBase();
+
+    const routes : APIRoutes = {
+        get: `${serverBase}/api/v1/app/search`,
+        getOne: (id: string | number) => ``,
+        create: ``,
+        put: ``,
+        delete: (id: string | number) => ``
+    }
+    return routes;
+}

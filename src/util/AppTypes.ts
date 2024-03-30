@@ -1,6 +1,22 @@
 
+export type SearchResult = {
+    entities: SearchEntity[]
+}
+
+export type SearchEntity = {
+    type: SearchType,
+    id: string,
+    profileId: string,
+    image: string,
+    name: string
+}
+
+export type SearchType = "USER" | "ORGANIZATION" | "BLOG" | "ALL";
+
+export type SearchBy = "USER_NAME" | "BLOG_TITLE" | "BLOG_CONTENT" | "ORGANIZATION_NAME" | "PROFILE_ID" | "ALL";
+
 export type Notification = {
-    id: number,
+    id: string,
     userId: string,
     message: string,
     senderId: string,
@@ -9,12 +25,12 @@ export type Notification = {
     time: string,
     seen: boolean,
     senderType: "USER" | "ORGANIZATION",
-    organizationId?: number
+    organizationId?: string
 }
 
 export type Comment = {
-    id: number,
-    blogId: number,
+    id: string,
+    blogId: string,
     commentBy: UserMeta,
     parentComment: Comment,
     threads: Comment[],
@@ -24,12 +40,13 @@ export type Comment = {
 }
 
 export type BlogLike = {
-    id: number,
+    id: string,
     blog: Blog,
     user: UserMeta
 }
 
 export type Profile = {
+    id: string,
     profileId: string,
     name: string,
     description: string,
@@ -54,7 +71,7 @@ export type Blog = {
     categories?: BlogCategory[],
     description?: string,
     displayPostedDate?: string,
-    id?: number,
+    id?: string,
     email?: string,
     publishedAt?: ProfileId,
     publised?: boolean
@@ -73,7 +90,7 @@ export type BlogCategory = string;
 
 export type Organization = {
     name?: string,
-    id?: number,
+    id?: string,
     description?: string,
     owner?: UserMeta,
     createdTime?: number,

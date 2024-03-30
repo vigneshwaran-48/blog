@@ -40,8 +40,8 @@ export async function createOrganization(organization: Organization) {
 
     const data = await response.json();
     if(response.status === 200 || response.status === 201) {
-        revalidatePath("/blog/organization/list");
-        revalidatePath("/blog/organization/edit");
+        revalidatePath("/organization/list");
+        revalidatePath("/organization/edit");
     }
     else if(response.status === 401) {
         redirect("/api/auth/signin");
@@ -49,7 +49,7 @@ export async function createOrganization(organization: Organization) {
     return data;
 }
 
-export const addUsersToOrganization = async (id: number, users: string[]) => {
+export const addUsersToOrganization = async (id: string, users: string[]) => {
     const routes: APIRoutes = getOrganizationResourceRoutes();
 
     const params = new URLSearchParams();
@@ -65,14 +65,14 @@ export const addUsersToOrganization = async (id: number, users: string[]) => {
 
     const data = await response.json();
     if(response.ok) {
-        revalidatePath(`/blog/organization/edit/${id}/members`, "page");
-        revalidatePath(`/blog/organization/edit`);
-        revalidatePath(`/blog/organization/list`, "page");
+        revalidatePath(`/organization/edit/${id}/members`, "page");
+        revalidatePath(`/organization/edit`);
+        revalidatePath(`/organization/list`, "page");
     }
     return data;
 }
 
-export const getOrganization = async (id: number) => {
+export const getOrganization = async (id: string) => {
 
     const routes: APIRoutes = getOrganizationResourceRoutes();
 
@@ -126,12 +126,12 @@ export const updateOrganization = async (organization: Organization) => {
     const data = await response.json();
 
     if(data.status === 200) {
-        revalidatePath(`/blog/organization/edit`);
+        revalidatePath(`/organization/edit`);
     }
     return data;
 }
 
-export const getUsersOfOrganization = async (id: number) => {
+export const getUsersOfOrganization = async (id: string) => {
 
     const routes: APIRoutes = getOrganizationResourceRoutes();
 
@@ -144,7 +144,7 @@ export const getUsersOfOrganization = async (id: number) => {
     throw new Error(`Error while retrieving users of Organization ${id}`);
 }
 
-export const updateUserRole = async (id: number, userId: string, role: string) => {
+export const updateUserRole = async (id: string, userId: string, role: string) => {
 
     const routes: APIRoutes = getOrganizationResourceRoutes();
 
@@ -156,12 +156,12 @@ export const updateUserRole = async (id: number, userId: string, role: string) =
 
     const data = await response.json();
     if(data.status === 200) {
-        revalidatePath(`/blog/organization/edit/${id}/members`);
+        revalidatePath(`/organization/edit/${id}/members`);
     }
     return data;
 }
 
-export const removeUsersFromOrganization = async (id: number, users: string[]) => {
+export const removeUsersFromOrganization = async (id: string, users: string[]) => {
     const routes: APIRoutes = getOrganizationResourceRoutes();
 
     const params = new URLSearchParams();
@@ -177,14 +177,14 @@ export const removeUsersFromOrganization = async (id: number, users: string[]) =
 
     const data = await response.json();
     if(response.ok) {
-        revalidatePath(`/blog/organization/edit/${id}/members`, "page");
-        revalidatePath(`/blog/organization/edit`);
-        revalidatePath(`/blog/organization/list`);
+        revalidatePath(`/organization/edit/${id}/members`, "page");
+        revalidatePath(`/organization/edit`);
+        revalidatePath(`/organization/list`);
     }
     return data;
 }
 
-export const deleteOrganization = async (id: number) => {
+export const deleteOrganization = async (id: string) => {
 
     const routes: APIRoutes = getOrganizationResourceRoutes();
 
@@ -197,6 +197,6 @@ export const deleteOrganization = async (id: number) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/organization`);
+    revalidatePath(`/organization`);
     return data;
 }

@@ -1,4 +1,4 @@
-import { PopupType } from "@/app/blog/components/popup/PopUp";
+import { PopupType } from "@/app/(blog)/components/popup/PopUp";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Popup {

@@ -18,7 +18,7 @@ export const getNotificationsOfUser = async () => {
     return data.notifications;
 }
 
-export const markNotificationAsSeen = async (id: number) => {
+export const markNotificationAsSeen = async (id: string) => {
 
     const routes: APIRoutes = getNotificationResourceRoutes();
 

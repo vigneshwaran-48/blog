@@ -17,7 +17,7 @@ export const followProfile = async (id: string) => {
     if(data.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/${id}`);
+    revalidatePath(`/${id}`);
     return data;
 }
 
@@ -45,6 +45,6 @@ export const unFollowProfile = async (id: string) => {
     if(data.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/${id}`);
+    revalidatePath(`/${id}`);
     return data;
 }

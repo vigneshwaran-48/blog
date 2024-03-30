@@ -7,7 +7,7 @@ export interface Compose {
     title: string,
     image: string,
     isEdit: boolean,
-    id?: number,
+    id?: string,
     isSaving: boolean,
     publised: boolean,
     publishedAt: ProfileId | null
