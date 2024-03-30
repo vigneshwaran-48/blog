@@ -37,7 +37,7 @@ export const postComment = async (profileId: string, blogId: string, content: st
     if(data.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/${profileId}/${blogId}`);
+    revalidatePath(`/${profileId}/${blogId}`);
     return data;
 }
 
@@ -55,7 +55,7 @@ export const likeComment = async (profileId: string, blogId: string, id: string)
     if(data.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/${profileId}/${blogId}`);
+    revalidatePath(`/${profileId}/${blogId}`);
     return data;
 }
 
@@ -73,6 +73,6 @@ export const unLikeComment = async (profileId: string, blogId: string, id: strin
     if(data.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/${profileId}/${blogId}`);
+    revalidatePath(`/${profileId}/${blogId}`);
     return data;
 }

@@ -67,7 +67,7 @@ export const updateUser = async (user: UserMeta) => {
         redirect("/api/auth/signin");
     }
     const userResponse = data.user;
-    revalidatePath(`/blog/${userResponse.profileId}`)
+    revalidatePath(`/${userResponse.profileId}`)
     return data; 
 }
 

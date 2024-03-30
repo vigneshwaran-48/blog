@@ -40,8 +40,8 @@ export async function createOrganization(organization: Organization) {
 
     const data = await response.json();
     if(response.status === 200 || response.status === 201) {
-        revalidatePath("/blog/organization/list");
-        revalidatePath("/blog/organization/edit");
+        revalidatePath("/organization/list");
+        revalidatePath("/organization/edit");
     }
     else if(response.status === 401) {
         redirect("/api/auth/signin");
@@ -65,9 +65,9 @@ export const addUsersToOrganization = async (id: string, users: string[]) => {
 
     const data = await response.json();
     if(response.ok) {
-        revalidatePath(`/blog/organization/edit/${id}/members`, "page");
-        revalidatePath(`/blog/organization/edit`);
-        revalidatePath(`/blog/organization/list`, "page");
+        revalidatePath(`/organization/edit/${id}/members`, "page");
+        revalidatePath(`/organization/edit`);
+        revalidatePath(`/organization/list`, "page");
     }
     return data;
 }
@@ -126,7 +126,7 @@ export const updateOrganization = async (organization: Organization) => {
     const data = await response.json();
 
     if(data.status === 200) {
-        revalidatePath(`/blog/organization/edit`);
+        revalidatePath(`/organization/edit`);
     }
     return data;
 }
@@ -156,7 +156,7 @@ export const updateUserRole = async (id: string, userId: string, role: string) =
 
     const data = await response.json();
     if(data.status === 200) {
-        revalidatePath(`/blog/organization/edit/${id}/members`);
+        revalidatePath(`/organization/edit/${id}/members`);
     }
     return data;
 }
@@ -177,9 +177,9 @@ export const removeUsersFromOrganization = async (id: string, users: string[]) =
 
     const data = await response.json();
     if(response.ok) {
-        revalidatePath(`/blog/organization/edit/${id}/members`, "page");
-        revalidatePath(`/blog/organization/edit`);
-        revalidatePath(`/blog/organization/list`);
+        revalidatePath(`/organization/edit/${id}/members`, "page");
+        revalidatePath(`/organization/edit`);
+        revalidatePath(`/organization/list`);
     }
     return data;
 }
@@ -197,6 +197,6 @@ export const deleteOrganization = async (id: string) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/organization`);
+    revalidatePath(`/organization`);
     return data;
 }

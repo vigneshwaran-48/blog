@@ -1,8 +1,0 @@
-.home {
-  justify-content: center;
-  padding-top: var(--app-main-page-padding-top);
-}
-.blogListing {
-  max-width: 700px;
-  width: 100%;
-}

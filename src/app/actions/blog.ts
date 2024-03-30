@@ -22,7 +22,7 @@ export const addBlog = async (blog: Blog) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath("/blog/stories");
+    revalidatePath("/stories");
     return data;
 }
 
@@ -56,7 +56,7 @@ export const deleteBlog = async (id: string) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath("/blog/stories");
+    revalidatePath("/stories");
     return data;
 }
 
@@ -97,8 +97,8 @@ export const updateBlog = async (blog: Blog) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/compose/${blog.id}`);
-    revalidatePath("/blog/stories");
+    revalidatePath(`/compose/${blog.id}`);
+    revalidatePath("/stories");
     return data;
 }
 
@@ -163,7 +163,7 @@ export const likeBlog = async (id: string, profileId: string) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/[profileId]/${id}`);
+    revalidatePath(`/[profileId]/${id}`);
     return data;
 }
 
@@ -180,7 +180,7 @@ export const removeLikeFromBlog = async (id: string, profileId: string) => {
     if(response.status === 401) {
         redirect("/api/auth/signin");
     }
-    revalidatePath(`/blog/[profileId]/${id}`);
+    revalidatePath(`/[profileId]/${id}`);
     return data;
 }
 
