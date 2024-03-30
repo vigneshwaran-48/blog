@@ -285,6 +285,7 @@ export const getFeeds = async () => {
         return data.blogs;
     }
     else if(response.status === 401) {
+        console.log("Got 401 response from server, So redirecting!");
         redirect("/api/auth/signin");
     }
     throw new Error("Error while fetching blog feeds of user");

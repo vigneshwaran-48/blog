@@ -12,6 +12,7 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
         })
     ],
+
     callbacks: {
         async signIn({ user, account, profile }) {
 
@@ -63,7 +64,16 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
         async session({ session, token, user }) {
-            session = Object.assign({}, session, {access_token: token?.access_token})
+            const currentDate = new Date();
+            currentDate.setHours(currentDate.getHours() + 1);
+            session = Object.assign(
+                                {}, 
+                                session, 
+                                {
+                                    access_token: token?.access_token,
+                                    expireDate: currentDate
+                                }
+                            )
             return session;
         }
     }
