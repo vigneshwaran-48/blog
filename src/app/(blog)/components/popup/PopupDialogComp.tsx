@@ -23,7 +23,7 @@ const PopupDialogComp = (props: PopupDialogState) => {
     }
 
     return (
-        <div className={`${styles.dialogContainerPage} ${open ? styles.showDialog : ""} full-body x-axis-flex`}>
+        <div className={`${styles.dialogContainerPage} ${open ? styles.showDialog : ""} z-20 full-body x-axis-flex`}>
             <div className={`${styles.background} full-body`}></div>
             <div 
                 className={`${styles.dialogContainer} y-axis-flex`}
