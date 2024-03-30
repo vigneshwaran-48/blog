@@ -3,6 +3,12 @@ import React from 'react'
 import styles from "./page.module.css"
 import { getFeeds } from '@/app/actions/blog';
 import InfiniteBlogScroller from './InfiniteBlogScroller';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Feeds",
+    description: "Blog feeds for the user"
+}
 
 const BlogFeeds = async () => {
 

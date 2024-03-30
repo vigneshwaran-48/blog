@@ -11,7 +11,6 @@ const InfiniteBlogScroller = ({ initialBlogs } : { initialBlogs : Blog[] }) => {
     const [ blogs, setBlogs ] = useState<Blog[]>(initialBlogs);
     const [ page, setPage ] = useState<number>(0);
 
-
     const loaderRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

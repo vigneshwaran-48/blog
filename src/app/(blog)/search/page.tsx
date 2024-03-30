@@ -5,11 +5,15 @@ import { SearchResult } from '@/util/AppTypes';
 import { search } from '@/app/actions/search';
 import ResultComp from './components/ResultComp';
 import Image from 'next/image';
-import { wait } from '@/util/wait';
 
-export const metadata: Metadata = {
-    title: "Search",
-    description: "Search page of blog app"
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+
+    const query = searchParams ? searchParams["query"] as string || "Search" : "Search";
+
+    return {
+        title: `${query}`,
+        description: `${query} results page`
+    }
 }
 
 interface Props {
