@@ -4,7 +4,8 @@ import { getServerBase } from "./ResourceServer";
 
 export const authOptions: NextAuthOptions = {
     session: {
-        strategy: "jwt"
+        strategy: "jwt",
+        maxAge: 3600
     },
     providers: [
         GoogleProvider({
@@ -12,7 +13,6 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
         })
     ],
-
     callbacks: {
         async signIn({ user, account, profile }) {
 
@@ -24,10 +24,8 @@ export const authOptions: NextAuthOptions = {
                 }
             });
             if(userResponse.ok) {
-                console.log("User already exists");
                 return true;
             }
-            console.log("User not exists going to create");
 
             let image = profile?.image;
             if(account?.provider === "google") {
@@ -64,16 +62,7 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
         async session({ session, token, user }) {
-            const currentDate = new Date();
-            currentDate.setHours(currentDate.getHours() + 1);
-            session = Object.assign(
-                                {}, 
-                                session, 
-                                {
-                                    access_token: token?.access_token,
-                                    expireDate: currentDate
-                                }
-                            )
+            session = Object.assign({}, session, {access_token: token?.access_token})
             return session;
         }
     }
