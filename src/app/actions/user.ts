@@ -13,10 +13,10 @@ export const getAllUsers = async () => {
 
     const response = await sendRequest({ url: routes.get, method: "GET", includeBody: false });
 
-    if(response.ok) {
+    if (response.ok) {
         const data = await response.json();
-                        
-        if(data.status !== 200) {
+
+        if (data.status !== 200) {
             throw new Error(data.error);
         }
         return data.users;
@@ -31,10 +31,10 @@ export const getUserProfile = async () => {
 
     const response = await sendRequest({ url: `${routes.get}/profile`, method: "GET", includeBody: false });
 
-    if(response.ok) {
+    if (response.ok) {
         const data = await response.json();
-                                                
-        if(data.status !== 200) {
+
+        if (data.status !== 200) {
             throw new Error(data.error);
         }
         return data.user;
@@ -57,18 +57,18 @@ export const updateUser = async (user: UserMeta) => {
     const response = await sendRequest({
         url: routes.put,
         method: "PATCH",
-        includeBody: true, 
+        includeBody: true,
         body: JSON.stringify(user),
         contentType: "application/json"
     });
 
     const data = await response.json();
-    if(response.status === 401) {
-        redirect("/api/auth/signin");
+    if (response.status === 401) {
+        redirect("/auth/signin");
     }
     const userResponse = data.user;
     revalidatePath(`/${userResponse.profileId}`)
-    return data; 
+    return data;
 }
 
 export const getUser = async (id: string) => {
@@ -77,10 +77,10 @@ export const getUser = async (id: string) => {
 
     const response = await sendRequest({ url: routes.getOne(id), method: "GET", includeBody: false });
 
-    if(response.ok) {
+    if (response.ok) {
         const data = await response.json();
-                                                
-        if(data.status !== 200) {
+
+        if (data.status !== 200) {
             throw new Error(data.error);
         }
         return data.user;

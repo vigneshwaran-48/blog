@@ -11,16 +11,16 @@ export const getProfile = async (id: string) => {
 
     const response = await sendRequest({ url: routes.getOne(id), method: "GET", includeBody: false });
 
-    if(response.ok) {
+    if (response.ok) {
         const data = await response.json();
 
-        if(data.status !== 200) {
+        if (data.status !== 200) {
             throw new Error(data.error);
         }
         return data.profile;
     }
-    else if(response.status === 401) {
-        redirect("/api/auth/signin");
+    else if (response.status === 401) {
+        redirect("/auth/signin");
     }
     throw new Error("Error while fetching profile");
 }
@@ -30,16 +30,16 @@ export const getAllProfiles = async () => {
 
     const response = await sendRequest({ url: routes.get, method: "GET", includeBody: false });
 
-    if(response.ok) {
+    if (response.ok) {
         const data = await response.json();
 
-        if(data.status !== 200) {
+        if (data.status !== 200) {
             throw new Error(data.error);
         }
         return data.profiles;
     }
-    else if(response.status === 401) {
-        redirect("/api/auth/signin");
+    else if (response.status === 401) {
+        redirect("/auth/signin");
     }
     throw new Error("Error while fetching profiles");
 }

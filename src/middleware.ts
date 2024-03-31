@@ -3,17 +3,17 @@ import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
 
-    if (!request.nextUrl.pathname.startsWith("/welcome")) {
+    if (!request.nextUrl.pathname.startsWith("/welcome") && !request.nextUrl.pathname.startsWith("/auth")) {
 
-        const token = await getToken({req: request});
+        const token = await getToken({ req: request });
 
         console.log(token);
 
         if ((!token) && request.nextUrl.pathname === "/") {
-            return NextResponse.redirect(new URL("/welcome", process.env.NEXTAUTH_URL)); 
+            return NextResponse.redirect(new URL("/welcome", process.env.NEXTAUTH_URL));
         }
         if (!token) {
-            return NextResponse.redirect(new URL("/api/auth/signin?callbackUrl=" + request.url, process.env.NEXTAUTH_URL));  
+            return NextResponse.redirect(new URL("/auth/signin?callbackUrl=" + request.url, process.env.NEXTAUTH_URL));
         }
     }
 }

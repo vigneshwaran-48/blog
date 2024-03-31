@@ -7,7 +7,7 @@ interface Props {
     shouldExpandOnActive?: boolean,
     placeHolder?: string,
     onSearch?: (query: string) => void,
-    value: string
+    value?: string
 }
 
 export const SearchBar = (props: Props) => {
@@ -16,13 +16,24 @@ export const SearchBar = (props: Props) => {
 
     return (
         <label htmlFor="search-bar-id" className={`${styles.searchBarLabel}`}>
-            <input 
-                id="search-bar-id" 
-                name="search-bar"
-                placeholder={ placeHolder }
-                onChange={e => onSearch(e.target.value)}
-                value={value}
-            />
+            {
+                value ? 
+                    <input 
+                        id="search-bar-id" 
+                        name="search-bar"
+                        placeholder={ placeHolder }
+                        onChange={e => onSearch(e.target.value)}
+                        value={value}
+                    />
+                    :
+                        <input 
+                            id="search-bar-id" 
+                            name="search-bar"
+                            placeholder={ placeHolder }
+                            onChange={e => onSearch(e.target.value)}
+                        />
+            }
+            
         </label>
     )
 }
