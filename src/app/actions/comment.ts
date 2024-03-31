@@ -11,11 +11,11 @@ export const getCommentsOfBlog = async (id: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
     const response = await sendRequest({ url: `${routes.getOne(id)}/comment`, method: "GET", includeBody: false });
-    
+
     const data = await response.json();
 
-    if(data.status === 401) {
-        redirect("/api/auth/signin");
+    if (data.status === 401) {
+        redirect("/auth/signin");
     }
     return data.comments;
 }
@@ -24,18 +24,18 @@ export const postComment = async (profileId: string, blogId: string, content: st
     const routes: APIRoutes = getBlogResourceRoutes();
     const body = { content, parentCommentId };
 
-    const response = await sendRequest({ 
+    const response = await sendRequest({
         url: `${routes.getOne(blogId)}/comment`,
-        method: "POST", 
+        method: "POST",
         includeBody: true,
         contentType: "application/json",
         body: JSON.stringify(body)
     });
-    
+
     const data = await response.json();
 
-    if(data.status === 401) {
-        redirect("/api/auth/signin");
+    if (data.status === 401) {
+        redirect("/auth/signin");
     }
     revalidatePath(`/${profileId}/${blogId}`);
     return data;
@@ -44,16 +44,16 @@ export const postComment = async (profileId: string, blogId: string, content: st
 export const likeComment = async (profileId: string, blogId: string, id: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ 
-        url: `${routes.getOne(blogId)}/comment/${id}/like`, 
-        method: "POST", 
-        includeBody: false 
+    const response = await sendRequest({
+        url: `${routes.getOne(blogId)}/comment/${id}/like`,
+        method: "POST",
+        includeBody: false
     });
-    
+
     const data = await response.json();
 
-    if(data.status === 401) {
-        redirect("/api/auth/signin");
+    if (data.status === 401) {
+        redirect("/auth/signin");
     }
     revalidatePath(`/${profileId}/${blogId}`);
     return data;
@@ -62,16 +62,16 @@ export const likeComment = async (profileId: string, blogId: string, id: string)
 export const unLikeComment = async (profileId: string, blogId: string, id: string) => {
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ 
-        url: `${routes.getOne(blogId)}/comment/${id}/like`, 
-        method: "DELETE", 
-        includeBody: false 
+    const response = await sendRequest({
+        url: `${routes.getOne(blogId)}/comment/${id}/like`,
+        method: "DELETE",
+        includeBody: false
     });
-    
+
     const data = await response.json();
 
-    if(data.status === 401) {
-        redirect("/api/auth/signin");
+    if (data.status === 401) {
+        redirect("/auth/signin");
     }
     revalidatePath(`/${profileId}/${blogId}`);
     return data;

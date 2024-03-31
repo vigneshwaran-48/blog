@@ -16,15 +16,15 @@ export const search = async (query: string, type: string, searchBy?: string) => 
         params.set("searchBy", searchBy);
     }
     const response = await sendRequest({ url: `${routes.get}?${params.toString()}`, method: "GET", includeBody: false });
-    if(response.ok) {
+    if (response.ok) {
         const data = await response.json();
-        if(data.status !== 200) {
+        if (data.status !== 200) {
             throw new Error(data.error);
         }
         return data.results;
     }
-    else if(response.status === 401) {
-        redirect("/api/auth/signin");
+    else if (response.status === 401) {
+        redirect("/auth/signin");
     }
     throw new Error("Error while searching");
 }

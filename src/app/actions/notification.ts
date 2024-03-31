@@ -12,8 +12,8 @@ export const getNotificationsOfUser = async () => {
     const response = await sendRequest({ url: `${routes.get}`, method: "GET", includeBody: false });
     const data = await response.json();
 
-    if(data.status === 401) {
-        redirect("/api/auth/signin");
+    if (data.status === 401) {
+        redirect("/auth/signin");
     }
     return data.notifications;
 }
@@ -25,8 +25,8 @@ export const markNotificationAsSeen = async (id: string) => {
     const response = await sendRequest({ url: `${routes.getOne(id)}/seen`, method: "POST", includeBody: false });
     const data = await response.json();
 
-    if(data.status === 401) {
-        redirect("/api/auth/signin");
+    if (data.status === 401) {
+        redirect("/auth/signin");
     }
     return data;
 }

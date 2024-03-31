@@ -4,7 +4,8 @@ import { getServerBase } from "./ResourceServer";
 
 export const authOptions: NextAuthOptions = {
     session: {
-        strategy: "jwt"
+        strategy: "jwt",
+        maxAge: 3600
     },
     providers: [
         GoogleProvider({
@@ -12,24 +13,26 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
         })
     ],
+    pages: {
+        signIn: "/auth/signin",
+        error: "/auth/sigin"
+    },
     callbacks: {
         async signIn({ user, account, profile }) {
 
             const id = profile?.sub;
 
-            const userResponse = await fetch(`${getServerBase()}/api/v1/app/user/${id}`,{
+            const userResponse = await fetch(`${getServerBase()}/api/v1/app/user/${id}`, {
                 headers: {
                     "Authorization": `Bearer ${account?.id_token}`
                 }
             });
-            if(userResponse.ok) {
-                console.log("User already exists");
+            if (userResponse.ok) {
                 return true;
             }
-            console.log("User not exists going to create");
 
             let image = profile?.image;
-            if(account?.provider === "google") {
+            if (account?.provider === "google") {
                 image = Object.create(profile as object).picture;
             }
 
@@ -49,7 +52,7 @@ export const authOptions: NextAuthOptions = {
                 body: JSON.stringify(userData)
             });
 
-            if(response.ok) {
+            if (response.ok) {
                 console.log("User created");
                 return true;
             }
@@ -57,13 +60,13 @@ export const authOptions: NextAuthOptions = {
             return false;
         },
         async jwt({ token, account }) {
-            if(account) {
+            if (account) {
                 token.access_token = account.id_token;
             }
             return token;
         },
         async session({ session, token, user }) {
-            session = Object.assign({}, session, {access_token: token?.access_token})
+            session = Object.assign({}, session, { access_token: token?.access_token })
             return session;
         }
     }

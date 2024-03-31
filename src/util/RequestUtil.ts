@@ -20,8 +20,8 @@ export const sendRequest = async (props: Props) => {
 
     const session = await getServerSession(authOptions);
 
-    if(!isAuthenticated(session as Session, false)) {
-        redirect("/api/auth/signin");
+    if (!isAuthenticated(session as Session, false)) {
+        redirect("/auth/signin");
     }
 
     const accessToken = getTokenFromSession(session as Session);
@@ -32,9 +32,9 @@ export const sendRequest = async (props: Props) => {
         "Accept-Language": "en-US"
     }
 
-    if(includeBody) {
+    if (includeBody) {
         options.body = body;
-        if(includeContentType) {
+        if (includeContentType) {
             headers["Content-Type"] = contentType;
         }
     }
@@ -43,8 +43,8 @@ export const sendRequest = async (props: Props) => {
     options.method = method;
 
     const response = await fetch(url, options);
-    if(response.status === 401) {
-        redirect("/api/auth/signin");
+    if (response.status === 401) {
+        redirect("/auth/signin");
     }
 
     return response;
