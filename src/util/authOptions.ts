@@ -20,6 +20,8 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async signIn({ user, account, profile }) {
 
+            console.log("Hello from callback ...");
+
             const id = profile?.sub;
 
             const userResponse = await fetch(`${getServerBase()}/api/v1/app/user/${id}`, {

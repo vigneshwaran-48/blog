@@ -3,6 +3,7 @@
 import { APIRoutes } from "@/util/AppTypes";
 import { sendRequest } from "@/util/RequestUtil";
 import { getProfileResourceRoutes } from "@/util/ResourceServer";
+import { getUniqueId } from "@/util/getUniqueId";
 import { redirect } from "next/navigation";
 
 export const getProfile = async (id: string) => {
@@ -20,8 +21,17 @@ export const getProfile = async (id: string) => {
         return data.profile;
     }
     else if (response.status === 401) {
-        redirect("/auth/signin");
+        return {
+            id: "Guest_" + getUniqueId(),
+            profileId: "Guest_" + getUniqueId(),
+            name: "Guest",
+            description: "",
+            type: "USER",
+            entityId: getUniqueId(),
+            bannerImage: ""
+        }
     }
+    console.log(`Response status => ${response.status}`);
     throw new Error("Error while fetching profile");
 }
 

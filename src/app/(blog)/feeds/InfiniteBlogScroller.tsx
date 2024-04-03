@@ -32,18 +32,12 @@ const InfiniteBlogScroller = ({ initialBlogs } : { initialBlogs : Blog[] }) => {
     }, [page]);
 
     const loadFeeds = async () => {
-        console.log(page)
-        console.log("Next page " + (page + 1));
         const feeds = await getFeeds(page + 1);
         if(feeds && feeds.length > 0) {
             setPage(prevPage => prevPage + 1);
-            console.log(feeds);
             setBlogs(prevBlogs => [...prevBlogs, ...feeds]);
         }
     }
-
-    console.log(`Page ${page}`)
-    console.log(blogs.length);
 
     const content = blogs && blogs.map((blog, key) => <BlogComp key={key} blog={blog} />);
 

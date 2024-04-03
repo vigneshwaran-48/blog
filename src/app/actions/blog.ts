@@ -273,7 +273,8 @@ export const getFeeds = async (page: number) => {
     const response = await sendRequest({
         url: `${routes.get}/feeds?page=${page}`,
         method: "GET",
-        includeBody: false
+        includeBody: false,
+        checkAuthentication: false
     });
 
     if (response.ok) {

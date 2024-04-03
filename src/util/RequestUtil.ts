@@ -11,25 +11,31 @@ interface Props {
     includeBody?: boolean,
     url: string,
     contentType?: string,
-    includeContentType?: boolean
+    includeContentType?: boolean,
+    checkAuthentication?: boolean
 }
 
 export const sendRequest = async (props: Props) => {
 
-    const { url, method = "GET", body, includeBody, contentType = "text/html", includeContentType = true } = props;
+    const { url, method = "GET", body, includeBody, contentType = "text/html", includeContentType = true, checkAuthentication = true } = props;
 
     const session = await getServerSession(authOptions);
 
-    if (!isAuthenticated(session as Session, false)) {
+    if (checkAuthentication && !isAuthenticated(session as Session, false)) {
         redirect("/auth/signin");
     }
 
-    const accessToken = getTokenFromSession(session as Session);
+    const accessToken: string = getTokenFromSession(session as Session);
+
+    const includeAccessToken = accessToken && accessToken.length > 0;
 
     const options: RequestInit = {};
     const headers: any = {
-        "Authorization": `Bearer ${accessToken}`,
         "Accept-Language": "en-US"
+    }
+
+    if (includeAccessToken) {
+        headers["Authorization"] = `Bearer ${accessToken}`;
     }
 
     if (includeBody) {
@@ -43,9 +49,6 @@ export const sendRequest = async (props: Props) => {
     options.method = method;
 
     const response = await fetch(url, options);
-    if (response.status === 401) {
-        redirect("/auth/signin");
-    }
-
+    
     return response;
 }
