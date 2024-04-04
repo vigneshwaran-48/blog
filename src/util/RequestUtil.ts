@@ -21,6 +21,8 @@ export const sendRequest = async (props: Props) => {
 
     const session = await getServerSession(authOptions);
 
+    console.log(`Going to hit request to ${url}`);
+
     if (checkAuthentication && !isAuthenticated(session as Session, false)) {
         redirect("/auth/signin");
     }
@@ -49,6 +51,8 @@ export const sendRequest = async (props: Props) => {
     options.method = method;
 
     const response = await fetch(url, options);
+
+    console.log(`Response status for ${url} is ${response.status}`);
     
     return response;
 }

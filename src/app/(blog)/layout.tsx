@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children : React.ReactNode })
         <html lang="en">
             <body>
                 <Provider store={storeRef.current}>
-                    <SessionProvider>
+                    {/* <SessionProvider> */}
                         <html lang="en">
                             <style jsx global>{`
                                 *{
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children : React.ReactNode })
                                 </PopupModelProvider>
                             </body>
                         </html>
-                    </SessionProvider>
+                    {/* </SessionProvider> */}
                 </Provider>
             </body>
         </html>

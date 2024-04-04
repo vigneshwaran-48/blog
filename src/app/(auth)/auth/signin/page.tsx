@@ -12,6 +12,8 @@ const page = ({ searchParams } : Props) => {
     const error = searchParams ? searchParams["error"] as string : undefined;
     const callbackUrl = searchParams ? searchParams["callbackUrl"] as string : undefined;
 
+    console.log("Signin page");
+
     return <SignupPage error={error} callbackUrl={callbackUrl} />
 }
 

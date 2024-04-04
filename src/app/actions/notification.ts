@@ -9,7 +9,7 @@ export const getNotificationsOfUser = async () => {
 
     const routes: APIRoutes = getNotificationResourceRoutes();
 
-    const response = await sendRequest({ url: `${routes.get}`, method: "GET", includeBody: false });
+    const response = await sendRequest({ url: `${routes.get}`, method: "GET", includeBody: false, checkAuthentication: false });
     const data = await response.json();
 
     if (data.status === 401) {

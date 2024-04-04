@@ -191,7 +191,8 @@ export const getBlogOfProfile = async (blogId: string, profileId: string) => {
     const response = await sendRequest({
         url: `${routes.getOne(blogId)}/profile/${profileId}`,
         method: "GET",
-        includeBody: false
+        includeBody: false,
+        checkAuthentication: false
     });
 
     if (response.ok) {
@@ -201,9 +202,6 @@ export const getBlogOfProfile = async (blogId: string, profileId: string) => {
             throw new Error(data.error);
         }
         return data.blog;
-    }
-    else if (response.status === 401) {
-        redirect("/auth/signin");
     }
     throw new Error("Error while fetching blog of profile");
 }
