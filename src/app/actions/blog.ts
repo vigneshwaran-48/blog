@@ -133,7 +133,8 @@ export const getLikesOfBlog = async (id: string, profileId: string) => {
     const response = await sendRequest({
         url: `${routes.getOne(id)}/like?profileId=${profileId}`,
         method: "GET",
-        includeBody: false
+        includeBody: false,
+        checkAuthentication: false
     });
 
     if (response.ok) {

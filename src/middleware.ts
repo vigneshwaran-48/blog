@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const matchers = ["/organization", "search", "stories", "settings"]
+const matchers = ["organization", "search", "stories", "settings"]
 export async function middleware(request: NextRequest) {
 
     const path = request.nextUrl.pathname;

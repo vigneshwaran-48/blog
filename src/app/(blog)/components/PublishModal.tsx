@@ -55,7 +55,7 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
     const items = profiles.map(profile => ({ id: profile.id + "", displayName: profile.profileId }));
 
     return (
-        <div className={`${styles.publishModal} ${isOpen ? styles.showModal : ""} full-body x-axis-flex`}>
+        <div className={`flex ${styles.publishModal} ${isOpen ? styles.showModal : "hidden"} full-body`}>
             <div 
                 className={`${styles.background} full-body`}
                 onClick={e => onClose()}
