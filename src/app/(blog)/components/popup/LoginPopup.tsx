@@ -17,7 +17,7 @@ const LoginPopup = () => {
         <div className={`fixed w-full h-full z-50 bg-[#000000b3] ${showPopup ? "flex" : "hidden"} justify-center items-center`}>
             <div className='flex max-w-[600px] w-[95%] bg-[--app-background-color] items-center p-2'>
                 <div className="hidden sm:block sm:w-1/3 h-full">
-                    <img src={"/vapps.png"} alt="App icon" className="w-full h-full rounded-xl" />
+                    <img src={"/app-icon.png"} alt="App icon" className="w-full h-full rounded-xl" />
                 </div>
                 <div className="flex flex-col w-full sm:w-2/3 h-full p-4">
                     <ol className="list-disc">

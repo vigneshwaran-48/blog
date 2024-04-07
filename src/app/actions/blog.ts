@@ -282,7 +282,10 @@ export const getFeeds = async (page: number) => {
         if (data.status !== 200) {
             throw new Error(data.error);
         }
-        return data.blogs;
+        return {
+            blogs: data.blogs,
+            nextPageStatus: data.nextPageStatus
+        };
     }
     else if (response.status === 401) {
         console.log("Got 401 response from server, So redirecting!");

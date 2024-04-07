@@ -12,11 +12,13 @@ export const metadata: Metadata = {
 
 const BlogFeeds = async () => {
 
-    const blogs: Blog[] = await getFeeds(0);
+    const data = await getFeeds(0);
+    const blogs: Blog[] = data.blogs;
+    const nextPageStatus: string = data.nextPageStatus;
 
     return (
         <div className={`${styles.feeds} x-axis-flex full-body`}>
-            <InfiniteBlogScroller initialBlogs={blogs} />
+            <InfiniteBlogScroller initialBlogs={blogs} nextPageStatus={nextPageStatus} />
         </div>
     )
 }
