@@ -83,7 +83,9 @@ export type UserMeta = {
     image?: string,
     description?: string
     email?: string,
-    profileId?: string
+    profileId?: string,
+    isLoggedIn?: boolean,
+    showLoginPopup?: boolean
 }
 
 export type BlogCategory = string;

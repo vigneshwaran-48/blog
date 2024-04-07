@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 import { SearchBar } from '../components/blog/SearchBar';
 import { OrganizationComp } from './components/OrganizationComp';
 import Link from 'next/link';
+import { NavLink } from '@/util/NavLink';
 
 interface Props {
     organizations: Organization[]
@@ -31,9 +32,9 @@ const OrganizationListing = ({ organizations }: Props) => {
         <div className={`${styles.main} y-axis-flex full-body`}>
             <div className={`${styles.header} x-axis-flex`}>
                 <SearchBar onSearch={handleOrganizationSearch} />
-                <Link href="/organization/create">
+                <NavLink href="/organization/create">
                     <button className={`button`}>Create</button>
-                </Link>
+                </NavLink>
             </div>
             <div className={`${styles.organizationListingContainer} hide-scrollbar full-width y-axis-flex`}>
                 { organizationElems }

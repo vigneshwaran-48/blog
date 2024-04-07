@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "./noOrganization.module.css";
 import Link from 'next/link';
+import { NavLink } from '@/util/NavLink';
 
 const NoOrganizations = () => {
     return (
@@ -9,9 +10,9 @@ const NoOrganizations = () => {
                 src="/create-join-organization.png"
                 alt="Create or Join a organization"
             />
-            <Link href="/organization/create">
+            <NavLink href="/organization/create">
                 <button className={`button`}>Create Organization</button>
-            </Link>
+            </NavLink>
         </div>
     )
 }

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faMinus } from '@fortawesome/free-solid-svg-icons';
 import BlogContentComp from './BlogContentComp';
 import Link from 'next/link';
+import { NavLink } from '@/util/NavLink';
 
 export const BlogComp = ({ blog }: { blog: Blog }) => {
 
@@ -20,7 +21,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
     });
 
     return (
-        <Link className={`${styles.blogMeta} mb-10 h-[170px]`} href={`/${blog.publishedAt?.profileId}/${blog.id}`}>
+        <NavLink className={`${styles.blogMeta} mb-10 h-[170px]`} href={`/${blog.publishedAt?.profileId}/${blog.id}`}>
             <article className={` y-axis-flex`}>
                 <div className={`${styles.blogMetaHeader} x-axis-flex`}>
                     <Image 
@@ -49,6 +50,6 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
                     </div>
                 </div>
             </article>
-        </Link>
+        </NavLink>
     )
 }

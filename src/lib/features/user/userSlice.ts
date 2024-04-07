@@ -1,12 +1,15 @@
 import { UserMeta } from "@/util/AppTypes";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { stat } from "fs";
 
 export const initialState: UserMeta = {
     name: "Guest",
     image: "/person.jpg",
     id: "test-001",
     email: "guest@guest.com",
-    profileId: "test-001"
+    profileId: "test-001",
+    isLoggedIn: false,
+    showLoginPopup: false
 }
 
 const userSlice = createSlice({
@@ -29,10 +32,14 @@ const userSlice = createSlice({
             state.id = action.payload.id;
             state.email = action.payload.email;
             state.profileId = action.payload.profileId || action.payload.id;
+            state.isLoggedIn = action.payload.isLoggedIn;
+        },
+        setLoginPopup: (state, action: PayloadAction<boolean>) => {
+            state.showLoginPopup = action.payload;
         }
     },
     initialState
 });
 
-export const { setName, setImage, setUser } = userSlice.actions;
+export const { setName, setImage, setUser, setLoginPopup } = userSlice.actions;
 export default userSlice.reducer;
