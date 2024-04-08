@@ -56,7 +56,7 @@ const InfiniteBlogScroller = ({ initialBlogs, nextPageStatus }: { initialBlogs: 
         }
         setShowSpinner(false);
         if (status === "NOT_AVAILABLE") {
-           
+           setNoContentElement(<p>No content available!</p>);
         } else if (status === "SIGNUP") {
             setNoContentElement(
                 <div className="p-2 flex flex-col items-center justify-center w-[98%] max-w-[500px]">

@@ -199,10 +199,11 @@ export const getBlogOfProfile = async (blogId: string, profileId: string) => {
     if (response.ok) {
         const data = await response.json();
 
-        if (data.status !== 200) {
+        console.log(data.status)
+        if (data.status !== 200 && data.status !== 204) {
             throw new Error(data.error);
         }
-        return data.blog;
+        return data;
     }
     throw new Error("Error while fetching blog of profile");
 }

@@ -19,7 +19,6 @@ const LoginStatusChecker = ({ children }: Props) => {
     if (!isLoggedIn && PRIVATE_ROUTES.includes(pathname)) {
         dispatch(setLoginPopup(true));
     } else {
-        console.log("User can view this page!");
         dispatch(setLoginPopup(false));
     }
 

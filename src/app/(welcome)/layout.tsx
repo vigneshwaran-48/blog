@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import '../globals.css';
-
-const inter = Inter({ subsets: ['latin'] })
+import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Blog app description',
+  title: 'Welcome',
+  description: 'Welcome page of the blog application',
 }
 
 export default function RootLayout({
@@ -16,6 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link
+            rel="icon"
+            href="/app-icon.png"
+            type="image/png"
+            sizes="any"
+        />
+      </head>
       <body>{children}</body>
     </html>
   )

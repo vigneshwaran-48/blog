@@ -1,6 +1,5 @@
 import { UserMeta } from "@/util/AppTypes";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { stat } from "fs";
 
 export const initialState: UserMeta = {
     name: "Guest",
