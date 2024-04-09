@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./page.module.css";
-import { NavLink } from '@/util/NavLink';
+import Link from 'next/link';
 
 const WelcomePage = () => {
     return (
@@ -8,9 +8,9 @@ const WelcomePage = () => {
             <div className={`${styles.welcomeMessageContainer} full-width x-axis-flex`}>
                 <div>
                     <h1>The Blog App that you&apos;ll need</h1>
-                    <NavLink href="/feeds">
+                    <Link href="/feeds">
                         <button className={`${styles.getStartedButton} button`}>Get Stared</button>
-                    </NavLink>
+                    </Link>
                 </div>
                 <img src="/welcome-image.png" alt="App Welcome Image" />
             </div>
