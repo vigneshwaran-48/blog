@@ -133,7 +133,8 @@ export const getLikesOfBlog = async (id: string, profileId: string) => {
     const response = await sendRequest({
         url: `${routes.getOne(id)}/like?profileId=${profileId}`,
         method: "GET",
-        includeBody: false
+        includeBody: false,
+        checkAuthentication: false
     });
 
     if (response.ok) {
@@ -191,19 +192,18 @@ export const getBlogOfProfile = async (blogId: string, profileId: string) => {
     const response = await sendRequest({
         url: `${routes.getOne(blogId)}/profile/${profileId}`,
         method: "GET",
-        includeBody: false
+        includeBody: false,
+        checkAuthentication: false
     });
 
     if (response.ok) {
         const data = await response.json();
 
-        if (data.status !== 200) {
+        console.log(data.status)
+        if (data.status !== 200 && data.status !== 204) {
             throw new Error(data.error);
         }
-        return data.blog;
-    }
-    else if (response.status === 401) {
-        redirect("/auth/signin");
+        return data;
     }
     throw new Error("Error while fetching blog of profile");
 }
@@ -273,7 +273,8 @@ export const getFeeds = async (page: number) => {
     const response = await sendRequest({
         url: `${routes.get}/feeds?page=${page}`,
         method: "GET",
-        includeBody: false
+        includeBody: false,
+        checkAuthentication: false
     });
 
     if (response.ok) {
@@ -282,7 +283,10 @@ export const getFeeds = async (page: number) => {
         if (data.status !== 200) {
             throw new Error(data.error);
         }
-        return data.blogs;
+        return {
+            blogs: data.blogs,
+            nextPageStatus: data.nextPageStatus
+        };
     }
     else if (response.status === 401) {
         console.log("Got 401 response from server, So redirecting!");

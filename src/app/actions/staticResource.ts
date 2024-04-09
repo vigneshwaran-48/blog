@@ -12,7 +12,8 @@ export const uploadImage = async(formData: FormData) => {
         method: "POST", 
         includeBody: true, 
         body: formData,
-        includeContentType: false
+        includeContentType: false,
+        checkAuthentication: false
     });
 
     return await response.json();

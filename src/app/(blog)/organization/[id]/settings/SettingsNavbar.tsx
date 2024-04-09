@@ -12,12 +12,12 @@ interface Props {
 const SettingsNavbar = ({ organizationId }: Props) => {
     return (
         <nav className={`${styles.organizationNavbar} x-axis-flex full-width`}>
-            <Link 
+            <NavLink 
                 href={`/organization`}
                 className={`${styles.navLink}`}
             >
                 <FontAwesomeIcon icon={faArrowLeftLong} />
-            </Link>
+            </NavLink>
             <ul className={`x-axis-flex full-width hide-scrollbar`}>
                 <li>
                     <NavLink 

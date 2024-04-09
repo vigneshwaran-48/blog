@@ -29,16 +29,19 @@ export const getUserProfile = async () => {
 
     const routes = getUserResourceRoutes();
 
-    const response = await sendRequest({ url: `${routes.get}/profile`, method: "GET", includeBody: false });
+    const response = await sendRequest({ url: `${routes.get}/profile`, method: "GET", includeBody: false, checkAuthentication: false });
 
     if (response.ok) {
         const data = await response.json();
 
-        if (data.status !== 200) {
-            throw new Error(data.error);
+        if (data.status === 200 || data.status === 401) {
+            const user = data.user;
+            user.isLoggedIn = data.status !== 401;
+            return user;
         }
-        return data.user;
+        throw new Error(data.error);
     }
+    console.log(`Response status => ${response.status}`)
     throw new Error("Error while fetching users details");
 }
 

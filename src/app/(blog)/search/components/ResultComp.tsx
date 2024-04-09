@@ -1,4 +1,5 @@
 import { SearchResult, SearchType } from '@/util/AppTypes';
+import { NavLink } from '@/util/NavLink';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
@@ -28,7 +29,7 @@ const ResultComp = ({ name, image, type, profileId, entityId }: Props ) => {
     }
     
     return (
-        <Link href={link} className="w-full h-fit">
+        <NavLink href={link} className="w-full h-fit">
             <div className="w-full h-fit border-b rounded transition duration-500 flex align-middle p-7 hover:bg-[var(--app-light-background-color)] sm:border-none">
                 <Image 
                     src={image}
@@ -42,7 +43,7 @@ const ResultComp = ({ name, image, type, profileId, entityId }: Props ) => {
                     <b><p className="text-xs p-1">{ type }</p></b>
                 </div>
             </div>
-        </Link>
+        </NavLink>
     )
 }
 

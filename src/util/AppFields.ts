@@ -5,5 +5,13 @@ export const AppFields = {
             onProceed: "popup:onproceed",
             onCancel: "popup:oncancel"
         }
+    },
+    PageStatus: {
+        AVAILABLE: "AVAILABLE",
+        SIGNUP: "SIGNUP",
+        BUY_PREMIUM: "BUY_PREMIUM",
+        NOT_AVAILABLE: "NOT_AVAILABLE"
     }
 }
+
+export const PRIVATE_ROUTES = ["/organization", "/search", "/settings/profile", "/stories", "/settings/customization"];

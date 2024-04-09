@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "./nostories.module.css";
 import Link from 'next/link';
+import { NavLink } from '@/util/NavLink';
 
 const NoStories = () => {
     return (
@@ -11,9 +12,9 @@ const NoStories = () => {
                 height={50}
                 alt="Create a Story"
             />
-            <Link href="/compose">
+            <NavLink href="/compose">
                 <button className={`button`}>Create Story</button>
-            </Link>
+            </NavLink>
         </div>
     )
 }

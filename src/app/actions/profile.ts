@@ -1,8 +1,9 @@
 "use server";
 
-import { APIRoutes } from "@/util/AppTypes";
+import { APIRoutes, UserMeta } from "@/util/AppTypes";
 import { sendRequest } from "@/util/RequestUtil";
 import { getProfileResourceRoutes } from "@/util/ResourceServer";
+import { getUniqueId } from "@/util/getUniqueId";
 import { redirect } from "next/navigation";
 
 export const getProfile = async (id: string) => {
@@ -17,11 +18,23 @@ export const getProfile = async (id: string) => {
         if (data.status !== 200) {
             throw new Error(data.error);
         }
-        return data.profile;
+        const profile = data.profile;
+        profile.isLoggedIn = true;
+        return profile;
     }
     else if (response.status === 401) {
-        redirect("/auth/signin");
+        return {
+            id: "Guest_" + getUniqueId(),
+            profileId: "Guest_" + getUniqueId(),
+            name: "Guest",
+            description: "",
+            type: "USER",
+            entityId: getUniqueId(),
+            bannerImage: "",
+            isLoggedIn: false
+        } as UserMeta
     }
+    console.log(`Response status => ${response.status}`);
     throw new Error("Error while fetching profile");
 }
 

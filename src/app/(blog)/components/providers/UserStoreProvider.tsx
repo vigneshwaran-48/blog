@@ -19,6 +19,7 @@ const UserStoreProvider = ({ children }: Props) => {
 
     const setUserInStore = async () => {
         const user = await getUserProfile();
+        console.log("Got user ...");
         dispatch(setUser(user));
     }
 

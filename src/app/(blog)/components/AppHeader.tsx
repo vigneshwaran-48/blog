@@ -7,7 +7,6 @@ import { faBars, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { AppFields } from '@/util/AppFields';
 import { UserMeta } from '@/util/AppTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import MoreOptions, { List } from './blog/MoreOptions';
 import Image from 'next/image';
@@ -15,6 +14,7 @@ import PublishBlog from './PublishBlog';
 import NotificationIcon from './notification/NotificationIcon';
 import { SearchBar } from './blog/SearchBar';
 import { setQuery } from '@/lib/features/search/searchSlice';
+import { NavLink } from '@/util/NavLink';
 
 export const AppHeader = () => {
 
@@ -64,13 +64,13 @@ export const AppHeader = () => {
                 {
                     !pathname.startsWith("/compose")
                     ? (
-                        <Link 
+                        <NavLink 
                             href="/compose" 
                             className={`${styles.composeIcon} x-axis-flex`}
                         >
                             <FontAwesomeIcon icon={faPenToSquare} />
                             <p>Create</p>
-                        </Link>
+                        </NavLink>
                     )
                     : (
                         <PublishBlog />

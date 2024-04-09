@@ -1,4 +1,12 @@
 
+export type BlogFeedResponse = {
+    message: string,
+    status: number,
+    time: string,
+    blogStatus: PageStatus,
+    feed: BlogFeed
+}
+
 export type SearchResult = {
     entities: SearchEntity[]
 }
@@ -10,6 +18,8 @@ export type SearchEntity = {
     image: string,
     name: string
 }
+
+export type PageStatus = "AVAILABLE" | "NOT_AVAILABLE" | "SIGNUP" | "BUY_PREMIUM";
 
 export type SearchType = "USER" | "ORGANIZATION" | "BLOG" | "ALL";
 
@@ -62,6 +72,12 @@ export type ProfileId = {
     type: "USER" | "ORGANIZATION"
 }
 
+export type BlogFeed = {
+    blog: Blog,
+    comments: Comment[],
+    likesOfBlog: BlogLike[]
+}
+
 export type Blog = {
     owner: UserMeta,
     title: string,
@@ -83,7 +99,9 @@ export type UserMeta = {
     image?: string,
     description?: string
     email?: string,
-    profileId?: string
+    profileId?: string,
+    isLoggedIn?: boolean,
+    showLoginPopup?: boolean
 }
 
 export type BlogCategory = string;

@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
+const matchers = ["organization", "search", "stories", "settings"]
 export async function middleware(request: NextRequest) {
 
-    if (!request.nextUrl.pathname.startsWith("/welcome") && !request.nextUrl.pathname.startsWith("/auth")) {
+    const path = request.nextUrl.pathname;
+    if (matchers.includes(path)) {
 
+        console.log(request.nextUrl.pathname);
         const token = await getToken({ req: request });
-
-        console.log(token);
 
         if ((!token) && request.nextUrl.pathname === "/") {
             return NextResponse.redirect(new URL("/welcome", process.env.NEXTAUTH_URL));

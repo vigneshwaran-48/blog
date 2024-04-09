@@ -8,7 +8,7 @@ import CommentArea from './CommentArea';
 import { postComment } from '@/app/actions/comment';
 import { getUniqueId } from '@/util/getUniqueId';
 import { addPopup } from '@/lib/features/popup/popupSlice';
-import { useAppDispatch } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { PopupType } from '@/app/(blog)/components/popup/PopUp';
 
 interface Props {
@@ -20,6 +20,7 @@ interface Props {
 const BlogCommentsSection = ({ blogId, comments, profileId }: Props) => {
 
     const dispatch = useAppDispatch();
+    const isLoggedIn = useAppSelector(state => state.userSlice.isLoggedIn);
 
     const handleOnComment = async (content: string) => {
         const response = await postComment(profileId, blogId, content, null);
@@ -41,7 +42,7 @@ const BlogCommentsSection = ({ blogId, comments, profileId }: Props) => {
     return (
         <div className={`${styles.commentSection} full-width y-axis-flex`}>
             <h2>Comments ({ comments.length })</h2>
-            <CommentArea onClose={() => {}} onComment={handleOnComment} hideCancel={true} />
+            { isLoggedIn && <CommentArea onClose={() => {}} onComment={handleOnComment} hideCancel={true} /> }
             <div className={`${styles.commentsContainer} full-width y-axis-flex`}>
                 { commentsElem }
             </div>

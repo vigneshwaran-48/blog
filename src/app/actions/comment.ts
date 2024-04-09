@@ -10,7 +10,7 @@ export const getCommentsOfBlog = async (id: string) => {
 
     const routes: APIRoutes = getBlogResourceRoutes();
 
-    const response = await sendRequest({ url: `${routes.getOne(id)}/comment`, method: "GET", includeBody: false });
+    const response = await sendRequest({ url: `${routes.getOne(id)}/comment`, method: "GET", includeBody: false, checkAuthentication: false });
 
     const data = await response.json();
 
