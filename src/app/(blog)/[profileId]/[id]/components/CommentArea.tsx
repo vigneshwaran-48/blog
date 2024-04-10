@@ -2,10 +2,11 @@
 
 import React, { useState } from 'react';
 import styles from "./blogComment.module.css";
+import Button from '@/app/(blog)/components/form/Button';
 
 interface Props {
     onClose: () => void, 
-    onComment: (comment: string) => void,
+    onComment: (comment: string) => Promise<any>,
     placeholder?: string,
     hideCancel?: boolean
 }
@@ -13,8 +14,8 @@ interface Props {
 const CommentArea = ({ onClose, onComment, placeholder = "Share your thoughts", hideCancel = false }: Props) => {
 
     const [ comment, setComment ] = useState<string>("");
-    const handleOnComment = () => {
-        onComment(comment);
+    const handleOnComment = async () => {
+        await onComment(comment);
         setComment("");
     }
 
@@ -33,10 +34,11 @@ const CommentArea = ({ onClose, onComment, placeholder = "Share your thoughts", 
                                         onClick={e => onClose()}
                                     >Cancel</button>
                 }
-                <button 
-                    className={`${styles.commentButton} button`}
+                <Button 
+                    displayName="Comment"
+                    loadingText="Commenting ..."
                     onClick={handleOnComment}
-                >Comment</button>
+                />
             </div>
         </div>
     )
