@@ -67,6 +67,7 @@ const page = async ({ params: { profileId } }: Props) => {
                                 name={user.name} 
                                 description={user.description}
                                 isFollowing={isFollowing}
+                                followersCount={followers.length}
                             />
                         :   <ProfileBanner 
                                 profileId={organization.profileId} 
@@ -74,6 +75,7 @@ const page = async ({ params: { profileId } }: Props) => {
                                 name={organization.name} 
                                 description={organization.description}
                                 isFollowing={isFollowing}
+                                followersCount={followers.length}
                             />
                 }
             </div>
