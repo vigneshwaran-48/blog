@@ -1,5 +1,6 @@
 import { getFollowersOfProfile } from '@/app/actions/follow'
 import { UserMeta } from '@/util/AppTypes';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
@@ -8,11 +9,16 @@ interface Props {
     params: { profileId: string }
 }
 
+export async function generateMetadata({ params: { profileId } }: Props): Promise<Metadata> {
+    return {
+        title: `${profileId}'s followers`,
+        description: `${profileId}'s followers page`
+    }
+}
+
 const page = async ({ params: { profileId } }: Props) => {
     
     const followers: UserMeta[] = await getFollowersOfProfile(profileId);
-
-    console.log(followers);
 
     const followerElems = followers && followers.map((follower, key) => (
         <div key={key} className="flex items-center w-full justify-between max-w-[400px] p-2">
