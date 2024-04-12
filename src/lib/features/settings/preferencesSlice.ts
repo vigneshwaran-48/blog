@@ -10,7 +10,7 @@ export interface Prefernces {
 
 const initialState: Prefernces = {
     lang: "en",
-    theme: "DARK"
+    theme: "LIGHT"
 }
 
 const preferenceSlice = createSlice({

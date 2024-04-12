@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import React from 'react';
+import CustomizationPage from './CustomizationPage';
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -8,10 +9,11 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-const CustomizationPage = () => {
+const page = () => {
+
     return (
-        <div>CustomizationPage</div>
+        <CustomizationPage />
     )
 }
 
-export default CustomizationPage;
+export default page;

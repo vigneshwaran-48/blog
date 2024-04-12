@@ -100,7 +100,7 @@ const FilterSection = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => vo
     return (
         <section 
             ref={sectionRef}
-            className={`flex-1 z-20 ${isOpen ? "translate-x-0" : "-translate-x-[250%]"} p-2 bg-white left-0 top-0 bottom-0 w-full max-w-48 border-r absolute transition duration-500 sm:relative sm:border-r-0 sm:w-1/4 sm:translate-x-0`}>
+            className={`flex-1 z-20 ${isOpen ? "translate-x-0" : "-translate-x-[250%]"} p-2 bg-[--app-background-color] left-0 top-0 bottom-0 w-full max-w-48 border-r absolute transition duration-500 sm:relative sm:border-r-0 sm:w-1/4 sm:translate-x-0`}>
             <FontAwesomeIcon 
                 icon={faX} 
                 className="absolute p-2 right-2 top-2 sm:hidden" 
