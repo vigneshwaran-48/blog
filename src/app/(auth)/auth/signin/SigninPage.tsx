@@ -10,7 +10,7 @@ const SignupPage = ({ error, callbackUrl }: { error: string | undefined, callbac
         if (callbackUrl) {
             signIn("google", { callbackUrl })
         } else {
-            signIn("google");
+            signIn("google", { callbackUrl: `${window.location.origin}` });
         }
     }
 

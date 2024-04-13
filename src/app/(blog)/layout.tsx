@@ -13,6 +13,7 @@ import UserStoreProvider from "./components/providers/UserStoreProvider";
 import "../globals.css";
 import LoginStatusChecker from "./components/providers/LoginStatusChecker";
 import LoginPopup from "./components/popup/LoginPopup";
+import ThemeProvider from "./components/providers/ThemeProvider";
 
 const roboto = Roboto({
     weight: "400",
@@ -52,13 +53,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             <PopupModelProvider>
                                 <UserStoreProvider>
                                     <LoginStatusChecker>
-                                        <AppHeader />
-                                        <div className={`${styles.middleBody} full-width x-axis-flex`}>
-                                            <NavBar />
-                                            <main className={`${styles.main} x-axis-flex`}>
-                                                {children}
-                                            </main>
-                                        </div>
+                                        <ThemeProvider>
+                                            <AppHeader />
+                                            <div className={`${styles.middleBody} full-width x-axis-flex`}>
+                                                <NavBar />
+                                                <main className={`${styles.main} x-axis-flex`}>
+                                                    {children}
+                                                </main>
+                                            </div>
+                                        </ThemeProvider>
                                     </LoginStatusChecker>
                                 </UserStoreProvider>
                                 <PopUpMessageContainer />

@@ -9,6 +9,7 @@ import { getUniqueId } from '@/util/getUniqueId';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { PopupType } from './popup/PopUp';
 import { useRouter } from 'next/navigation';
+import Button from './form/Button';
 
 interface Props {
     isOpen: boolean,
@@ -69,7 +70,8 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
                     <p>Tags</p>
                     <p>Javascript</p>
                 </div>
-                <button className={`button`} onClick={onPublish}>Publish</button>
+                {/* <button className={`button`} onClick={onPublish}>Publish</button> */}
+                <Button displayName="Publish" loadingText="Publishing ..." onClick={onPublish} backgroundColor="#128B10" />
             </div>
         </div>
     )

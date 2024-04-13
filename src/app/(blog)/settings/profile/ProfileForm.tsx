@@ -14,31 +14,32 @@ import { setUser } from '@/lib/features/user/userSlice';
 import TextArea from '../../components/form/TextArea';
 import { getStaticResourceRoutes } from '@/util/ResourceServer';
 import { uploadImage } from '@/app/actions/staticResource';
+import Button from '../../components/form/Button';
 
 const ProfileForm = () => {
-    
+
     const user = useAppSelector(state => state.userSlice);
     const dispatch = useAppDispatch();
-    const [ userFormState, setUserFormState ] = useState<UserMeta>(user);
+    const [userFormState, setUserFormState] = useState<UserMeta>(user);
 
     useEffect(() => {
         setUserFormState(user);
     }, [user]);
 
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(!e.target.files) {
+        if (!e.target.files) {
             return;
         }
         const form = new FormData();
         form.append("resource", e.target.files[0]);
         const resourceResponse = await uploadImage(form);
 
-        if(resourceResponse.status !== 200 && resourceResponse.status !== 201) {
+        if (resourceResponse.status !== 200 && resourceResponse.status !== 201) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: resourceResponse.error }));
             return;
         }
         const imageUrl = getStaticResourceRoutes().getOne(resourceResponse.id);
-        setUserFormState(prevUserFormState => ({ ...prevUserFormState, image: imageUrl}));
+        setUserFormState(prevUserFormState => ({ ...prevUserFormState, image: imageUrl }));
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -48,29 +49,31 @@ const ProfileForm = () => {
 
     const saveProfile = async () => {
         const response = await updateUser(userFormState);
-        if(response.status !== 200) {
+        if (response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
             return;
         }
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
-        dispatch(setUser(response.user));
+        const updatedUser = response.user;
+        updatedUser.isLoggedIn = user.isLoggedIn;
+        dispatch(setUser(updatedUser));
     }
 
     return (
         <div className={`${styles.profileForm} full-body y-axis-flex`}>
-            <ImageInput 
-                name="user-profile-image" 
+            <ImageInput
+                name="user-profile-image"
                 value={userFormState.image}
                 onChange={e => handleImageChange(e as React.ChangeEvent<HTMLInputElement>)}
             />
-            <Input 
-                value={userFormState.name} 
+            <Input
+                value={userFormState.name}
                 onChange={handleChange}
                 name="name"
                 displayName="Display Name"
             />
-            <Input 
-                value={userFormState.profileId} 
+            <Input
+                value={userFormState.profileId}
                 onChange={handleChange}
                 name="profileId"
                 displayName="Profile Id"
@@ -81,7 +84,8 @@ const ProfileForm = () => {
                 onChange={handleChange}
                 displayName="Description"
             />
-            <button className={`button`} onClick={saveProfile}>Save Profile</button>
+            {/* <button className={`button`} onClick={saveProfile}>Save Profile</button> */}
+            <Button displayName="Save Profile" loadingText="Saving ..." onClick={saveProfile} />
         </div>
     )
 }
