@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './page.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +24,12 @@ export const AppHeader = () => {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const searchParams = useSearchParams();
+    const query = useAppSelector(state => state.searchSlice.query);
+
+    useEffect(() => {
+        const params = new URLSearchParams(searchParams);
+        dispatch(setQuery(params.get("query") || ""));
+    }, []);
 
     const onSearch = (query: string) => {
         dispatch(setQuery(query));
@@ -57,7 +63,7 @@ export const AppHeader = () => {
                 <h1 className={`text-3xl flex-shrink-0 font-bold`}>Blog App</h1>
                 <FontAwesomeIcon onClick={handleNavbarToggle} icon={faBars} />
                 <span className="ml-2 hidden text-xs m-4 sm:block">
-                    <SearchBar shouldExpandOnActive={true} onSearch={onSearch} />
+                    <SearchBar shouldExpandOnActive={true} onSearch={onSearch} value={query} />
                 </span>
             </div>
             <div className={`${styles.rightBar} x-axis-flex`}>
