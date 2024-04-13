@@ -53,7 +53,6 @@ export const authOptions: NextAuthOptions = {
             });
 
             if (response.ok) {
-                console.log("User created");
                 return true;
             }
 

@@ -101,11 +101,13 @@ const FilterSection = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => vo
         <section 
             ref={sectionRef}
             className={`flex-1 z-20 ${isOpen ? "translate-x-0" : "-translate-x-[250%]"} p-2 bg-[--app-background-color] left-0 top-0 bottom-0 w-full max-w-48 border-r absolute transition duration-500 sm:relative sm:border-r-0 sm:w-1/4 sm:translate-x-0`}>
-            <FontAwesomeIcon 
-                icon={faX} 
-                className="absolute p-2 right-2 top-2 sm:hidden" 
-                onClick={e => onClose()}
-            />
+            <span className="sm:hidden">
+                <FontAwesomeIcon 
+                    icon={faX} 
+                    className="absolute p-2 right-2 top-2" 
+                    onClick={e => onClose()}
+                />
+            </span>
             <h2 className={`text-3xl w-full p-2 border-b border-[#c2c1c1] h-fit font-semibold`}>Filters</h2>
             <div className={`flex-1 p-3 border-b border-[#c2c1c1]`}>
                 <h2 className={`text-2xl mb-3 font-bold text-gray-500`}>Type</h2>

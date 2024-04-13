@@ -1,3 +1,10 @@
+import { Theme } from "@/lib/features/settings/preferencesSlice"
+
+export type Preferences = {
+    userId: string,
+    id: string,
+    theme: Theme
+}
 
 export type BlogFeedResponse = {
     message: string,
@@ -101,7 +108,8 @@ export type UserMeta = {
     email?: string,
     profileId?: string,
     isLoggedIn?: boolean,
-    showLoginPopup?: boolean
+    showLoginPopup?: boolean,
+    preferences: Preferences
 }
 
 export type BlogCategory = string;

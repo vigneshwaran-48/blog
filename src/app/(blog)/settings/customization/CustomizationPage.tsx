@@ -5,15 +5,19 @@ import React from 'react'
 import RadioGroup from '../../components/form/RadioGroup';
 import { Props } from '../../components/form/Props';
 import { Theme, setTheme } from '@/lib/features/settings/preferencesSlice';
+import { updateTheme } from '@/app/actions/preferences';
+import { Preferences } from '@/util/AppTypes';
 
 const CustomizationPage = () => {
 
     const theme = useAppSelector(state => state.preferencesSlice.theme);
     const dispatch = useAppDispatch();
 
-    const handleThemeChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const handleThemeChange = async (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         const value = e.target.value;
-        dispatch(setTheme(value as Theme));
+        const response = await updateTheme(value as Theme);
+        const preferences: Preferences = response.preferences;
+        dispatch(setTheme(preferences.theme));
     }
 
     const themes: Props[] = [
