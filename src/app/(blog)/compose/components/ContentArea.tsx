@@ -22,14 +22,6 @@ const ContentArea = ({ onChange }: { onChange: (blog: Partial<Compose>) => void 
         onChange({ content: text });
     }
 
-    // [
-    //     [{ 'header': [1, 2, false] }],
-    //     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    //     [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-    //     ['link', 'image'],
-    //     ['clean']
-    // ]
-
     const toolbarOptions = [
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
         ['blockquote', 'code-block'],
@@ -61,7 +53,6 @@ const ContentArea = ({ onChange }: { onChange: (blog: Partial<Compose>) => void 
                 toolbar: toolbarOptions
             }}
             placeholder="Today is a wonderful day"
-            // scrollingContainer={styles.contentScrollContainer}
         />
     )
 }
