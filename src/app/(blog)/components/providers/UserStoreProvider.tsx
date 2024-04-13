@@ -1,8 +1,10 @@
 "use client";
 
 import { getUserProfile } from '@/app/actions/user';
+import { setTheme } from '@/lib/features/settings/preferencesSlice';
 import { setUser } from '@/lib/features/user/userSlice';
 import { useAppDispatch } from '@/lib/hooks';
+import { UserMeta } from '@/util/AppTypes';
 import React, { useEffect } from 'react';
 
 interface Props {
@@ -18,9 +20,9 @@ const UserStoreProvider = ({ children }: Props) => {
     }, []);
 
     const setUserInStore = async () => {
-        const user = await getUserProfile();
-        console.log("Got user ...");
+        const user: UserMeta = await getUserProfile();
         dispatch(setUser(user));
+        dispatch(setTheme(user.preferences?.theme || "LIGHT"));
     }
 
     return (
