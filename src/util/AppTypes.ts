@@ -109,7 +109,7 @@ export type UserMeta = {
     profileId?: string,
     isLoggedIn?: boolean,
     showLoginPopup?: boolean,
-    preferences: Preferences
+    preferences?: Preferences
 }
 
 export type BlogCategory = string;

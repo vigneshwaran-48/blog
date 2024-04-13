@@ -22,7 +22,7 @@ const UserStoreProvider = ({ children }: Props) => {
     const setUserInStore = async () => {
         const user: UserMeta = await getUserProfile();
         dispatch(setUser(user));
-        dispatch(setTheme(user.preferences.theme));
+        dispatch(setTheme(user.preferences?.theme || "LIGHT"));
     }
 
     return (
