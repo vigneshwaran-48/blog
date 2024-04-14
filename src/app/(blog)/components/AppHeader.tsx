@@ -29,7 +29,7 @@ export const AppHeader = () => {
     useEffect(() => {
         const params = new URLSearchParams(searchParams);
         dispatch(setQuery(params.get("query") || ""));
-    }, []);
+    }, [searchParams]);
 
     const onSearch = (query: string) => {
         dispatch(setQuery(query));

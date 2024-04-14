@@ -80,7 +80,7 @@ const OrganizationCreationForm = () => {
             return;
         }
         dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
-        router.push(`/blog/${currentOrganization?.profileId}`);
+        router.push(`/${currentOrganization?.profileId}`);
     }
 
     const visibilityRadioButtons: Props[] = [

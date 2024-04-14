@@ -19,7 +19,6 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL("/auth/signin?callbackUrl=" + request.url, process.env.NEXTAUTH_URL));
         }
 
-        console.log(token);
     }
 }
 
