@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import styles from "./page.module.css";
 import { SearchBar } from '../components/blog/SearchBar';
 import { OrganizationComp } from './components/OrganizationComp';
-import Link from 'next/link';
 import { NavLink } from '@/util/NavLink';
 
 interface Props {
