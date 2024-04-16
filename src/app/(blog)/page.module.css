@@ -2,13 +2,14 @@
     justify-content: space-between;
 }
 .middleBody {
-    justify-content: space-between;
+    justify-content: center;
     height: calc(100% - var(--app-header-height));
 }
 
 .main {
     height: 100%;
-    width: calc(100% - 200px);
+    width: 100%;
+    max-width: 1336px;
     --app-main-body-background-color: var(--app-background-color);
     justify-content: center;
 }
