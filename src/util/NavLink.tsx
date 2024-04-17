@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { PRIVATE_ROUTES } from './AppFields';
@@ -21,6 +21,12 @@ export const NavLink = ({ children, href, activeClassName, className, useStartsW
     const dispatch = useAppDispatch();
 
     const pathName = usePathname();
+    const params = useSearchParams();
+    let paramsString = params.toString();
+    
+    if (paramsString.endsWith("=")) {
+        paramsString = paramsString.slice(0, paramsString.length - 1);
+    }
 
     const hanldeLinkClick = (href: string, e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         if (!isLoggedIn && PRIVATE_ROUTES.includes(href)) {
@@ -29,11 +35,13 @@ export const NavLink = ({ children, href, activeClassName, className, useStartsW
         }
     }
 
+    const pathnameStr = `${pathName}${paramsString.length > 0 ? "?" + paramsString : ""}`
+
     return (
         <Link href={href} className={`${className} ${useStartsWith
-            ? pathName.startsWith(href)
+            ? pathnameStr.startsWith(href)
                 ? activeClassName : ""
-            : pathName === href
+            : pathnameStr === href
                 ? activeClassName : ""}`}
             onClick={e => hanldeLinkClick(href, e)}
             id={href}

@@ -295,3 +295,33 @@ export const getFeeds = async (page: number) => {
     throw new Error("Error while fetching blog feeds of user");
 
 }
+
+export const getFollowingFeeds = async (page: number) => {
+
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({
+        url: `${routes.get}/following/feeds?page=${page}`,
+        method: "GET",
+        includeBody: false,
+        checkAuthentication: false
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        if (data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return {
+            blogs: data.blogs,
+            nextPageStatus: data.nextPageStatus
+        };
+    }
+    else if (response.status === 401) {
+        console.log("Got 401 response from server, So redirecting!");
+        redirect("/auth/signin");
+    }
+    throw new Error("Error while fetching blog feeds of user");
+
+}

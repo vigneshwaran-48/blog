@@ -5,9 +5,7 @@ const matchers = ["/organization", "/search", "/stories", "/settings"]
 export async function middleware(request: NextRequest) {
 
     const path = request.nextUrl.pathname;
-    console.log(path)
     const matched = matchers.findIndex(matcher => path.startsWith(matcher))
-    console.log(matched)
     if (matched > -1) {
 
         const token = await getToken({ req: request });
