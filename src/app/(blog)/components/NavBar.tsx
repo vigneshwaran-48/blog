@@ -7,7 +7,7 @@ import { faComment, faMagnifyingGlass, faRss, faSitemap } from '@fortawesome/fre
 export const NavBar = () => {
     
     return (
-        <nav className={`${styles.appNavbar} flex flex-row sm:flex-col`}>
+        <nav className={`${styles.appNavbar} flex flex-row sm:hidden`}>
             <NavLink 
                 activeClassName={`${styles.activeNavLink}`}
                 className={`${styles.navLink}`}

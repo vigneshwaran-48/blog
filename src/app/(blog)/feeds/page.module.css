@@ -7,6 +7,19 @@
   width: 100%;
 }
 
+.feedsPage {
+  width: calc(100% - 350px);
+}
+
+@media screen and (max-width: 910px) {
+  .suggestionBar {
+    display: none;
+  }
+  .feedsPage {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .feeds {
     padding-top: 10px;

@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
     ],
     pages: {
         signIn: "/auth/signin",
-        error: "/auth/sigin"
+        error: "/auth/signin"
     },
     callbacks: {
         async signIn({ user, account, profile }) {

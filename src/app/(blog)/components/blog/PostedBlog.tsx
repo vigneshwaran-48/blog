@@ -18,7 +18,7 @@ const PostedBlog = ({ blog }: { blog: Blog }) => {
     }
 
     return (
-        <article className={`${styles.blogMeta} y-axis-flex`} onClick={handleBlogClick} >
+        <article className={`${styles.blogMeta} y-axis-flex border-b`} onClick={handleBlogClick} >
             <BlogMetaHeader 
                 ownerName={blog.owner.name as string}
                 ownerImage={blog.owner.image as string}

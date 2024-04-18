@@ -14,11 +14,14 @@ import "../globals.css";
 import LoginStatusChecker from "./components/providers/LoginStatusChecker";
 import LoginPopup from "./components/popup/LoginPopup";
 import ThemeProvider from "./components/providers/ThemeProvider";
+import localFont from "next/font/local";
 
 const roboto = Roboto({
     weight: "400",
     subsets: ["latin"]
 })
+
+const font = localFont({ src: "../fonts/OpenSans-VariableFont_wdth,wght.ttf" });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
@@ -39,16 +42,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     sizes="any"
                 />
             </head>
-            <body>
+            <body className={font.className}>
                 <Provider store={storeRef.current}>
                     <html lang="en">
-                        <style jsx global>{`
-                            *{
-                                font-family: ${roboto.style.fontFamily};
-                                font-style: ${roboto.style.fontStyle};
-                            }
-                        `}
-                        </style>
                         <body className={`full-body ${styles.body} y-axis-flex`}>
                             <PopupModelProvider>
                                 <UserStoreProvider>

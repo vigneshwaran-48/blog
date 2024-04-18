@@ -21,7 +21,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
     });
 
     return (
-        <NavLink className={`${styles.blogMeta} mb-10 h-[170px]`} href={`/${blog.publishedAt?.profileId}/${blog.id}`}>
+        <NavLink className={`${styles.blogMeta} border-b mb-10 h-[170px]`} href={`/${blog.publishedAt?.profileId}/${blog.id}`}>
             <article className={` y-axis-flex`}>
                 <div className={`${styles.blogMetaHeader} x-axis-flex`}>
                     <Image 

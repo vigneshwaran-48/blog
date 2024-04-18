@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import PostedBlog from '../components/blog/PostedBlog';
 import { Metadata } from 'next';
 import NoStories from './NoStories';
+import { NavLink } from '@/util/NavLink';
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -23,7 +24,13 @@ const StoriesPage = async () => {
     
     return (
         <div className={`${styles.storiesContainer} hide-scrollbar y-axis-flex`}>
-            { blogElems }
+            <nav className="flex w-full h-[50px]">
+                <NavLink activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 button" href="/stories">UnPublished</NavLink>
+                <NavLink activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 button" href="/stories?published">Published</NavLink>
+            </nav>
+            <div className="w-full h-[calc(100%-50px)]">
+                { blogElems }
+            </div>
         </div>
     )
 }
