@@ -72,12 +72,12 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .appOrHamburgerMenu > svg {
+    /* .appOrHamburgerMenu > svg {
         display: block;
     }
-    .appOrHamburgerMenu > h1 {
+    .appOrHamburgerMenu > a > h1 {
         display: none;
-    }
+    } */
     .appNavbar {
         transform: translateX(var(--app-navbar-status-translate));
         position: absolute;
@@ -105,7 +105,7 @@
     .appOrHamburgerMenu > svg {
         display: none;
     }
-    .appOrHamburgerMenu > h1 {
+    .appOrHamburgerMenu > a > h1 {
         display: block;
         font-size: 26px;
     }
