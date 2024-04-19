@@ -246,6 +246,7 @@ export const publishBlog = async (id: string, publishAtProfileId: string) => {
     if (response.status === 401) {
         redirect("/auth/signin");
     }
+    revalidatePath("/stories");
     return data;
 }
 
@@ -263,6 +264,7 @@ export const unPublishBlog = async (id: string) => {
     if (response.status === 401) {
         redirect("/auth/signin");
     }
+    revalidatePath("/stories");
     return data;
 }
 
