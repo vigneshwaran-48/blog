@@ -36,7 +36,7 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
 
     return (
         <div className={`${styles.feeds} full-body flex`}>
-            <div className={`${styles.feedsPage} flex flex-col border-r`}>
+            <div className={`${styles.feedsPage} flex flex-col sm:border-r`}>
                 <nav className="p-2 flex w-full h-[50px]">
                     <NavLink activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 h-fit p-1 rounded-sm" href="/feeds" useStartsWith={false}>Feeds</NavLink>
                     <NavLink activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 h-fit p-1 rounded-sm" href="/feeds?following">Following</NavLink>

@@ -70,7 +70,9 @@ export const updateUser = async (user: UserMeta) => {
         redirect("/auth/signin");
     }
     const userResponse = data.user;
-    revalidatePath(`/${userResponse.profileId}`)
+    if (response.ok) {
+        revalidatePath(`/${userResponse.profileId}`)
+    }
     return data;
 }
 

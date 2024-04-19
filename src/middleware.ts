@@ -10,6 +10,8 @@ export async function middleware(request: NextRequest) {
 
         const token = await getToken({ req: request });
 
+        console.log(token)
+
         if ((!token) && request.nextUrl.pathname === "/") {
             return NextResponse.redirect(new URL("/welcome", process.env.NEXTAUTH_URL));
         }
