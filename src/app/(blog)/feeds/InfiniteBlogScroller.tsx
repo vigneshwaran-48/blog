@@ -10,7 +10,7 @@ import { setLoginPopup } from '@/lib/features/user/userSlice';
 
 const InfiniteBlogScroller = ({ initialBlogs, nextPageStatus }: { initialBlogs: Blog[], nextPageStatus: string }) => {
 
-    const [blogs, setBlogs] = useState<Blog[]>(initialBlogs);
+    const [blogs, setBlogs] = useState<Blog[]>([]);
     const [page, setPage] = useState<number>(0);
     const [showSpinner, setShowSpinner] = useState<boolean>(true);
     const [noContentElement, setNoContentElement] = useState<React.ReactNode>("No Content");
@@ -41,6 +41,10 @@ const InfiniteBlogScroller = ({ initialBlogs, nextPageStatus }: { initialBlogs: 
             setShowSpinner(false);
         }
     }, []);
+
+    useEffect(() => {
+        setBlogs(initialBlogs);
+    }, [initialBlogs])
 
     const loadFeeds = async () => {
         const data = await getFeeds(page + 1);

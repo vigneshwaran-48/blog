@@ -22,9 +22,19 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
 
     const isFollowing = searchParams["following"] != null;
 
-    const data = isFollowing ? await getFollowingFeeds(0) : await getFeeds(0);
+    console.log(`Is Following? ${isFollowing}`);
+
+    let data;
+    if (isFollowing) {
+        data = await getFollowingFeeds(0);
+    } else {
+        data = await getFeeds(0);
+    }
+    console.log(data)
     const blogs: Blog[] = data.blogs || [];
     const nextPageStatus: string = data.nextPageStatus;
+
+    console.log(blogs);
 
     // Just for testing need to remove this and move to a client component and loaded it there async. 
     // Otherwise this will impact page loading.
