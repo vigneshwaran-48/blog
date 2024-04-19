@@ -1,7 +1,7 @@
 import { Blog, UserMeta } from '@/util/AppTypes';
 import React from 'react'
 import styles from "./page.module.css"
-import { getFeeds, getFollowingFeeds } from '@/app/actions/blog';
+import { getFeeds, getFollowingFeeds, getMostLikedBlogs } from '@/app/actions/blog';
 import InfiniteBlogScroller from './InfiniteBlogScroller';
 import { Metadata } from 'next';
 import { NavLink } from '@/util/NavLink';
@@ -22,25 +22,16 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
 
     const isFollowing = searchParams["following"] != null;
 
-    console.log(`Is Following? ${isFollowing}`);
-
-    let data;
-    if (isFollowing) {
-        data = await getFollowingFeeds(0);
-    } else {
-        data = await getFeeds(0);
-    }
-    console.log(data)
+    let data = isFollowing ? await getFollowingFeeds(0) : await getFeeds(0);
     const blogs: Blog[] = data.blogs || [];
     const nextPageStatus: string = data.nextPageStatus;
-
-    console.log(blogs);
 
     // Just for testing need to remove this and move to a client component and loaded it there async. 
     // Otherwise this will impact page loading.
     const users: UserMeta[] = await getAllUsers();
 
-    const mostLikedBlogsElems = blogs.map((blog, key) => <SmallBlog blog={blog} key={key} />);
+    const mostLikedBlogs: Blog[] = await getMostLikedBlogs();
+    const mostLikedBlogsElems = mostLikedBlogs.map((blog, key) => <SmallBlog blog={blog} key={key} />);
     const mostFollowedUsers = users.map((user, key) => <SmallUserComp user={user} key={key} />)
 
     return (

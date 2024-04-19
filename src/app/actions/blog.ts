@@ -325,3 +325,24 @@ export const getFollowingFeeds = async (page: number) => {
     throw new Error("Error while fetching blog feeds of user");
 
 }
+
+export const getMostLikedBlogs = async  () => {
+    const routes: APIRoutes = getBlogResourceRoutes();
+
+    const response = await sendRequest({
+        url: `${routes.get}/most-liked`,
+        method: "GET",
+        includeBody: false,
+        checkAuthentication: false
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        if (data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.blogs;
+    }
+    throw new Error("Error while fetching most liked blogs!");
+}
