@@ -2,12 +2,13 @@ import { Blog, UserMeta } from '@/util/AppTypes';
 import React from 'react'
 import styles from "./page.module.css"
 import { getFeeds, getFollowingFeeds, getMostLikedBlogs } from '@/app/actions/blog';
-import InfiniteBlogScroller from './InfiniteBlogScroller';
+import InfiniteBlogScroller from './components/InfiniteBlogScroller';
 import { Metadata } from 'next';
 import { NavLink } from '@/util/NavLink';
 import SmallBlog from '../components/blog/SmallBlog';
 import { getAllUsers, getMostFollowedUsers } from '@/app/actions/user';
-import SmallUserComp from './SmallUserComp';
+import SmallUserComp from './components/SmallUserComp';
+import SidebarFeeds from './components/SidebarFeeds';
 
 export const metadata: Metadata = {
     title: "Feeds",
@@ -26,14 +27,6 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
     const blogs: Blog[] = data.blogs || [];
     const nextPageStatus: string = data.nextPageStatus;
 
-    // Just for testing need to remove this and move to a client component and loaded it there async. 
-    // Otherwise this will impact page loading.
-    const mostFollowedUsers: UserMeta[] = await getMostFollowedUsers();
-    const mostLikedBlogs: Blog[] = await getMostLikedBlogs();
-
-    const mostLikedBlogsElems = mostLikedBlogs.map((blog, key) => <SmallBlog blog={blog} key={key} />);
-    const mostFollowedUsersElems = mostFollowedUsers.map((user, key) => <SmallUserComp user={user} key={key} />)
-
     return (
         <div className={`${styles.feeds} full-body flex`}>
             <div className={`${styles.feedsPage} flex flex-col sm:border-r`}>
@@ -46,20 +39,7 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
                     <InfiniteBlogScroller initialBlogs={blogs} nextPageStatus={nextPageStatus} />
                 </div>
             </div>
-            <div className={`${styles.suggestionBar} w-[350px] px-3 py-2 h-full overflow-y-scroll hide-scrollbar`}>
-                <section className="mb-2">
-                    <h2 className="text-xl font-semibold">Most Liked</h2>
-                    <ul className="py-2">
-                        { mostLikedBlogsElems }
-                    </ul>
-                </section>
-                <section className="mb-2">
-                    <h2 className="text-xl font-semibold">Most Followed</h2>
-                    <ul className="py-2">
-                        { mostFollowedUsersElems }
-                    </ul>
-                </section>
-            </div>
+            <SidebarFeeds />
         </div>
     )
 }

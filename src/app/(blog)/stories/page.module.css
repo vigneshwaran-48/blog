@@ -1,19 +1,26 @@
 
 .storiesContainer {
-    max-width: var(--app-main-page-max-width);
-    padding-top: var(--app-main-page-padding-top);
-    width: 100%;
-    overflow-y: scroll;
-    align-items: center;
+    width: calc(100% - 350px);
 }
 
 .storiesContainer > article {
     margin-bottom: 20px;
 }
 
-@media screen and (max-width: 500px) {
-    
+.storiesPage {
+    justify-content: center;
+    padding-top: var(--app-main-page-padding-top);
+}
+
+@media screen and (max-width: 910px) {
     .storiesContainer {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .storiesPage {
         padding-top: 10px;
     }
 }

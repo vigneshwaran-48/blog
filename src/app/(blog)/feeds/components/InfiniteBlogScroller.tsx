@@ -2,9 +2,9 @@
 
 import { Blog } from '@/util/AppTypes';
 import React, { useEffect, useRef, useState } from 'react'
-import { BlogComp } from '../components/blog/BlogComp';
+import { BlogComp } from '../../components/blog/BlogComp';
 import { getFeeds } from '@/app/actions/blog';
-import CircleLoader from '../components/CircleLoader';
+import CircleLoader from '../../components/CircleLoader';
 import { useAppDispatch } from '@/lib/hooks';
 import { setLoginPopup } from '@/lib/features/user/userSlice';
 
@@ -60,12 +60,12 @@ const InfiniteBlogScroller = ({ initialBlogs, nextPageStatus }: { initialBlogs: 
         }
         setShowSpinner(false);
         if (status === "NOT_AVAILABLE") {
-           setNoContentElement(<p>No content available!</p>);
+            setNoContentElement(<p>No content available!</p>);
         } else if (status === "SIGNUP") {
             setNoContentElement(
                 <div className="p-2 flex flex-col items-center justify-center w-[98%] max-w-[500px]">
                     <p className="mb-2">Your daily limit is reached!</p>
-                    <button 
+                    <button
                         className="button w-fit bg-[--app-selected-background-color] text-[--app-selected-text-color]"
                         onClick={() => dispatch(setLoginPopup(true))}
                     >Login</button>
