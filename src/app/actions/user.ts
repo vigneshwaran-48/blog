@@ -90,3 +90,20 @@ export const getUser = async (id: string) => {
     }
     throw new Error("Error while fetching user details");
 }
+
+export const getMostFollowedUsers = async () => {
+
+    const routes = getUserResourceRoutes();
+
+    const response = await sendRequest({ url: `${routes.get}/most-followed`, method: "GET", includeBody: false });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        if (data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.users;
+    }
+    throw new Error("Error while fetching most followed users details");
+}

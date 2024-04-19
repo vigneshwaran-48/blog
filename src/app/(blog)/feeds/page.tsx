@@ -6,7 +6,7 @@ import InfiniteBlogScroller from './InfiniteBlogScroller';
 import { Metadata } from 'next';
 import { NavLink } from '@/util/NavLink';
 import SmallBlog from '../components/blog/SmallBlog';
-import { getAllUsers } from '@/app/actions/user';
+import { getAllUsers, getMostFollowedUsers } from '@/app/actions/user';
 import SmallUserComp from './SmallUserComp';
 
 export const metadata: Metadata = {
@@ -28,11 +28,11 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
 
     // Just for testing need to remove this and move to a client component and loaded it there async. 
     // Otherwise this will impact page loading.
-    const users: UserMeta[] = await getAllUsers();
-
+    const mostFollowedUsers: UserMeta[] = await getMostFollowedUsers();
     const mostLikedBlogs: Blog[] = await getMostLikedBlogs();
+
     const mostLikedBlogsElems = mostLikedBlogs.map((blog, key) => <SmallBlog blog={blog} key={key} />);
-    const mostFollowedUsers = users.map((user, key) => <SmallUserComp user={user} key={key} />)
+    const mostFollowedUsersElems = mostFollowedUsers.map((user, key) => <SmallUserComp user={user} key={key} />)
 
     return (
         <div className={`${styles.feeds} full-body flex`}>
@@ -56,7 +56,7 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
                 <section className="mb-2">
                     <h2 className="text-xl font-semibold">Most Followed</h2>
                     <ul className="py-2">
-                        { mostFollowedUsers }
+                        { mostFollowedUsersElems }
                     </ul>
                 </section>
             </div>
