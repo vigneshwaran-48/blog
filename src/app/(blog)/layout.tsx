@@ -6,7 +6,6 @@ import styles from "./page.module.css";
 import { NavBar } from "./components/NavBar";
 import { AppStore, makeStore } from "@/lib/store";
 import { Provider } from "react-redux";
-import { Roboto } from "next/font/google";
 import PopUpMessageContainer from "./components/popup/PopUpMessageContainer";
 import PopupModelProvider from "./components/popup/PopupModelProvider";
 import UserStoreProvider from "./components/providers/UserStoreProvider";
@@ -15,11 +14,6 @@ import LoginStatusChecker from "./components/providers/LoginStatusChecker";
 import LoginPopup from "./components/popup/LoginPopup";
 import ThemeProvider from "./components/providers/ThemeProvider";
 import localFont from "next/font/local";
-
-const roboto = Roboto({
-    weight: "400",
-    subsets: ["latin"]
-})
 
 const font = localFont({ src: "../fonts/OpenSans-VariableFont_wdth,wght.ttf" });
 

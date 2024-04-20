@@ -2,7 +2,7 @@
 
 import { APIRoutes } from "@/util/AppTypes";
 import { sendRequest } from "@/util/RequestUtil";
-import { getProfileResourceRoutes } from "@/util/ResourceServer";
+import { getOrganizationResourceRoutes, getProfileResourceRoutes, getUserResourceRoutes } from "@/util/ResourceServer";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -50,6 +50,27 @@ export const unFollowProfile = async (id: string) => {
 }
 
 export const getFollowingUsers = async () => {
-
+    const routes: APIRoutes = getUserResourceRoutes();
     
+    const response = await sendRequest({ url: `${routes.get}/following`, method: "GET", includeBody: false });
+    
+    const data = await response.json();
+    
+    if (data.status === 401) {
+        redirect("/auth/signin");
+    }
+    return data.users;
+}
+
+export const getFollowingOrganizations = async () => {
+    const routes: APIRoutes = getOrganizationResourceRoutes();
+    
+    const response = await sendRequest({ url: `${routes.get}/following`, method: "GET", includeBody: false });
+    
+    const data = await response.json();
+    
+    if (data.status === 401) {
+        redirect("/auth/signin");
+    }
+    return data.organizations;
 }
