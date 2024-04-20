@@ -53,6 +53,10 @@ export const AppHeader = () => {
             onClick: () => router.push(`/${user.profileId}`)
         },
         {
+            content: "Dashboard",
+            onClick: () => router.push(`/dashboard`)
+        },
+        {
             content: "Settings",
             onClick: () => router.push(`/settings/profile`)
         },

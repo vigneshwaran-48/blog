@@ -1,5 +1,5 @@
 import { getBlogsOfUser } from '@/app/actions/blog';
-import { Blog, UserMeta } from '@/util/AppTypes';
+import { Blog } from '@/util/AppTypes';
 import React from 'react';
 import styles from "./page.module.css";
 import PostedBlog from '../components/blog/PostedBlog';

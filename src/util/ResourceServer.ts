@@ -95,3 +95,16 @@ export const getSearchResourceRoutes = () => {
     }
     return routes;
 }
+
+export const getTagResourceRoutes = () => {
+    const serverBase = getServerBase();
+
+    const routes : APIRoutes = {
+        get: `${serverBase}/api/v1/app/tag`,
+        getOne: (id: string | number) => `${serverBase}/api/v1/app/tag/${id}`,
+        create: ``,
+        put: ``,
+        delete: (id: string | number) => `${serverBase}/api/v1/app/tag/${id}`
+    }
+    return routes;
+}

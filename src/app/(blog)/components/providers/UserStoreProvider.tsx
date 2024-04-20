@@ -1,5 +1,6 @@
 "use client";
 
+import { getFollowingTags } from '@/app/actions/tag';
 import { getUserProfile } from '@/app/actions/user';
 import { setTheme } from '@/lib/features/settings/preferencesSlice';
 import { setUser } from '@/lib/features/user/userSlice';
@@ -21,6 +22,9 @@ const UserStoreProvider = ({ children }: Props) => {
 
     const setUserInStore = async () => {
         const user: UserMeta = await getUserProfile();
+        const tags = await getFollowingTags();
+        console.log("tags following ")
+        console.log(tags)
         dispatch(setUser(user));
         dispatch(setTheme(user.preferences?.theme || "LIGHT"));
     }

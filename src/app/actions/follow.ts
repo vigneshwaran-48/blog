@@ -48,3 +48,8 @@ export const unFollowProfile = async (id: string) => {
     revalidatePath(`/${id}`);
     return data;
 }
+
+export const getFollowingUsers = async () => {
+
+    
+}

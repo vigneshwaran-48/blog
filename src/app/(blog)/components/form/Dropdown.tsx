@@ -10,21 +10,29 @@ export type Item = {
 
 interface Props {
     items: Item[],
-    onSelect: (id: string) => void
+    onSelect: (id: string) => void,
+    defaultValue?: string,
+    rightAlign?: boolean
 }
 
-const Dropdown = ({ items, onSelect }: Props) => {
+const Dropdown = ({ items, onSelect, defaultValue, rightAlign = false }: Props) => {
 
     const [ showDropdown, setShowDropdown ] = useState<boolean>(false);
     const [ selectedItem, setSelectedItem ] = useState<Item>(items[0]);
+
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (defaultValue && items.findIndex(item => item.id === defaultValue) >= 0) {
+            setSelectedItem(items.find(item => item.id === defaultValue) as Item);
+        }
+    }, []);
 
     useEffect(() => {
         if(!selectedItem) {
             setSelectedItem(items[0]);
         }
     }, [items]);
-
-    const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const foucusOutHandler = (e: MouseEvent | TouchEvent) => {
@@ -63,7 +71,7 @@ const Dropdown = ({ items, onSelect }: Props) => {
                 <p>{ selectedItem?.displayName }</p>
                 <FontAwesomeIcon icon={faAngleDown} />
             </div>
-            <ul className={`${styles.dropDown} ${showDropdown ? styles.showDropDown : ""}`}>
+            <ul className={`${rightAlign ? styles.dropDownRight : styles.dropDownLeft} ${showDropdown ? styles.showDropDown : ""}`}>
                 { itemElems }
             </ul>
         </div>
