@@ -8,9 +8,13 @@ interface Props {
 
 const page = ({ searchParams = {} }: Props) => {
 
-    const isUsers = searchParams["users"] != null; 
+    let isUsers = searchParams["users"] != null; 
     const isTags = searchParams["tags"] != null; 
     const isOrganizations = searchParams["organizations"] != null; 
+
+    if (!isUsers && !isOrganizations && !isTags) {
+        isUsers = true;
+    }
 
     return (
         <div className="w-full h-full sm:p-2">
