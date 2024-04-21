@@ -1,9 +1,17 @@
 import React from 'react'
 import FilterBar from './components/FilterBar';
 import FollowingUsersOrganizationsComp from './components/FollowingUsersOrganizationsComp';
+import { Metadata } from 'next';
 
 interface Props {
     searchParams?: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Following",
+        description: `User's following page`
+    }
 }
 
 const page = ({ searchParams = {} }: Props) => {

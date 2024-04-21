@@ -28,7 +28,7 @@ const FollowingUsersOrganizationsComp = async ({ isUser }: { isUser: boolean }) 
             <p className="my-2 font-semibold">{ user.name }</p>
             <Link 
                 href={`/${user.profileId}`} 
-                className="text-[--app-light-text-color] text-[14px]"
+                className="text-[--app-light-text-color] tex                                                                                                     t-[14px]"
             >{ `@${user.profileId}` }</Link>
         </div>
     )) : "No content"

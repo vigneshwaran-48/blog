@@ -36,7 +36,7 @@ export const AppHeader = () => {
         dispatch(setQuery(query));
         const params = new URLSearchParams(searchParams);
         params.set("query", query);
-        router.push(`${pathname}?${params.toString()}`);
+        router.push(`/search?${params.toString()}`);
     }
 
     const handleNavbarToggle = () => {
