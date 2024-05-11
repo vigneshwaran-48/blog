@@ -15,6 +15,7 @@ import NotificationIcon from './notification/NotificationIcon';
 import { SearchBar } from './blog/SearchBar';
 import { setQuery } from '@/lib/features/search/searchSlice';
 import { NavLink } from '@/util/NavLink';
+import Link from 'next/link';
 
 export const AppHeader = () => {
 
@@ -35,7 +36,7 @@ export const AppHeader = () => {
         dispatch(setQuery(query));
         const params = new URLSearchParams(searchParams);
         params.set("query", query);
-        router.push(`${pathname}?${params.toString()}`);
+        router.push(`/search?${params.toString()}`);
     }
 
     const handleNavbarToggle = () => {
@@ -52,15 +53,33 @@ export const AppHeader = () => {
             onClick: () => router.push(`/${user.profileId}`)
         },
         {
+            content: "Dashboard",
+            onClick: () => router.push(`/dashboard`)
+        },
+        {
             content: "Settings",
             onClick: () => router.push(`/settings/profile`)
+        },
+        {
+            content: "Search",
+            onClick: () => router.push(`/search`)
+        },
+        {
+            content: "Organization",
+            onClick: () => router.push(`/organization`)
+        },
+        {
+            content: "Stories",
+            onClick: () => router.push(`/stories`)
         }
     ]
 
     return (
         <header className={`${styles.appHeader} full-width x-axis-flex`}>
             <div className={`${styles.appOrHamburgerMenu} flex items-center`}>
-                <h1 className={`text-3xl flex-shrink-0 font-bold`}>Blog App</h1>
+                <Link href="/feeds">
+                    <h1 className={`text-3xl flex-shrink-0 font-bold`}>Blog App</h1>
+                </Link>
                 <FontAwesomeIcon onClick={handleNavbarToggle} icon={faBars} />
                 <span className="ml-2 hidden text-xs m-4 sm:block">
                     <SearchBar shouldExpandOnActive={true} onSearch={onSearch} value={query} />
@@ -95,7 +114,7 @@ export const AppHeader = () => {
                         />
                     }
                     top="50px"
-                    translateX="-80%"
+                    translateX="-90%"
                 />
             </div>
         </header>

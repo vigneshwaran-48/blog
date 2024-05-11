@@ -20,7 +20,6 @@ interface Props {
 
 const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
 
-    const [ allUsers, setAllUsers ] = useState<UserMeta[]>(users);
     const [ organizationUsers, setOrganizationUsers ] = useState<OrganizationUser[]>(orgUsers);
 
     const [ openUserAddComp, setOpenUserAddComp ] = useState<boolean>(false);
