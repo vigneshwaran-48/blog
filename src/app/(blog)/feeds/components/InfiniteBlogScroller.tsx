@@ -4,7 +4,7 @@ import { Blog } from '@/util/AppTypes';
 import React, { useEffect, useRef, useState } from 'react'
 import { BlogComp } from '../../components/blog/BlogComp';
 import { getFeeds } from '@/app/actions/blog';
-import CircleLoader from '../../components/CircleLoader';
+import CircleLoader from '../../components/loaders/CircleLoader';
 import { useAppDispatch } from '@/lib/hooks';
 import { setLoginPopup } from '@/lib/features/user/userSlice';
 

@@ -8,7 +8,7 @@ import SmallUserComp from './SmallUserComp';
 import styles from "../page.module.css";
 import { getMostFollowedUsers } from '@/app/actions/user';
 import { getMostLikedBlogs } from '@/app/actions/blog';
-import CircleLoader from '../../components/CircleLoader';
+import CircleLoader from '../../components/loaders/CircleLoader';
 
 const SidebarFeeds = () => {
 

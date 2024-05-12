@@ -10,6 +10,8 @@ import { getAllUsers, getMostFollowedUsers } from '@/app/actions/user';
 import SmallUserComp from './components/SmallUserComp';
 import SidebarFeeds from './components/SidebarFeeds';
 import { wait } from '@/util/wait';
+import DolphinLoader from '../components/loaders/DolphinLoader';
+import BlogboxSkeleton from '../components/skeleton/BlogboxSkeleton';
 
 export const metadata: Metadata = {
     title: "Feeds",
@@ -21,6 +23,12 @@ interface Props {
 }
 
 const BlogFeeds = async ({ searchParams = {} }: Props) => {
+
+    if (true) {
+        return (
+            
+        )
+    }
 
     const isFollowing = searchParams["following"] != null;
 
