@@ -9,6 +9,7 @@ import SmallBlog from '../components/blog/SmallBlog';
 import { getAllUsers, getMostFollowedUsers } from '@/app/actions/user';
 import SmallUserComp from './components/SmallUserComp';
 import SidebarFeeds from './components/SidebarFeeds';
+import { wait } from '@/util/wait';
 
 export const metadata: Metadata = {
     title: "Feeds",

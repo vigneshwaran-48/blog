@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { PRIVATE_ROUTES } from "./util/AppFields";
 
-const matchers = ["/organization", "/search", "/stories", "/settings", "/dashboard"]
 export async function middleware(request: NextRequest) {
 
     const path = request.nextUrl.pathname;
-    const matched = matchers.findIndex(matcher => path.startsWith(matcher))
+    const matched = PRIVATE_ROUTES.findIndex(matcher => path.startsWith(matcher))
     if (matched > -1) {
 
         const token = await getToken({ req: request });

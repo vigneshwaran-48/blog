@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <body className={`full-body ${styles.body} y-axis-flex`}>
                             <PopupModelProvider>
                                 <UserStoreProvider>
-                                    <LoginStatusChecker>
+                                    {/* <LoginStatusChecker> */}
                                         <ThemeProvider>
                                             <AppHeader />
                                             <div className={`${styles.middleBody} full-width x-axis-flex`}>
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                                 </main>
                                             </div>
                                         </ThemeProvider>
-                                    </LoginStatusChecker>
+                                    {/* </LoginStatusChecker> */}
                                 </UserStoreProvider>
                                 <PopUpMessageContainer />
                             </PopupModelProvider>
