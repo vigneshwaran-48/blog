@@ -14,4 +14,4 @@ export const AppFields = {
     }
 }
 
-export const PRIVATE_ROUTES = ["/organization", "/search", "/settings/profile", "/stories", "/settings/customization"];
+export const PRIVATE_ROUTES = ["/organization", "/search", "/settings/profile", "/stories", "/settings/customization", "/feeds"];

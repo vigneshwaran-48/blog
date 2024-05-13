@@ -22,9 +22,10 @@ const UserStoreProvider = ({ children }: Props) => {
 
     const setUserInStore = async () => {
         const user: UserMeta = await getUserProfile();
-        const tags = await getFollowingTags();
-        console.log("tags following ")
-        console.log(tags)
+        if (user.isLoggedIn) {
+            const tags = await getFollowingTags();
+            console.log(tags);
+        }
         dispatch(setUser(user));
         dispatch(setTheme(user.preferences?.theme || "LIGHT"));
     }

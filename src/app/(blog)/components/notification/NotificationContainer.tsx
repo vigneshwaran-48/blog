@@ -4,7 +4,7 @@ import styles from "./notification.module.css";
 import { Notification } from '@/util/AppTypes';
 import { getNotificationsOfUser, markNotificationAsSeen } from '@/app/actions/notification';
 import NotificationComp from './NotificationComp';
-import { useAppDispatch } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '../popup/PopUp';
@@ -14,10 +14,12 @@ const NotificationContainer = () => {
     const [ notifications, setNotifications ] = useState<Notification[]>([]);
 
     const dispatch = useAppDispatch();
+    const isLoggedIn = useAppSelector(state => state.userSlice.isLoggedIn);
 
     useEffect(() => {
-        console.log("Setting notification")
-        fetchAndSetNotifications();
+        if (isLoggedIn) {
+            fetchAndSetNotifications();
+        }
     }, []);
 
     const fetchAndSetNotifications = async () => {

@@ -1,5 +1,7 @@
 import { getFollowersOfProfile } from '@/app/actions/follow'
 import { UserMeta } from '@/util/AppTypes';
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -36,7 +38,12 @@ const page = async ({ params: { profileId } }: Props) => {
     
     return (
         <div className="p-2 flex flex-col items-center w-full h-full pt-[10px] max-w-[--app-main-page-max-width] sm:pt-[--app-main-page-padding-top]">
-            <h1 className="text-3xl border-b mb-2 p-2">Followers of <b>{ profileId }</b></h1>
+            <div className="flex items-center">
+                <Link href={`/${profileId}`}>
+                    <FontAwesomeIcon className="text-[24px] mb-2" icon={faArrowLeftLong} />
+                </Link>
+                <h1 className="text-2xl sm:text-3xl border-b mb-2 p-2">Followers of <b>{ profileId }</b></h1>
+            </div>
             <div className="flex flex-col items-center p-2 w-full h-[calc(100%-55px)] overflow-y-scroll hide-scrollbar">
                 { followerElems }
             </div>

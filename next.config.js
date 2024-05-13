@@ -2,6 +2,10 @@
 const nextConfig = {
     images: {
         remotePatterns: [{ hostname: "*" }]
+    },
+    compiler: {
+      // Enables the styled-components SWC transform
+      styledComponents: true
     }
 }
 
