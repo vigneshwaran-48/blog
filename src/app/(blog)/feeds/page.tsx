@@ -1,17 +1,11 @@
-import { Blog, UserMeta } from '@/util/AppTypes';
+import { Blog } from '@/util/AppTypes';
 import React from 'react'
 import styles from "./page.module.css"
-import { getFeeds, getFollowingFeeds, getMostLikedBlogs } from '@/app/actions/blog';
+import { getFeeds, getFollowingFeeds } from '@/app/actions/blog';
 import InfiniteBlogScroller from './components/InfiniteBlogScroller';
 import { Metadata } from 'next';
 import { NavLink } from '@/util/NavLink';
-import SmallBlog from '../components/blog/SmallBlog';
-import { getAllUsers, getMostFollowedUsers } from '@/app/actions/user';
-import SmallUserComp from './components/SmallUserComp';
 import SidebarFeeds from './components/SidebarFeeds';
-import { wait } from '@/util/wait';
-import DolphinLoader from '../components/loaders/DolphinLoader';
-import BlogboxSkeleton from '../components/skeleton/BlogboxSkeleton';
 
 export const metadata: Metadata = {
     title: "Feeds",
@@ -23,12 +17,6 @@ interface Props {
 }
 
 const BlogFeeds = async ({ searchParams = {} }: Props) => {
-
-    if (true) {
-        return (
-            
-        )
-    }
 
     const isFollowing = searchParams["following"] != null;
 
