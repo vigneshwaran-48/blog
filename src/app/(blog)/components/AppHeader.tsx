@@ -16,6 +16,7 @@ import { SearchBar } from './blog/SearchBar';
 import { setQuery } from '@/lib/features/search/searchSlice';
 import { NavLink } from '@/util/NavLink';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 export const AppHeader = () => {
 
@@ -71,6 +72,10 @@ export const AppHeader = () => {
         {
             content: "Stories",
             onClick: () => router.push(`/stories`)
+        },
+        {
+            content: "Logout",
+            onClick: () => signOut()
         }
     ]
 
