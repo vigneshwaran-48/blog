@@ -56,8 +56,10 @@ export const authOptions: NextAuthOptions = {
             }
 
             let image = profile?.image;
-            if (account?.provider === "google" || account?.provider === "vapps") {
+            if (account?.provider === "google") {
                 image = Object.create(profile as object).picture;
+            } else if (account?.provider === "vapps") {
+                image = Object.create(profile as object).image;
             }
 
             const userData = {
