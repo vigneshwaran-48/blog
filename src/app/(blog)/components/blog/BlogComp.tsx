@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faMinus } from '@fortawesome/free-solid-svg-icons';
 import BlogContentComp from './BlogContentComp';
-import Link from 'next/link';
 import { NavLink } from '@/util/NavLink';
 
 export const BlogComp = ({ blog }: { blog: Blog }) => {

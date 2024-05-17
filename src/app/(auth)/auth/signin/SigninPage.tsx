@@ -1,15 +1,17 @@
 "use client";
 
-import CircleLoader from '@/app/(blog)/components/loaders/CircleLoader';
 import DolphinLoader from '@/app/(blog)/components/loaders/DolphinLoader';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 const SignupPage = ({ error, callbackUrl }: { error: string | undefined, callbackUrl: string | undefined }) => {
 
 
     useEffect(() => {
+        if (!callbackUrl) {
+            callbackUrl = `${window.location.origin}/feeds`;
+        }
         signIn("vapps", { callbackUrl })
     }, []);
 

@@ -53,13 +53,12 @@ const BlogComposeComp = ({ blog }: Props) => {
         }
         else {
             router.push(`/compose/${response.blog.id}`);
-            dispatch(response.blog);
+            dispatch(setBlog(response.blog));
         }
         dispatch(setIsSaving(false));
     }), []);
 
     const processEditChange = useMemo(() => debounce(async (blog: Blog) => {
-        // dispatch(setIsSaving(true));
         const response = await updateBlog(blog)
         if(response.status !== 200 && response.status !== 201) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error}));
