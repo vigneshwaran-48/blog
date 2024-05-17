@@ -53,7 +53,7 @@ const BlogComposeComp = ({ blog }: Props) => {
         }
         else {
             router.push(`/compose/${response.blog.id}`);
-            dispatch(response.blog);
+            dispatch(setBlog(response.blog));
         }
         dispatch(setIsSaving(false));
     }), []);
