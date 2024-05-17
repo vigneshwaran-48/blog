@@ -11,7 +11,7 @@ const ProfileBlog = ({ blog, profileId }: { blog: Blog, profileId: string }) => 
 
     return (
         <div 
-            className={`${styles.blog} y-axis-flex`}
+            className={`${styles.blog} y-axis-flex cursor-pointer`}
             onClick={e => router.push(`/${profileId}/${blog.id}`)}
         >
             <img src={blog.image} alt="User Posted Blog" width={100} height={230}  />
