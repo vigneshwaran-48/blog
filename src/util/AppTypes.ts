@@ -1,5 +1,11 @@
 import { Theme } from "@/lib/features/settings/preferencesSlice"
 
+export type Tag = {
+    id: string,
+    name: string,
+    description: string
+}
+
 export type Preferences = {
     userId: string,
     id: string,
@@ -28,7 +34,7 @@ export type SearchEntity = {
 
 export type PageStatus = "AVAILABLE" | "NOT_AVAILABLE" | "SIGNUP" | "BUY_PREMIUM";
 
-export type SearchType = "USER" | "ORGANIZATION" | "BLOG" | "ALL";
+export type SearchType = "USER" | "ORGANIZATION" | "BLOG" | "TAG" | "ALL";
 
 export type SearchBy = "USER_NAME" | "BLOG_TITLE" | "BLOG_CONTENT" | "ORGANIZATION_NAME" | "PROFILE_ID" | "ALL";
 

@@ -8,7 +8,7 @@ const FollowingUsersOrganizationsComp = async ({ isUser }: { isUser: boolean }) 
 
     const followingData: UserMeta[] = isUser ? await getFollowingUsers() : await getFollowingOrganizations();
 
-    const followoingUserElems = followingData ? followingData.map((user, key) => (
+    const followoingUserElems = followingData && followingData.length > 0 ? followingData.map((user, key) => (
         <div 
             key={key} 
             className="w-[250px] h-[175px] flex flex-col items-center justify-center p-4 m-2 border rounded-md transition-all sm:hover:scale-[1.1]"
@@ -31,7 +31,7 @@ const FollowingUsersOrganizationsComp = async ({ isUser }: { isUser: boolean }) 
                 className="text-[--app-light-text-color] tex                                                                                                     t-[14px]"
             >{ `@${user.profileId}` }</Link>
         </div>
-    )) : "No content"
+    )) : <h1 className="text-2xl text-center">{`You are not following any ${isUser ? "Users" : "Organizations"}`}</h1>
 
     return (
         <div className="w-full h-full flex flex-wrap items-center sm:items-start justify-center overflow-y-scroll hide-scrollbar">

@@ -2,6 +2,7 @@ import React from 'react'
 import FilterBar from './components/FilterBar';
 import FollowingUsersOrganizationsComp from './components/FollowingUsersOrganizationsComp';
 import { Metadata } from 'next';
+import FollowingTags from './components/FollowingTags';
 
 interface Props {
     searchParams?: { [key: string]: string | string[] | undefined }
@@ -29,7 +30,7 @@ const page = ({ searchParams = {} }: Props) => {
             <FilterBar currentFilter={Object.keys(searchParams)[0] || "users"} />
             <div className="w-full h-[calc(100%-62px)]">
                 {
-                    isUsers || isOrganizations ? <FollowingUsersOrganizationsComp isUser={isUsers} /> : "Test"
+                    isUsers || isOrganizations ? <FollowingUsersOrganizationsComp isUser={isUsers} /> : <FollowingTags />
                 }
             </div>
         </div>

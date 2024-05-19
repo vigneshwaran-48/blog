@@ -37,6 +37,12 @@ const initialState: Search = {
                 name: "Blog",
                 checked: false,
                 type: "type"
+            },
+            {
+                id: "TAG",
+                name: "Tag",
+                checked: false,
+                type: "type"
             }
         ],
         searchBy: [
