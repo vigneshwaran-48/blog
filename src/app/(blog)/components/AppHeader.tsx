@@ -75,7 +75,8 @@ export const AppHeader = () => {
         },
         {
             content: "Logout",
-            onClick: () => signOut()
+            onClick: () => signOut(),
+            hoverRed: true
         }
     ]
 
@@ -118,8 +119,8 @@ export const AppHeader = () => {
                             height={40}
                         />
                     }
-                    top="50px"
-                    translateX="-90%"
+                    top="55px"
+                    translateX="-85%"
                 />
             </div>
         </header>
