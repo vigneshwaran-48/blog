@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from "./publishBlog.module.css";
 import Dropdown from './form/Dropdown';
 import { ProfileId, Tag } from '@/util/AppTypes';
@@ -10,6 +10,9 @@ import { addPopup } from '@/lib/features/popup/popupSlice';
 import { PopupType } from './popup/PopUp';
 import { useRouter } from 'next/navigation';
 import Button from './form/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { applyTagsToBlog } from '@/app/actions/tag';
 
 interface Props {
     isOpen: boolean,
@@ -54,7 +57,16 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
         setTagsToShow(prevTagsToShow => {
             return prevTagsToShow.filter(prevTag => prevTag.id !== id);
         });
-        console.log(id)
+    }
+
+    const onRemoveTag = (id: string) => {
+        setBlogTags(prevBlogTags => {
+            return prevBlogTags.filter(tag => tag.id !== id);
+        });
+        setTagsToShow(prevTagsToShow => {
+            prevTagsToShow.push(tags.find(tag => tag.id === id) as Tag);
+            return [...prevTagsToShow];
+        });
     }
 
     const onPublish = async () => {
@@ -71,14 +83,16 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
         router.push(`/${publishAtProfile?.profileId}/${blogId}`);
     }
 
-    const items = profiles.map(profile => ({ id: profile.id + "", displayName: profile.profileId }));
+    const onEdit = async () => {
+        const response = await applyTagsToBlog(blogId as string, blogTags.map(tag => tag.id));
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
+    }
 
-    const tagList = tagsToShow.map((tag, key) => 
-        <li className="p-2 bg-[--app-background-color] border-b border-[transparent] cursor-pointer transition-all hover:border-[--app-light-background-color]" 
-            key={key}
-            onClick={() => onApplyTag(tag.id)}
-        >{tag.name}</li>
-    );
+    const items = profiles.map(profile => ({ id: profile.id + "", displayName: profile.profileId }));
 
     return (
         <div className={`flex ${styles.publishModal} ${isOpen ? styles.showModal : "hidden"} full-body`}>
@@ -93,16 +107,81 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
                 </div>
                 <div className={`${styles.modalRow} x-axis-flex full-width`}>
                     <p>Tags</p>
-                    <div className={`${styles.tagDropdownContainer} relative`}>
-                        <input type="text" className="w-full p-2 border outline-none" />
-                        <ul className="w-full absolute top-[100%] h-[0px] transition-all overflow-y-scroll">
-                            { tagList }
-                        </ul>
-                    </div>
+                    <TagsDropdown tags={tagsToShow} selectedTags={blogTags} onApplyTag={onApplyTag} onRemoveTag={onRemoveTag} />
                 </div>
-                {/* <button className={`button`} onClick={onPublish}>Publish</button> */}
-                <Button displayName="Publish" loadingText="Publishing ..." onClick={onPublish} backgroundColor="#128B10" />
+                <div className="flex">
+                    <Button displayName="Publish" loadingText="Publishing ..." onClick={onPublish} backgroundColor="#128B10" />
+                    <Button displayName="Edit" loadingText="Editting ..." onClick={onEdit}></Button>
+                </div>
             </div>
+        </div>
+    )
+}
+
+const TagsDropdown = ({ tags, selectedTags, onApplyTag, onRemoveTag }: { tags: Tag[], selectedTags: Tag[], onApplyTag: (id: string) => void, onRemoveTag: (id: string) => void }) => {
+
+    const [ showDropdown, setShowDropdown ] = useState<boolean>(false);
+    const [ searchedTags, setSearchedTags ] = useState<Tag[]>([]);
+    const dropDownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const foucusOutHandler = (e: MouseEvent) => {
+            if (dropDownRef.current && !dropDownRef.current.contains(e.target as Node)) {
+                setShowDropdown(false);
+            }
+        }
+        window.addEventListener("click", foucusOutHandler);
+        return (() => {
+            window.removeEventListener("click", foucusOutHandler);
+        });
+    }, []);
+
+    useEffect(() => {
+        setSearchedTags(tags);
+    }, [tags]);
+
+    const handleSearchTags = (query: string) => {
+        setSearchedTags(() => {
+            return tags.filter(tag => tag.name.toLowerCase().includes(query.toLowerCase()));
+        });
+    }
+
+    const tagList = searchedTags.map((tag, key) => 
+        <li className="p-2 bg-[--app-background-color] border-b border-[transparent] cursor-pointer transition-all hover:border-[--app-light-background-color]" 
+            key={key}
+            onClick={() => onApplyTag(tag.id)}
+        >{tag.name}</li>
+    );
+
+    const selectedElems = selectedTags.map(tag => {
+        return (
+            <div key={tag.id} className={`m-1 w-fit p-1 bg-[--app-light-background-color] rounded flex flex-shrink-0 items-center justify-between`}>
+                <p className="mr-1">{ tag.name }</p>
+                <FontAwesomeIcon 
+                    icon={faXmark} 
+                    onClick={() => onRemoveTag(tag.id)}
+                    className="cursor-pointer"
+                />
+            </div>
+        )
+    })
+
+    return (
+        <div ref={dropDownRef} className={`${styles.tagDropdownContainer} w-[230px] relative`}>
+            <div className={`flex flex-wrap h-fit border`}>
+                <div className={`flex flex-wrap`}>
+                    { selectedElems }
+                </div>
+                <input 
+                    type="text" 
+                    onFocus={() => setShowDropdown(true)} 
+                    className="w-full p-2 outline-none" 
+                    onChange={e => handleSearchTags(e.target.value)}
+                />
+            </div>
+            <ul className={`w-full absolute top-[100%] ${showDropdown ? "h-[205px]" : "h-[0px]"} transition-all overflow-y-scroll`}>
+                { tagList }
+            </ul>
         </div>
     )
 }

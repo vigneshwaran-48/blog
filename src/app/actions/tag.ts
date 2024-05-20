@@ -2,6 +2,7 @@
 
 import { sendRequest } from "@/util/RequestUtil";
 import { getTagResourceRoutes } from "@/util/ResourceServer";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const getFollowingTags = async () => {
@@ -78,4 +79,22 @@ export const getAllBlogsOfTag = async (id: string) => {
         redirect("/auth/signin");
     }
     throw new Error("Error while fetching blogs of tag");
+}
+
+export const applyTagsToBlog = async (blogId: string, tagIds: string[]) => {
+    const routes = getTagResourceRoutes();
+
+    let tagIdsStr = "";
+    tagIds.forEach(tagId => {
+        tagIdsStr += `${tagId},`;
+    })
+    tagIdsStr = tagIdsStr.substring(0, tagIdsStr.length -1);
+    const response = await sendRequest({ url: `${routes.get}/blog/${blogId}?tagIds=${tagIdsStr}`, method: "POST", includeBody: false });
+
+    const data = await response.json();
+    if (response.status === 401) {
+        redirect("/auth/signin");
+    }
+    revalidatePath(`/compose/${blogId}`);
+    return data;
 }
