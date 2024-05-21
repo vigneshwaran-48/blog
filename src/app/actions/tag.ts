@@ -98,3 +98,27 @@ export const applyTagsToBlog = async (blogId: string, tagIds: string[]) => {
     revalidatePath(`/compose/${blogId}`);
     return data;
 }
+
+export const followTag = async (id: string) => {
+    const routes = getTagResourceRoutes();
+
+    const response = await sendRequest({ url: `${routes.get}/${id}/follow`, method: "POST", includeBody: false });
+    const data = await response.json();
+    if (response.status === 401) {
+        redirect("/auth/signin");
+    }
+    revalidatePath(`/tag/${id}`);
+    return data;
+}
+
+export const unFollowTag = async (id: string) => {
+    const routes = getTagResourceRoutes();
+
+    const response = await sendRequest({ url: `${routes.get}/${id}/follow`, method: "DELETE", includeBody: false });
+    const data = await response.json();
+    if (response.status === 401) {
+        redirect("/auth/signin");
+    }
+    revalidatePath(`/tag/${id}`);
+    return data;
+}

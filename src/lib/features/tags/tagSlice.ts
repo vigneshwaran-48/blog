@@ -12,7 +12,7 @@ const tagSlice = createSlice({
             state.push(...action.payload);
         }
     }
-})
+});
 
 export const { setTags } = tagSlice.actions;
 export default tagSlice.reducer;
