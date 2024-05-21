@@ -90,10 +90,6 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
         router.push(`/${publishAtProfile?.profileId}/${blogId}`);
     }
 
-    const onEdit = async () => {
-        
-    }
-
     const items = profiles.map(profile => ({ id: profile.id + "", displayName: profile.profileId }));
 
     return (
