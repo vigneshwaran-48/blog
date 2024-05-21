@@ -103,7 +103,8 @@ export type Blog = {
     id?: string,
     email?: string,
     publishedAt?: ProfileId,
-    publised?: boolean
+    publised?: boolean,
+    tags?: Tag[]
 }
 
 export type UserMeta = {

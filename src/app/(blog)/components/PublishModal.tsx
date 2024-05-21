@@ -74,6 +74,13 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: "No blog to publish"}));
             return;
         }
+
+        const tagsAddedResponse = await applyTagsToBlog(blogId as string, blogTags.map(tag => tag.id));
+        if(tagsAddedResponse.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: tagsAddedResponse.error }));
+            return;
+        }
+
         const response = await publishBlog(blogId, publishAtProfile?.profileId as string);
         if(response.status !== 200) {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
@@ -84,12 +91,7 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
     }
 
     const onEdit = async () => {
-        const response = await applyTagsToBlog(blogId as string, blogTags.map(tag => tag.id));
-        if(response.status !== 200) {
-            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
-            return;
-        }
-        dispatch(addPopup({ id: getUniqueId(), type: PopupType.SUCCESS, message: response.message }));
+        
     }
 
     const items = profiles.map(profile => ({ id: profile.id + "", displayName: profile.profileId }));
@@ -109,10 +111,7 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
                     <p>Tags</p>
                     <TagsDropdown tags={tagsToShow} selectedTags={blogTags} onApplyTag={onApplyTag} onRemoveTag={onRemoveTag} />
                 </div>
-                <div className="flex">
-                    <Button displayName="Publish" loadingText="Publishing ..." onClick={onPublish} backgroundColor="#128B10" />
-                    <Button displayName="Edit" loadingText="Editting ..." onClick={onEdit}></Button>
-                </div>
+                <Button displayName="Publish" loadingText="Publishing ..." onClick={onPublish} backgroundColor="#128B10" />
             </div>
         </div>
     )
@@ -175,7 +174,7 @@ const TagsDropdown = ({ tags, selectedTags, onApplyTag, onRemoveTag }: { tags: T
                 <input 
                     type="text" 
                     onFocus={() => setShowDropdown(true)} 
-                    className="w-full p-2 outline-none" 
+                    className="w-full p-2 outline-none bg-transparent" 
                     onChange={e => handleSearchTags(e.target.value)}
                 />
             </div>

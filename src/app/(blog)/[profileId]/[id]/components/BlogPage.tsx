@@ -4,6 +4,7 @@ import BlogUserDetails from './BlogUserDetails';
 import BlogOptions from './BlogOptions';
 import BlogCommentsSection from './BlogCommentsSection';
 import styles from "../page.module.css";
+import Link from 'next/link';
 
 interface Props {
     blog: Blog,
@@ -14,6 +15,14 @@ interface Props {
 
 const BlogPage = ({ blog, likesOfBlog, profileId, comments }: Props) => {
 
+    const tagsElems = blog.tags && blog.tags.length > 0 ? blog.tags.map(tag =>
+            <Link key={tag.id} href={`/tag/${tag.id}`}>
+                <p  
+                    className="text-[14px] flex-shrink-0 mr-2 font-semibold p-1 transition-all rounded hover:underline"
+                >#{tag.name}</p>
+            </Link>
+    ) : "";
+
     return (
         <>
             <img 
@@ -22,7 +31,10 @@ const BlogPage = ({ blog, likesOfBlog, profileId, comments }: Props) => {
             <BlogUserDetails user={blog.owner} postedOn={blog.displayPostedDate as string}  />
             <BlogOptions likes={likesOfBlog} blogId={blog.id as string} profileId={blog.publishedAt?.profileId as string} />
             <div className={`${styles.blogContent}`}>
-                <h1>{ blog.title }</h1>
+                <h1 className="text-4xl font-bold">{ blog.title }</h1>
+                <div className="flex flex-wrap p-1">
+                    { tagsElems }
+                </div>
                 <p dangerouslySetInnerHTML={ { __html: blog.content } } />
             </div>
             <BlogCommentsSection blogId={blog.id as string} profileId={profileId} comments={comments} />
