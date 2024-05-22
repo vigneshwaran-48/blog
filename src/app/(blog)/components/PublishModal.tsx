@@ -13,6 +13,7 @@ import Button from './form/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { applyTagsToBlog } from '@/app/actions/tag';
+import { setBlog } from '@/lib/features/compose/composeSlice';
 
 interface Props {
     isOpen: boolean,
@@ -22,6 +23,7 @@ interface Props {
 const PublishModal = ({ isOpen, onClose }: Props) => {
 
     const blogId = useAppSelector(state => state.composeSlice.id);
+    const blogComposeTags = useAppSelector(state => state.composeSlice.tags);
     const tags = useAppSelector(state => state.tagSlice);
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -39,6 +41,10 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
         setTagsToShow(tags.filter(tag => blogTags.findIndex(blogTag => blogTag.id === tag.id) < 0));
     }, [tags])
 
+    useEffect(() => {
+        setBlogTags(blogComposeTags || []);
+    }, [blogComposeTags])
+
     const fetchProfiles = async () => {
         const profiles: ProfileId[] = await getAllProfiles();
         setProfiles(profiles);
@@ -51,8 +57,7 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
 
     const onApplyTag = (id: string) => {
         setBlogTags(prevBlogTags => {
-            prevBlogTags.push(tags.find(tag => tag.id === id) as Tag);
-            return [...prevBlogTags];
+            return [...prevBlogTags, tags.find(tag => tag.id === id) as Tag];
         });
         setTagsToShow(prevTagsToShow => {
             return prevTagsToShow.filter(prevTag => prevTag.id !== id);
@@ -64,8 +69,7 @@ const PublishModal = ({ isOpen, onClose }: Props) => {
             return prevBlogTags.filter(tag => tag.id !== id);
         });
         setTagsToShow(prevTagsToShow => {
-            prevTagsToShow.push(tags.find(tag => tag.id === id) as Tag);
-            return [...prevTagsToShow];
+            return [...prevTagsToShow, tags.find(tag => tag.id === id) as Tag];
         });
     }
 

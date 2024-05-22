@@ -1,4 +1,4 @@
-import { Blog, ProfileId } from "@/util/AppTypes";
+import { Blog, ProfileId, Tag } from "@/util/AppTypes";
 import { getStaticResourceRoutes } from "@/util/ResourceServer";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
@@ -10,7 +10,8 @@ export interface Compose {
     id?: string,
     isSaving: boolean,
     publised: boolean,
-    publishedAt: ProfileId | null
+    publishedAt: ProfileId | null,
+    tags?: Tag[]
 }
 
 const defaultImage = getStaticResourceRoutes().getOne(552);
@@ -22,7 +23,8 @@ const initialState: Compose = {
     isEdit: false,
     isSaving: false,
     publised: false,
-    publishedAt: null
+    publishedAt: null,
+    tags: []
 }
 
 const composeSlice = createSlice({
@@ -46,6 +48,7 @@ const composeSlice = createSlice({
             state.isSaving = false;
             state.publised = false;
             state.publishedAt = null;
+            state.tags = [];
         },
         setBlog: (state, action: PayloadAction<Blog>) => {
             state.content = action.payload.content;
@@ -54,6 +57,7 @@ const composeSlice = createSlice({
             state.id = action.payload.id;
             state.publised = action.payload.publised || false;
             state.publishedAt = action.payload.publishedAt || null
+            state.tags = action.payload.tags;
         },
         setEditMode: (state, action: PayloadAction<boolean>) => {
             state.isEdit = action.payload;

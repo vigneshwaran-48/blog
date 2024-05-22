@@ -28,8 +28,8 @@ const FollowButtons = ({ tagId, isFollowing }: { tagId: string, isFollowing: boo
 
     return (
         isFollowing 
-            ? <Button displayName="UnFollow" loadingText="UnFollowing ..." onClick={() => followAction(true)} />
-            : <Button displayName="Follow" loadingText="Following ..." onClick={() => followAction(false)} />
+            ? <Button displayName="UnFollow" loadingText="UnFollowing..." className="bg-[red]" onClick={() => followAction(true)} />
+            : <Button displayName="Follow" loadingText="Following..." onClick={() => followAction(false)} />
     )
 }
 
