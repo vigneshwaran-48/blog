@@ -1,9 +1,8 @@
-import { followTag, getAllBlogsOfTag, getFollowingTags, getTagById, unFollowTag } from '@/app/actions/tag'
+import { getAllBlogsOfTag, getFollowingTags, getTagById } from '@/app/actions/tag'
 import { Blog, Tag } from '@/util/AppTypes';
 import React from 'react'
 import { BlogComp } from '../../components/blog/BlogComp';
 import SidebarFeeds from '../../feeds/components/SidebarFeeds';
-import Button from '../../components/form/Button';
 import FollowButtons from './FollowButtons';
 
 interface Props {

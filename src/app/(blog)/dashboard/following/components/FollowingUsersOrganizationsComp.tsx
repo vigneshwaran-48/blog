@@ -34,7 +34,7 @@ const FollowingUsersOrganizationsComp = async ({ isUser }: { isUser: boolean }) 
     )) : <h1 className="text-2xl text-center">{`You are not following any ${isUser ? "Users" : "Organizations"}`}</h1>
 
     return (
-        <div className="w-full h-full flex flex-wrap items-center sm:items-start justify-center overflow-y-scroll hide-scrollbar">
+        <div className="w-full h-full flex flex-wrap items-start justify-center overflow-y-scroll hide-scrollbar">
             { followoingUserElems }
         </div>
     )
