@@ -39,7 +39,7 @@ const StoriesPage = async ({ searchParams = {} }: Props) => {
     
     return (
         <div className={`${styles.storiesPage} full-body flex`}>
-            <div className={`${styles.storiesContainer} flex flex-col sm:border-r`}>
+            <div className={`${styles.storiesContainer} flex flex-col sm:border-r p-2`}>
                 <nav className="flex w-full h-[50px]">
                     <NavLink activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 button" href="/stories" useStartsWith={false}>UnPublished</NavLink>
                     <NavLink activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 button" href="/stories?published" useStartsWith={false}>Published</NavLink>
