@@ -15,14 +15,18 @@ export type Props = {
 const ResultComp = ({ name, image, type, profileId, entityId }: Props ) => {
 
     let link;
-
+    console.log(type)
     switch(type) {
         case "BLOG":
             link = `/${profileId}/${entityId}`;
             break;
         case "ORGANIZATION":
         case "USER":
+        case "ALL":
             link = `/${profileId}`;
+            break;
+        case "TAG":
+            link = `/tag/${profileId}`
             break;
         default:
             throw new Error("Unknown type");
@@ -32,7 +36,7 @@ const ResultComp = ({ name, image, type, profileId, entityId }: Props ) => {
         <NavLink href={link} className="w-full h-fit">
             <div className="w-full h-fit border-b rounded transition duration-500 flex align-middle p-7 hover:bg-[var(--app-light-background-color)] sm:border-none">
                 <Image 
-                    src={image}
+                    src={image || "/person.jpg"}
                     alt="search result image"
                     width={40}
                     height={40}

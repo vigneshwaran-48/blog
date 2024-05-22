@@ -4,6 +4,7 @@ import popupSlice from "./features/popup/popupSlice";
 import preferencesSlice from "./features/settings/preferencesSlice";
 import composeSlice from "./features/compose/composeSlice";
 import searchSlice from "./features/search/searchSlice";
+import tagSlice from "./features/tags/tagSlice";
 
 export const makeStore = () => {
     return configureStore({
@@ -12,7 +13,8 @@ export const makeStore = () => {
             popupSlice,
             preferencesSlice,
             composeSlice,
-            searchSlice
+            searchSlice,
+            tagSlice
         }
     });
 }

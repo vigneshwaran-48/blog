@@ -71,7 +71,7 @@ const Dropdown = ({ items, onSelect, defaultValue, rightAlign = false }: Props) 
                 <p>{ selectedItem?.displayName }</p>
                 <FontAwesomeIcon icon={faAngleDown} />
             </div>
-            <ul className={`${rightAlign ? styles.dropDownRight : styles.dropDownLeft} ${showDropdown ? styles.showDropDown : ""}`}>
+            <ul className={`${rightAlign ? styles.dropDownRight : styles.dropDownLeft} ${showDropdown ? styles.showDropDown : ""} z-20`}>
                 { itemElems }
             </ul>
         </div>

@@ -6,10 +6,11 @@ interface Props {
     displayName: string,
     onClick: () => Promise<any>,
     loadingText: string,
-    backgroundColor?: string
+    backgroundColor?: string,
+    className?: string
 }
 
-const Button = ({ displayName, loadingText, onClick, backgroundColor = "--app-selected-background-color" }: Props) => {
+const Button = ({ displayName, loadingText, onClick, backgroundColor = "--app-selected-background-color", className = "" }: Props) => {
 
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
@@ -21,7 +22,7 @@ const Button = ({ displayName, loadingText, onClick, backgroundColor = "--app-se
 
     return (
         <button 
-            className={`button bg-[${backgroundColor}] text-[--app-selected-text-color] ${isLoading ? "active:scale-[1]" : "active:scale-[0.9]"}`}
+            className={`button bg-[${backgroundColor}] text-[--app-selected-text-color] ${isLoading ? "active:scale-[1]" : "active:scale-[0.9]"} ${className}`}
             onClick={handleClick}
             disabled={isLoading}
         >
