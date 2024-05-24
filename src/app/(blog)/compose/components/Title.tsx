@@ -20,6 +20,7 @@ const Title = ({ onChange }: { onChange: (blog: Partial<Compose>) => void }) => 
             name="Title"
             onChange={text => handleTitleChange(text.currentTarget.value)}
             placeHolder='Title'
+            maxLength={25}
         />
     )
 }

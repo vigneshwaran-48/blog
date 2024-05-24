@@ -5,6 +5,7 @@ import BlogOptions from './BlogOptions';
 import BlogCommentsSection from './BlogCommentsSection';
 import styles from "../page.module.css";
 import Link from 'next/link';
+import ReadTimeWatcher from './ReadTimeWatcher';
 
 interface Props {
     blog: Blog,
@@ -25,6 +26,7 @@ const BlogPage = ({ blog, likesOfBlog, profileId, comments }: Props) => {
 
     return (
         <>
+            <ReadTimeWatcher blogId={blog.id as string} />
             <img 
                 src={blog.image} 
                 alt="Blog Header Image" />

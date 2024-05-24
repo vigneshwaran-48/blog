@@ -4,7 +4,6 @@ import React from 'react';
 import styles from "./blogOptions.module.css";
 import { BlogLike } from '@/util/AppTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import Image from 'next/image';
 import { likeBlog, removeLikeFromBlog } from '@/app/actions/blog';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
