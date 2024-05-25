@@ -6,6 +6,7 @@ import BlogCommentsSection from './BlogCommentsSection';
 import styles from "../page.module.css";
 import Link from 'next/link';
 import ReadTimeWatcher from './ReadTimeWatcher';
+import { setBlogView } from '@/app/actions/blogStats';
 
 interface Props {
     blog: Blog,
@@ -23,6 +24,8 @@ const BlogPage = ({ blog, likesOfBlog, profileId, comments }: Props) => {
                 >#{tag.name}</p>
             </Link>
     ) : "";
+
+    setBlogView(profileId, blog.id as string);
 
     return (
         <>
