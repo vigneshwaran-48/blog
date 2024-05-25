@@ -12,10 +12,11 @@ interface Props {
     blog: Blog,
     likesOfBlog: BlogLike[],
     profileId: string,
-    comments: Comment[]
+    comments: Comment[],
+    viewsCount: number
 }
 
-const BlogPage = ({ blog, likesOfBlog, profileId, comments }: Props) => {
+const BlogPage = ({ blog, likesOfBlog, profileId, comments, viewsCount }: Props) => {
 
     const tagsElems = blog.tags && blog.tags.length > 0 ? blog.tags.map(tag =>
             <Link key={tag.id} href={`/tag/${tag.id}`}>
@@ -34,7 +35,13 @@ const BlogPage = ({ blog, likesOfBlog, profileId, comments }: Props) => {
                 src={blog.image} 
                 alt="Blog Header Image" />
             <BlogUserDetails user={blog.owner} postedOn={blog.displayPostedDate as string}  />
-            <BlogOptions likes={likesOfBlog} blogId={blog.id as string} profileId={blog.publishedAt?.profileId as string} />
+            <BlogOptions 
+                viewsCount={viewsCount} 
+                likes={likesOfBlog} 
+                blogId={blog.id as string} 
+                profileId={blog.publishedAt?.profileId as string} 
+                commentsCount={comments.length}
+            />
             <div className={`${styles.blogContent}`}>
                 <h1 className="text-4xl font-bold">{ blog.title }</h1>
                 <div className="flex flex-wrap p-1">

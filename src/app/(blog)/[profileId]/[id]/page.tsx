@@ -32,14 +32,17 @@ const page = async ({ params: { id, profileId } }: Props) => {
     const blogResponse: BlogFeedResponse = await getBlogOfProfile(id, profileId);
     const blogStatsResponse: BlogViewStats = await getBlogViewStats(id);
 
-    console.log(blogStatsResponse)
-
     let blogStatus = blogResponse.blogStatus;
     let content;
 
     if (blogStatus === AppFields.PageStatus.AVAILABLE) {
         const { blog, likesOfBlog, comments } = blogResponse.feed;
-        content = <BlogPage profileId={profileId} blog={blog} comments={comments} likesOfBlog={likesOfBlog} />;
+        content = <BlogPage 
+                    viewsCount={blogStatsResponse.viewsCount} 
+                    profileId={profileId} 
+                    blog={blog} 
+                    comments={comments} 
+                    likesOfBlog={likesOfBlog} />;
     } else if (blogStatus === AppFields.PageStatus.SIGNUP) {
         content = (
             <div className="relative hide-scrollbar overflow-y-scroll w-full h-full flex">
