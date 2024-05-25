@@ -51,5 +51,29 @@ export const getBlogViewStats = async (blogId: string) => {
     else if (response.status === 401) {
         redirect("/auth/signin");
     }
-    throw new Error("Error while fetching blog stats");
+    throw new Error("Error while fetching blog view stats");
+}
+
+export const getAllBlogsViewStats = async () => {
+    const routes: APIRoutes = getBlogResourceRoutes(); 
+
+    const response = await sendRequest({
+        url: `${routes.get}/stats/view`,
+        method: "GET",
+        includeBody: false,
+        checkAuthentication: false
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        if (data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.stats;
+    }
+    else if (response.status === 401) {
+        redirect("/auth/signin");
+    }
+    throw new Error("Error while fetching all blog view stats");
 }

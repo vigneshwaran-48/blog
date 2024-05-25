@@ -2,6 +2,7 @@ import { Theme } from "@/lib/features/settings/preferencesSlice"
 
 export type BlogViewStats = {
     blogId: string,
+    title: string,
     viewsCount: number,
     usersCount: number,
     blogViews: BlogView[]
