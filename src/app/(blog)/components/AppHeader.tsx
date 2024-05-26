@@ -63,15 +63,18 @@ export const AppHeader = () => {
         },
         {
             content: "Search",
-            onClick: () => router.push(`/search`)
+            onClick: () => router.push(`/search`),
+            hideOnMobileView: true
         },
         {
             content: "Organization",
-            onClick: () => router.push(`/organization`)
+            onClick: () => router.push(`/organization`),
+            hideOnMobileView: true
         },
         {
             content: "Stories",
-            onClick: () => router.push(`/stories`)
+            onClick: () => router.push(`/stories`),
+            hideOnMobileView: true
         },
         {
             content: "Logout",

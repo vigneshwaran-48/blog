@@ -12,7 +12,6 @@ const BlogViewStatsRenderer = ({ allBlogsViewStats }: { allBlogsViewStats: BlogV
     return (
         <div className="w-[280px] h-[180px] sm:w-[480px] sm:h-[280px]">
             <LineChart 
-                // xAxis={[{ data: xAxis }]}
                 xAxis={[{
                     data: xAxis,
                     valueFormatter: index => allBlogsViewStats[index].title,

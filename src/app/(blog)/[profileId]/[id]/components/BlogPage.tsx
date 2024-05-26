@@ -34,7 +34,11 @@ const BlogPage = ({ blog, likesOfBlog, profileId, comments, viewsCount }: Props)
             <img 
                 src={blog.image} 
                 alt="Blog Header Image" />
-            <BlogUserDetails user={blog.owner} postedOn={blog.displayPostedDate as string}  />
+            <BlogUserDetails 
+                user={blog.owner} 
+                postedOn={blog.displayPostedDate as string}  
+                profileId={blog.publishedAt?.profileId as string}
+            />
             <BlogOptions 
                 viewsCount={viewsCount} 
                 likes={likesOfBlog} 

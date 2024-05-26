@@ -1,6 +1,6 @@
 "use client";
 
-import { BlogViewStats, UserMeta } from '@/util/AppTypes';
+import { BlogViewStats } from '@/util/AppTypes';
 import { LineChart } from '@mui/x-charts';
 import React from 'react'
 
@@ -22,8 +22,6 @@ const UserViewStatsRemderer = ({ allBlogsViewStats }: { allBlogsViewStats: BlogV
             timeVsUsers[date.getTime()] = [blogView.user.id];
         }
     }
-
-    console.log(Object.values(timeVsUsers).map(ids => ids.length).reverse())
 
     return (
         <div className="w-[280px] h-[180px] sm:w-[480px] sm:h-[280px]">

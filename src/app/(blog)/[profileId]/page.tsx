@@ -16,6 +16,7 @@ interface Props {
 
 export async function generateMetadata({ params: { profileId } }: Props): Promise<Metadata> {
 
+    console.log(`Profile Id => ${profileId}`)
     const profile: Profile = await getProfile(profileId);
 
     return {

@@ -5,26 +5,27 @@ import styles from "./moreOptions.module.css";
 
 export interface List {
     content: any,
-    hoverRed?: boolean
-    onClick?: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+    hoverRed?: boolean,
+    onClick?: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void,
+    hideOnMobileView?: boolean
 }
 
 interface Props {
     lists: List[], 
     icon: any, 
     top?: string, 
-    translateX?: string
+    translateX?: string,
 }
 
 const MoreOptions = ({ lists, icon, top = "20px", translateX = "" }: Props) => {
 
     const listElems = lists && lists.map((list, key) => {
-        const { content, hoverRed = false, onClick = () => {} } = list;
+        const { content, hoverRed = false, onClick = () => {}, hideOnMobileView } = list;
         return (
             <li 
                 key={key} 
                 onClick={onClick}
-                className={`${hoverRed ? styles.hoverRed : ""}`}
+                className={`${hoverRed ? styles.hoverRed : ""} ${hideOnMobileView ? "hidden sm:block" : ""}`}
             >{ content }</li>
         )
     });
