@@ -9,5 +9,6 @@ export interface Props {
     onChange: (e: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => void,
     width?: number,
     height?: number,
-    id?: string
+    id?: string,
+    maxLength?: number
 }

@@ -1,5 +1,20 @@
 import { Theme } from "@/lib/features/settings/preferencesSlice"
 
+export type BlogViewStats = {
+    blogId: string,
+    title: string,
+    viewsCount: number,
+    usersCount: number,
+    blogViews: BlogView[]
+}
+
+export type BlogView = {
+    id: string,
+    blog: Blog,
+    user: UserMeta,
+    viewedTime: string
+}
+
 export type Tag = {
     id: string,
     name: string,

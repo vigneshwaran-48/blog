@@ -4,20 +4,23 @@ import React from 'react';
 import styles from "./blogOptions.module.css";
 import { BlogLike } from '@/util/AppTypes';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import Image from 'next/image';
 import { likeBlog, removeLikeFromBlog } from '@/app/actions/blog';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '../../../components/popup/PopUp';
 import LikeButton from './LikeButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faEye } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     likes: BlogLike[],
     blogId: string,
-    profileId: string
+    profileId: string,
+    viewsCount: number,
+    commentsCount: number
 }
 
-const BlogOptions = ({ likes, blogId, profileId }: Props) => {
+const BlogOptions = ({ likes, blogId, profileId, viewsCount, commentsCount }: Props) => {
 
     const userId = useAppSelector(state => state.userSlice.id);
     const dispatch = useAppDispatch();
@@ -49,6 +52,24 @@ const BlogOptions = ({ likes, blogId, profileId }: Props) => {
                 onRemoveLike={onRemoveLike}
                 onLiked={onLiked}
             />
+            {
+                viewsCount > 0 && 
+                    <span className="flex ml-4 items-center justify-between">
+                        <FontAwesomeIcon 
+                            icon={faEye} 
+                            color={document.documentElement.style.getPropertyValue("--app-text-color")} />
+                        <p className="ml-1">{ viewsCount }</p>
+                    </span>
+            }
+            {
+                commentsCount > 0 && 
+                    <span className="flex ml-4 items-center justify-between">
+                        <FontAwesomeIcon 
+                            icon={faComment} 
+                            color={document.documentElement.style.getPropertyValue("--app-text-color")} />
+                        <p className="ml-1">{ commentsCount }</p>
+                    </span>
+            }
         </div>
     )
 }

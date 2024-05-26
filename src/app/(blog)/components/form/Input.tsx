@@ -6,7 +6,7 @@ import { Props } from './Props';
 
 const TextArea = (props: Props) => {
 
-    const { name, placeHolder = "", value, onChange, displayName = name } = props;
+    const { name, placeHolder = "", value, onChange, displayName = name, maxLength = 100 } = props;
 
     return (
         <label className={`${styles.label}`}>
@@ -16,6 +16,7 @@ const TextArea = (props: Props) => {
                 placeholder={placeHolder}
                 value={value}
                 onChange={onChange}
+                maxLength={maxLength}
             />
         </label>
     )

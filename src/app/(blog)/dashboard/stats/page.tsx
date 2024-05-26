@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import React from 'react'
+import BlogViewStatsContainer from './BlogViewStatsContainer';
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -8,9 +9,12 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-const page = () => {
+const page = async () => {
+    
     return (
-        <div>Stats</div>
+        <div className="w-full h-full sm:p-2">
+            <BlogViewStatsContainer />
+        </div>
     )
 }
 

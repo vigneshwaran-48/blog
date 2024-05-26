@@ -1,5 +1,6 @@
 import { UserMeta } from '@/util/AppTypes';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 
 const SmallUserComp = ({ user }: { user: UserMeta }) => {
@@ -8,15 +9,19 @@ const SmallUserComp = ({ user }: { user: UserMeta }) => {
 
     return (
         <div className="flex items-center p-2">
-            <Image 
+            <Link href={`/${user.profileId}`}>
+                <Image 
                     src={image || "/person.jpg"} 
                     width={25} 
                     height={25} 
                     alt="Most Followed user" 
                     className="rounded-full mr-1"
                 />
+            </Link>
             <div className="flex flex-col">
-                <p className="font-bold">{ name }</p> 
+                <Link href={`/${user.profileId}`}>
+                    <p className="font-bold hover:underline">{ name }</p>                 
+                </Link>
                 <p className="text-[14px] text-[--app-light-text-color]">{ description }</p>
             </div>
         </div>

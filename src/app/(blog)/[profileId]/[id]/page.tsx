@@ -1,5 +1,5 @@
 import { getBlogOfProfile } from '@/app/actions/blog';
-import { BlogFeedResponse, UserMeta } from '@/util/AppTypes';
+import { BlogFeedResponse, BlogViewStats, UserMeta } from '@/util/AppTypes';
 import React from 'react';
 import styles from "./page.module.css";
 import { Metadata } from 'next';
@@ -7,6 +7,7 @@ import { AppFields } from '@/util/AppFields';
 import BlogPage from './components/BlogPage';
 import EmptyBlogPage from './components/EmptyBlogPage';
 import Link from 'next/link';
+import { getBlogViewStats } from '@/app/actions/blogStats';
 
 interface Props {
     params: { id: string, profileId: string }
@@ -29,13 +30,19 @@ export async function generateMetadata({ params: { id, profileId } }: Props): Pr
 const page = async ({ params: { id, profileId } }: Props) => {
 
     const blogResponse: BlogFeedResponse = await getBlogOfProfile(id, profileId);
+    const blogStatsResponse: BlogViewStats = await getBlogViewStats(id);
 
     let blogStatus = blogResponse.blogStatus;
     let content;
 
     if (blogStatus === AppFields.PageStatus.AVAILABLE) {
         const { blog, likesOfBlog, comments } = blogResponse.feed;
-        content = <BlogPage profileId={profileId} blog={blog} comments={comments} likesOfBlog={likesOfBlog} />;
+        content = <BlogPage 
+                    viewsCount={blogStatsResponse.viewsCount} 
+                    profileId={profileId} 
+                    blog={blog} 
+                    comments={comments} 
+                    likesOfBlog={likesOfBlog} />;
     } else if (blogStatus === AppFields.PageStatus.SIGNUP) {
         content = (
             <div className="relative hide-scrollbar overflow-y-scroll w-full h-full flex">
