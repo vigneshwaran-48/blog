@@ -39,7 +39,9 @@ const page = async ({ params: { tagId } }: Props) => {
                         }
                     </div>
                 </div>
-                { blogElems }
+                <div className="items-center w-[90%] h-[calc(100%-87px)] max-w-[--app-main-page-max-width] py-10 overflow-scroll hide-scrollbar y-axis-flex">
+                    { blogElems }
+                </div>
             </div>
             <SidebarFeeds />
         </div>
