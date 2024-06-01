@@ -4,9 +4,20 @@ import React from 'react'
 import { BlogComp } from '../../components/blog/BlogComp';
 import SidebarFeeds from '../../feeds/components/SidebarFeeds';
 import FollowButtons from './FollowButtons';
+import { Metadata } from 'next';
 
 interface Props {
     params: { tagId: string }
+}
+
+export async function generateMetadata({ params: { tagId } }: Props): Promise<Metadata> {
+
+    const tag: Tag = await getTagById(tagId);
+
+    return {
+        title: `${tag.name}`,
+        description: `${tag.name} applied blogs page`
+    }
 }
 
 const page = async ({ params: { tagId } }: Props) => {
@@ -39,7 +50,9 @@ const page = async ({ params: { tagId } }: Props) => {
                         }
                     </div>
                 </div>
-                { blogElems }
+                <div className="items-center w-[90%] h-[calc(100%-87px)] max-w-[--app-main-page-max-width] py-10 overflow-scroll hide-scrollbar y-axis-flex">
+                    { blogElems }
+                </div>
             </div>
             <SidebarFeeds />
         </div>

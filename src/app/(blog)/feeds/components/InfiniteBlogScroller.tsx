@@ -77,7 +77,7 @@ const InfiniteBlogScroller = ({ initialBlogs, nextPageStatus }: { initialBlogs: 
     const content = blogs && blogs.map((blog, key) => <BlogComp key={key} blog={blog} />);
 
     return (
-        <div className="items-center w-full max-w-[--app-main-page-max-width] py-10 overflow-scroll hide-scrollbar y-axis-flex">
+        <div className="items-center w-full h-full max-w-[--app-main-page-max-width] py-10 overflow-scroll hide-scrollbar y-axis-flex">
             {content}
             {showSpinner ?
                 <div ref={loaderRef}>

@@ -11,9 +11,10 @@ import { deleteBlog } from '@/app/actions/blog';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '../popup/PopUp';
+import { Tag } from '@/util/AppTypes';
 
 interface Props {
-    categories: string[],
+    categories: Tag[],
     blogId: string,
     postedDate: string
 }
@@ -47,10 +48,10 @@ const BlogMetaFooter = ({ blogId, categories, postedDate }: Props) => {
     const categoriesElems = categories?.map(category => {
         return (
             <div 
-                key={category} 
+                key={category.id} 
                 className={styles.category}
                 title="category"
-            >{ category }</div>
+            >{ category.name }</div>
         )
     });
 

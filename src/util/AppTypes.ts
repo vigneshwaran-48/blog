@@ -112,7 +112,6 @@ export type Blog = {
     content: string,
     image: string,
     postedTime?: string,
-    categories?: BlogCategory[],
     description?: string,
     displayPostedDate?: string,
     id?: string,
@@ -133,8 +132,6 @@ export type UserMeta = {
     showLoginPopup?: boolean,
     preferences?: Preferences
 }
-
-export type BlogCategory = string;
 
 export type Organization = {
     name?: string,
