@@ -4,6 +4,7 @@ import React from 'react'
 import { BlogComp } from '../../components/blog/BlogComp';
 import SidebarFeeds from '../../feeds/components/SidebarFeeds';
 import FollowButtons from './FollowButtons';
+import { Metadata } from 'next';
 
 interface Props {
     params: { tagId: string }
