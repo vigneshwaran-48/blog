@@ -9,6 +9,16 @@ interface Props {
     params: { tagId: string }
 }
 
+export async function generateMetadata({ params: { tagId } }: Props): Promise<Metadata> {
+
+    const tag: Tag = await getTagById(tagId);
+
+    return {
+        title: `${tag.name}`,
+        description: `${tag.name} applied blogs page`
+    }
+}
+
 const page = async ({ params: { tagId } }: Props) => {
 
     const [blogs, tag, followingTags]: [Blog[], Tag, Tag[]] = await Promise.all([
