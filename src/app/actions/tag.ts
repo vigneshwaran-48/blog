@@ -122,3 +122,22 @@ export const unFollowTag = async (id: string) => {
     revalidatePath(`/tag/${id}`);
     return data;
 }
+
+export const getAllBlogsOfTagForFeeds = async (name: string, page: number) => {
+    const routes = getTagResourceRoutes();
+
+    const response = await sendRequest({ url: `${routes.get}/${name}/blog/feeds?page=${page}`, method: "GET", includeBody: false });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        if (data.status !== 200) {
+            throw new Error(data.error);
+        }
+        return data.blogs;
+    }
+    else if (response.status === 401) {
+        redirect("/auth/signin");
+    }
+    throw new Error("Error while fetching blogs of tag for feeds");
+}
