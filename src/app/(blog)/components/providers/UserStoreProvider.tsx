@@ -7,7 +7,8 @@ import { setTags } from '@/lib/features/tags/tagSlice';
 import { setUser } from '@/lib/features/user/userSlice';
 import { useAppDispatch } from '@/lib/hooks';
 import { UserMeta } from '@/util/AppTypes';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import DolphinLoader from '../loaders/DolphinLoader';
 
 interface Props {
     children: React.ReactNode
@@ -17,8 +18,12 @@ const UserStoreProvider = ({ children }: Props) => {
 
     const dispatch = useAppDispatch();
 
+    const [ isLoading, setIsLoading ] = useState<boolean>(false);
+
     useEffect(() => {
+        setIsLoading(true);
         setUserInStore();
+        setIsLoading(false);
     }, []);
 
     const setUserInStore = async () => {
@@ -33,7 +38,7 @@ const UserStoreProvider = ({ children }: Props) => {
 
     return (
         <>
-            { children }
+            { isLoading ? <DolphinLoader /> : children }
         </>
     )
 }
