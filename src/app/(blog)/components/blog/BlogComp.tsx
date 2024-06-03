@@ -13,7 +13,7 @@ export const BlogComp = ({ blog }: { blog: Blog }) => {
         return (
             <div 
                 key={tag.id} 
-                className={`${styles.category} text-[14px]`}
+                className={`${styles.category} text-[14px] flex-shrink-0`}
                 title="category"
             >{ tag.name }</div>
         )

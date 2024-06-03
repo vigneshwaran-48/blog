@@ -134,7 +134,7 @@ export const getAllBlogsOfTagForFeeds = async (name: string, page: number) => {
         if (data.status !== 200) {
             throw new Error(data.error);
         }
-        return data.blogs;
+        return data;
     }
     else if (response.status === 401) {
         redirect("/auth/signin");

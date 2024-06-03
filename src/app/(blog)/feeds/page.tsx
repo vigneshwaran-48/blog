@@ -22,13 +22,13 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
 
     const followingTags: Tag[] = await getFollowingTags();
     const followintTagElems = followingTags && followingTags.length > 0 && followingTags.map(tag => (
-        <NavLink key={tag.id} activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 h-fit p-1 rounded-sm" href={`/feeds?tag=${tag.name}`}>{ tag.name }</NavLink>
+        <NavLink key={tag.id} activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 h-fit p-1 rounded-sm flex-shrink-0" href={`/feeds?tag=${tag.name}`} replacePlus={true}>{ tag.name }</NavLink>
     ));
 
     const isFollowing = searchParams["following"] != null;
     let followingTag: any = searchParams["tag"];
 
-    if (followingTag != null && followingTags.filter(tag => tag.name === followingTag).length < 1) {
+    if (followingTag != null && followingTags.filter(tag => tag.name === decodeURI(followingTag)).length < 1) {
         redirect("/feeds");
     }
 
@@ -38,10 +38,6 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
         data = await getFollowingFeeds(0);
     } else if (followingTag != null) {
         data = await getAllBlogsOfTagForFeeds(followingTag as string, 0);
-        console.log("Following Tag")
-        console.log(data)
-        console.log(data.blogs)
-        console.log(data.nextPageStatus)
     } else {
         data = await getFeeds(0);
     }
@@ -51,7 +47,7 @@ const BlogFeeds = async ({ searchParams = {} }: Props) => {
     return (
         <div className={`${styles.feeds} full-body flex`}>
             <div className={`${styles.feedsPage} flex flex-col sm:border-r`}>
-                <nav className="p-2 flex w-full h-[50px]">
+                <nav className="p-2 flex w-full sm:w-fit h-[50px] overflow-x-scroll hide-scrollbar border-b">
                     <NavLink activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 h-fit p-1 rounded-sm" href="/feeds" useStartsWith={false}>Feeds</NavLink>
                     <NavLink activeClassName="bg-[--app-selected-background-color] text-[--app-selected-text-color]" className="mr-2 h-fit p-1 rounded-sm" href="/feeds?following">Following</NavLink>
                     { followintTagElems }
