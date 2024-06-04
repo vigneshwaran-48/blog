@@ -49,8 +49,7 @@ const BlogMetaFooter = ({ blogId, categories, postedDate }: Props) => {
         return (
             <div 
                 key={category.id} 
-                className={styles.category}
-                title="category"
+                className={`${styles.category} flex-shrink-0`}
             >{ category.name }</div>
         )
     });

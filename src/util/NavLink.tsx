@@ -13,9 +13,10 @@ interface Props {
     activeClassName?: string,
     className?: string | null,
     useStartsWith?: boolean,
+    replacePlus?: boolean
 }
 
-export const NavLink = ({ children, href, activeClassName, className, useStartsWith = true }: Props) => {
+export const NavLink = ({ children, href, activeClassName, className, useStartsWith = true, replacePlus = false }: Props) => {
 
     const isLoggedIn = useAppSelector(state => state.userSlice.isLoggedIn);
     const dispatch = useAppDispatch();
@@ -35,13 +36,17 @@ export const NavLink = ({ children, href, activeClassName, className, useStartsW
         }
     }
 
-    const pathnameStr = `${pathName}${paramsString.length > 0 ? "?" + paramsString : ""}`
+    let pathnameStr = `${pathName}${paramsString.length > 0 ? "?" + paramsString : ""}`
+
+    if (replacePlus) {
+        pathnameStr = pathnameStr.replaceAll("+", " ");
+    }
 
     return (
         <Link href={href} className={`${className} ${useStartsWith
             ? pathnameStr.startsWith(href)
                 ? activeClassName : ""
-            : pathnameStr === href
+            : pathnameStr === href || decodeURI(pathnameStr) === href
                 ? activeClassName : ""}`}
             onClick={e => hanldeLinkClick(href, e)}
             id={href}
