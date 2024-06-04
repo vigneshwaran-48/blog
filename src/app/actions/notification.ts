@@ -30,3 +30,15 @@ export const markNotificationAsSeen = async (id: string) => {
     }
     return data;
 }
+
+export const markAllAsSeen = async () => {
+    const routes: APIRoutes = getNotificationResourceRoutes();
+
+    const response = await sendRequest({ url: `${routes.get}/seen`, method: "POST", includeBody: false });
+    const data = await response.json();
+
+    if (data.status === 401) {
+        redirect("/auth/signin");
+    }
+    return data;
+}

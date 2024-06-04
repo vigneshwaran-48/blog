@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from 'react';
+"use client";
+
+import React from 'react';
 
 import styles from "./notification.module.css";
-import { Notification } from '@/util/AppTypes';
-import { getNotificationsOfUser, markNotificationAsSeen } from '@/app/actions/notification';
+import { markAllAsSeen, markNotificationAsSeen } from '@/app/actions/notification';
 import NotificationComp from './NotificationComp';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '../popup/PopUp';
+import { setNotifications } from '@/lib/features/notification/notificationSlice';
 
 const NotificationContainer = () => {
 
-    const [ notifications, setNotifications ] = useState<Notification[]>([]);
+    const notifications = useAppSelector(state => state.notificationSlice.notifications);
 
     const dispatch = useAppDispatch();
-    const isLoggedIn = useAppSelector(state => state.userSlice.isLoggedIn);
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            fetchAndSetNotifications();
-        }
-    }, []);
-
-    const fetchAndSetNotifications = async () => {
-        const notifs: Notification[] = await getNotificationsOfUser();
-        setNotifications(notifs);
-    }
 
     const handleMarkAsSeen = async (id: string) => {
         const response = await markNotificationAsSeen(id);
@@ -33,17 +23,23 @@ const NotificationContainer = () => {
             dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
             return;
         }
-        setNotifications(prevNotifications => {
-            return prevNotifications.map(notification => {
-                if(notification.id === id) {
-                    notification.seen = true;
-                }
-                return notification;
-            });
-        });
+        dispatch(setNotifications(notifications.map(notification => 
+            notification.id === id ? { ...notification, seen: true } : notification)
+        ));
     }
 
-    const notificationElems = notifications && notifications.map((notification, key) => 
+    const handleMarkAllAsSeen = async () => {
+        const response = await markAllAsSeen();
+        if(response.status !== 200) {
+            dispatch(addPopup({ id: getUniqueId(), type: PopupType.FAILED, message: response.error }));
+            return;
+        }
+        dispatch(setNotifications(notifications.map(notification => ({ ...notification, seen: true }))));
+    }
+    
+    const notificationElems = notifications && [...notifications]
+                                                .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
+                                                .map((notification, key) => 
                                                     <NotificationComp 
                                                         key={key} 
                                                         notification={notification} 
@@ -55,7 +51,7 @@ const NotificationContainer = () => {
             <div className={`${styles.notificationContainer} full-body`}>
                 <div className={`${styles.notificationContainerHeader} x-axis-flex`}>
                     <h2>Notification</h2>
-                    <p>Mark as read</p>
+                    <p onClick={handleMarkAllAsSeen}>Mark all as seen</p>
                 </div>
                 <div className={`${styles.notifications} full-width hide-scrollbar y-axis-flex`}>
                     { notificationElems }

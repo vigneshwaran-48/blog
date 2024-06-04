@@ -5,6 +5,7 @@ import preferencesSlice from "./features/settings/preferencesSlice";
 import composeSlice from "./features/compose/composeSlice";
 import searchSlice from "./features/search/searchSlice";
 import tagSlice from "./features/tags/tagSlice";
+import notificationSlice from "./features/notification/notificationSlice";
 
 export const makeStore = () => {
     return configureStore({
@@ -14,7 +15,8 @@ export const makeStore = () => {
             preferencesSlice,
             composeSlice,
             searchSlice,
-            tagSlice
+            tagSlice,
+            notificationSlice
         }
     });
 }
