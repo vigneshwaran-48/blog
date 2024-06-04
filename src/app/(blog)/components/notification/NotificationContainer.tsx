@@ -5,15 +5,14 @@ import React from 'react';
 import styles from "./notification.module.css";
 import { markAllAsSeen, markNotificationAsSeen } from '@/app/actions/notification';
 import NotificationComp from './NotificationComp';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { useAppDispatch } from '@/lib/hooks';
 import { addPopup } from '@/lib/features/popup/popupSlice';
 import { getUniqueId } from '@/util/getUniqueId';
 import { PopupType } from '../popup/PopUp';
 import { setNotifications } from '@/lib/features/notification/notificationSlice';
+import { Notification } from '@/util/AppTypes';
 
-const NotificationContainer = () => {
-
-    const notifications = useAppSelector(state => state.notificationSlice.notifications);
+const NotificationContainer = ({ notifications }: { notifications: Notification[] }) => {
 
     const dispatch = useAppDispatch();
 
