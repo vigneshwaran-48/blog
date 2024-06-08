@@ -16,6 +16,13 @@ const NotificationComp = ({ notification, onMarkAsSeen }: Props) => {
         }
     }
 
+    let displayTime;
+    if (new Date(notification.time).toLocaleDateString() === new Date().toLocaleDateString()) {
+        displayTime = new Date(notification.time).toLocaleTimeString().slice(0, 5);
+    } else {
+        displayTime = new Date(notification.time).toLocaleDateString().slice(0, 5);
+    }
+    
     return (
         <div 
             onClick={handleMarkAsSeen} 
@@ -32,7 +39,7 @@ const NotificationComp = ({ notification, onMarkAsSeen }: Props) => {
                 <p>{ notification.message }</p>
             </div>
             <div className={`${styles.timeAndSeenStatus} y-axis-flex`}>
-                <p>{ notification.time.slice(0, 3) }</p>
+                <p>{ displayTime }</p>
                 {
                     <div className={`${styles.unseenIndicator} ${!notification.seen && styles.unSeenColor}`}></div>
                 }
