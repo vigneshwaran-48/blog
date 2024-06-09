@@ -1,13 +1,19 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
-import styles from "./page.module.css";
 
 const WelcomeHeader = () => {
 
     return (
-        <header className={`${styles.welcomeHeader} full-width`}>
-            <nav className="full-width x-axis-flex">
-                <h1>Blog</h1>
-                <button className={`${styles.getStartedButton} button`}>Get Started</button>
+        <header className={`w-full flex justify-center`}>
+            <nav className="w-full flex justify-between items-center sm:px-[20px]">
+                <div className="flex items-center">
+                    <Image src="/app-icon.png" width={30} height={30} alt="App icon" />
+                    <p className="font-bold text-[24px] ml-1">Blog</p>
+                </div>
+                <Link href="/feeds">
+                    <button className="p-2 bg-[--app-selected-background-color] text-[--app-selected-text-color] rounded">Get Started</button>
+                </Link>
             </nav>
         </header>
     )

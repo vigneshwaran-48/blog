@@ -14,7 +14,7 @@ const ProfileBlog = ({ blog, profileId }: { blog: Blog, profileId: string }) => 
             className={`${styles.blog} y-axis-flex cursor-pointer`}
             onClick={e => router.push(`/${profileId}/${blog.id}`)}
         >
-            <img src={blog.image} alt="User Posted Blog" width={100} height={230}  />
+            <img src={blog.image} alt="User Posted Blog" width={100} height={230} className="w-[100px] h-[230px]"  />
             <h2 className="m-2 text-3xl font-bold">{ blog.title }</h2>
         </div>
     )

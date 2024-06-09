@@ -41,7 +41,9 @@ export const getUserProfile = async () => {
         }
         throw new Error(data.error);
     }
-    console.log(`Response status => ${response.status}`)
+    if (response.status === 401) {
+        redirect("/auth/signin");
+    }
     throw new Error("Error while fetching users details");
 }
 
