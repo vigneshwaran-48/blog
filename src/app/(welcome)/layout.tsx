@@ -7,22 +7,23 @@ export const metadata: Metadata = {
   description: 'Welcome page of the blog application',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const layout = ({ children }: { children: React.ReactNode }) => {
+
   return (
-    <html lang="en">
-      <head>
-        <link
-            rel="icon"
-            href="/app-icon.png"
-            type="image/png"
-            sizes="any"
-        />
-      </head>
-      <body>{children}</body>
-    </html>
+      <html>
+          <head>
+              <link
+                  rel="icon"
+                  href="/app-icon.png"
+                  type="image/png"
+                  sizes="any"
+              />
+          </head>
+          <body className="flex justify-center items-center">
+              { children }
+          </body>
+      </html>
   )
 }
+
+export default layout;

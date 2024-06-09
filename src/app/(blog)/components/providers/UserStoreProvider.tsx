@@ -32,7 +32,6 @@ const UserStoreProvider = ({ children }: Props) => {
         const user: UserMeta = await getUserProfile();
         if (user.isLoggedIn) {
             const [tags, notifications]: [Tag[], Notification[]] = await Promise.all([getAllTags(), getNotificationsOfUser()]);
-            console.log(notifications)
             dispatch(setTags(tags));
             dispatch(setNotifications(notifications));
         }

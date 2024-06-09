@@ -3,12 +3,12 @@ import WelcomeHeader from "../components/WelcomeHeader"
 import WelcomePage from "../components/WelcomePage"
 import styles from "./page.module.css";
 
-export const metadata : Metadata = {
+export const metadata: Metadata = {
   title: "Welcome",
   description: "Welcome page of blog app"
 }
 
-export default function Home() {
+export default function page() {
   return (
     <main className={`${styles.welcomePage} y-axis-flex full-body`}>
       <WelcomeHeader />

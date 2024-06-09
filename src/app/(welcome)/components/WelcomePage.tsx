@@ -1,27 +1,25 @@
 import React from 'react';
-import styles from "./page.module.css";
 import Link from 'next/link';
+import Image from 'next/image';
 
 const WelcomePage = () => {
     return (
-        <div className={`${styles.welcomePage} full-width y-axis-flex`}>
-            <div className={`${styles.welcomeMessageContainer} full-width x-axis-flex`}>
-                <div>
-                    <h1>The Blog App that you&apos;ll need</h1>
-                    <Link href="/feeds">
-                        <button className={`${styles.getStartedButton} button`}>Get Stared</button>
-                    </Link>
-                </div>
-                <img src="/welcome-image.png" alt="App Welcome Image" />
+        <div className={`w-full h-[calc(100%-40px)] flex flex-col items-center`}>
+            <div className="flex flex-col">
+                <h1 className="my-6 text-center text-5xl font-bold text-gray-800 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-300">
+                    Share Your Voice with the World
+                </h1>
+                <p className="mt-4 text-center text-gray-700 max-w-2xl">
+                    Experience seamless blogging with advanced features like organizational roles, user and organization follow notifications, and comprehensive search functionality. Easily create and manage posts, tag content, and connect with a vibrant community.
+                </p>
             </div>
-            <div className={`${styles.welcomePageInfoContainer} full-width x-axis-flex`}>
-                <div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quae magni dolores fugiat odio? Maiores, dicta. Eligendi, fuga. Ipsa earum sed sapiente assumenda quo expedita nam suscipit aperiam enim totam.</p>
-                </div>
-                <div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quae magni dolores fugiat odio? Maiores, dicta. Eligendi, fuga. Ipsa earum sed sapiente assumenda quo expedita nam suscipit aperiam enim totam.</p>
-                </div>
-            </div>
+            <Image 
+                src="/welcome/blog-app-feeds.png" 
+                width={100} 
+                height={100} 
+                alt='Blog App Feeds page' 
+                className="max-w-[500px] w-[95%] h-fit my-4"
+            />
         </div>
     )
 }

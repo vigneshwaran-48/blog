@@ -23,7 +23,6 @@ const userSlice = createSlice({
             state.image = image;
         },
         setUser: (state, action: PayloadAction<UserMeta>) => {
-            console.log(action.payload);
             // Setting all values separately then only it is getting reflected in the store.
             state.name = action.payload.name;
             state.image = action.payload.image;

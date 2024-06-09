@@ -7,8 +7,6 @@ const SmallBlog = ({ blog }: { blog: Blog }) => {
 
     const { title, owner } = blog;
 
-    console.log(owner);
-
     return (
         <Link href={`/${blog.publishedAt?.profileId}/${blog.id}`}>
             <div className="w-full flex flex-col p-2">
