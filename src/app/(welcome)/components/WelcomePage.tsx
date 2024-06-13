@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 
 const WelcomePage = () => {
@@ -13,13 +12,18 @@ const WelcomePage = () => {
                     Experience seamless blogging with advanced features like organizational roles, user and organization follow notifications, and comprehensive search functionality. Easily create and manage posts, tag content, and connect with a vibrant community.
                 </p>
             </div>
-            <Image 
-                src="/welcome/blog-app-feeds.png" 
-                width={100} 
-                height={100} 
-                alt='Blog App Feeds page' 
-                className="max-w-[500px] w-[95%] h-fit my-4"
-            />
+            <div className="w-full flex justify-center">
+                <Image 
+                    src="/welcome/blog-app-feeds.png" 
+                    width={100} 
+                    height={100} 
+                    alt='Blog App Feeds page' 
+                    className="max-w-[500px] w-[95%] h-fit my-4"
+                />
+            </div>
+            <div className="w-full">
+
+            </div>
         </div>
     )
 }
