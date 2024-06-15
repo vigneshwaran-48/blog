@@ -8,7 +8,7 @@
     position: absolute;
     justify-content: space-between;
     border-radius: 7px;
-    padding: 10px;
+    padding: 5px;
 }
 
 .background {
@@ -27,15 +27,7 @@
     margin-bottom: 10px;
 }
 
-.userListContainer {
-    height: calc(100% - 50px);
-}
-
 .addedUsersPreview {
-    position: absolute;
-    bottom: 0%;
-    right: 2px;
-    left: 2px;
     padding: 5px;
     justify-content: space-between;
     align-items: center;

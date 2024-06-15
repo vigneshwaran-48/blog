@@ -23,7 +23,7 @@ const User = (props: Props) => {
     return (
         <div className={`${styles.userListContainer} full-width x-axis-flex`}>
             <Image 
-                src={image as string}
+                src={image || '/person.jpg'}
                 alt="user"
                 width={40}
                 height={40}

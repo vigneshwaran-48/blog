@@ -1,5 +1,5 @@
 import { UserMeta } from '@/util/AppTypes';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./useradd.module.css";
 import { SearchBar } from '@/app/(blog)/components/blog/SearchBar';
 import User from '@/app/(blog)/components/blog/User';
@@ -14,9 +14,14 @@ interface Props {
 
 const OrganizationMemberAddPage = ({ members, onAdd, onClose }: Props) => {
 
-    const [ usersToDisplay, setUsersToDisplay ] = useState<UserMeta[]>(members); 
+    const [ usersToDisplay, setUsersToDisplay ] = useState<UserMeta[]>([]); 
 
     const [ selectedUsers, setSelectedUsers ] = useState<UserMeta[]>([]);
+
+    useEffect(() => {
+        console.log(members)
+        setUsersToDisplay(members)
+    }, []);
 
     const handleUsersSearch = (query: string) => {
         setUsersToDisplay(members.filter(user => user.name?.toLowerCase().includes(query.toLowerCase())));
@@ -64,19 +69,22 @@ const OrganizationMemberAddPage = ({ members, onAdd, onClose }: Props) => {
                     <FontAwesomeIcon icon={faXmark} />
                 </span>
                 <SearchBar onSearch={handleUsersSearch} />
-                <div className={`${styles.userListContainer} full-width y-axis-flex`}>
+                <div className={`${styles.userListContainer} ${selectedUsersElem ? "h-[calc(100%-95px)]" : "h-[calc(100%-50px)]"} overflow-y-scroll hide-scrollbar full-width y-axis-flex`}>
                     { userElems }
                 </div>
-                <div className={`${styles.addedUsersPreview} x-axis-flex`}>
-                    <div className={`${styles.addedUsersContainer} x-axis-flex`}>
-                        { selectedUsersElem }
+                {
+                    selectedUsersElem &&  
+                    <div className={`${styles.addedUsersPreview} items-center h-full x-axis-flex`}>
+                        <div className={`${styles.addedUsersContainer} x-axis-flex`}>
+                            { selectedUsersElem }
+                        </div>
+                        {
+                            selectedUsers.length > 0 
+                                ? <button onClick={e => onAdd(selectedUsers)} className={`button`}>Add</button> 
+                                : ""
+                        }
                     </div>
-                    {
-                        selectedUsers.length > 0 
-                            ? <button onClick={e => onAdd(selectedUsers)} className={`button`}>Add</button> 
-                            : ""
-                    }
-                </div>
+                }
             </div>
         </div>
     )

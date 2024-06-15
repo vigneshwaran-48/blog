@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import FeatureSection from './FeatureSection';
 
 const WelcomePage = () => {
     return (
@@ -13,16 +13,24 @@ const WelcomePage = () => {
                 </p>
             </div>
             <div className="w-full flex justify-center">
-                <Image 
+                <img 
                     src="/welcome/blog-app-feeds.png" 
-                    width={100} 
-                    height={100} 
                     alt='Blog App Feeds page' 
-                    className="max-w-[500px] w-[95%] h-fit my-4"
+                    className="max-w-[600px] w-[95%] h-fit my-4"
                 />
             </div>
-            <div className="w-full">
-
+            <div className="w-full max-w-[1200px]">
+                <FeatureSection 
+                    image={"/Organizations.png"} 
+                    heading={"Organizations"} 
+                    content={"The organizations feature of your blog application enables seamless collaboration by allowing users to create and manage groups with defined roles and permissions. Administrators can assign roles like editors and contributors, ensuring efficient content workflows. This feature supports both private and public settings, making it perfect for teams, businesses, and communities to manage and publish content collaboratively and effectively."}
+                />
+                <FeatureSection 
+                    image={"/Manage-org-members.png"} 
+                    heading={"Manage Organization Users"} 
+                    content={"The members roles feature in your blog application's organizations functionality allows administrators to assign specific roles, such as editors, contributors, and viewers, to different members. This ensures a streamlined workflow by defining clear responsibilities and permissions for each role, enhancing collaboration and maintaining order within the organization."}
+                    isRight={false}
+                />
             </div>
         </div>
     )
