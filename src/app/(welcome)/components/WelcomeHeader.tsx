@@ -5,7 +5,7 @@ import React from 'react'
 const WelcomeHeader = () => {
 
     return (
-        <header className={`w-full flex justify-center`}>
+        <header className={`w-full flex justify-center p-2`}>
             <nav className="w-full flex justify-between items-center sm:px-[20px]">
                 <div className="flex items-center">
                     <Image src="/app-icon.png" width={30} height={30} alt="App icon" />
