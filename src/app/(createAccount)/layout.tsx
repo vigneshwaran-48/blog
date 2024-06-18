@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+import "../globals.css";
+import React from "react";
+
+export const metaData: Metadata = {
+  title: "Create You Account",
+  description: "Account creation page"
+}
 
 const layout = ({ children }: { children: React.ReactNode }) => {
 
@@ -11,7 +19,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                     sizes="any"
                 />
             </head>
-            <body className="flex justify-center items-center p-4">
+            <body className="flex justify-center items-center">
                 {children}
             </body>
         </html>
