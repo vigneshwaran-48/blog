@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import "../globals.css";
 import React from "react";
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
   title: "Create You Account",
   description: "Account creation page"
 }
