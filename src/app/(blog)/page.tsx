@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
 export const metadata : Metadata = {
@@ -7,6 +8,9 @@ export const metadata : Metadata = {
 }
 
 export default async function HomePage() {
-
-    redirect("/feeds");
+    const session = await getServerSession();
+    if (session) {
+        redirect("/feeds");
+    }
+    redirect("/welcome");
 }

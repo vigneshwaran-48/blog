@@ -6,7 +6,6 @@ import { Organization } from '@/util/AppTypes';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { deleteOrganization } from '@/app/actions/organization';
 import { addPopup } from '@/lib/features/popup/popupSlice';
@@ -53,6 +52,7 @@ export const OrganizationComp = (props: Props) => {
                 width={50}
                 height={50}
                 alt="organization"
+                className="rounded-full w-[50px] h-[50px]"
             />
             <div className={`${styles.organizationCompNameDesc}`}>
                 <h3>{ organization?.name }</h3>

@@ -76,7 +76,8 @@ const MembersEditPage = ({ users, orgUsers, organizationId}: Props) => {
                 </div>
             </div>
             {
-                openUserAddComp ? <OrganizationMemberAddPage 
+                openUserAddComp ? 
+                                    <OrganizationMemberAddPage 
                                         members={users} 
                                         onAdd={handleUsersAdd} 
                                         onClose={() => setOpenUserAddComp(false)}

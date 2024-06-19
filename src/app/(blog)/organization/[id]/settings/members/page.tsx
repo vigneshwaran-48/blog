@@ -28,6 +28,10 @@ const OrganizationMemersPage = async ({ params }: Props) => {
 
     const filteredUsers = users.filter(user => orgUsers.findIndex(orgUser => orgUser.details.id === user.id) < 0);
 
+    console.log(filteredUsers)
+    console.log("--------------------------")
+    console.log(organizationUsers.users);
+
     return (
         <MembersEditPage users={filteredUsers} orgUsers={organizationUsers.users} organizationId={params.id} />
     )

@@ -81,7 +81,7 @@ const OrganizationUserContainer = ({ user, organizationId, onRemove }: Props) =>
             />
             <p>{ name }</p>
             <div className={`${styles.operationsContainer} x-axis-flex`}>
-                <UserRole 
+                <UserRoleComp 
                     role={role}
                     onRoleChange={onUserRoleChange}
                 />
@@ -117,7 +117,7 @@ const emptyIcon = (
     <span></span>
 )
 
-const UserRole = ({ role, onRoleChange }: UserRoleProps) => {
+const UserRoleComp = ({ role, onRoleChange }: UserRoleProps) => {
 
     const elementRef = useRef<HTMLDivElement>(null);
 
