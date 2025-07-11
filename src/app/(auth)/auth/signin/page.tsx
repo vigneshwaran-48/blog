@@ -1,5 +1,5 @@
 import React from 'react'
-import SignupPage from './SigninPage';
+import SignupPage from './SignupPage';
 
 interface Props {
     searchParams?: { [key: string]: string | string[] | undefined }
